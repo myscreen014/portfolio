@@ -1,0 +1,26 @@
+
+
+/*	STRUCTURE
+-----------------------------------------------------------------------------------------*/
+
+#container {}
+
+/* Sidebar */
+#container .sidebar {}
+
+/* Content */
+#container .content {}
+
+/*	ELEMENTs
+-----------------------------------------------------------------------------------------*/
+
+.table {}
+.table th.actions,
+.table td.actions {
+	width: auto;
+	text-align: right;
+}
+
+h1 {
+	margin-bottom: 40px;
+}
