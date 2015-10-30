@@ -13,7 +13,6 @@
 	</div>
 </div>
 
-<script src="{{ asset('js/dropzone.js') }}"></script>
 
 @section('javascript')
 
