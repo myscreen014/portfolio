@@ -16,7 +16,9 @@ class Page extends Model
     }
 
   	public static function boot() {   
-  		parent::boot();
+  		
+        parent::boot();
+
         static::saving(function ($page) {
         	$slugCandidateRoot = str_slug($page->name);
         	$slugCandidate = $slugCandidateRoot;
@@ -26,6 +28,12 @@ class Page extends Model
         	}
            	$page->slug = $slugCandidate;	
         });
+
+        static::deleted(function($page)
+        {
+            $page->files()->delete();
+        });
+        
     }
 
 }
