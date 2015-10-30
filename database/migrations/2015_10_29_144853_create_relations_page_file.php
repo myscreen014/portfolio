@@ -14,7 +14,8 @@ class CreateRelationsPageFile extends Migration
     {
         //
         Schema::table('files', function (Blueprint $table) {
-            $table->integer('page_id')->unsigned()->index();
+            $table->text('model_table');
+            $table->integer('model_id')->unsigned()->index();
         });
     }
 

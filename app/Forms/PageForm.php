@@ -19,7 +19,12 @@ class PageForm extends Form
         $this
         ->add('name', 'text', array('label'=>trans('admin.pages.field.name')))
         ->add('content', 'textarea', array('label'=>trans('admin.pages.field.content')))
-       	->add('tags', 'files')
+       	->add('files', 'files', 
+            array(
+                'model_table' => $this->getData('model_table'),
+                'model_id' => $this->getData('model_id'),
+            )
+        )
         ->add(trans('admin.pages.action.save'), 'submit', ['attr' => ['class' => 'btn btn-success'] ]);
     }
 }

@@ -1,0 +1,38 @@
+
+/*	TEMPLATES 
+-----------------------------------------------------------------------------------------*/
+
+
+
+
+/*	FORMS 
+-----------------------------------------------------------------------------------------*/
+form {
+	.form-group {
+		.dropzone {
+			height: auto;
+			.dz-default {
+				text-align: center;
+			}
+			.dz-preview {
+				border: 2px solid #eee;
+				position: relative;
+				float: left;
+				margin: 10px;
+				
+				.dz-image {
+					padding: 2px;
+					height: 120px;
+					width: 120px;
+				}
+				.dz-details,
+				.dz-progress,
+				.dz-success-mark,
+				.dz-error-mark,
+				.dz-error-message {
+					display: none;
+				}
+			}
+		}
+	}
+}

@@ -14,6 +14,7 @@ use Kris\LaravelFormBuilder\FormBuilder;
 use App\Models\Page;
 use App\Models\File;
 use App\Http\Requests\PageRequest;
+use DB;
 
 
 class PagesComponent extends Controller
@@ -42,11 +43,18 @@ class PagesComponent extends Controller
     {
         $page = new Page;
 
-        $form = $formBuilder->create('App\Forms\PageForm', [
-            'method' => 'POST',
-            'url' => route('admin.pages.store'),
-            'showFieldErrors' => false
-        ]);
+        $form = $formBuilder->create(
+            'App\Forms\PageForm', 
+            array(
+                'method' => 'POST',
+                'url' => route('admin.pages.store'),
+                'showFieldErrors' => false
+            ), 
+            array(
+                'model_table'=> $page->getTable(),
+                'model_id'=> NULL
+            )
+        );
 
         return view($this->defaultView, array(
             'page'=>$page,
@@ -60,10 +68,19 @@ class PagesComponent extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, PageRequest $request)
+    public function store(PageRequest $request)
     {
-        $page = Page::create($request->all());
-        
+    
+        // Create pages
+        $page = Page::create($request->only('name', 'content'));
+
+        // Get files added for this pages
+        $file = new File();
+        $files = $file->whereIn('id', explode(',', $request->input('files')))->get();
+
+        // Save relation
+        $page->files()->saveMany($files);
+
         return redirect(route('admin.pages.index'));
     }
 
@@ -87,14 +104,21 @@ class PagesComponent extends Controller
      */
     public function edit($id, FormBuilder $formBuilder)
     {
-        $page = Page::findOrFail($id);
+        $page = new Page;
+        $page = $page->with('files')->findOrFail($id);
 
-        $form = $formBuilder->create('App\Forms\PageForm', [
-            'method' => 'PUT',
-            'url' => route('admin.pages.update', $id),
-            'model' => $page
-        ]);
-
+        $form = $formBuilder->create(
+            'App\Forms\PageForm',
+            array(
+                'method' => 'PUT',
+                'url' => route('admin.pages.update', $id),
+                'model' => $page
+            ), 
+            array(
+                'model_table'=> $page->getTable(),
+                'model_id'=> $page->id
+            )
+        );
         return view($this->defaultView,  array(
             'page' => $page,
             'form' => $form

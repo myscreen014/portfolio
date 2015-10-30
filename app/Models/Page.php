@@ -8,11 +8,23 @@ class Page extends Model
 {
     
  
-    protected $fillable = ['name', 'content'];
+    protected $fillable = ['name', 'content', 'files'];
+
+
+    public function files() {
+    	return $this->hasMany('App\Models\File', 'model_id');
+    }
 
   	public static function boot() {   
+  		parent::boot();
         static::saving(function ($page) {
-           $page->slug = str_slug($page->name);
+        	$slugCandidateRoot = str_slug($page->name);
+        	$slugCandidate = $slugCandidateRoot;
+        	$cmptProposal = 0;
+        	while(Page::where('slug', $slugCandidate)->count()>0) {
+        		$slugCandidate = $slugCandidateRoot . '-' . intval(++$cmptProposal);
+        	}
+           	$page->slug = $slugCandidate;	
         });
     }
 

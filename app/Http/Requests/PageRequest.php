@@ -25,7 +25,7 @@ class PageRequest extends Request
     {
         return [
             'slug' => 'unique:pages,slug',
-            'name' => 'required|min:5',
+            'name' => 'required',
             'content' => 'required'
         ];
     }

@@ -13,7 +13,7 @@ class File extends Model
 
     //
     public function page() {
-    	return $this->belongsTo('App\Models\Page');
+    	return $this->belongsTo('App\Models\Page', 'model_id');
     }
 
 

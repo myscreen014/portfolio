@@ -10,6 +10,12 @@ return [
     |
     */
 
+    'global' => [
+        'message' => [
+            'upload_file_here' => 'Glisser vos fichiers ici'
+        ]
+    ],
+
     'pages' => [
         'title' => [
             'index'         => "Liste des pages",
@@ -19,6 +25,7 @@ return [
         'field' => [
             'name'          => "Nom de page",
             'content'       => "Contenu de page",
+            'files'         => "Fichiers de la page",
         ],
         'message' => [
             'nocontent'     => "Aucune page actuellement.",

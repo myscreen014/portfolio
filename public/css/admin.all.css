@@ -1,1 +1,24 @@
+/*	TEMPLATES 
+-----------------------------------------------------------------------------------------*/
+/*	FORMS 
+-----------------------------------------------------------------------------------------*/
+form .form-group .dropzone {
+  height: auto; }
+  form .form-group .dropzone .dz-default {
+    text-align: center; }
+  form .form-group .dropzone .dz-preview {
+    border: 2px solid #eee;
+    position: relative;
+    float: left;
+    margin: 10px; }
+    form .form-group .dropzone .dz-preview .dz-image {
+      padding: 2px;
+      height: 120px;
+      width: 120px; }
+    form .form-group .dropzone .dz-preview .dz-details,
+    form .form-group .dropzone .dz-preview .dz-progress,
+    form .form-group .dropzone .dz-preview .dz-success-mark,
+    form .form-group .dropzone .dz-preview .dz-error-mark,
+    form .form-group .dropzone .dz-preview .dz-error-message {
+      display: none; }
 

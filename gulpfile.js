@@ -18,7 +18,11 @@ elixir(function(mix) {
 	mix.sass([
         'admin.scss',
         'app.scss'
-    ], "public/css/admin.all.css")
-    .version("public/css/admin.all.css");
+    ], "public/css/admin.all.css");
+
+    mix.scripts([
+        'admin.js'
+    ], "public/js/admin.all.js" );
    
+   mix.version(["public/css/admin.all.css", "public/js/admin.all.js"]);
 });
