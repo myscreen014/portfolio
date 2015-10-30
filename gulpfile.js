@@ -21,6 +21,7 @@ elixir(function(mix) {
     ], "public/css/admin.all.css");
 
     mix.scripts([
+    	'jquery-1.11.3.min.js',
         'admin.js'
     ], "public/js/admin.all.js" );
    
