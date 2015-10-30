@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\File;
 
 class FilesComponent extends Controller
 {
@@ -41,9 +42,26 @@ class FilesComponent extends Controller
      */
     public function store(Request $request)
     {
-        //
-        varlog($_POST);
+        $fileUploadedName = 'file';
+        $destinationPath = config('app.uploads_path');
+        if (!empty($_FILES)) {
+            if ($request->hasFile($fileUploadedName)) {
+                if ($request->file($fileUploadedName)->isValid()) {
+                    $fileUploaded = $request->file($fileUploadedName);
 
+                    // Create File
+                    $file = new File();
+                    $file->name = $fileUploaded->getClientOriginalName();
+                    $file->path = $destinationPath.'/'.$file->name;
+                    $file->type = $fileUploaded->getMimeType();
+                    $file->save();
+
+                    // Move uploaded file
+                    $fileUploaded->move($destinationPath, $fileUploaded->getClientOriginalName());
+                }
+            } 
+        }
+       
     }
 
     /**

@@ -22,10 +22,10 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
     Route::resource('pages', 'Admin\PagesComponent');
 
     // Files management
- 	Route::get('files',['as' => 'admin.files.store', 'method' => 'POST', 'uses' => 'Admin\FilesComponent@store']);
+ 	Route::post('files/store',['as' => 'admin.files.store', 'uses' => 'Admin\FilesComponent@store']);
 
 });
-
+ 
 
 /* SITE */
 Route::group(['prefix' => '/', 'middleware'=> 'pages'], function () {
