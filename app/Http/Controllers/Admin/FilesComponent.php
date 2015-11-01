@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use App\Models\FileModel;
 
@@ -44,22 +45,31 @@ class FilesComponent extends Controller
 		if (isset($_POST['model_table']) && isset($_POST['model_id'])) {
 			$fileUploadedName = 'file';
 			$destinationPath = config('app.uploads_path');
+			$modelTable = $_POST['model_table'];
+			$modelId = $_POST['model_table'];
+
 			if (!empty($_FILES)) {
 				if ($request->hasFile($fileUploadedName)) {
 					if ($request->file($fileUploadedName)->isValid()) {
 						$fileUploaded = $request->file($fileUploadedName);
 
+						$destinationPath = $destinationPath.'/'.$modelTable;
+
+						if (!File::exists($destinationPath)) {
+							File::makeDirectory($destinationPath);
+						}
+	
 						// Create File
 						$file = new FileModel();
 						$file->name = $fileUploaded->getClientOriginalName();
-						$file->path = $destinationPath.'/'.$file->name;
 						$file->type = $fileUploaded->getMimeType();
-						$file->model_table = $_POST['model_table'];
-						$file->model_id = $_POST['model_id'];
+						$file->model_table = $modelTable;
+						$file->model_id = $modelId;
+						$file->path = $modelTable.'/'.$file->name;
 						$isSave = $file->save();
 
 						// Move uploaded file
-						$isUploaded = $fileUploaded->move(public_path().'/'.$destinationPath, $fileUploaded->getClientOriginalName());
+						$isUploaded = $fileUploaded->move($destinationPath, $fileUploaded->getClientOriginalName());
 						if ($isSave && $isUploaded) {
 							return array(
 								'file_id' => $file->id

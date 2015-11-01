@@ -76,7 +76,7 @@ class PagesComponent extends Controller
 
         // Get files added for this pages
         $file = new FileModel();
-        $files = $file->whereIn('id', explode(',', $request->input('files')))->get();
+        $files = $file->whereIn('id', explode(',', $request->input('files-new')))->get();
 
         // Save relation
         $page->files()->saveMany($files);
@@ -139,7 +139,7 @@ class PagesComponent extends Controller
 
         // Get files added for this pages
         $file = new FileModel();
-        $files = $file->whereIn('id', explode(',', $request->input('files')))->get();
+        $files = $file->whereIn('id', explode(',', $request->input('files-new')))->get();
 
         // Save relation
         $page->files()->saveMany($files);

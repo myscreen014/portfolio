@@ -11,7 +11,7 @@
 	
 		@foreach($page->files as $file)
 			
-			@boom($file, 'simple')
+		<img src="{{ route('file', $file->id, 'thumnails') }}" />
 			
 		@endforeach
 	</div>

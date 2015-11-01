@@ -15,6 +15,7 @@ class PageForm extends Form
     	// Add custom fields
     	$this->addCustomField('files', 'App\Forms\Fields\FilesType');
 
+        
     	// Create form
         $this
         ->add('name', 'text', array('label'=>trans('admin.pages.field.name')))

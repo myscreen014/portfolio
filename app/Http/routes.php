@@ -28,7 +28,7 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
  
 
 /* SITE */
-Route::get('/file/{id}',['as' => 'file', 'uses' => 'FilesController@index']);
+Route::get('/file/{id_thumbnail}',['as' => 'file', 'uses' => 'FilesController@index']);
 
 Route::group(['prefix' => '/', 'middleware'=> 'pages'], function () {
 

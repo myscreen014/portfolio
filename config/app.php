@@ -105,7 +105,7 @@ return [
     |
     */
 
-    'uploads_path'      => '/uploads',
+    'uploads_path'      => base_path().'/uploads',
 
     /*
     |--------------------------------------------------------------------------
@@ -148,6 +148,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -206,7 +207,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
-        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class
+        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
+        'Image'     => Intervention\Image\Facades\Image::class
 
     ],
 
