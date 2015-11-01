@@ -11,8 +11,8 @@ use App\Helpers;
 use Kris\LaravelFormBuilder\FormBuilder;
 
 /* My uses */
-use App\Models\Page;
-use App\Models\File;
+use App\Models\PageModel;
+use App\Models\FileModel;
 use App\Http\Requests\PageRequest;
 use DB;
 
@@ -29,8 +29,8 @@ class PagesComponent extends Controller
      */
     public function index()
     {
-        $pages = Page::get();
-        $page = new Page;
+        $pages = PageModel::get();
+        $page = new PageModel;
         return view($this->defaultView, array('pages' => $pages));
     }
 
@@ -41,7 +41,7 @@ class PagesComponent extends Controller
      */
     public function create(FormBuilder $formBuilder)
     {
-        $page = new Page;
+        $page = new PageModel;
 
         $form = $formBuilder->create(
             'App\Forms\PageForm', 
@@ -72,10 +72,10 @@ class PagesComponent extends Controller
     {
     
         // Create pages
-        $page = Page::create($request->only('name', 'content'));
+        $page = PageModel::create($request->only('name', 'content'));
 
         // Get files added for this pages
-        $file = new File();
+        $file = new FileModel();
         $files = $file->whereIn('id', explode(',', $request->input('files')))->get();
 
         // Save relation
@@ -92,7 +92,7 @@ class PagesComponent extends Controller
      */
     public function show($id)
     {
-        $page = Page::findOrFail($id);
+        $page = PageModel::findOrFail($id);
         return view($this->defaultView, array('page' => $page));
     }
 
@@ -104,7 +104,7 @@ class PagesComponent extends Controller
      */
     public function edit($id, FormBuilder $formBuilder)
     {
-        $page = new Page;
+        $page = new PageModel;
         $page = $page->with('files')->findOrFail($id);
 
         $form = $formBuilder->create(
@@ -134,8 +134,16 @@ class PagesComponent extends Controller
      */
     public function update(Request $request, $id, PageRequest $request)
     {
-        $page = Page::findOrFail($id);
-        $page->update($request->all());
+        $page = PageModel::findOrFail($id);
+        $page->update($request->only('name', 'content'));
+
+        // Get files added for this pages
+        $file = new FileModel();
+        $files = $file->whereIn('id', explode(',', $request->input('files')))->get();
+
+        // Save relation
+        $page->files()->saveMany($files);
+
         return redirect(route('admin.pages.index'));
     }
 
@@ -147,7 +155,7 @@ class PagesComponent extends Controller
      */
     public function destroy($id)
     {
-        $page = Page::findOrFail($id);
+        $page = PageModel::findOrFail($id);
         $page->delete();
         return redirect(route('admin.pages.index'));
     }

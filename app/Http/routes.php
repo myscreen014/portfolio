@@ -28,6 +28,8 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
  
 
 /* SITE */
+Route::get('/file/{id}',['as' => 'file', 'uses' => 'FilesController@index']);
+
 Route::group(['prefix' => '/', 'middleware'=> 'pages'], function () {
 
 	Route::get('{slug?}',['as' => 'page', 'uses' => 'Site\PagesController@index']);

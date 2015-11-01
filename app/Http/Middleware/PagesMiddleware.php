@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-use App\Models\Page;
+use App\Models\PageModel;
 use Illuminate\Support\Facades\View;
 
 class PagesMiddleware
@@ -18,7 +18,7 @@ class PagesMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $pages = Page::all();
+        $pages = PageModel::all();
         View::share('pages', $pages);
         return $next($request);
     }

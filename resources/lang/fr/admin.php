@@ -13,6 +13,11 @@ return [
     'global' => [
         'message' => [
             'upload_file_here' => 'Glisser vos fichiers ici'
+        ],
+        'action' => [
+            'edit' => 'éditer',
+            'view' => 'afficher',
+            'save' => 'enregistrer',
         ]
     ],
 

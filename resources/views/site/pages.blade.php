@@ -8,7 +8,12 @@
 	<div class="wysiwyg">
 		{{ $page->content }}
 
-		{{ $page->files }}
+	
+		@foreach($page->files as $file)
+			
+			@boom($file, 'simple')
+			
+		@endforeach
 	</div>
 
 @endsection

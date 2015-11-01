@@ -2,16 +2,49 @@
 /*	TEMPLATES 
 -----------------------------------------------------------------------------------------*/
 
-
-
+/*	TABLES 
+-----------------------------------------------------------------------------------------*/
+table {
+	thead {
+		tr {
+			th {
+				font-weight: bold;
+				&.actions {
+					text-align: right;
+					width: 20%;
+				}
+			}
+		}
+	}
+	tbody {
+		tr {
+			td {
+				&.actions {
+					text-align: right;
+				}
+			}
+		}
+	}
+}
 
 /*	FORMS 
 -----------------------------------------------------------------------------------------*/
 form {
 	.form-group {
+		.filebrowser {
+			img {
+				border: 1px solid #eee;
+				margin: 5px;
+				height: 120px;
+				width: 120px;
+			}
+		}
 		.dropzone {
-			height: auto;
+			$height: 40px;
+			min-height: $height;
 			.dz-default {
+				cursor: pointer;
+				line-height: $height;
 				text-align: center;
 			}
 			.dz-preview {

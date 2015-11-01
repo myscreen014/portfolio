@@ -1,17 +1,42 @@
-<div class="form-group clearfix">
-	<label for="">{{ trans('admin.pages.field.files') }}</label>
 
-	<input class="form-control" name="{{ $name }}" id="{{ $name }}" />
+<div class="form-group clearfix">
 	
-	<div class="panel panel-default clearfix">
+	<label for="">{{ trans('admin.pages.field.files') }}</label>
+	<input class="form-control" name="{{ $name }}" id="{{ $name }}" type="hidden" />
+
+	<div class="panel panel-default clearfix filebrowser">
 		@if (isset($options['value']))
-			@foreach($options['value'] as $picture)
-				<img src="{{ url($picture->path) }}" />
-			@endforeach
+			<table class="table table-condensed">
+				<tbody>
+					@foreach($options['value'] as $picture)
+						<tr>
+							<td>
+								{{ url($picture->path) }}
+							</td>
+							<td class="actions">
+								<a href="" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>
+								<a href="" class="btn btn-default btn-xs">{{ trans('admin.global.action.view') }}</a>
+							</td>
+						</tr>
+					@endforeach
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="2">
+							<div class="dropzone" id="myAwesomeDropzone"></div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		
+			
 		@endif 
-		<div class="dropzone clearfix form-control" id="myAwesomeDropzone"></div>
+		
 	</div>
+	
+
 </div>
+
 
 
 @section('javascript')
