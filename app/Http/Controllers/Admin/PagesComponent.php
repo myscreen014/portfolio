@@ -39,22 +39,25 @@ class PagesComponent extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(FormBuilder $formBuilder)
+    public function create(FormBuilder $formBuilder, Request $request)
     {
-        $page = new PageModel;
 
+        $page = new PageModel;
+        $page->files = FileModel::whereIn('id', explode(',', $request->old('files_new')))->get();
+       
         $form = $formBuilder->create(
             'App\Forms\PageForm', 
             array(
                 'method' => 'POST',
                 'url' => route('admin.pages.store'),
-                'showFieldErrors' => false
+                'showFieldErrors' => false,
+                'model' => $page
             ), 
             array(
                 'model_table'=> $page->getTable(),
                 'model_id'=> NULL
             )
-        );
+        )->add(trans('admin.pages.action.create'), 'submit', ['attr' => ['class' => 'btn btn-primary'] ]);
 
         return view($this->defaultView, array(
             'page'=>$page,
@@ -76,7 +79,7 @@ class PagesComponent extends Controller
 
         // Get files added for this pages
         $file = new FileModel();
-        $files = $file->whereIn('id', explode(',', $request->input('files-new')))->get();
+        $files = $file->whereIn('id', explode(',', $request->input('files_new')))->get();
 
         // Save relation
         $page->files()->saveMany($files);
@@ -102,10 +105,13 @@ class PagesComponent extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, FormBuilder $formBuilder)
+    public function edit($id, Request $request, FormBuilder $formBuilder)
     {
+
         $page = new PageModel;
         $page = $page->with('files')->findOrFail($id);
+
+        $page->files = $page->files->merge(FileModel::whereIn('id', explode(',', $request->old('files_new')))->get());
 
         $form = $formBuilder->create(
             'App\Forms\PageForm',
@@ -118,7 +124,7 @@ class PagesComponent extends Controller
                 'model_table'=> $page->getTable(),
                 'model_id'=> $page->id
             )
-        );
+        )->add(trans('admin.pages.action.save'), 'submit', ['attr' => ['class' => 'btn btn-primary'] ]);
         return view($this->defaultView,  array(
             'page' => $page,
             'form' => $form
@@ -132,14 +138,14 @@ class PagesComponent extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, PageRequest $request)
+    public function update($id, PageRequest $request)
     {
         $page = PageModel::findOrFail($id);
         $page->update($request->only('name', 'content'));
 
         // Get files added for this pages
         $file = new FileModel();
-        $files = $file->whereIn('id', explode(',', $request->input('files-new')))->get();
+        $files = $file->whereIn('id', explode(',', $request->input('files_new')))->get();
 
         // Save relation
         $page->files()->saveMany($files);

@@ -12,7 +12,6 @@ return [
 
     'global' => [
         'message' => [
-            'upload_file_here' => 'Glisser vos fichiers ici'
         ],
         'action' => [
             'edit' => 'éditer',
@@ -36,7 +35,8 @@ return [
             'nocontent'     => "Aucune page actuellement.",
         ],
         'action' => [
-            'save'          => "Enregister cette page"
+            'save'          => "Enregister cette page",
+            'create'        => "Ajouter cette page",
         ]
     ]
     

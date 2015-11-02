@@ -32,24 +32,45 @@ table {
 form {
 	.form-group {
 		.filebrowser {
-			.dz-default {
-				line-height: 30px;
-				text-align: center;
-			} 
-			ul.files {
-				list-style: inside none;
-				margin: -5px;
-				padding: 0;
-				li.dz-details {
+			.panel-footer { 
+				.dz-default {
+					line-height: 30px;
+					text-align: center;
+				} 
+			}
+			.panel-body {
+				ul.files {
+					list-style: inside none;
 					display: block;
-					float: left;
-					margin: 5px;
-					height: 100px;
-					width: 100px;
-					.thumbnail {
-						display: inline-block;
-						height: 100px;
-						width: 100px;
+					margin: -3px;
+					padding: 0;
+					li.dz-details {
+						$height: 100px;
+						$width: 100px;
+						cursor: pointer;
+						display: block;
+						float: left;
+						margin: 0px;
+						position: relative;
+						.thumbnail {
+							display: inline-block;
+							margin: 5px;
+							height: $height;
+							width: $width;
+						}
+						.file-actions {
+							display: none;
+							bottom: 15px;
+							left: 0;
+							position: absolute;
+							text-align: center;
+							width: 100%;
+						}
+						&:hover {
+							.file-actions {
+								display: block;
+							}
+						}
 					}
 				}
 			}

@@ -2,19 +2,22 @@
 <div class="form-group clearfix">
 	
 	<label for="">{{ trans('admin.pages.field.files') }}</label>
-	<input class="form-control" name="{{ $name }}-new" id="{{ $name }}-new" value="" type="text" />
+	<input class="form-control" name="{{ $name }}_new" id="{{ $name }}_new" value="{{ Request::old($name.'_new') }}" type="hidden" />
 
-	<div class="panel panel-default clearfix filebrowser">
-		<div class="panel-heading dropzone" id="myAwesomeDropzone"></div>
+	<div id="dropzone" class="panel panel-default clearfix filebrowser dropzone">
   		<div class="panel-body">
-  			<ul id="previewsContainer" class="files">
+  			<ul id="files-container" class="files clearfix">
 				@if (isset($options['value']))
 					@foreach($options['value'] as $picture)
-						<li class="dz-details">
-							<img class="thumbnail" src="{{ route('file', $picture->id.'.filebrowser')}}" />
+						<li class="dz-details file">
+							<img class="thumbnail file-thumbnail" src="{{ route('file', $picture->id.'.filebrowser')}}" />
+							<span class="file-actions">
+								<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+	  							<a href="" class="btn btn-default btn-xs"><i class="fa fa-eye"></i></a>
+							</span>
 						</li>
 					@endforeach
-				@endif 
+				@endif
 			</ul>
   		</div>
 	</div>
@@ -22,12 +25,14 @@
 </div>
 
 <div id="preview-template" style="display: none;">
-	<li class="dz-details">
+	<li class="dz-details file">
   		<img data-dz-thumbnail class="thumbnail" />
+  		<span class="file-actions">
+			<a href="" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+			<a href="" class="btn btn-default btn-xs"><i class="fa fa-eye"></i></a>
+		</span>
   	</li>
 </div>
-
-
 
 @section('javascript')
 
@@ -35,18 +40,21 @@
 		
 		var previewTemplate = $('#preview-template');
 
-		Dropzone.options.myAwesomeDropzone = {
-			dictDefaultMessage: "{{ trans('admin.global.message.upload_file_here') }}",
+		Dropzone.options.dropzone = {
+			dictDefaultMessage: '',
 	  		paramName: "file", // The name that will be used to transfer the file
-	  		maxFilesize: 2, // MB
+	  		maxFilesize: 5, // MB
 	  		url: "{{ route('admin.files.store') }}",
-	  		previewsContainer: '#previewsContainer',
+	  		previewsContainer: '#files-container',
 	  		previewTemplate: previewTemplate.html(),
 	  		createImageThumbnails: false,
 		  	success: function(file, response) {
 		  		if (response!==false) {
-		  			Admin.addToSerializedField('{{ $name }}-new', response['file_id']);
-		  			$(file.previewElement).find('img').attr('src', '/file/'+response['file_id']);
+		  			Admin.addToSerializedField('{{ $name }}_new', response['file_id']);
+		  			$(file.previewElement).find('img').attr(
+		  				'src', 
+		  				("{{ route('file', '%s') }}").replace("%s", response['file_id'])
+		  			);
 		  		}
 		  	},
 		  	init: function() {
