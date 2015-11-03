@@ -9,7 +9,7 @@ class FileModel extends Model
 {
 
 	protected $table = 'files';
-	protected $fillable = array('name', 'path', 'type');
+	protected $fillable = array('name', 'legend', 'path', 'type');
 
     //
     public function page() {

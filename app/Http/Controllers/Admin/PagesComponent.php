@@ -8,13 +8,13 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Helpers;
 
-use Kris\LaravelFormBuilder\FormBuilder;
 
 /* My uses */
 use App\Models\PageModel;
 use App\Models\FileModel;
 use App\Http\Requests\PageRequest;
 use DB;
+use Kris\LaravelFormBuilder\FormBuilder;
 
 
 class PagesComponent extends Controller
@@ -29,8 +29,8 @@ class PagesComponent extends Controller
      */
     public function index()
     {
-        $pages = PageModel::get();
         $page = new PageModel;
+        $pages = $page->get();
         return view($this->defaultView, array('pages' => $pages));
     }
 
@@ -50,7 +50,6 @@ class PagesComponent extends Controller
             array(
                 'method' => 'POST',
                 'url' => route('admin.pages.store'),
-                'showFieldErrors' => false,
                 'model' => $page
             ), 
             array(
@@ -151,6 +150,13 @@ class PagesComponent extends Controller
         $page->files()->saveMany($files);
 
         return redirect(route('admin.pages.index'));
+    }
+
+    public function delete($id) {
+        $page = PageModel::findOrFail($id);
+        return view($this->defaultView,  array(
+            'page' => $page
+        ));
     }
 
     /**

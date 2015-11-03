@@ -8,8 +8,6 @@ class PageForm extends Form
 {
 
 
-	
-
     public function buildForm()
     {
     	// Add custom fields

@@ -19,9 +19,12 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
 	Route::get('/', ['as'=>'admin.index', 'uses' => 'Admin\AdminController@index']);
 
 	// Pages management
+	Route::get('pages/{id}/delete', array('as' => 'admin.pages.delete', 'uses' => 'Admin\PagesComponent@delete'));
     Route::resource('pages', 'Admin\PagesComponent');
 
     // Files management
+    Route::get('files/{id}/edit',['as' => 'admin.files.edit', 'uses' => 'Admin\FilesComponent@edit']);
+    Route::put('files/{id}/update',['as' => 'admin.files.update', 'uses' => 'Admin\FilesComponent@update']);
  	Route::post('files/store',['as' => 'admin.files.store', 'uses' => 'Admin\FilesComponent@store']);
 
 });

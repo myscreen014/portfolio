@@ -10,8 +10,7 @@ table {
 			th {
 				font-weight: bold;
 				&.actions {
-					text-align: right;
-					width: 20%;
+					text-align: right; 
 				}
 			}
 		}
@@ -23,6 +22,15 @@ table {
 					text-align: right;
 				}
 			}
+		}
+	}
+	&.table-show {
+		td.field {
+			font-weight: bold;
+			width: 20%;
+		}
+		td.value {
+			width: 80%
 		}
 	}
 }
@@ -45,18 +53,12 @@ form {
 					margin: -3px;
 					padding: 0;
 					li.dz-details {
-						$height: 100px;
-						$width: 100px;
-						cursor: pointer;
 						display: block;
+						margin: 0;
 						float: left;
-						margin: 0px;
-						position: relative;
-						.thumbnail {
-							display: inline-block;
-							margin: 5px;
-							height: $height;
-							width: $width;
+						.dz-details-inner {
+							position: relative;
+							img  {}
 						}
 						.file-actions {
 							display: none;
@@ -65,10 +67,29 @@ form {
 							position: absolute;
 							text-align: center;
 							width: 100%;
-						}
+						}	
 						&:hover {
 							.file-actions {
 								display: block;
+							}
+						}	
+						&.dz-processing {
+							.dz-progress {
+								bottom: 0;
+								height: 10px;
+								position: absolute;
+								width: 100%;;
+								.dz-upload {
+									position: absolute;
+									height: 100%;
+									background-color:red;
+									z-index: 9;
+								}
+							}
+						} 
+						&.dz-complete {
+							.dz-progress {
+								display: none;
 							}
 						}
 					}

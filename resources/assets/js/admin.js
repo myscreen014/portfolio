@@ -1,7 +1,5 @@
 var Admin = {
 
-
-
 	addToSerializedField: function(element, value) {
 		var cleanValues = [];
 		var cleanValue = '';
@@ -34,5 +32,13 @@ var Admin = {
 		}
 		return false;
 	},	
+
+	showLoading: function() {
+		$('#admin-modal-loading').modal('show');
+	},
+
+	hideLoading: function() {
+		$('#admin-modal-loading').modal('hide');
+	}
 
 }

@@ -104,6 +104,10 @@
 		</div><!-- /.container -->
 
 
+		<!-- Include modals for admin
+		================================================== -->
+		@include('_others.modals')
+
 		<!-- Bootstrap core JavaScript
 		================================================== -->
 		<script src="{{ elixir('js/admin.all.js') }}"></script>

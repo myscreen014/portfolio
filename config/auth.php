@@ -2,6 +2,8 @@
 
 return [
 
+    'redirectPathRoute' => 'admin.index',
+
     /*
     |--------------------------------------------------------------------------
     | Default Authentication Driver

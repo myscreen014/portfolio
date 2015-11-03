@@ -30,6 +30,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
+        $this->redirectPath = route(\Illuminate\Support\Facades\Config::get('auth.redirectPathRoute'));
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 

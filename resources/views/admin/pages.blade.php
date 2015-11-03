@@ -26,8 +26,9 @@
 						<tr>
 							<td>{{ $page->name }}</td>
 							<td class="actions">
-								<a href="{{ route('admin.pages.show', [$page->id]) }}" class="btn btn-default btn-xs">afficher</a>
-								<a href="{{ route('admin.pages.edit', [$page->id]) }}" class="btn btn-primary btn-xs">éditer</a>
+								<a href="{{ route('admin.pages.show', [$page->id]) }}" class="btn btn-default btn-xs">{{ trans('admin.global.action.show') }}</a>
+								<a href="{{ route('admin.pages.edit', [$page->id]) }}" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>
+								<a href="{{ route('admin.pages.delete', [$page->id]) }}" class="btn btn-danger btn-xs">{{ trans('admin.global.action.delete') }}</a>
 							</td>
 						</tr>
 					@endforeach	
@@ -55,8 +56,19 @@
 	@if (Route::currentRouteName() == 'admin.pages.edit')
 		
 		<h1>{{ trans('admin.pages.title.edit') }}</h1>
-
 		{!! form($form) !!}
+
+	@endif
+
+	{{-- DELETE --}}
+	@if (Route::currentRouteName() == 'admin.pages.delete')
+
+		<h1>{{ trans('admin.pages.title.delete') }}</h1>
+
+		{!! Form::model($page, array('route' => array('admin.pages.destroy', $page->id), 'method' => 'DELETE')) !!}
+			<a href="{{ route('admin.pages.index') }}" class="btn btn-default">Retour</a>
+			{!! Form::submit('Supprimer cette page', ['class'=>'btn btn-danger'] ) !!}
+		{!! Form::close() !!}
 
 	@endif
 
@@ -65,21 +77,18 @@
 	@if (Route::currentRouteName() == 'admin.pages.show')
 		
 		<h1>Affichage d'une page</h1>
-		
-		<div class="panel panel-default">
-  			<div class="panel-body">
-				@foreach($page->getFillable() as $attribut)
-					<h2>{{ trans('admin.pages.field.'.$attribut) }}</h2>
-					<div>{{ $page->$attribut }}</div>
-				@endforeach
-			</div>
-		</div>
+
+		<table class="table table-bordered table-show">
+			@foreach($page->getFillable() as $attribut)
+				<tr>
+					<td class="field">{{ trans('admin.pages.field.'.$attribut) }}</td>
+					<td class="value">{{ $page->$attribut }}</td>
+				</tr>
+			@endforeach
+		</table>
 
 		<div class="form-group">
-			{!! Form::model($page, array('route' => array('admin.pages.destroy', $page->id), 'method' => 'DELETE')) !!}
-				<a href="{{ route('admin.pages.index') }}" class="btn btn-default">Retour</a>
-				{!! Form::submit('Supprimer cette page', ['class'=>'btn btn-danger'] ) !!}
-			{!! Form::close() !!}
+			<a href="{{ route('admin.pages.index') }}" class="btn btn-default">Retour</a>
 		</div>
 
 	@endif
