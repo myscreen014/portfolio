@@ -25,11 +25,11 @@ class FilesComponent extends Controller
 	public function store(Request $request)
 	{
 		
-		if (isset($_POST['model_table']) && isset($_POST['model_id'])) {
+		if (!is_null($request->input('model_table')) && !is_null($request->input('model_id'))) {
 			$fileUploadedName = 'file';
 			$destinationPath = config('app.uploads_path');
-			$modelTable = $_POST['model_table'];
-			$modelId = $_POST['model_table'];
+			$modelTable = $request->input('model_table');
+			$modelId = $request->input('model_id');
 
 			if (!empty($_FILES)) {
 				if ($request->hasFile($fileUploadedName)) {

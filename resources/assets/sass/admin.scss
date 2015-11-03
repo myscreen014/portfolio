@@ -35,6 +35,18 @@ table {
 	}
 }
 
+/*	MODALS 
+-----------------------------------------------------------------------------------------*/
+.modal {
+	.modal-header {}
+	.modal-body {
+		.progress,
+		.alert {
+			margin: 0;
+		}
+	}
+}
+
 /*	FORMS 
 -----------------------------------------------------------------------------------------*/
 form {
@@ -47,18 +59,21 @@ form {
 				} 
 			}
 			.panel-body {
+
 				ul.files {
 					list-style: inside none;
 					display: block;
-					margin: -3px;
+					margin: 0 -5px;
 					padding: 0;
 					li.dz-details {
 						display: block;
-						margin: 0;
+						margin: 0 5px;
+						position: relative;
 						float: left;
-						.dz-details-inner {
-							position: relative;
-							img  {}
+						img {
+							display: block;
+							height: 120px;
+							width: 120px;
 						}
 						.file-actions {
 							display: none;
@@ -78,7 +93,8 @@ form {
 								bottom: 0;
 								height: 10px;
 								position: absolute;
-								width: 100%;;
+								width: 100%;
+								z-index: 9;
 								.dz-upload {
 									position: absolute;
 									height: 100%;
