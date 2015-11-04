@@ -1,5 +1,13 @@
 var Admin = {
 
+
+	alert: function(title, content) {
+		$('#modal-default').modal();
+		$('#modal-default').find('.modal-title').html(title)
+		$('#modal-default').find('.modal-body').html(content);
+		
+	},
+
 	addToSerializedField: function(element, value) {
 		var cleanValues = [];
 		var cleanValue = '';
@@ -34,11 +42,11 @@ var Admin = {
 	},	
 
 	showLoading: function() {
-		$('#admin-modal-loading').modal('show');
+		$('#modal-loading').modal('show');
 	},
 
 	hideLoading: function() {
-		$('#admin-modal-loading').modal('hide');
+		$('#modal-loading').modal('hide');
 	}
 
 }

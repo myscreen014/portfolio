@@ -17,7 +17,7 @@
 									<button type="button" class="btn btn-primary btn-xs modal-edit-open" data-url-edit="{{ route('admin.files.edit', $picture->id) }}">
 										<i class="fa fa-pencil"></i>
 									</button>
-									<a href="" class="btn btn-default btn-xs"><i class="fa fa-eye"></i></a>
+									<button type="button" class="btn btn-default btn-xs modal-show-open"><i class="fa fa-eye"></i></button>
 								</span>
 							</div>
 						</li>
@@ -55,12 +55,15 @@
 
 	<script type="text/javascript">	
 
-		/* Modal editing file */
+		/* Modal editing/show file */
+		$('#{{ $name }}-files-container').on("click", '.modal-show-open', function(event) {
+			Admin.alert('Mon titre', 'Mon contenu');
+		});
 		$('#{{ $name }}-files-container').on("click", '.modal-edit-open', function(event) {
 			/* load form */
-			var modal = $('#modal-edit');
+			var modal = $('#modal-edit-file');
 			var urlEdit = $(this).attr('data-url-edit');
-			var modalBody = $('#modal-edit').modal().find('.modal-body');
+			var modalBody = modal.modal().find('.modal-body');
 		  	$.ajax({
   				url: urlEdit,
   				data: {},
