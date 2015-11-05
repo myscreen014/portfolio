@@ -34,12 +34,4 @@ var Admin = {
 		return false;
 	},	
 
-	showLoading: function() {
-		$('#modal-loading').modal('show');
-	},
-
-	hideLoading: function() {
-		$('#modal-loading').modal('hide');
-	}
-
 }

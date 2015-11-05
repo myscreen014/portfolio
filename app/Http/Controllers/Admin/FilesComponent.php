@@ -73,23 +73,47 @@ class FilesComponent extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit($id, FormBuilder $formBuilder)
+	public function editAjax($id, FormBuilder $formBuilder, Request $request)
 	{
-		$file = new FileModel;
-		$file = $file->findOrFail($id);
+		if ($request->ajax()) {
+			$file = new FileModel;
+			$file = $file->findOrFail($id);
 
-		$form = $formBuilder->create(
-            'App\Forms\FileForm', 
-            array(
-				'method' => 'PUT',
-				'url' => route('admin.files.update', $id),
-	            'model' => $file
-			)
-        )->add(trans('admin.files.action.save'), 'submit', ['attr' => ['class' => 'btn btn-primary']]);
+			$form = $formBuilder->create(
+	            'App\Forms\FileForm', 
+	            array(
+					'method' => 'PUT',
+					'url' => route('admin.files.update', $id),
+		            'model' => $file
+				)
+	        )->add(trans('admin.files.action.save'), 'submit', ['attr' => ['class' => 'btn btn-primary']]);
 
-        return (new Response(form($form), '200'));
-
+	        return (new Response(form($form), 200));
+	    } else {
+	    	return (new Response(NULL, 403));
+	    }
 	}
+
+
+	 /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showAjax($id, Request $request)
+    {
+    	if ($request->ajax()) {
+	        $file = FileModel::findOrFail($id);
+	        return (new Response(
+	        	array(
+	        		'values' => $file->toJson(),
+	        		'route' => route('file', $file->id)	
+	        ), 200));
+	    } else {
+	    	return (new Response(NULL, 403));
+	    }
+    }
 
  	/**
      * Update the specified resource in storage.
@@ -98,12 +122,15 @@ class FilesComponent extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-	public function update($id, Request $request) // Need FileRequest ???
+	public function updateAjax($id, Request $request) // Need FileRequest ???
     {
-
-        $file = FileModel::findOrFail($id);
-        $file->update($request->only('legend'));
-        return (new Response(NULL, '200'));
+    	if ($request->ajax()) {
+	        $file = FileModel::findOrFail($id);
+	        $file->update($request->only('legend'));
+	        return (new Response(NULL, 200));
+	    } else {
+	    	return (new Response(NULL, 403));
+	    }
     }
 
 	

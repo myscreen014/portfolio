@@ -17,7 +17,7 @@
 									<button type="button" class="btn btn-primary btn-xs modal-edit-open" data-url-edit="{{ route('admin.files.edit', $picture->id) }}">
 										<i class="fa fa-pencil"></i>
 									</button>
-									<button type="button" class="btn btn-default btn-xs modal-show-open"><i class="fa fa-eye"></i></button>
+									<button type="button" class="btn btn-default btn-xs modal-show-open" data-url-show="{{ route('admin.files.show', $picture->id) }}"><i class="fa fa-eye"></i></button>
 								</span>
 							</div>
 						</li>
@@ -41,7 +41,7 @@
 				<button type="button" class="btn btn-primary btn-xs modal-edit-open" data-url-edit="{{ route('admin.files.edit', '%s') }}">
 					<i class="fa fa-pencil"></i>
 				</button>
-				<a href="" class="btn btn-default btn-xs"><i class="fa fa-eye"></i></a>
+				<button type="button" class="btn btn-default btn-xs modal-show-open" data-url-show="{{ route('admin.files.show', $picture->id) }}"><i class="fa fa-eye"></i></button>
 			</span>
 		</div>
 	</li>
@@ -57,7 +57,7 @@
 
 		/* Modal editing/show file */
 		$('#{{ $name }}-files-container').on("click", '.modal-show-open', function(event) {
-			Admin.alert('Mon titre', 'Mon contenu');
+			Admin.Modal.picture($(this).attr('data-url-show'));
 		});
 
 		$('#{{ $name }}-files-container').on("click", '.modal-edit-open', function(event) {

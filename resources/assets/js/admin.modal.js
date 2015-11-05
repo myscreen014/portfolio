@@ -2,19 +2,43 @@ $.extend(Admin, {
 
 	Modal: {
 
+		showLoading: function() {
+			$('#modal-loading').modal('show');
+		},
 
-		alert: function(title, content) {
-			$('#modal-default').modal();
-			$('#modal-default').find('.modal-title').html(title)
-			$('#modal-default').find('.modal-body').html(content);
+		hideLoading: function() {
+			$('#modal-loading').modal('hide');
+		},
+
+		picture: function(urlShow) {
+				
+			// preparing modal
+			var modal = $('#modal-default').clone();
+			var modalTitle = modal.find('.modal-title');
+			var modalBody = modal.find('.modal-body').addClass('text-center');
+			var modalFooter = modal.find('.modal-footer');
+
+			// Ajax
+			$.ajax({
+  				url: urlShow,
+  				data: {},
+  				success: function(response) {
+  					var file = jQuery.parseJSON(response['values']);
+  					var route = response['route'];
+  					modalTitle.html(file['name']);
+  					modalBody.html('<img src="'+route+'" />');	
+  				}
+  			});
+
+  			modal.modal();
 		}, 
 
 		ajaxForm: function(params) {
 			
 			// preparing modal
-			var modal = $('#modal-default');
+			var modal = $('#modal-default').clone();
 			var modalTitle = modal.find('.modal-title');
-			var modalBody = modal.find('.modal-body');
+			var modalBody = modal.find('.modal-body').removeClass('text-center');
 			var modalFooter = modal.find('.modal-footer');
 			modalTitle.html(params.title);
 

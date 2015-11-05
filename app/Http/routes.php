@@ -23,8 +23,9 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
     Route::resource('pages', 'Admin\PagesComponent');
 
     // Files management
-    Route::get('files/{id}/edit',['as' => 'admin.files.edit', 'uses' => 'Admin\FilesComponent@edit']);
-    Route::put('files/{id}/update',['as' => 'admin.files.update', 'uses' => 'Admin\FilesComponent@update']);
+    Route::get('files/{id}/edit',['as' => 'admin.files.edit', 'uses' => 'Admin\FilesComponent@editAjax']);
+    Route::put('files/{id}/update',['as' => 'admin.files.update', 'uses' => 'Admin\FilesComponent@updateAjax']);
+    Route::get('files/{id}/show',['as' => 'admin.files.show', 'uses' => 'Admin\FilesComponent@showAjax']);
  	Route::post('files/store',['as' => 'admin.files.store', 'uses' => 'Admin\FilesComponent@store']);
 
 });
