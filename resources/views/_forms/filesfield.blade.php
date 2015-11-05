@@ -10,7 +10,7 @@
 				@if (isset($options['value']))
 					@forelse($options['value'] as $file)
 
-						<li id="preview-file-{{ $file->id }}" class="dz-details file col-md-2 col-sm-3 col-xs-4">
+						<li id="preview-file-{{ $file->id }}" data-file-id="{{ $file->id }}" class="dz-details file col-md-2 col-sm-3 col-xs-4">
 							<div class="dz-details-inner thumbnail">
 								<img src="{{ route('file', $file->id.'.filebrowser')}}" />
 								<span class="file-actions">
@@ -34,7 +34,7 @@
 </div>
 
 <div id="preview-template" style="display: none;">
-	<li id="preview-file-%file_id" class="dz-details file col-md-2 col-sm-4 col-xs-6">
+	<li id="preview-file-%file_id" data-file-id="%file_id" class="dz-details file col-md-2 col-sm-4 col-xs-6">
 		<div class="dz-details-inner thumbnail">
 			<img data-dz-thumbnail />
 			<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
@@ -56,6 +56,34 @@
 @section('javascript')
 
 	<script type="text/javascript">	
+
+		/* Sortable - JQuery UI */
+    	$( "#{{ $name }}-files-container" ).sortable({
+      		placeholder: "ui-state-highlight dz-details file col-md-2 col-sm-3 col-xs-4",
+      		start: function(event, ui){
+        		ui.placeholder.innerHeight(ui.item.innerHeight()-1);
+    		},
+    		stop: function(event, ui){
+    			var filesIds = Array();
+    			var files = $( "#{{ $name }}-files-container" ).find('li');
+    			for (var i = 0; i < files.length ; i++) {
+    				filesIds.push($(files[i]).attr('data-file-id'));
+    			};
+    			console.log(filesIds);
+    			$.ajax({
+	  				url: "{{ route('admin.files.reorder') }}",
+	  				method: 'POST',
+	  				data: {
+	  					'_token' : "{{ csrf_token() }}",
+	  					'filesIds': filesIds
+	  				},
+	  				success: function(response) {
+	  					console.log(response);
+	  				}
+	  			});
+    		}
+
+    	});
 
 		/* Modal edit/delete/show */
 		$('#{{ $name }}-files-container').on("click", '.modal-edit-open', function(event) {

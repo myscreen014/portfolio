@@ -82,7 +82,11 @@ class PagesComponent extends Controller
     {
 
         $page = new PageModel;
-        $page = $page->with('files')->findOrFail($id);
+        $page = $page->with(array(
+            'files' => function($query) {
+                $query->orderBy('ordering', 'asc');
+            }
+        ))->findOrFail($id);
 
         $page->files = $page->files->merge(FileModel::whereIn('id', explode(',', $request->old('files_new')))->get());
 

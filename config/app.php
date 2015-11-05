@@ -149,6 +149,7 @@ return [
         
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -208,7 +209,8 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
         'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
-        'Image'     => Intervention\Image\Facades\Image::class
+        'Image'     => Intervention\Image\Facades\Image::class,
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
 
     ],
 

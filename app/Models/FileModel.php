@@ -13,7 +13,7 @@ class FileModel extends Model
 
 	protected $table = 'files';
 	protected $dates = ['deleted_at'];
-	protected $fillable = array('name', 'legend', 'path', 'type');
+	protected $fillable = array('name', 'legend', 'path', 'type', 'ordering');
 
     //
     public function page() {

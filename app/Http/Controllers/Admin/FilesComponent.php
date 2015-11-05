@@ -134,5 +134,20 @@ class FilesComponent extends Controller {
 	    }
     }
 
+    public function reorderAjax(Request $request) {
+    	if ($request->ajax()) {
+	    	$filesIds = $request->input('filesIds');
+	  		$filesOrder = array_flip($filesIds);
+	    	$files = FileModel::whereIn('id', $filesIds)->get();
+			foreach ($files as $key => $file) {
+				$file->ordering = $filesOrder[$file->id];
+				$file->update(); // il faut trouver un solution pour le multiple
+			}
+	    	return (new Response(NULL, 200));
+	    } else {
+	    	return (new Response(NULL, 403));
+	    }
+    }
+
 	
 }
