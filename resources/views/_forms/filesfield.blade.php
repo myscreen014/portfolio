@@ -24,7 +24,7 @@
 						</li>
 
 					@empty
-						<li class="dz-message">{{ trans('admin.global.message.upload_file_here') }}</li>
+						<p class="dz-message">{{ trans('admin.global.message.upload_file_here') }}</p>
 					@endforelse
 				@endif
 			</ul>
@@ -34,7 +34,7 @@
 </div>
 
 <div id="preview-template" style="display: none;">
-	<li id="preview-file-{{ $file->id }}" class="dz-details file col-md-2 col-sm-4 col-xs-6">
+	<li id="preview-file-%file_id" class="dz-details file col-md-2 col-sm-4 col-xs-6">
 		<div class="dz-details-inner thumbnail">
 			<img data-dz-thumbnail />
 			<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
@@ -74,7 +74,11 @@
 				'messageSuccess': "{{ trans('admin.files.feedback.delete.ok') }}",
 				'messageError': "{{ trans('admin.files.feedback.delete.error') }}",
 				'callbackSuccess': function() {
-					button.parents('li').hide();
+					button.parents('li').remove();
+					console.log($('#{{ $name }}-files-container .dz-details'));
+					if ($('#{{ $name }}-files-container .dz-details').length <= 0) {
+						$('#{{ $name }} .dz-message').show();
+					}
 				}
 			});
 		});
