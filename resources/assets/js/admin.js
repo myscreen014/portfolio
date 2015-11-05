@@ -1,13 +1,6 @@
 var Admin = {
 
 
-	alert: function(title, content) {
-		$('#modal-default').modal();
-		$('#modal-default').find('.modal-title').html(title)
-		$('#modal-default').find('.modal-body').html(content);
-		
-	},
-
 	addToSerializedField: function(element, value) {
 		var cleanValues = [];
 		var cleanValue = '';
@@ -22,7 +15,7 @@ var Admin = {
 		for (var i=0; i<newValues.length; ++i) {
 			if (!Admin.inArray(newValues[i], cleanValues)) {
 				cleanValues.push(newValues[i]);
-			}
+			} 
 		}
 		$('#'+element).val(cleanValues.join(','));
 		return cleanValues;

@@ -59,34 +59,13 @@
 		$('#{{ $name }}-files-container').on("click", '.modal-show-open', function(event) {
 			Admin.alert('Mon titre', 'Mon contenu');
 		});
+
 		$('#{{ $name }}-files-container').on("click", '.modal-edit-open', function(event) {
-			/* load form */
-			var modal = $('#modal-edit-file');
-			var urlEdit = $(this).attr('data-url-edit');
-			var modalBody = modal.modal().find('.modal-body');
-		  	$.ajax({
-  				url: urlEdit,
-  				data: {},
-  				success: function(response) {
-  					modal.find('.modal-footer #modal-edit-submit').show();
-					modalBody.html('').append(response);
-  					var form = $('#modal-edit').find('form');
-  					$('#modal-edit').find('#modal-edit-submit').click(function() {
-  						$.ajax({
-  							url: form.attr('action'),
-  							method: 'PUT',
-  							data: form.serialize(),
-  							success: function(response, status) {
-  								modalBody.html('').append('<div class="alert alert-success" role="alert">'+"{{ trans('admin.files.feedback.update.ok') }}"+'</div>')
-  								modal.find('.modal-footer #modal-edit-submit').hide();
-  							},
-  							error: function(response) {
-  								modalBody.html('').append('<div class="alert alert-danger" role="alert">'+"{{ trans('admin.files.feedback.update.error') }}"+'</div>')
-  								modal.find('.modal-footer #modal-edit-submit').hide();
-  							},
-  						});
-  					});
-  				},
+			Admin.Modal.ajaxForm({
+				'url' : $(this).attr('data-url-edit'),
+				'title' : "{{ trans('admin.files.title.edit') }}",
+				'messageSuccess': "{{ trans('admin.files.feedback.update.ok') }}",
+				'messageError': "{{ trans('admin.files.feedback.update.error') }}",
 			});
 		});
 

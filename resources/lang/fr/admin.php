@@ -57,6 +57,9 @@ return [
         'field' => [
             'legend'            => "Légende du fichier",
         ],
+        'action' => [
+            'save'              => "Enregister ce fichier",
+        ]
     ]
     
 ];

@@ -75,7 +75,6 @@ class FilesComponent extends Controller
 	 */
 	public function edit($id, FormBuilder $formBuilder)
 	{
-
 		$file = new FileModel;
 		$file = $file->findOrFail($id);
 
@@ -86,7 +85,7 @@ class FilesComponent extends Controller
 				'url' => route('admin.files.update', $id),
 	            'model' => $file
 			)
-        );
+        )->add(trans('admin.files.action.save'), 'submit', ['attr' => ['class' => 'btn btn-primary']]);
 
         return (new Response(form($form), '200'));
 
@@ -101,6 +100,7 @@ class FilesComponent extends Controller
      */
 	public function update($id, Request $request) // Need FileRequest ???
     {
+
         $file = FileModel::findOrFail($id);
         $file->update($request->only('legend'));
         return (new Response(NULL, '200'));

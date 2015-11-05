@@ -23,7 +23,8 @@ elixir(function(mix) {
     mix.scripts([
     	'jquery-1.11.3.min.js',
     	'dropzone.js',
-        'admin.js'
+        'admin.js',
+        'admin.modal.js'
     ], "public/js/admin.all.js" );
    
    mix.version(["public/css/admin.all.css", "public/js/admin.all.js"]);
