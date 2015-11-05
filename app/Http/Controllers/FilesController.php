@@ -32,23 +32,38 @@ class FilesController extends Controller
     	/* Thumbnail ? */
     	if (isset($fileInfos[1])) {
             $thumbnailName = $fileInfos[1]; 
-            $thumbnailsDir = base_path().'/uploads'.Config::get('picture.thumbnails_path');
+            $thumbnailsDir = base_path().'/uploads'.Config::get('thumbnail.path');
 
             if (File::exists($thumbnailsDir.'/'.$thumbnailName.'-'.$file->name)) {
                 $fileContent = File::get($thumbnailsDir.'/'.$thumbnailName.'-'.$file->name);
             } else {
-                $thumbnailsAvailables = Config::get('picture.thumbnails');
+                $thumbnailsAvailables = Config::get('thumbnail.thumbnails');
                 if (in_array($thumbnailName, array_keys($thumbnailsAvailables))) {
                     
                     if (!File::exists($thumbnailsDir)) {
-                     File::makeDirectory($thumbnailsDir);
+                        File::makeDirectory($thumbnailsDir);
                     }
                     $thumbnail = Image::make($uploadPath.'/'.$file->path);
-                    foreach ($thumbnailsAvailables[$thumbnailName] as $key => $value) {
-                        call_user_func_array(array($thumbnail, $key), array_values($value));
+                    foreach ($thumbnailsAvailables[$thumbnailName] as $filter => $filterParams) {
+                        switch ($filter) {
+
+                            // Custom filters
+                            case 'max':
+                                $thumbnail->resize($filterParams[0], $filterParams[1], function ($constraint) {
+                                    $constraint->aspectRatio();
+                                    $constraint->upsize();
+                                });
+                                break;
+                            default:  // default filters
+                                call_user_func_array(array($thumbnail, $filter), array_values($filterParams));
+                                break;
+                       }
+                       
                     }
                     $thumbnail->save($thumbnailsDir.'/'.$thumbnailName.'-'.$file->name);
                     $fileContent = File::get($thumbnailsDir.'/'.$thumbnailName.'-'.$file->name);
+                } else {
+                     $fileContent = File::get($uploadPath.'/'.$file->path);
                 }
             }
     	} else {

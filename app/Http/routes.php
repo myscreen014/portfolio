@@ -26,6 +26,8 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
     Route::get('files/{id}/edit',['as' => 'admin.files.edit', 'uses' => 'Admin\FilesComponent@editAjax']);
     Route::put('files/{id}/update',['as' => 'admin.files.update', 'uses' => 'Admin\FilesComponent@updateAjax']);
     Route::get('files/{id}/show',['as' => 'admin.files.show', 'uses' => 'Admin\FilesComponent@showAjax']);
+    Route::get('files/{id}/delete',['as' => 'admin.files.delete', 'uses' => 'Admin\FilesComponent@deleteAjax']);
+    Route::delete('files/{id}/destroy',['as' => 'admin.files.destroy', 'uses' => 'Admin\FilesComponent@destroyAjax']);
  	Route::post('files/store',['as' => 'admin.files.store', 'uses' => 'Admin\FilesComponent@store']);
 
 });

@@ -59,9 +59,11 @@ $.extend(Admin, {
 	  							success: function(response, status) {
 	  								modalBody.html('<div class="alert alert-success" role="alert">'+params.messageSuccess+'</div>');
 	  								modalFooter.find('button[type=submit]').hide();
+	  								if (typeof params.callbackSuccess != 'undefined') {
+	  									params.callbackSuccess();	
+	  								}
 	  							},
 	  							error: function(response) {
-	  								console.log(response);
 	  								modalBody.html('<div class="alert alert-danger" role="alert">'+params.messageError+'</div>');
 	  								modalFooter.find('button[type=submit]').hide();
 	  							},

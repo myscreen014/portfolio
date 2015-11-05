@@ -13,17 +13,9 @@ use App\Models\FileModel;
 use App\Forms\FileForm;
 use Kris\LaravelFormBuilder\FormBuilder;
 
-class FilesComponent extends Controller
-{
+class FilesComponent extends Controller {
 	
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store(Request $request)
-	{
+	public function store(Request $request) {
 		
 		if (!is_null($request->input('model_table')) && !is_null($request->input('model_id'))) {
 			$fileUploadedName = 'file';
@@ -67,14 +59,7 @@ class FilesComponent extends Controller
 		} 
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function editAjax($id, FormBuilder $formBuilder, Request $request)
-	{
+	public function editAjax($id, FormBuilder $formBuilder, Request $request) {
 		if ($request->ajax()) {
 			$file = new FileModel;
 			$file = $file->findOrFail($id);
@@ -94,39 +79,55 @@ class FilesComponent extends Controller
 	    }
 	}
 
-
-	 /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function showAjax($id, Request $request)
-    {
+    public function showAjax($id, Request $request) {
     	if ($request->ajax()) {
 	        $file = FileModel::findOrFail($id);
 	        return (new Response(
 	        	array(
 	        		'values' => $file->toJson(),
-	        		'route' => route('file', $file->id)	
+	        		'route' => route('file', $file->id.'.modal')	
 	        ), 200));
 	    } else {
 	    	return (new Response(NULL, 403));
 	    }
     }
 
- 	/**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-	public function updateAjax($id, Request $request) // Need FileRequest ???
-    {
+	public function updateAjax($id, Request $request) {
     	if ($request->ajax()) {
 	        $file = FileModel::findOrFail($id);
 	        $file->update($request->only('legend'));
+	        return (new Response(NULL, 200));
+	    } else {
+	    	return (new Response(NULL, 403));
+	    }
+    }
+
+    public function deleteAjax($id, Request $request, FormBuilder $formBuilder) {
+
+    	if ($request->ajax()) {
+	        $file = FileModel::findOrFail($id);
+	        $form = $formBuilder->plain(
+		        array(
+					'method' => 'DELETE',
+					'url' => route('admin.files.destroy', $id),
+		            'model' => $file
+				)
+		    )->add('message', 'static', [
+   				'tag' => 'p',
+   				'label_attr' => ['class' => 'hidden'],
+    			'attr' => ['class' => 'text-danger'],
+    			'value' => trans('admin.files.message.delete')
+			])->add(trans('admin.global.action.delete'), 'submit', ['attr' => ['class' => 'btn btn-danger']]);
+		    return (new Response(form($form), 200));
+		} else {
+	    	return (new Response(NULL, 403));
+	    }
+    }
+
+    public function destroyAjax($id, Request $request) {
+        if ($request->ajax()) {
+	        $file = FileModel::findOrFail($id);
+	        $file->delete();
 	        return (new Response(NULL, 200));
 	    } else {
 	    	return (new Response(NULL, 403));

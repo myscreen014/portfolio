@@ -28,7 +28,7 @@ return [
             'index'             => "Liste des pages",
             'create'            => "Ajout d'une page",
             'edit'              => "Edition d'une page",
-            'delete'            => "Êtes vous certain de vouloir supprimer cette page",
+            'delete'            => "Suppression d'une page",
         ],
         'field' => [
             'name'              => "Nom de page",
@@ -50,9 +50,17 @@ return [
                 'ok'            => 'Le fichier a bien été enregistré !',
                 'error'         => 'Une erreur est survenue lors de l\'enregistrement du fichier !',
             ],
+            'delete' => [
+                'ok'            => 'Le fichier a bien été supprimé !',
+                'error'         => 'Une erreur est survenue lors de la suppression de ce fichier !',
+            ],
         ],
         'title' => [
-            'edit'              => 'Édition du fichier'
+            'edit'              => 'Édition du fichier',
+            'delete'            => "Suppression d'un fichier",
+        ],
+        'message' => [
+            'delete'            => "Êtes vous certain de vouloir supprimer ce fichier ?",
         ],
         'field' => [
             'legend'            => "Légende du fichier",

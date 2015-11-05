@@ -22,11 +22,7 @@ class PagesComponent extends Controller
 
     private $defaultView = 'admin.pages';
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $page = new PageModel;
@@ -34,11 +30,6 @@ class PagesComponent extends Controller
         return view($this->defaultView, array('pages' => $pages));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(FormBuilder $formBuilder, Request $request)
     {
 
@@ -64,12 +55,6 @@ class PagesComponent extends Controller
         ));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(PageRequest $request)
     {
     
@@ -86,24 +71,13 @@ class PagesComponent extends Controller
         return redirect(route('admin.pages.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $page = PageModel::findOrFail($id);
         return view($this->defaultView, array('page' => $page));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id, Request $request, FormBuilder $formBuilder)
     {
 
@@ -130,13 +104,7 @@ class PagesComponent extends Controller
         ));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update($id, PageRequest $request)
     {
         $page = PageModel::findOrFail($id);
@@ -159,12 +127,6 @@ class PagesComponent extends Controller
         ));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $page = PageModel::findOrFail($id);

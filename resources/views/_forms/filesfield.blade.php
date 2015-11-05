@@ -8,16 +8,17 @@
   		<div class="panel-body">
   			<ul id="{{ $name }}-files-container" class="files clearfix">
 				@if (isset($options['value']))
-					@forelse($options['value'] as $picture)
+					@forelse($options['value'] as $file)
 
-						<li class="dz-details file thumbnail">
+						<li id="preview-file-{{ $file->id }}" class="dz-details file thumbnail">
 							<div class="dz-details-inner">
-								<img src="{{ route('file', $picture->id.'.filebrowser')}}" />
+								<img src="{{ route('file', $file->id.'.filebrowser')}}" />
 								<span class="file-actions">
-									<button type="button" class="btn btn-primary btn-xs modal-edit-open" data-url-edit="{{ route('admin.files.edit', $picture->id) }}">
-										<i class="fa fa-pencil"></i>
-									</button>
-									<button type="button" class="btn btn-default btn-xs modal-show-open" data-url-show="{{ route('admin.files.show', $picture->id) }}"><i class="fa fa-eye"></i></button>
+									<span class="btn-group">
+										<button type="button" class="btn btn-primary btn-xs modal-edit-open" data-url-edit="{{ route('admin.files.edit', $file->id) }}"><i class="fa fa-pencil"></i></button>
+										<button type="button" class="btn btn-danger btn-xs modal-delete-open" data-url-delete="{{ route('admin.files.delete', $file->id) }}"><i class="fa fa-trash-o"></i></button>
+										<button type="button" class="btn btn-default btn-xs modal-show-open" data-url-show="{{ route('admin.files.show', $file->id) }}"><i class="fa fa-eye"></i></button>
+									</span>
 								</span>
 							</div>
 						</li>
@@ -35,13 +36,14 @@
 <div id="preview-template" style="display: none;">
 	<li class="dz-details file thumbnail">
 		<div class="dz-details-inner">
-			<img src="" />
+			<img data-dz-thumbnail />
 			<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
-			<span class="file-actions">
-				<button type="button" class="btn btn-primary btn-xs modal-edit-open" data-url-edit="{{ route('admin.files.edit', '%s') }}">
-					<i class="fa fa-pencil"></i>
-				</button>
-				<button type="button" class="btn btn-default btn-xs modal-show-open" data-url-show="{{ route('admin.files.show', $picture->id) }}"><i class="fa fa-eye"></i></button>
+			<span class="file-actions ">
+				<span class="btn-group">
+					<button type="button" class="btn btn-primary btn-xs modal-edit-open" data-url-edit="{{ route('admin.files.edit', '%file_id') }}"><i class="fa fa-pencil"></i></button>
+					<button type="button" class="btn btn-danger btn-xs modal-delete-open" data-url-delete="{{ route('admin.files.delete', '%file_id') }}"><i class="fa fa-trash-o"></i></button>
+					<button type="button" class="btn btn-default btn-xs modal-show-open" data-url-show="{{ route('admin.files.show', '%file_id') }}"><i class="fa fa-eye"></i></button>
+				</span>
 			</span>
 		</div>
 	</li>
@@ -55,11 +57,7 @@
 
 	<script type="text/javascript">	
 
-		/* Modal editing/show file */
-		$('#{{ $name }}-files-container').on("click", '.modal-show-open', function(event) {
-			Admin.Modal.picture($(this).attr('data-url-show'));
-		});
-
+		/* Modal edit/delete/show */
 		$('#{{ $name }}-files-container').on("click", '.modal-edit-open', function(event) {
 			Admin.Modal.ajaxForm({
 				'url' : $(this).attr('data-url-edit'),
@@ -67,6 +65,21 @@
 				'messageSuccess': "{{ trans('admin.files.feedback.update.ok') }}",
 				'messageError': "{{ trans('admin.files.feedback.update.error') }}",
 			});
+		});
+		$('#{{ $name }}-files-container').on("click", '.modal-delete-open', function(event) {
+			var button = $(this);
+			Admin.Modal.ajaxForm({
+				'url' : $(this).attr('data-url-delete'),
+				'title' : "{{ trans('admin.files.title.delete') }}",
+				'messageSuccess': "{{ trans('admin.files.feedback.delete.ok') }}",
+				'messageError': "{{ trans('admin.files.feedback.delete.error') }}",
+				'callbackSuccess': function() {
+					button.parents('li').hide();
+				}
+			});
+		});
+		$('#{{ $name }}-files-container').on("click", '.modal-show-open', function(event) {
+			Admin.Modal.picture($(this).attr('data-url-show'));
 		});
 
 		/* Dropzone */
@@ -78,18 +91,10 @@
 	  		url: "{{ route('admin.files.store') }}",
 	  		previewsContainer: '#{{ $name }}-files-container',
 	  		previewTemplate: previewTemplate.html(),
-	  		createImageThumbnails: false,
 		  	success: function(file, response) {
 		  		if (response!==false) {
 		  			Admin.addToSerializedField('{{ $name }}_new', response['file_id']);
-		  			$(file.previewElement).find('.modal-edit-open').attr(
-		  				'data-url-edit',
-		  				("{{ route('admin.files.edit', '%s') }}").replace("%s", response['file_id'])
-		  			);
-		  			$(file.previewElement).find('img').attr(
-		  				'src', 
-		  				("{{ route('file', '%s.filebrowser') }}").replace("%s", response['file_id'])
-		  			);
+		  			$(file.previewElement).html($(file.previewElement).html().replace(/%file_id/g, response['file_id']));	
 		  		}
 		  	},
 		  	init: function() {
