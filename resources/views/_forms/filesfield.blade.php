@@ -6,12 +6,12 @@
 
 	<div id="{{ $name }}" class="panel panel-default clearfix filebrowser dropzone">
   		<div class="panel-body">
-  			<ul id="{{ $name }}-files-container" class="files clearfix">
+  			<ul id="{{ $name }}-files-container" class="files clearfix row">
 				@if (isset($options['value']))
 					@forelse($options['value'] as $file)
 
-						<li id="preview-file-{{ $file->id }}" class="dz-details file thumbnail">
-							<div class="dz-details-inner">
+						<li id="preview-file-{{ $file->id }}" class="dz-details file col-md-2 col-sm-3 col-xs-4">
+							<div class="dz-details-inner thumbnail">
 								<img src="{{ route('file', $file->id.'.filebrowser')}}" />
 								<span class="file-actions">
 									<span class="btn-group">
@@ -34,8 +34,8 @@
 </div>
 
 <div id="preview-template" style="display: none;">
-	<li class="dz-details file thumbnail">
-		<div class="dz-details-inner">
+	<li id="preview-file-{{ $file->id }}" class="dz-details file col-md-2 col-sm-4 col-xs-6">
+		<div class="dz-details-inner thumbnail">
 			<img data-dz-thumbnail />
 			<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
 			<span class="file-actions ">
