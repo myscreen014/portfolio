@@ -1,3 +1,5 @@
+@import 'mixins';
+
 /*	TEMPLATES 
 -----------------------------------------------------------------------------------------*/
 
@@ -56,58 +58,74 @@ table {
 form {
 	.form-group {
 		.filebrowser {
-			.panel-body {}
-			ul.files {
-				display: block;
-				list-style: inside none;
-				margin: -1%;
-				padding: 0;
-				.dz-message {
-					margin: 40px 0;
+			.panel-body {
+				ul.files {
+					display: block;
+					list-style: inside none;
+					margin: 0;
 					padding: 0;
-					text-align: center;
-				}
-				li.dz-details {  
-					margin: 1%;
-					width: 48%;
-					float: left;
-					.dz-details-inner  {
-						cursor: pointer;
-						position: relative;
-						.file-thumnails {
-							display: block;
-							float: left; 
-							height: 80px;
-							width: 80px;
-						}
-						.file-infos { 
-							display: block;
-							height: 80px;
-							padding-left: 90px;
-							.file-summary {
+					.dz-message {
+						margin: 40px 0;
+						padding: 0;
+						text-align: center;
+					}
+					li.dz-details {  
+						padding: 10px;
+						.dz-details-inner  {
+							background-color: #f8f8f8;
+							cursor: move;
+							outline: 1px solid #e7e7e7;
+							padding: 4px;
+							position: relative;
+							.file-thumnails {
+								border: 1px solid #e7e7e7;
 								display: block;
-								height: 50px;
-								.file-name {
+								float: left; 
+								img {
 									display: block;
-								}
-								.file-type {
-									display: block;
+									height: 80px;
+									width: 80px;
 								}
 							}
-							.file-actions {
+							.file-infos { 
 								display: block;
-								text-align: right;
-								height: 30px;
+								height: 80px;
+								padding-left: 90px;
+								.file-summary {
+									display: block;
+									height: 58px;
+									.file-name {
+										display: block;
+									}
+									.file-type {
+										display: block;
+									}
+								}
+								.file-actions {
+									display: block;
+									text-align: right;
+									height: 22px;
+									.btn {
+										width: 22px;
+									}
+								}
 							}
 						}
-					}
-					&.ui-state-highlight {
-						background-color: #eee;
-						outline: 2px dotted #ddd;
-					}
-					&.dz-complete {
-						.dz-progress {
-							display: none;
+						&.ui-state-highlight {
+							background-color: #eee;
+							outline: 2px dotted #ddd;
+							z-index: 9;
+						}
+						&.ui-sortable-helper {
+							.dz-details-inner {
+							@include box-shadow(0px 0px 10px rgba(0,0,0,.3));
+							z-index: 9;
+						}
+						}
+						&.dz-complete {
+							.dz-progress {
+								display: none;
+							}
 						}
 					}
 				}
@@ -116,4 +134,14 @@ form {
 		}
 		
 	}
+}
+
+
+/*	SHORTCODES
+-----------------------------------------------------------------------------------------*/
+
+.overflow {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

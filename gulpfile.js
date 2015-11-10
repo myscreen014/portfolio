@@ -16,17 +16,18 @@ elixir.config.sourcemaps = false;
 elixir(function(mix) {
 	
 	mix.sass([
-        'bootstrap-theme.min.css',
         'bootstrap.min.css',
+        'bootstrap-theme.min.css',
         'font-awesome.min.css',
+        'mixins.scss',
         'admin.scss',
-        'app.scss'
+        'sb-admin-2.scss',
     ], "public/css/admin.all.css");
 
     mix.scripts([
     	'jquery-1.11.3.min.js',
-        'bootstrap.min.js',
         'jquery-ui.min.js',
+        'bootstrap.min.js',
     	'dropzone.js',
         'admin.js',
         'admin.modal.js'

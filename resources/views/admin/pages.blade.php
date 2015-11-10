@@ -1,10 +1,6 @@
 @extends('admin')
 
-@section('sidebar')
 
-<h1>{{ trans('admin.pages.title.index') }}</h1>
-	
-@endsection
 
 
 @section('content')
@@ -12,8 +8,10 @@
 
 	{{-- INDEX --}}
 	@if (Route::currentRouteName() == 'admin.pages.index')
-		
-		<h1>{{ trans('admin.pages.title.index') }}</h1>
+
+		@section('title')
+			{{ trans('admin.pages.title.index') }}
+		@endsection
 
 		@if (count($pages)>0)
 			<table class="table table-striped">
@@ -47,8 +45,10 @@
 
 	{{-- CREATE --}}
 	@if (Route::currentRouteName() == 'admin.pages.create')
-		
-		<h1>{{ trans('admin.pages.title.create') }}</h1>
+
+		@section('title')
+			{{ trans('admin.pages.title.create') }}
+		@endsection
 
 		{!! form($form) !!}
 
@@ -56,8 +56,11 @@
 
 	{{-- EDIT --}}
 	@if (Route::currentRouteName() == 'admin.pages.edit')
+
+		@section('title')
+			{{ trans('admin.pages.title.edit') }}
+		@endsection
 		
-		<h1>{{ trans('admin.pages.title.edit') }}</h1>
 		{!! form($form) !!}
 
 	@endif
@@ -65,7 +68,9 @@
 	{{-- DELETE --}}
 	@if (Route::currentRouteName() == 'admin.pages.delete')
 
-		<h1>{{ trans('admin.pages.title.delete') }}</h1>
+		@section('title')
+			{{ trans('admin.pages.title.delete') }}
+		@endsection
 
 		{!! Form::model($page, array('route' => array('admin.pages.destroy', $page->id), 'method' => 'DELETE')) !!}
 			<a href="{{ route('admin.pages.index') }}" class="btn btn-default">Retour</a>
@@ -77,9 +82,11 @@
 
 	{{-- SHOW --}}
 	@if (Route::currentRouteName() == 'admin.pages.show')
-		
-		<h1>Affichage d'une page</h1>
 
+		@section('title')
+			{{ trans('admin.pages.title.show') }}
+		@endsection
+	
 		<table class="table table-bordered table-show">
 			@foreach($page->getFillable() as $attribut)
 				<tr>

@@ -19,7 +19,7 @@ class CreateFilesTable extends Migration
             $table->text('legend');
             $table->string('path');
             $table->string('type');
-            $table->string('ordering');
+            $table->integer('ordering')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

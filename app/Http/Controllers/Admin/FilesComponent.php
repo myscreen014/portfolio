@@ -49,7 +49,8 @@ class FilesComponent extends Controller {
 						$isUploaded = $fileUploaded->move($destinationPath, $fileUploaded->getClientOriginalName());
 						if ($isSave && $isUploaded) {
 							return array(
-								'file_id' => $file->id
+								'file_id' => $file->id,
+								'file' => $file->toArray()
 							);
 						} else {
 							return false;

@@ -27,8 +27,15 @@ return [
     ],
 
     'users' => [
+        'title' => [
+            'login'             => "Se connecter",
+        ],
         'action' => [
             'logout'            => "Déconnexion",
+            'login'             => "Connexion",
+        ],
+        'message' => [
+            'remember_me'        => "Se Souvenir De Moi",
         ],
         'field' => [
             'email'             => "Email",

@@ -11,14 +11,14 @@
 				@if (isset($options['value']))
 					@forelse($options['value'] as $file)
 
-						<li id="preview-file-{{ $file->id }}" data-file-id="{{ $file->id }}" class="dz-details file">
+						<li id="preview-file-{{ $file->id }}" data-file-id="{{ $file->id }}" class="dz-details file col-md-6 col-lg-4 ">
 							<div class="dz-details-inner clearfix">
 								<span class="file-thumnails">
 									<img src="{{ route('file', $file->id.'.filebrowser')}}" />
 								</span>
 								<span class="file-infos">
 									<span class="file-summary">
-										<strong class="file-name">{{ $file->name }}</strong>
+										<strong class="file-name overflow">{{ $file->name }}</strong>
 										<small class="file-type">{{ $file->type }}</small>
 										<p>{{ $file->legend }}</p>
 									</span>
@@ -30,8 +30,6 @@
 										</span>
 									</span>
 								</span>
-									
-								
 							</div>
 						</li>
 
@@ -42,21 +40,29 @@
 			</ul>
   		</div>
 	</div>
-	
 </div>
 
 <div id="preview-template" style="display: none;">
-	<li id="preview-file-%file_id" data-file-id="%file_id" class="dz-details file">
-		<div class="dz-details-inner thumbnail">
-			<img data-dz-thumbnail />
-			<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
-			<span class="file-actions ">
-				<span class="btn-group">
-					<button type="button" class="btn btn-primary btn-xs modal-edit-open" data-url-edit="{{ route('admin.files.edit', '%file_id') }}"><i class="fa fa-pencil"></i></button>
-					<button type="button" class="btn btn-danger btn-xs modal-delete-open" data-url-delete="{{ route('admin.files.delete', '%file_id') }}"><i class="fa fa-trash-o"></i></button>
-					<button type="button" class="btn btn-default btn-xs modal-show-open" data-url-show="{{ route('admin.files.show', '%file_id') }}"><i class="fa fa-eye"></i></button>
+	<li id="preview-file-%file_id" data-file-id="%file_id" class="dz-details file col-md-6 col-lg-4 ">
+		<div class="dz-details-inner clearfix">
+			<span class="file-thumnails">
+				<img data-dz-thumbnail />
+			</span>
+			<span class="file-infos">
+				<span class="file-summary">
+					<strong class="file-name overflow">%file_name</strong>
+					<small class="file-type">%file_type</small>
+					<p></p>
+				</span>
+				<span class="file-actions">
+					<span class="btn-group">
+						<button type="button" class="btn btn-primary btn-xs modal-edit-open" data-url-edit="{{ route('admin.files.edit', '%file_id') }}"><i class="fa fa-pencil"></i></button>
+						<button type="button" class="btn btn-danger btn-xs modal-delete-open" data-url-delete="{{ route('admin.files.delete', '%file_id') }}"><i class="fa fa-trash-o"></i></button>
+						<button type="button" class="btn btn-default btn-xs modal-show-open" data-url-show="{{ route('admin.files.show', '%file_id') }}"><i class="fa fa-eye"></i></button>
+					</span>
 				</span>
 			</span>
+			<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
 		</div>
 	</li>
 </div>
@@ -67,15 +73,15 @@
 
 @section('javascript')
 
-	@parent();
+	@parent
 
 	<script type="text/javascript">	
 
 		/* Sortable - JQuery UI */
     	$( "#{{ $name }}-files-container" ).sortable({
-      		placeholder: "ui-state-highlight dz-details file col-xs-6",
+      		placeholder: "ui-state-highlight dz-details file col-lg-4 col-md-6 ",
       		start: function(event, ui){
-        		ui.placeholder.innerHeight(ui.item.innerHeight()-1);
+        		ui.placeholder.innerHeight(ui.item.innerHeight());
     		},
     		stop: function(event, ui){
     			var filesIds = Array();
@@ -83,7 +89,6 @@
     			for (var i = 0; i < files.length ; i++) {
     				filesIds.push($(files[i]).attr('data-file-id'));
     			};
-    			console.log(filesIds);
     			$.ajax({
 	  				url: "{{ route('admin.files.reorder') }}",
 	  				method: 'POST',
@@ -117,7 +122,6 @@
 				'messageError': "{{ trans('admin.files.feedback.delete.error') }}",
 				'callbackSuccess': function() {
 					button.parents('li').remove();
-					console.log($('#{{ $name }}-files-container .dz-details'));
 					if ($('#{{ $name }}-files-container .dz-details').length <= 0) {
 						$('#{{ $name }} .dz-message').show();
 					}
@@ -140,8 +144,11 @@
 	  		previewTemplate: previewTemplate.html(),
 		  	success: function(file, response) {
 		  		if (response!==false) {
-		  			Admin.addToSerializedField('{{ $name }}_new', response['file_id']);
-		  			$(file.previewElement).html($(file.previewElement).html().replace(/%file_id/g, response['file_id']));	
+		  			var responseFile = response['file'];
+		  			Admin.addToSerializedField('{{ $name }}_new', responseFile['id']);
+		  			$(file.previewElement).html($(file.previewElement).html().replace(/%file_id/g, responseFile['id']));	
+		  			$(file.previewElement).html($(file.previewElement).html().replace(/%file_name/g, responseFile['name']));	
+		  			$(file.previewElement).html($(file.previewElement).html().replace(/%file_type/g, responseFile['type']));	
 		  		}
 		  	},
 		  	init: function() {
