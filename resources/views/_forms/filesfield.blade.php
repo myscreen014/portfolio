@@ -140,7 +140,7 @@
 		Dropzone.autoDiscover = false;
 		var myDropzone{{ $name }} = new Dropzone({{ $name }}, {
 			dictDefaultMessage: "",
-	  		paramName: "file", // The name that will be used to transfer the file
+	  		//paramName: "file", // The name that will be used to transfer the file
 	  		maxFilesize: 5, // MB
 	  		autoProcessQueue: false,
 	  		url: "{{ route('admin.files.store') }}",
@@ -148,16 +148,19 @@
  	  		acceptedFiles: "{{ $options['dropzone_acceptedFiles'] }}",
 	  		previewsContainer: '#{{ $name }}-files-container',
 	  		previewTemplate: '<div style="display:none"></div>',
-	  		uploadMultiple: true,
+	  		uploadMultiple: false,
 		  	init: function() {
+		  		var dropzone = this;
 		  		var modalIsOpen = false;
 		  		var modalFilesUpload = null;
 		  		this.on("addedfile", function(file) {
 		  			console.log('addedfile');
     				$('#{{ $name }} .dz-message').hide();
 					if (!modalIsOpen) {
-						console.log('create modale');
 						modalFilesUpload = Admin.Modal.filesUpload();
+						modalFilesUpload.find('button').bind('click', function() {
+							myDropzone{{ $name }}.processQueue();
+						});
 						modalIsOpen = true;
 					}
 					modalFilesUpload.find('.modal-body').append(
@@ -175,6 +178,8 @@
 			  		console.log('uploadprogress');
 			  	});
 			  	this.on("success", function(file, response)  {
+			  		// Upload next file
+			  		myDropzone{{ $name }}.processQueue();
 			  		console.log('success');
 			  		if (response!==false) {
 			  			var responseFile = response['file'];

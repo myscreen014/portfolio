@@ -29,6 +29,9 @@
             <div class="modal-body">
             
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Lancer l'upload</button>
+            </div>
         </div>
     </div>
 </div>
