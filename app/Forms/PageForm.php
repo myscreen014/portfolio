@@ -19,20 +19,20 @@ class PageForm extends Form
         ->add('content', 'textarea', array('label'=>trans('admin.pages.field.content')))
         ->add('pictures', 'files', 
             array(
-                'dropzone_acceptedFiles' => 'image/jpeg',
+                'dropzone_acceptedFiles' => 'image/*',
                 'model_table' => $this->getData('model_table'),
                 'model_field' => 'pictures',
                 'model_id' => $this->getData('model_id'),
             )
         )
-        ->add('files', 'files', 
+      /*  ->add('files', 'files', 
             array(
-                'dropzone_acceptedFiles' => 'application/pdf',
+                'dropzone_acceptedFiles' => 'application/*, text/*, audio/*',
                 'model_table' => $this->getData('model_table'),
                 'model_field' => 'files',
                 'model_id' => $this->getData('model_id'),
             )
-        );
+        )*/;
 
     }
 }

@@ -16,7 +16,6 @@ use Kris\LaravelFormBuilder\FormBuilder;
 class FilesComponent extends Controller {
 	
 	public function store(Request $request) {
-		
 		if (!is_null($request->input('model_table')) && !is_null($request->input('model_field')) && !is_null($request->input('model_id'))) {
 			$fileUploadedName = 'file';
 			$destinationPath = config('app.uploads_path');

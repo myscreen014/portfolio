@@ -10,6 +10,25 @@ $.extend(Admin, {
 			$('#modal-loading').modal('hide');
 		},
 
+		alert: function(title, message) {
+
+			// preparing modal
+			var modal = $('#modal-default').clone();
+			var modalTitle = modal.find('.modal-title').html(title);
+			var modalBody = modal.find('.modal-body').html(message);
+
+			modal.modal();
+		},
+
+		filesUpload: function() {
+			// preparing modal
+			var modal = $('#modal-files-upload').clone();
+			var modalBody = modal.find('.modal-body').addClass('text-center');
+			var modalFooter = modal.find('.modal-footer');
+			modal.modal();
+			return modal;
+		},
+
 		picture: function(urlShow) {
 				
 			// preparing modal

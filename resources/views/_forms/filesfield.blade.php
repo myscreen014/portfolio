@@ -14,7 +14,11 @@
 						<li id="preview-file-{{ $file->id }}" data-file-id="{{ $file->id }}" class="dz-details file col-md-6 col-lg-4 ">
 							<div class="dz-details-inner clearfix">
 								<span class="file-thumnails">
-									<img src="{{ route('file', $file->id.'.filebrowser')}}" />
+									@if($file->isPicture())
+										<img src="{{ route('file', $file->id.'.filebrowser')}}" />
+									@else
+										<span class="img-type"><i class="fa {{ $file->getIconClass() }}"></i></span>
+									@endif
 								</span>
 								<span class="file-infos">
 									<span class="file-summary">
@@ -133,36 +137,68 @@
 		});
 
 		/* Dropzone */
-		var previewTemplate = $('#preview-template');
-		Dropzone.options.{{ $name }} = {
+		Dropzone.autoDiscover = false;
+		var myDropzone{{ $name }} = new Dropzone({{ $name }}, {
 			dictDefaultMessage: "",
 	  		paramName: "file", // The name that will be used to transfer the file
 	  		maxFilesize: 5, // MB
+	  		autoProcessQueue: false,
 	  		url: "{{ route('admin.files.store') }}",
-	  		acceptedFiles: "{{ $options['dropzone_acceptedFiles'] }}",
+	  		parallelUploads: 1,
+ 	  		acceptedFiles: "{{ $options['dropzone_acceptedFiles'] }}",
 	  		previewsContainer: '#{{ $name }}-files-container',
-	  		previewTemplate: previewTemplate.html(),
-		  	success: function(file, response) {
-		  		if (response!==false) {
-		  			var responseFile = response['file'];
-		  			Admin.addToSerializedField('{{ $name }}_new', responseFile['id']);
-		  			$(file.previewElement).html($(file.previewElement).html().replace(/%file_id/g, responseFile['id']));	
-		  			$(file.previewElement).html($(file.previewElement).html().replace(/%file_name/g, responseFile['name']));	
-		  			$(file.previewElement).html($(file.previewElement).html().replace(/%file_type/g, responseFile['type']));	
-		  		}
-		  	},
+	  		previewTemplate: '<div style="display:none"></div>',
+	  		uploadMultiple: true,
 		  	init: function() {
+		  		var modalIsOpen = false;
+		  		var modalFilesUpload = null;
+		  		this.on("addedfile", function(file) {
+		  			console.log('addedfile');
+    				$('#{{ $name }} .dz-message').hide();
+					if (!modalIsOpen) {
+						console.log('create modale');
+						modalFilesUpload = Admin.Modal.filesUpload();
+						modalIsOpen = true;
+					}
+					modalFilesUpload.find('.modal-body').append(
+						'<label>'+file.name+'</label><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">60%</div></div>'
+					);
+  				});
 			  	this.on("sending", function(file, xhr, formData) {
+			  		console.log('sending');
 			   		formData.append("_token", "{{ csrf_token() }}");
 			   		formData.append("model_table", "{{ $options['model_table'] }}");
 			   		formData.append("model_field", "{{ $options['model_field'] }}");
 			   		formData.append("model_id", "{{ $options['model_id'] }}");
 			  	});
-			  	this.on("addedfile", function(file) {
-    				$('#{{ $name }} .dz-message').hide();
-  				});
+			  	this.on("uploadprogress", function(file, progress)  {
+			  		console.log('uploadprogress');
+			  	});
+			  	this.on("success", function(file, response)  {
+			  		console.log('success');
+			  		if (response!==false) {
+			  			var responseFile = response['file'];
+			  			Admin.addToSerializedField('{{ $name }}_new', responseFile['id']);
+			  			$(file.previewElement).html($(file.previewElement).html().replace(/%file_id/g, responseFile['id']));	
+			  			$(file.previewElement).html($(file.previewElement).html().replace(/%file_name/g, responseFile['name']));	
+			  			$(file.previewElement).html($(file.previewElement).html().replace(/%file_type/g, responseFile['type']));	
+			  		}
+			  	});
+			  	this.on("error", function(file, response)  {
+			  		$(file.previewElement).remove();
+			  		if ($('#{{ $name }}-files-container .dz-details').length <= 0) {
+						$('#{{ $name }} .dz-message').show();
+					}
+					Admin.Modal.alert("{{ trans('admin.files.title.upload')}}", "{{ trans('admin.files.message.upload.error.acceptedfiles')}}");
+			  	});
+
+			  	/****** test *********/
+			  	this.on("processFile", function(question, accepted, rejected)  {
+			  		console.log('confirm');
+			  	});
 			}
-		};
+		});
+		
 	</script>
 
 @stop

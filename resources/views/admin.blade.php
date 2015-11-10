@@ -87,8 +87,8 @@
 									</div>
 									<!-- /input-group -->
 								</li>
-								<li class="@if ($controller == NULL) active @endif"><a href="{{ route('admin.index') }}">Home</a></li>
-								<li class="@if ($controller == 'pages') active @endif" ><a href="{{ route('admin.pages.index')}}">Pages</a></li>
+								<li><a href="{{ route('admin.index') }}" class="@if ($controller == NULL) active @endif">Home</a></li>
+								<li><a href="{{ route('admin.pages.index')}}" class="@if ($controller == 'pages') active @endif">Pages</a></li>
 							</ul>
 						</div>
 						<!-- /.sidebar-collapse -->

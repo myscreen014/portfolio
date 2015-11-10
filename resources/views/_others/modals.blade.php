@@ -19,6 +19,20 @@
     </div>
 </div>
 
+<!-- Modal files uploading -->
+<div class="modal " id="modal-files-upload">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Chargement...</h4>
+            </div>
+            <div class="modal-body">
+            
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Modal loading -->
 <div class="modal " id="modal-loading">
 	<div class="modal-dialog">

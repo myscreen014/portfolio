@@ -81,9 +81,15 @@ return [
         'title' => [
             'edit'              => 'Édition du fichier',
             'delete'            => "Suppression d'un fichier",
+            'upload'            => "Upload de fichier",
         ],
         'message' => [
             'delete'            => "Êtes vous certain de vouloir supprimer ce fichier ?",
+            'upload' => [
+                'error' => [
+                    'acceptedfiles' => "Ce type de fichier n'est pas accepté"
+                ]
+            ]
         ],
         'field' => [
             'legend'            => "Légende du fichier",
