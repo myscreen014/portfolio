@@ -48,13 +48,11 @@ class FilesComponent extends Controller {
 						$isUploaded = $fileUploaded->move($destinationPath, $fileUploaded->getClientOriginalName());
 						if ($isSave && $isUploaded) {
 							return array(
-								'file_id' => $file->id,
 								'file' => $file->toArray()
 							);
 						} else {
 							return false;
 						}
-						
 					}
 				} 
 			}
@@ -150,6 +148,15 @@ class FilesComponent extends Controller {
 	    	return (new Response(NULL, 403));
 	    }
     }
+
+    public function getitemfilebrowserAjax(Request $request) {
+    	if ($request->ajax()) {
+    		$file = FileModel::findOrFail($request->input('file_id'));
+    		return view('_forms.itemfilebrowser', array('file' => $file));
+    	}
+    	return (new Response('fileId', 200));
+    }
+
 
 	
 }

@@ -81,7 +81,7 @@ return [
         'title' => [
             'edit'              => 'Édition du fichier',
             'delete'            => "Suppression d'un fichier",
-            'upload'            => "Upload de fichier",
+            'upload'            => "Upload de fichiers",
         ],
         'message' => [
             'delete'            => "Êtes vous certain de vouloir supprimer ce fichier ?",
@@ -96,6 +96,7 @@ return [
         ],
         'action' => [
             'save'              => "Enregister ce fichier",
+            'upload'            => "Lancer l'upload des fichiers",
         ]
     ]
     

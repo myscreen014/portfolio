@@ -11,7 +11,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title"></h4>
             </div>
-            <div class="modal-body"> </div>
+            <div class="modal-body"><i class="fa fa-spinner fa-spin"></i></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('admin.global.action.close') }}</button>
             </div>
@@ -24,13 +24,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Chargement...</h4>
+                <h4 class="modal-title">{{ trans('admin.files.title.upload') }}</h4>
             </div>
-            <div class="modal-body">
-            
-            </div>
+            <div class="modal-body"></div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Lancer l'upload</button>
+                <button type="button" class="btn btn-default" id="button-cancel-upload" data-dismiss="modal">{{ trans('admin.global.action.close') }}</button>
+                <button type="button" class="btn btn-success" id="button-start-upload">{{ trans('admin.files.action.upload') }}</button>
             </div>
         </div>
     </div>

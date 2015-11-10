@@ -32,7 +32,7 @@ class FileModel extends Model
 
     /* Methods */
     public function isPicture() {
-    	if (in_array($this->type, array('image/jpeg', 'image/jpg', 'image/gif'))) {
+    	if (in_array($this->type, array('image/jpeg', 'image/png', 'image/jpg', 'image/gif'))) {
     		return true;
     	}
     	return false;
@@ -41,6 +41,7 @@ class FileModel extends Model
     public function getIconClass() {
     	$type = $this->type;
     	$iconClass = 'fa-file-o';
+        varlog($type);
     	switch ($type) {
     		case 'application/excel':
     			$iconClass = 'fa-file-excel-o';
