@@ -14,7 +14,7 @@
 			{!!  Form::token() !!}
 
 			<div class="form-group">
-				{!! FORM::label('Email') !!}
+				{!! FORM::label(trans('admin.users.field.email')) !!}
 				{!! FORM::text('email', old('email'), ['class'=>'form-control']) !!}
 			</div>
 

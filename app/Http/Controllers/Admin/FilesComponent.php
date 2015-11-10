@@ -17,10 +17,11 @@ class FilesComponent extends Controller {
 	
 	public function store(Request $request) {
 		
-		if (!is_null($request->input('model_table')) && !is_null($request->input('model_id'))) {
+		if (!is_null($request->input('model_table')) && !is_null($request->input('model_field')) && !is_null($request->input('model_id'))) {
 			$fileUploadedName = 'file';
 			$destinationPath = config('app.uploads_path');
 			$modelTable = $request->input('model_table');
+			$modelField = $request->input('model_field');
 			$modelId = $request->input('model_id');
 
 			if (!empty($_FILES)) {
@@ -39,6 +40,7 @@ class FilesComponent extends Controller {
 						$file->name = $fileUploaded->getClientOriginalName();
 						$file->type = $fileUploaded->getMimeType();
 						$file->model_table = $modelTable;
+						$file->model_field = $modelField;
 						$file->model_id = $modelId;
 						$file->path = $modelTable.'/'.$file->name;
 						$isSave = $file->save();

@@ -34,7 +34,8 @@ class PagesComponent extends Controller
     {
 
         $page = new PageModel;
-        $page->files = FileModel::whereIn('id', explode(',', $request->old('files_new')))->get();
+        $page->pictures = FileModel::where('model_field', 'pictures')->whereIn('id', explode(',', $request->old('files_new')))->get();
+        $page->files = FileModel::where('model_field', 'files')->whereIn('id', explode(',', $request->old('files_new')))->get();
        
         $form = $formBuilder->create(
             'App\Forms\PageForm', 
@@ -84,10 +85,15 @@ class PagesComponent extends Controller
         $page = new PageModel;
         $page = $page->with(array(
             'files' => function($query) {
-                $query->orderBy('ordering', 'asc');
+                $query->where('model_field', 'files')->orderBy('ordering', 'asc');
+            }
+        ))->with(array(
+            'pictures' => function($query) {
+                $query->where('model_field', 'pictures')->orderBy('ordering', 'asc');
             }
         ))->findOrFail($id);
 
+        $page->pictures = $page->pictures->merge(FileModel::whereIn('id', explode(',', $request->old('pictures_new')))->get());
         $page->files = $page->files->merge(FileModel::whereIn('id', explode(',', $request->old('files_new')))->get());
 
         $form = $formBuilder->create(

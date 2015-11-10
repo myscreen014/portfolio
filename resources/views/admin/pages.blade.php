@@ -1,6 +1,8 @@
 @extends('admin')
 
 @section('sidebar')
+
+<h1>{{ trans('admin.pages.title.index') }}</h1>
 	
 @endsection
 

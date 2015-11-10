@@ -11,6 +11,9 @@ return [
     */
 
     'global' => [
+        'application' => [
+            'name'              => 'Abarth'
+        ],
         'message' => [
             'upload_file_here'  => 'Glisser vos fichiers ici'
         ],
@@ -21,6 +24,18 @@ return [
             'save'              =>  'Enregistrer',
             'delete'            =>  'Supprimer',
         ]
+    ],
+
+    'users' => [
+        'action' => [
+            'logout'            => "Déconnexion",
+        ],
+        'field' => [
+            'email'             => "Email",
+            'content'           => "Contenu de page",
+            'files'             => "Fichiers de la page",
+            'pictures'          => "Photos de la page",
+        ],
     ],
 
     'pages' => [
@@ -34,6 +49,7 @@ return [
             'name'              => "Nom de page",
             'content'           => "Contenu de page",
             'files'             => "Fichiers de la page",
+            'pictures'          => "Photos de la page",
         ],
         'message' => [
             'nocontent'         => "Aucune page actuellement.",

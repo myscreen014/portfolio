@@ -15,6 +15,10 @@ class PageModel extends Model
     	return $this->hasMany('App\Models\FileModel', 'model_id');
     }
 
+    public function pictures() {
+        return $this->hasMany('App\Models\FileModel', 'model_id');
+    }
+
   	public static function boot() {   
   		
         parent::boot();

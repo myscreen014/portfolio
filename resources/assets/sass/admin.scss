@@ -18,10 +18,10 @@ table {
 		tr {
 			td {
 				&.actions {
-					text-align: right;
+					 text-align: right;
 				}
 			}
-		}
+		}  
 	}
 	&.table-show {
 		td.field {
@@ -33,6 +33,7 @@ table {
 		}
 	}
 }
+
 
 /*	MODALS 
 -----------------------------------------------------------------------------------------*/
@@ -55,68 +56,54 @@ table {
 form {
 	.form-group {
 		.filebrowser {
-			&.dz-drag-hover {
-				background-color: #eee;
-				border-style: dashed;
-				.dz-details img {
-					opacity: 0.7;
-				}
-			}
+			.panel-body {}
 			ul.files {
-				list-style: inside none;
 				display: block;
-				margin-top: -10px;
-				margin-bottom: -10px;
+				list-style: inside none;
+				margin: -1%;
 				padding: 0;
 				.dz-message {
 					margin: 40px 0;
 					padding: 0;
 					text-align: center;
 				}
-				li.dz-details {
-					cursor: pointer;
+				li.dz-details {  
+					margin: 1%;
+					width: 48%;
+					float: left;
 					.dz-details-inner  {
+						cursor: pointer;
 						position: relative;
-						margin-top: 10px;
-						margin-bottom: 10px;
-						text-align: center;
-						img {
-							display: inline-block;
-							height: auto;
-							width: auto;
-							margin: 0;
+						.file-thumnails {
+							display: block;
+							float: left; 
+							height: 80px;
+							width: 80px;
 						}
-						.file-actions {
-							display: none;
-							bottom: 15px;
-							left: 0;
-							position: absolute;
-							text-align: center;
-							width: 100%;
-							.btn {
-								width: 26px;
-							}
-						}	
-						&:hover {
-							.file-actions {
+						.file-infos { 
+							display: block;
+							height: 80px;
+							padding-left: 90px;
+							.file-summary {
 								display: block;
-							}
-						}	
-						&.dz-processing {
-							.dz-progress {
-								bottom: 0;
-								height: 10px;
-								position: absolute;
-								width: 100%;
-								z-index: 9;
-								.dz-upload {
-									position: absolute;
-									height: 100%;
-									background-color:red;
-									z-index: 9;
+								height: 50px;
+								.file-name {
+									display: block;
+								}
+								.file-type {
+									display: block;
 								}
 							}
-						} 
+							.file-actions {
+								display: block;
+								text-align: right;
+								height: 30px;
+							}
+						}
+					}
+					&.ui-state-highlight {
+						background-color: #eee;
+						outline: 2px dotted #ddd;
 					}
 					&.dz-complete {
 						.dz-progress {

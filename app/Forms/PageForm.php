@@ -17,9 +17,19 @@ class PageForm extends Form
         $this
         ->add('name', 'text', array('label'=>trans('admin.pages.field.name')))
         ->add('content', 'textarea', array('label'=>trans('admin.pages.field.content')))
-       	->add('files', 'files', 
+        ->add('pictures', 'files', 
             array(
+                'dropzone_acceptedFiles' => 'image/jpeg',
                 'model_table' => $this->getData('model_table'),
+                'model_field' => 'pictures',
+                'model_id' => $this->getData('model_id'),
+            )
+        )
+        ->add('files', 'files', 
+            array(
+                'dropzone_acceptedFiles' => 'application/pdf',
+                'model_table' => $this->getData('model_table'),
+                'model_field' => 'files',
                 'model_id' => $this->getData('model_id'),
             )
         );

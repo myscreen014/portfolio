@@ -1,25 +1,37 @@
 
 <div class="form-group clearfix">
+
 	
-	<label for="">{{ trans('admin.pages.field.files') }}</label>
+	<label for="">{{ trans('admin.pages.field.'.$name) }}</label>
 	<input class="form-control" name="{{ $name }}_new" id="{{ $name }}_new" value="{{ Request::old($name.'_new') }}" type="hidden" />
 
 	<div id="{{ $name }}" class="panel panel-default clearfix filebrowser dropzone">
   		<div class="panel-body">
-  			<ul id="{{ $name }}-files-container" class="files clearfix row">
+  			<ul id="{{ $name }}-files-container" class="files clearfix">
 				@if (isset($options['value']))
 					@forelse($options['value'] as $file)
 
-						<li id="preview-file-{{ $file->id }}" data-file-id="{{ $file->id }}" class="dz-details file col-md-2 col-sm-3 col-xs-4">
-							<div class="dz-details-inner thumbnail">
-								<img src="{{ route('file', $file->id.'.filebrowser')}}" />
-								<span class="file-actions">
-									<span class="btn-group">
-										<button type="button" class="btn btn-primary btn-xs modal-edit-open" data-url-edit="{{ route('admin.files.edit', $file->id) }}"><i class="fa fa-pencil"></i></button>
-										<button type="button" class="btn btn-danger btn-xs modal-delete-open" data-url-delete="{{ route('admin.files.delete', $file->id) }}"><i class="fa fa-trash-o"></i></button>
-										<button type="button" class="btn btn-default btn-xs modal-show-open" data-url-show="{{ route('admin.files.show', $file->id) }}"><i class="fa fa-eye"></i></button>
+						<li id="preview-file-{{ $file->id }}" data-file-id="{{ $file->id }}" class="dz-details file">
+							<div class="dz-details-inner clearfix">
+								<span class="file-thumnails">
+									<img src="{{ route('file', $file->id.'.filebrowser')}}" />
+								</span>
+								<span class="file-infos">
+									<span class="file-summary">
+										<strong class="file-name">{{ $file->name }}</strong>
+										<small class="file-type">{{ $file->type }}</small>
+										<p>{{ $file->legend }}</p>
+									</span>
+									<span class="file-actions">
+										<span class="btn-group">
+											<button type="button" class="btn btn-primary btn-xs modal-edit-open" data-url-edit="{{ route('admin.files.edit', $file->id) }}"><i class="fa fa-pencil"></i></button>
+											<button type="button" class="btn btn-danger btn-xs modal-delete-open" data-url-delete="{{ route('admin.files.delete', $file->id) }}"><i class="fa fa-trash-o"></i></button>
+											<button type="button" class="btn btn-default btn-xs modal-show-open" data-url-show="{{ route('admin.files.show', $file->id) }}"><i class="fa fa-eye"></i></button>
+										</span>
 									</span>
 								</span>
+									
+								
 							</div>
 						</li>
 
@@ -34,7 +46,7 @@
 </div>
 
 <div id="preview-template" style="display: none;">
-	<li id="preview-file-%file_id" data-file-id="%file_id" class="dz-details file col-md-2 col-sm-4 col-xs-6">
+	<li id="preview-file-%file_id" data-file-id="%file_id" class="dz-details file">
 		<div class="dz-details-inner thumbnail">
 			<img data-dz-thumbnail />
 			<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
@@ -55,11 +67,13 @@
 
 @section('javascript')
 
+	@parent();
+
 	<script type="text/javascript">	
 
 		/* Sortable - JQuery UI */
     	$( "#{{ $name }}-files-container" ).sortable({
-      		placeholder: "ui-state-highlight dz-details file col-md-2 col-sm-3 col-xs-4",
+      		placeholder: "ui-state-highlight dz-details file col-xs-6",
       		start: function(event, ui){
         		ui.placeholder.innerHeight(ui.item.innerHeight()-1);
     		},
@@ -121,6 +135,7 @@
 	  		paramName: "file", // The name that will be used to transfer the file
 	  		maxFilesize: 5, // MB
 	  		url: "{{ route('admin.files.store') }}",
+	  		acceptedFiles: "{{ $options['dropzone_acceptedFiles'] }}",
 	  		previewsContainer: '#{{ $name }}-files-container',
 	  		previewTemplate: previewTemplate.html(),
 		  	success: function(file, response) {
@@ -133,6 +148,7 @@
 			  	this.on("sending", function(file, xhr, formData) {
 			   		formData.append("_token", "{{ csrf_token() }}");
 			   		formData.append("model_table", "{{ $options['model_table'] }}");
+			   		formData.append("model_field", "{{ $options['model_field'] }}");
 			   		formData.append("model_id", "{{ $options['model_id'] }}");
 			  	});
 			  	this.on("addedfile", function(file) {

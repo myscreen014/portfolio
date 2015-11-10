@@ -11,12 +11,21 @@ return [
    
    	'path'      => '/thumbnails',
 
+    'quality'   => 80,
+
     'thumbnails' => [
+
         'filebrowser' => [
-            'fit' =>  [120,120]
+            'filters' => [
+                'fit' =>  [80,80]
+            ],
+            'quality' => 40
         ],
+
         'modal' => [
-            'max' =>  [600,400]
+            'filters' => [
+                'max' =>  [600,400]
+            ]
         ]
     ],  
 

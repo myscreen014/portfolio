@@ -35,6 +35,7 @@ class FilesController extends Controller
             $thumbnailsDir = base_path().'/uploads'.Config::get('thumbnail.path');
 
             if (File::exists($thumbnailsDir.'/'.$thumbnailName.'-'.$file->name)) {
+                varlog('file not exist');
                 $fileContent = File::get($thumbnailsDir.'/'.$thumbnailName.'-'.$file->name);
             } else {
                 $thumbnailsAvailables = Config::get('thumbnail.thumbnails');
@@ -44,7 +45,8 @@ class FilesController extends Controller
                         File::makeDirectory($thumbnailsDir);
                     }
                     $thumbnail = Image::make($uploadPath.'/'.$file->path);
-                    foreach ($thumbnailsAvailables[$thumbnailName] as $filter => $filterParams) {
+                    varlog($thumbnailsAvailables[$thumbnailName]);
+                    foreach ($thumbnailsAvailables[$thumbnailName]['filters'] as $filter => $filterParams) {
                         switch ($filter) {
 
                             // Custom filters
@@ -60,7 +62,10 @@ class FilesController extends Controller
                        }
                        
                     }
-                    $thumbnail->save($thumbnailsDir.'/'.$thumbnailName.'-'.$file->name);
+                    $thumbnail->save(
+                        $thumbnailsDir.'/'.$thumbnailName.'-'.$file->name,
+                        (isset($thumbnailsAvailables[$thumbnailName]['quality']) ? $thumbnailsAvailables[$thumbnailName]['quality'] : Config::get('thumbnail.quality') )
+                    );
                     $fileContent = File::get($thumbnailsDir.'/'.$thumbnailName.'-'.$file->name);
                 } else {
                      $fileContent = File::get($uploadPath.'/'.$file->path);

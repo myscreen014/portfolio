@@ -87,7 +87,7 @@
 						@show
 					</div>
 
-					<div class="content col-md-9 col-md-offset-1">
+					<div class="content col-md-10">
 						@section('content')
 							<div class="jumbotron">
 						    	<h1>Bankroll</h1>
