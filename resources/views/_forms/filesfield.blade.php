@@ -44,9 +44,6 @@
 	  				data: {
 	  					'_token' : "{{ csrf_token() }}",
 	  					'filesIds': filesIds
-	  				},
-	  				success: function(response) {
-	  					console.log(response);
 	  				}
 	  			});
     		}
@@ -84,90 +81,72 @@
 		/* Dropzone */
 		Dropzone.autoDiscover = false;
 		var myDropzone{{ $name }} = new Dropzone({{ $name }}, {
-			dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
-         	dictFileTooBig: "File is too big ",
-       		dictInvalidFileType: "You can't upload files of this type.",
-         	dictResponseError: "Server responded with code.",
-         	dictCancelUpload: "Cancel upload",
 			dictDefaultMessage: "",
 	  		//paramName: "file", // The name that will be used to transfer the file
 	  		maxFilesize: 5, // MB
+	  		maxFiles: 2,
 	  		autoProcessQueue: false,
 	  		url: "{{ route('admin.files.store') }}",
-	  		parallelUploads: 1,
+	  		parallelUploads: 5,
  	  		acceptedFiles: "{{ $options['dropzone_acceptedFiles'] }}",
 	  		previewsContainer: '#{{ $name }}-files-container',
 	  		previewTemplate: '<div style="display:none"></div>',
+
+	  		dictResponseError: "{{ trans('admin.files.label.status.error') }}",
+	  		dictInvalidFileType: "{{ trans('admin.files.label.status.unaccepted') }}",
+	  		
 	  		uploadMultiple: false,
 		  	init: function() {
 		  		var dropzone = this;
 		  		var modalFilesUpload = null;
-		  		var modalIsOpen = false;
-		  		var modalFilesUpload = null;
-		
-		  		this.on("addedfiles", function(files) {
+		  		var actionUpload = null;
 
-		  			console.log(files);
-		  		
+		  		this.on("addedfiles", function(files) {
+		  			
+		  			// drop all files
+		  			dropzone.removeAllFiles();
+
+		  			// Create modal
 					modalFilesUpload = Admin.Modal.filesUpload();
-					modalFilesUpload.find('button#button-cancel-upload').bind('click', function() {
-						refreshDropzone('{{ $name }}');
-					});
-					modalFilesUpload.find('button#button-start-upload').bind('click', function() {
-						// Upload first file
-						myDropzone{{ $name }}.processQueue();
-					});
-						
+					
 					var modalBodyTable = modalFilesUpload.find('.modal-body table tbody');
-					modalBodyTable.html('');
+
+					actionUpload = modalFilesUpload.find('.modal-footer #action-upload').bind('click', function() {
+						dropzone.processQueue();
+					});
+					
 					for (var i = 0; i < files.length; i++) {
 						files[i]['id'] = (i+1);
+						if (i > dropzone.options.maxFiles-1) { break; }
 						modalBodyTable.append(
 							'<tr id="upload-file-'+files[i]['id']+'"><th scope="row">'+(i+1)+'</th><td class="upload-name"><span class="overflow">'+files[i]['name']+'</span></td><td class="upload-progress"><div class="progress"><div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div></div></td><td class="text-center upload-status"><span class="label label-info">{{ trans("admin.files.label.status.pending") }}</span></td></tr>'
 						);
 					};
-				
   				});
-			  	this.on("sending", function(file, xhr, formData) {
-			  		console.log('sending '+file.name);
+				this.on("sending", function(file, xhr, formData) {
 			   		formData.append("_token", "{{ csrf_token() }}");
 			   		formData.append("model_table", "{{ $options['model_table'] }}");
 			   		formData.append("model_field", "{{ $options['model_field'] }}");
 			   		formData.append("model_id", "{{ $options['model_id'] }}");
 			  	});
+			
 			  	this.on("uploadprogress", function(file, progress)  {
-			  		console.log('uploadprogress');
 			  		var progressionBar = $('#upload-file-'+file['id']+' .progress-bar');
 			  		progressionBar.width(progress+'%').text(progress+'%');
 			  		if (progress=='100') {
 			  			progressionBar.addClass('progress-bar-success');
 			  		}
 			  	});
-			  	
-			  	this.on("queuecomplete", function() {
-			  		console.log('queuecomplete event');
-					modalIsOpen = false;
-		  			modalFilesUpload.find('button#button-start-upload').hide();
-		  			refreshDropzone('{{ $name }}');	
-			  	});
-			  	this.on("complete", function(file)  {
-			  		console.log('complete');
+			  	this.on('error', function(file, errorMessage)  {
 			  		var lineUpload = $('#upload-file-'+file['id']);
-			  		console.log(file['id']);
-			  		console.log('sttus '+file.status);
 			  		var labelStatus = lineUpload.find('.upload-status .label').removeClass('label-info');
-			  		if (file.status == 'success') {
-			  			console.log('TODO success');
-						labelStatus.addClass('label-success').html("{{ trans('admin.files.label.status.success') }}");
-			  		} else if (file.status == 'error') {
-			  			console.log('TODO ERROR');
-			  			lineUpload.addClass('bg-danger');
-			  			labelStatus.addClass('label-danger').html("{{ trans('admin.files.label.status.unaccepted') }}");
-			  		}
+			  		lineUpload.addClass('bg-danger');
+			  		labelStatus.addClass('label-danger').html(errorMessage);
 			  	});
-			  	this.on("success", function(file, response)  {
-			  		console.log('success');
-			  		// Add File in file browser
+			  	this.on('success', function(file, response)  {
+			  		var lineUpload = $('#upload-file-'+file['id']);
+			  		var labelStatus = lineUpload.find('.upload-status .label').removeClass('label-info');
+			  		labelStatus.addClass('label-success').html("{{ trans('admin.files.label.status.success') }}");
 			  		var fileId = response['file']['id'];
 			  		$.ajax({
 		  				url: "{{ route('admin.files.getitemfilebrowser') }}",
@@ -180,9 +159,14 @@
 		  					$(dropzone.options.previewsContainer).append(response);
 		  				}
 		  			});
-			  		// Upload next file
-			  		myDropzone{{ $name }}.processQueue();
-			  		refreshDropzone('{{ $name }}');
+			  	});
+			  	this.on("queuecomplete", function() {
+			  		if (dropzone.getQueuedFiles().length==0) {
+			  			actionUpload.remove();
+						modalFilesUpload.find('button').prop("disabled", false).bind('click', function() {
+							refreshDropzone('{{ $name }}');
+						});
+			  		}
 			  	});
 			}
 		});

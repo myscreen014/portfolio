@@ -85,11 +85,6 @@ return [
         ],
         'message' => [
             'delete'            => "Êtes vous certain de vouloir supprimer ce fichier ?",
-            'upload' => [
-                'error' => [
-                    'acceptedfiles' => "Ce type de fichier n'est pas accepté"
-                ]
-            ]
         ],
         'field' => [
             'name'              => "Nom du fichier",
@@ -99,13 +94,13 @@ return [
             'status' => [
                 'pending'       => 'En attente',
                 'success'       => 'Transféré',
-                'error'         => 'Erreur',
+                'error'         => "Erreur",
                 'unaccepted'    => 'Fichier invalide',
             ]
         ],
         'action' => [
             'save'              => "Enregister ce fichier",
-            'upload'            => "Lancer l'upload des fichiers",
+            'upload'            => "Lancer le transfert des fichiers",
         ]
     ]
     

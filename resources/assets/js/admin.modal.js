@@ -2,6 +2,12 @@ $.extend(Admin, {
 
 	Modal: {
 
+		_get: function(modaleName) {
+			$('.'+modaleName+':not(.mother)').remove();
+			var modal = $('.'+modaleName).clone().removeClass('mother');
+			return modal;
+		},
+
 		showLoading: function() {
 			$('#modal-loading').modal('show');
 		},
@@ -12,8 +18,7 @@ $.extend(Admin, {
 
 		alert: function(title, message) {
 
-			// preparing modal
-			var modal = $('#modal-default').clone();
+			var modal = Admin.Modal._get('modal-default');
 			var modalTitle = modal.find('.modal-title').html(title);
 			var modalBody = modal.find('.modal-body').html(message);
 
@@ -21,11 +26,8 @@ $.extend(Admin, {
 		},
 
 		filesUpload: function() {
-			// preparing modal
-			$('.modal-files-upload').addClass('backup');
-			$('.modal-files-upload:not(.backup)').remove();
-			var modal = $('.modal-files-upload').clone().removeClass('backup');
-			
+
+			var modal = Admin.Modal._get('modal-files-upload');
 
 			// Clean it 
 			modal.modal(); 

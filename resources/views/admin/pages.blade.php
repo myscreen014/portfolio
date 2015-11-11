@@ -4,7 +4,6 @@
 
 
 @section('content')
-	
 
 	{{-- INDEX --}}
 	@if (Route::currentRouteName() == 'admin.pages.index')
