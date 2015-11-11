@@ -35,7 +35,6 @@ class FilesController extends Controller
             $thumbnailsDir = base_path().'/uploads'.Config::get('thumbnail.path');
 
             if (File::exists($thumbnailsDir.'/'.$thumbnailName.'-'.$file->name)) {
-                varlog('file not exist');
                 $fileContent = File::get($thumbnailsDir.'/'.$thumbnailName.'-'.$file->name);
             } else {
                 $thumbnailsAvailables = Config::get('thumbnail.thumbnails');

@@ -34,6 +34,31 @@ table {
 			width: 80%
 		}
 	}
+	&.table-upload {
+		.upload-index {}
+		.upload-name {
+			width: 20%;
+			span {
+				width: 200px;	
+			}
+		}
+		.upload-progress {
+			width: 70%;
+			.progress {
+				margin: 0;
+			}
+		}
+		.upload-status {
+			.label {
+				display: block;
+				line-height: 20px;
+				margin: 0;
+				padding-bottom: 0;
+				padding-top: 0;
+			}
+		}
+		
+	}
 }
 
 
@@ -159,6 +184,7 @@ form {
 -----------------------------------------------------------------------------------------*/
 
 .overflow {
+	display: inline-block;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

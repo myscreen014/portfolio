@@ -22,10 +22,13 @@ $.extend(Admin, {
 
 		filesUpload: function() {
 			// preparing modal
-			var modal = $('#modal-files-upload').clone();
-			var modalBody = modal.find('.modal-body').addClass('text-center');
-			var modalFooter = modal.find('.modal-footer');
-			modal.modal();
+			$('.modal-files-upload').addClass('backup');
+			$('.modal-files-upload:not(.backup)').remove();
+			var modal = $('.modal-files-upload').clone().removeClass('backup');
+			
+
+			// Clean it 
+			modal.modal(); 
 			return modal;
 		},
 

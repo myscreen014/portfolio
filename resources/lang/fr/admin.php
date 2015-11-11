@@ -92,7 +92,16 @@ return [
             ]
         ],
         'field' => [
+            'name'              => "Nom du fichier",
             'legend'            => "Légende du fichier",
+        ],
+        'label' => [
+            'status' => [
+                'pending'       => 'En attente',
+                'success'       => 'Transféré',
+                'error'         => 'Erreur',
+                'unaccepted'    => 'Fichier invalide',
+            ]
         ],
         'action' => [
             'save'              => "Enregister ce fichier",

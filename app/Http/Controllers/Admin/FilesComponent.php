@@ -141,7 +141,7 @@ class FilesComponent extends Controller {
 	    	$files = FileModel::whereIn('id', $filesIds)->get();
 			foreach ($files as $key => $file) {
 				$file->ordering = $filesOrder[$file->id];
-				$file->update(); // il faut trouver un solution pour le multiple
+				$file->update(); 
 			}
 	    	return (new Response(NULL, 200));
 	    } else {
