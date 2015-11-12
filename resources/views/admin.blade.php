@@ -79,8 +79,9 @@
 									</div>
 									<!-- /input-group -->
 								</li>
-								<li><a href="{{ route('admin.index') }}" class="@if ($controller == NULL) active @endif">Home</a></li>
-								<li><a href="{{ route('admin.pages.index')}}" class="@if ($controller == 'pages') active @endif">Pages</a></li>
+								<li><a href="{{ route('admin.index') }}" class="@if ($controller == NULL) active @endif">{{ trans('admin.global.component.root') }}</a></li>
+								<li><a href="{{ route('admin.pages.index')}}" class="@if ($controller == 'pages') active @endif">{{ trans('admin.global.component.pages') }}</a></li>
+								<li><a href="{{ route('admin.administrators.index')}}" class="@if ($controller == 'administrators') active @endif">{{ trans('admin.global.component.administrators') }}</a></li>
 							</ul>
 						</div>
 						<!-- /.sidebar-collapse -->

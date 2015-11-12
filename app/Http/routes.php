@@ -12,6 +12,16 @@
 */
 
 
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
+Route::get('auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
+
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+
 /* ADMIN */
 Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
 
@@ -21,6 +31,10 @@ Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
 	// Pages management
 	Route::get('pages/{id}/delete', array('as' => 'admin.pages.delete', 'uses' => 'Admin\PagesComponent@delete'));
     Route::resource('pages', 'Admin\PagesComponent');
+
+    // Administrators management
+    Route::get('administrators/{id}/delete', array('as' => 'admin.administrators.delete', 'uses' => 'Admin\AdministratorsComponent@delete'));
+    Route::resource('administrators', 'Admin\AdministratorsComponent');
 
     // Files management
     Route::get('files/{id}/edit',['as' => 'admin.files.edit', 'uses' => 'Admin\FilesComponent@editAjax']);
@@ -46,11 +60,3 @@ Route::group(['prefix' => '/', 'middleware'=> 'pages'], function () {
 
 
 
-// Authentication routes...
-Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
-Route::get('auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
-
-// Registration routes...
-Route::get('auth/register', 'Auth\AuthController@getRegister');
-Route::post('auth/register', 'Auth\AuthController@postRegister');

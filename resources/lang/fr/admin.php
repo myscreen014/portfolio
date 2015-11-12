@@ -14,6 +14,11 @@ return [
         'application' => [
             'name'              => 'Abarth'
         ],
+        'component' => [
+            'root'              => 'Accueil',
+            'pages'             => 'Pages',
+            'administrators'    => 'Utilisateurs',
+        ],
         'feedback' => [
             'update' => [
                 'ok'            => 'Les modifications ont bien été enregistrée !',
@@ -35,6 +40,18 @@ return [
             'save'              =>  'Enregistrer',
             'delete'            =>  'Supprimer',
         ]
+    ],
+
+    'administrators' => [
+        'title' => [
+            'index'             => "Liste des administrateurs",
+            'create'            => "Ajout d'un administrateur",
+            'edit'              => "Edition d'un administrateur",
+            'delete'            => "Suppression d'un administrateur",
+        ],
+        'action' => [
+            'add'               => "Ajouter un administrateur"
+        ],
     ],
 
     'users' => [
@@ -62,7 +79,6 @@ return [
             'create'            => "Ajout d'une page",
             'edit'              => "Edition d'une page",
             'delete'            => "Suppression d'une page",
-            'show'              => "Affichage de la page",
         ],
         'field' => [
             'name'              => "Nom de page",

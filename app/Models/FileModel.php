@@ -19,45 +19,45 @@ class FileModel extends Model
 
 	/* Scopes */
 	public function scopeOfOrder($query){
-        return $query
-            ->orderBy(DB::raw('ISNULL(ordering)'), 'ASC')
-            ->orderBy('ordering', 'ASC')
-            ->orderBy('id', 'ASC');
-    }
+		return $query
+			->orderBy(DB::raw('ISNULL(ordering)'), 'ASC')
+			->orderBy('ordering', 'ASC')
+			->orderBy('id', 'ASC');
+	}
 
-  	/* Relations */
-    public function page() {
-    	return $this->belongsTo('App\Models\PageModel', 'model_id');
-    }
+	/* Relations */
+	public function page() {
+		return $this->belongsTo('App\Models\PageModel', 'model_id');
+	}
 
-    /* Methods */
-    public function isPicture() {
-    	if (in_array($this->type, array('image/jpeg', 'image/png', 'image/jpg', 'image/gif'))) {
-    		return true;
-    	}
-    	return false;
-    }
+	/* Methods */
+	public function isPicture() {
+		if (in_array($this->type, array('image/jpeg', 'image/png', 'image/jpg', 'image/gif'))) {
+			return true;
+		}
+		return false;
+	}
 
-    public function getIconClass() {
-    	$type = $this->type;
-    	$iconClass = 'fa-file-o';
-    	switch ($type) {
-    		case 'application/excel':
-    			$iconClass = 'fa-file-excel-o';
-    			break;
-    		case 'application/msword':
-    			$iconClass = 'fa-file-word-o';
-    			break;
-    		break;
-    		case "text/rtf":
-    			$iconClass = 'fa-file-text-o';
-    			break;
-    		case "application/pdf":
-    			$iconClass = 'fa-file-pdf-o';
-    			break;
-    	}
-    	return $iconClass;
-    }
+	public function getIconClass() {
+		$type = $this->type;
+		$iconClass = 'fa-file-o';
+		switch ($type) {
+			case 'application/excel':
+				$iconClass = 'fa-file-excel-o';
+				break;
+			case 'application/msword':
+				$iconClass = 'fa-file-word-o';
+				break;
+			break;
+			case "text/rtf":
+				$iconClass = 'fa-file-text-o';
+				break;
+			case "application/pdf":
+				$iconClass = 'fa-file-pdf-o';
+				break;
+		}
+		return $iconClass;
+	}
 
 
 }
