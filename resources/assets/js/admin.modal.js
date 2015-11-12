@@ -8,7 +8,7 @@ $.extend(Admin, {
 			return modal;
 		},
 
-		showLoading: function() {
+		showLoading: function() { 
 			$('#modal-loading').modal('show');
 		},
 
@@ -18,10 +18,12 @@ $.extend(Admin, {
 
 		alert: function(title, message) {
 
+			// preparing modal
 			var modal = Admin.Modal._get('modal-default');
 			var modalTitle = modal.find('.modal-title').html(title);
 			var modalBody = modal.find('.modal-body').html(message);
 
+			// display modal
 			modal.modal();
 		},
 
@@ -29,20 +31,19 @@ $.extend(Admin, {
 
 			var modal = Admin.Modal._get('modal-files-upload');
 
-			// Clean it 
+			// display modal
 			modal.modal(); 
 			return modal;
 		},
 
 		picture: function(urlShow) {
-				
+
 			// preparing modal
-			var modal = $('#modal-default').clone();
+			var modal = Admin.Modal._get('modal-default');
 			var modalTitle = modal.find('.modal-title');
 			var modalBody = modal.find('.modal-body').addClass('text-center');
 			var modalFooter = modal.find('.modal-footer');
 
-			// Ajax
 			$.ajax({
   				url: urlShow,
   				data: {},
@@ -54,13 +55,14 @@ $.extend(Admin, {
   				}
   			});
 
+  			// display modal
   			modal.modal();
 		}, 
 
 		ajaxForm: function(params) {
-			
+
 			// preparing modal
-			var modal = $('#modal-default').clone();
+			var modal = Admin.Modal._get('modal-default');
 			var modalTitle = modal.find('.modal-title');
 			var modalBody = modal.find('.modal-body').removeClass('text-center');
 			var modalFooter = modal.find('.modal-footer');

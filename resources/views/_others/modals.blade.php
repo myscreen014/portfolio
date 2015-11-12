@@ -11,7 +11,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title"></h4>
             </div>
-            <div class="modal-body"><i class="fa fa-spinner fa-spin"></i></div>
+            <div class="modal-body"><div class="text-center"><i class="fa fa-spinner fa-spin"></i></div></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('admin.global.action.close') }}</button>
             </div>
@@ -49,7 +49,7 @@
 </div>
 
 <!-- Modal loading -->
-<div class="modal modal-loading">
+<div class="modal modal-loading mother">
 	<div class="modal-dialog">
     	<div class="modal-content">
       		<div class="modal-header">
