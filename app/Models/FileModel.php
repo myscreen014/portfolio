@@ -41,7 +41,6 @@ class FileModel extends Model
     public function getIconClass() {
     	$type = $this->type;
     	$iconClass = 'fa-file-o';
-        varlog($type);
     	switch ($type) {
     		case 'application/excel':
     			$iconClass = 'fa-file-excel-o';

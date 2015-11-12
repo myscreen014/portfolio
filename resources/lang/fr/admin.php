@@ -96,6 +96,9 @@ return [
                 'success'       => 'Transféré',
                 'error'         => "Erreur",
                 'unaccepted'    => 'Fichier invalide',
+            ],
+            'count' => [
+                'short'         => "<span class=\"count-value\">:count</span> fichier(s)"
             ]
         ],
         'action' => [

@@ -1,11 +1,13 @@
 
 <div class="form-group clearfix">
 
-	
 	<label for="">{{ trans('admin.pages.field.'.$name) }}</label>
 	<input class="form-control" name="{{ $name }}_new" id="{{ $name }}_new" value="{{ Request::old($name.'_new') }}" type="hidden" />
 
 	<div id="{{ $name }}" class="panel panel-default clearfix filebrowser dropzone">
+		<div class="panel-heading text-right">
+			{!! trans('admin.files.label.count.short', array('count' => count($options['value']))) !!}
+		</div>
   		<div class="panel-body">
   			<ul id="{{ $name }}-files-container" class="files clearfix">
 				@if (isset($options['value']))
@@ -68,9 +70,7 @@
 				'messageError': "{{ trans('admin.files.feedback.delete.error') }}",
 				'callbackSuccess': function() {
 					button.parents('li').remove();
-					if ($('#{{ $name }}-files-container .dz-details').length <= 0) {
-						$('#{{ $name }} .dz-message').show();
-					}
+					refreshDropzone('{{ $name }}');
 				}
 			});
 		});
@@ -157,23 +157,24 @@
 		  				},
 		  				success: function(response) {
 		  					$(dropzone.options.previewsContainer).append(response);
+		  					refreshDropzone('{{ $name }}');
 		  				}
 		  			});
 			  	});
 			  	this.on("queuecomplete", function() {
 			  		if (dropzone.getQueuedFiles().length==0) {
 			  			actionUpload.remove();
-						modalFilesUpload.find('button').prop("disabled", false).bind('click', function() {
-							refreshDropzone('{{ $name }}');
-						});
+						modalFilesUpload.find('button').prop("disabled", false);
 			  		}
 			  	});
 			}
 		});
 		function refreshDropzone(fieldName) {
-			if ($('#'+fieldName+'-files-container .dz-details').length = 0) {
+			var countFiles = $('#'+fieldName+'-files-container .dz-details').length;
+			if (countFiles == 0) {
 				$('#{{ $name }} .dz-message').show();
 			} else {
+				$('#{{ $name }} .panel-heading .count-value').html(countFiles);
 				$('#{{ $name }} .dz-message').hide();
 			}
 		}
