@@ -41,8 +41,8 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default"  disabled="disabled" data-dismiss="modal">{{ trans('admin.global.action.close') }}</button>
-                <button type="button" class="btn btn-success"  id="action-upload">{{ trans('admin.files.action.upload') }}</button>
+                <button type="button" class="btn btn-default" id="action-upload-cancel" data-dismiss="modal">{{ trans('admin.global.action.close') }}</button>
+                <button type="button" class="btn btn-success" id="action-upload-start">{{ trans('admin.files.action.upload') }}</button>
             </div>
         </div>
     </div>

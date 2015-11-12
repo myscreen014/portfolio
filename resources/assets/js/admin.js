@@ -24,6 +24,17 @@ var Admin = {
 		return cleanValues;
 	},
 
+	removeFromSerializedField: function(element, value) {
+		if ($('#'+element).val()=='') return;
+		var values = $('#'+element).val().split(',');
+		var newValues = [];
+		for (var i=0; i < values.length; ++i) {
+			if (values[i]!=value) newValues.push(values[i]);
+		}
+		$('#'+element).val(newValues.join(','));
+		return newValues;
+	},
+
 	inArray: function(needle, haystack) {
 		var key = '';
 		if (typeof haystack=='string') {

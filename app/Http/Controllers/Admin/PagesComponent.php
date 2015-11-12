@@ -15,6 +15,7 @@ use App\Models\FileModel;
 use App\Http\Requests\PageRequest;
 use DB;
 use Kris\LaravelFormBuilder\FormBuilder;
+use Illuminate\Support\Facades\Session;
 
 
 class PagesComponent extends Controller
@@ -34,6 +35,7 @@ class PagesComponent extends Controller
     {
 
         $page = new PageModel;
+        varlog($request->old('pictures_new'));
         $page->pictures = FileModel::where('model_field', 'pictures')->whereIn('id', explode(',', $request->old('pictures_new')))->get();
         $page->files = FileModel::where('model_field', 'files')->whereIn('id', explode(',', $request->old('files_new')))->get();
        
@@ -71,13 +73,6 @@ class PagesComponent extends Controller
 
         return redirect(route('admin.pages.index'));
     }
-
-    public function show($id)
-    {
-        $page = PageModel::findOrFail($id);
-        return view($this->defaultView, array('page' => $page));
-    }
-
     
     public function edit($id, Request $request, FormBuilder $formBuilder)
     {
@@ -126,6 +121,10 @@ class PagesComponent extends Controller
 
         // Save relation
         $page->files()->saveMany($files);
+        Session::flash('feedback', array(
+            'message'=> trans('admin.global.feedback.update.ok'),
+            'type' => 'success'
+        ));
 
         return redirect(route('admin.pages.index'));
     }
@@ -141,6 +140,10 @@ class PagesComponent extends Controller
     {
         $page = PageModel::findOrFail($id);
         $page->delete();
+        Session::flash('feedback', array(
+            'message'=> trans('admin.global.feedback.delete.ok'),
+            'type' => 'success'
+        ));
         return redirect(route('admin.pages.index'));
     }
 }

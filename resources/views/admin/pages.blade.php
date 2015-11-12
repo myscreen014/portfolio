@@ -5,6 +5,8 @@
 
 @section('content')
 
+	@include ('_others.feedbacks')
+	
 	{{-- INDEX --}}
 	@if (Route::currentRouteName() == 'admin.pages.index')
 
@@ -25,7 +27,6 @@
 						<tr>
 							<td>{{ $page->name }}</td>
 							<td class="actions">
-								<a href="{{ route('admin.pages.show', [$page->id]) }}" class="btn btn-default btn-xs">{{ trans('admin.global.action.show') }}</a>
 								<a href="{{ route('admin.pages.edit', [$page->id]) }}" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>
 								<a href="{{ route('admin.pages.delete', [$page->id]) }}" class="btn btn-danger btn-xs">{{ trans('admin.global.action.delete') }}</a>
 							</td>
@@ -71,6 +72,10 @@
 			{{ trans('admin.pages.title.delete') }}
 		@endsection
 
+		<p class="text text-danger">
+			{{ trans('admin.pages.message.delete') }}
+		</p>
+
 		{!! Form::model($page, array('route' => array('admin.pages.destroy', $page->id), 'method' => 'DELETE')) !!}
 			<a href="{{ route('admin.pages.index') }}" class="btn btn-default">Retour</a>
 			{!! Form::submit('Supprimer cette page', ['class'=>'btn btn-danger'] ) !!}
@@ -78,27 +83,5 @@
 
 	@endif
 
-
-	{{-- SHOW --}}
-	@if (Route::currentRouteName() == 'admin.pages.show')
-
-		@section('title')
-			{{ trans('admin.pages.title.show') }}
-		@endsection
-	
-		<table class="table table-bordered table-show">
-			@foreach($page->getFillable() as $attribut)
-				<tr>
-					<td class="field">{{ trans('admin.pages.field.'.$attribut) }}</td>
-					<td class="value">{{ $page->$attribut }}</td>
-				</tr>
-			@endforeach
-		</table>
-
-		<div class="form-group">
-			<a href="{{ route('admin.pages.index') }}" class="btn btn-default">Retour</a>
-		</div>
-
-	@endif
 
 @endsection

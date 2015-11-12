@@ -6,10 +6,10 @@
 
 	<div id="{{ $name }}" class="panel panel-default clearfix filebrowser dropzone">
 		<div class="panel-heading text-right">
-			{!! trans('admin.files.label.count.short', array('count' => count($options['value']))) !!}
+			<span class="label label-info">{!! trans('admin.files.label.count.short', array('count' => count($options['value']))) !!}</span>
 		</div>
   		<div class="panel-body">
-  			<ul id="{{ $name }}-files-container" class="files">
+  			<ul id="{{ $name }}-files-container" class="files clearfix">
 				@if (isset($options['value']))
 					@forelse($options['value'] as $file)
 						@include('_forms.itemfilesfield', ['file' => $file])
@@ -30,15 +30,24 @@
 
 	
 		/* Sortable - JQuery UI */
-    	$( "#{{ $name }}-files-container").sortable({
+		var heightInitContainer = null;
+    	var containerSortable = $( "#{{ $name }}-files-container").sortable({
       		placeholder: "ui-state-highlight dz-details file col-md-6 col-lg-4",  
       		items: "> li",   		
+      		tolerance: 'pointer',
+      		create: function() {
+      			console.log('create');
+      			heightInitContainer = $(this).height();
+      			$(this).height(heightInitContainer);
+      		},
+      		update: function() {
+      			console.log('update');
+      		},
       		start: function(event, ui){
-      			$("body").css('overflow', 'hidden');
+      			$(this).height(heightInitContainer);
         		ui.placeholder.innerHeight(ui.item.innerHeight());
     		},
     		stop: function(event, ui){
-				$("body").css('overflow', 'visible');
     			var filesIds = Array();
     			var files = $( "#{{ $name }}-files-container" ).find('li');
     			for (var i = 0; i < files.length ; i++) {
@@ -71,12 +80,14 @@
 		});
 		$('#{{ $name }}-files-container').on("click", '.modal-delete-open', function(event) {
 			var button = $(this);
+			var fileId = button.parents('li').attr('data-file-id');
 			Admin.Modal.ajaxForm({
 				'url' : $(this).attr('data-url-delete'),
 				'title' : "{{ trans('admin.files.title.delete') }}",
 				'messageSuccess': "{{ trans('admin.files.feedback.delete.ok') }}",
 				'messageError': "{{ trans('admin.files.feedback.delete.error') }}",
 				callbackSuccess: function() {
+					Admin.removeFromSerializedField('{{ $name }}_new', fileId);
 					button.parents('li').remove();
 					refreshDropzone('{{ $name }}');
 				}
@@ -92,7 +103,7 @@
 			dictDefaultMessage: "",
 	  		//paramName: "file", // The name that will be used to transfer the file
 	  		maxFilesize: 5, // MB
-	  		maxFiles: 2,
+	  		maxFiles: 5,
 	  		autoProcessQueue: false,
 	  		url: "{{ route('admin.files.store') }}",
 	  		parallelUploads: 5,
@@ -129,7 +140,8 @@
 					
 					var modalBodyTable = modalFilesUpload.find('.modal-body table tbody');
 
-					actionUpload = modalFilesUpload.find('.modal-footer #action-upload').bind('click', function() {
+					actionUpload = modalFilesUpload.find('.modal-footer #action-upload-start').bind('click', function() {
+						modalFilesUpload.find('#action-upload-cancel').prop("disabled", true);
 						dropzone.processQueue();
 					});
 					
@@ -174,6 +186,7 @@
 		  					'file_id' : fileId
 		  				},
 		  				success: function(response) {
+		  					Admin.addToSerializedField('{{ $name }}_new', fileId);
 		  					$(dropzone.options.previewsContainer).append(response);
 		  					refreshDropzone('{{ $name }}');
 		  				}
@@ -204,6 +217,11 @@
 		}
 
 		function refreshDropzone(fieldName) {
+			// Refresh sortable
+			containerSortable.height('auto').sortable( "refresh" );
+			heightInitContainer = containerSortable.height();
+
+			// Refresh dropzone status (empty, count files, ...)
 			var countFiles = $('#'+fieldName+'-files-container .dz-details').length;
 			if (countFiles == 0) {
 				$('#{{ $name }} .dz-message').show();

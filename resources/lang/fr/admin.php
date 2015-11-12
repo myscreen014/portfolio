@@ -14,10 +14,21 @@ return [
         'application' => [
             'name'              => 'Abarth'
         ],
+        'feedback' => [
+            'update' => [
+                'ok'            => 'Les modifications ont bien été enregistrée !',
+                'error'         => 'Une erreur est survenue lors de l\'enregistrement des modifications !',
+            ],
+            'delete' => [
+                'ok'            => 'La suppression à bien été effectuée !',
+                'error'         => 'Une erreur est survenue lors de la suppression !',
+            ],
+        ],
         'message' => [
             'upload_file_here'  => 'Glisser vos fichiers ici'
         ],
         'action' => [
+            'back'              =>  'Retour',
             'close'             =>  'Fermer',
             'edit'              =>  'Éditer',
             'show'              =>  'Afficher',
@@ -61,6 +72,7 @@ return [
         ],
         'message' => [
             'nocontent'         => "Aucune page actuellement.",
+            'delete'            => "Êtes-vous certain de vouloir supprimer cette page ?",
         ],
         'action' => [
             'save'              => "Enregister cette page",

@@ -17,7 +17,6 @@ elixir(function(mix) {
 	
 	mix.sass([
         'bootstrap.min.css',
-        'bootstrap-theme.min.css',
         'font-awesome.min.css',
         'mixins.scss',
         'admin.scss',
