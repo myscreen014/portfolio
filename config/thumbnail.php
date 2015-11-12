@@ -19,7 +19,7 @@ return [
             'filters' => [
                 'fit' =>  [80,80]
             ],
-            'quality' => 40
+            'quality' => 100
         ],
 
         'modal' => [

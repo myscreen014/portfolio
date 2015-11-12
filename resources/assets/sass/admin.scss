@@ -128,29 +128,37 @@ form {
 							.file-infos { 
 								display: block;
 								height: 80px;
-								padding-left: 90px;
-								.file-summary {
+								overflow: hidden;
+								padding-left: 4px;
+								.file-name {
 									display: block;
-									height: 58px;
-									.file-name {
-										display: block;
-									}
-									.file-type {
-										display: block;
-									}
 								}
-								.file-actions {
-									display: none;
-									text-align: right;
-									height: 22px;
-									.btn {
-										width: 22px;
-									}
+								.file-type {
+									display: block;
+									line-height: 12px;
+								}
+								.file-legend {
+									line-height: 13px;
+									padding-top: 5px;
+								}
+							}
+							.file-actions {
+								@include transition(0.1s ease-in-out);
+								@include opacity(0);
+								position: absolute;
+								text-align: right;
+								bottom: 0px;
+								right: 5px;
+								text-align: center;
+								.btn {
+									width: 22px;
 								}
 							}
 							&:hover {
-								.file-infos .file-actions {
-									display: block;
+								.file-actions {
+									@include transition(0.1s ease-in-out);
+									@include opacity(1);
+									bottom: 5px;
 								}
 							}
 						}

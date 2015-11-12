@@ -4,7 +4,7 @@
 
 
 <!-- Modal Default -->
-<div class="modal modal-default mother" tabindex="-1" role="dialog">
+<div class="modal fade modal-default mother" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -20,7 +20,7 @@
 </div>
 
 <!-- Modal files uploading -->
-<div class="modal modal-files-upload mother" >
+<div class="modal modal-files-upload mother" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -49,7 +49,7 @@
 </div>
 
 <!-- Modal loading -->
-<div class="modal modal-loading mother">
+<div class="modal modal-loading mother" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
     	<div class="modal-content">
       		<div class="modal-header">

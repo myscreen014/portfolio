@@ -9,7 +9,7 @@
 			{!! trans('admin.files.label.count.short', array('count' => count($options['value']))) !!}
 		</div>
   		<div class="panel-body">
-  			<ul id="{{ $name }}-files-container" class="files clearfix">
+  			<ul id="{{ $name }}-files-container" class="files">
 				@if (isset($options['value']))
 					@forelse($options['value'] as $file)
 						@include('_forms.itemfilesfield', ['file' => $file])
@@ -29,12 +29,14 @@
 	<script type="text/javascript">	
 
 		/* Sortable - JQuery UI */
-    	$( "#{{ $name }}-files-container" ).sortable({
-      		placeholder: "ui-state-highlight dz-details file col-lg-4 col-md-6 ",
+    	$( "#{{ $name }}-files-container").sortable({
+      		placeholder: "ui-state-highlight dz-details file col-md-6 col-lg-4",      		
       		start: function(event, ui){
+      			$("body").css('overflow', 'hidden');
         		ui.placeholder.innerHeight(ui.item.innerHeight());
     		},
     		stop: function(event, ui){
+				$("body").css('overflow', 'visible');
     			var filesIds = Array();
     			var files = $( "#{{ $name }}-files-container" ).find('li');
     			for (var i = 0; i < files.length ; i++) {
@@ -54,11 +56,16 @@
 
 		/* Modal edit/delete/show */
 		$('#{{ $name }}-files-container').on("click", '.modal-edit-open', function(event) {
+			var button = $(this);
+			var fileId = button.parents('li').attr('data-file-id');
 			Admin.Modal.ajaxForm({
 				'url' : $(this).attr('data-url-edit'),
 				'title' : "{{ trans('admin.files.title.edit') }}",
 				'messageSuccess': "{{ trans('admin.files.feedback.update.ok') }}",
 				'messageError': "{{ trans('admin.files.feedback.update.error') }}",
+				callbackSuccess: function() {
+					refreshFile('{{ $name }}', fileId);
+				}
 			});
 		});
 		$('#{{ $name }}-files-container').on("click", '.modal-delete-open', function(event) {
@@ -68,7 +75,7 @@
 				'title' : "{{ trans('admin.files.title.delete') }}",
 				'messageSuccess': "{{ trans('admin.files.feedback.delete.ok') }}",
 				'messageError': "{{ trans('admin.files.feedback.delete.error') }}",
-				'callbackSuccess': function() {
+				callbackSuccess: function() {
 					button.parents('li').remove();
 					refreshDropzone('{{ $name }}');
 				}
@@ -169,6 +176,22 @@
 			  	});
 			}
 		});
+
+		function refreshFile(fieldName, fileId) {
+			$.ajax({
+  				url: "{{ route('admin.files.getitemfilebrowser') }}",
+  				method: 'POST',
+  				data: {
+  					'_token' : "{{ csrf_token() }}",
+  					'file_id' : fileId
+  				},
+  				success: function(response) {
+  					$('#'+fieldName+'-files-container').find('#preview-file-'+fileId).replaceWith(response);
+  					refreshDropzone('{{ $name }}');
+  				}
+  			});
+		}
+
 		function refreshDropzone(fieldName) {
 			var countFiles = $('#'+fieldName+'-files-container .dz-details').length;
 			if (countFiles == 0) {

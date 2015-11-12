@@ -44,7 +44,6 @@ class FilesController extends Controller
                         File::makeDirectory($thumbnailsDir);
                     }
                     $thumbnail = Image::make($uploadPath.'/'.$file->path);
-                    varlog($thumbnailsAvailables[$thumbnailName]);
                     foreach ($thumbnailsAvailables[$thumbnailName]['filters'] as $filter => $filterParams) {
                         switch ($filter) {
 
