@@ -6,7 +6,7 @@
 	<h1>{{ $page->name }}</h1>
 
 	<div class="wysiwyg">
-		{{ $page->content }}
+		{!! $page->content !!}
 
 	
 		@foreach($page->files as $file)

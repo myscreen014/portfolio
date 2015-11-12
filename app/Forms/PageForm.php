@@ -15,8 +15,13 @@ class PageForm extends Form
 
     	// Create form
         $this
-        ->add('name', 'text', array('label'=>trans('admin.pages.field.name')))
-        ->add('content', 'textarea', array('label'=>trans('admin.pages.field.content')))
+        ->add('name', 'text', array(
+            'label'=>trans('admin.pages.field.name')
+        ))
+        ->add('content', 'textarea', array(
+            'label'=>trans('admin.pages.field.content'),
+            'attr' => array('class' => 'form-control wysiwyg')
+        ))
         ->add('pictures', 'files', 
             array(
                 'dropzone_acceptedFiles' => 'image/*',

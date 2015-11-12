@@ -18,6 +18,8 @@ elixir(function(mix) {
     /* COPY CSS files */
     mix.copy('resources/assets/css/bootstrap.min.css', 'public/css/bootstrap.min.css');
     mix.copy('resources/assets/css/font-awesome.min.css', 'public/css/font-awesome.min.css');
+    mix.copy('resources/assets/fonts', 'public/fonts');
+    mix.copy('resources/assets/plugins', 'public/plugins');
 
     /* SASS */
 	mix.sass([
@@ -25,6 +27,9 @@ elixir(function(mix) {
         'admin.scss',
         'sb-admin-2.scss',
     ], "public/css/admin.all.css");
+    mix.sass([
+        'wysiwyg.scss'
+    ], "public/css/wysiwyg.css");
 
     mix.scripts([
     	'jquery-1.11.3.min.js',

@@ -116,9 +116,10 @@
 			================================================== -->
 			@include('_others.modals')
 
-			<!-- Bootstrap core JavaScript
+			<!-- JavaScripts
 			================================================== -->
 			<script src="{{ elixir('js/admin.all.js') }}"></script>
+			<script src="{{ asset('plugins/tinymce/tinymce.min.js') }}"></script>
 			
 
 			@section('javascript')

@@ -36,7 +36,6 @@
       		items: "> li",   		
       		tolerance: 'pointer',
       		create: function() {
-      			console.log('create');
       			heightInitContainer = $(this).height();
       			$(this).height(heightInitContainer);
       		},
