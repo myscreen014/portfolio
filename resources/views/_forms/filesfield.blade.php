@@ -10,7 +10,7 @@
   			<ul id="{{ $name }}-files-container" class="files clearfix">
 				@if (isset($options['value']))
 					@forelse($options['value'] as $file)
-						@include('_forms.itemfilebrowser', ['file' => $file])
+						@include('_forms.itemfilesfield', ['file' => $file])
 					@empty
 						<p class="dz-message">{{ trans('admin.global.message.upload_file_here') }}</p>
 					@endforelse

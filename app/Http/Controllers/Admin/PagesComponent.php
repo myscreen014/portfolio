@@ -93,8 +93,8 @@ class PagesComponent extends Controller
             }
         ))->findOrFail($id);
 
-       // $page->pictures = $page->pictures->merge(FileModel::whereIn('id', explode(',', $request->old('pictures_new')))->get());
-       // $page->files = $page->files->merge(FileModel::whereIn('id', explode(',', $request->old('files_new')))->get());
+        $page->pictures = $page->pictures->merge(FileModel::whereIn('id', explode(',', $request->old('pictures_new')))->get());
+        $page->files = $page->files->merge(FileModel::whereIn('id', explode(',', $request->old('files_new')))->get());
 
         $form = $formBuilder->create(
             'App\Forms\PageForm',

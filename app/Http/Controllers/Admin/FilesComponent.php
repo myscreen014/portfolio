@@ -153,7 +153,7 @@ class FilesComponent extends Controller {
     public function getitemfilebrowserAjax(Request $request) {
     	if ($request->ajax()) {
     		$file = FileModel::findOrFail($request->input('file_id'));
-    		return view('_forms.itemfilebrowser', array('file' => $file));
+    		return view('_forms.itemfilesfield', array('file' => $file));
     	}
     	return (new Response('fileId', 200));
     }
