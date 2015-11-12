@@ -48,7 +48,7 @@ class PagesComponent extends Controller
                 'model_table'=> $page->getTable(),
                 'model_id'=> NULL
             )
-        )->add(trans('admin.pages.action.create'), 'submit', ['attr' => ['class' => 'btn btn-primary'] ]);
+        )->add(trans('admin.pages.action.create'), 'submit', ['attr' => ['class' => 'btn btn-success'] ]);
 
         return view($this->defaultView, array(
             'page'=>$page,

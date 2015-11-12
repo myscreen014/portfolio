@@ -121,6 +121,9 @@
 			
 
 			@section('javascript')
+				<script>
+					Admin.init();
+				</script>
 			@show
 				
 		@show

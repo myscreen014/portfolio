@@ -51,6 +51,7 @@ return [
             'create'            => "Ajout d'une page",
             'edit'              => "Edition d'une page",
             'delete'            => "Suppression d'une page",
+            'show'              => "Affichage de la page",
         ],
         'field' => [
             'name'              => "Nom de page",

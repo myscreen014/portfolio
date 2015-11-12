@@ -28,9 +28,11 @@
 
 	<script type="text/javascript">	
 
+	
 		/* Sortable - JQuery UI */
     	$( "#{{ $name }}-files-container").sortable({
-      		placeholder: "ui-state-highlight dz-details file col-md-6 col-lg-4",      		
+      		placeholder: "ui-state-highlight dz-details file col-md-6 col-lg-4",  
+      		items: "> li",   		
       		start: function(event, ui){
       			$("body").css('overflow', 'hidden');
         		ui.placeholder.innerHeight(ui.item.innerHeight());
@@ -51,7 +53,6 @@
 	  				}
 	  			});
     		}
-
     	});
 
 		/* Modal edit/delete/show */
@@ -104,9 +105,19 @@
 	  		
 	  		uploadMultiple: false,
 		  	init: function() {
+		  		
 		  		var dropzone = this;
 		  		var modalFilesUpload = null;
 		  		var actionUpload = null;
+
+		  		$(document.body).bind("dragover", function(event) {
+					event.preventDefault();
+					return false;
+	   			});
+				$(document.body).bind("drop", function(event){
+					event.preventDefault();	
+					return false;
+				});
 
 		  		this.on("addedfiles", function(files) {
 		  			

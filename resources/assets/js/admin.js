@@ -1,5 +1,8 @@
 var Admin = {
 
+	init: function() {
+
+	},
 
 	addToSerializedField: function(element, value) {
 		var cleanValues = [];
