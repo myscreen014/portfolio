@@ -15,9 +15,12 @@ elixir.config.sourcemaps = false;
 
 elixir(function(mix) {
 	
+    /* COPY CSS files */
+    mix.copy('resources/assets/css/bootstrap.min.css', 'public/css/bootstrap.min.css');
+    mix.copy('resources/assets/css/font-awesome.min.css', 'public/css/font-awesome.min.css');
+
+    /* SASS */
 	mix.sass([
-        'bootstrap.min.css',
-        'font-awesome.min.css',
         'mixins.scss',
         'admin.scss',
         'sb-admin-2.scss',
@@ -32,6 +35,11 @@ elixir(function(mix) {
         'admin.modal.js'
     ], "public/js/admin.all.js" );
    
-   mix.version(["public/css/admin.all.css", "public/js/admin.all.js"]);
+    mix.version([
+        "public/css/bootstrap.min.css",
+        "public/css/font-awesome.min.css",
+        "public/css/admin.all.css",
+        "public/js/admin.all.js"
+    ]);
 
 });

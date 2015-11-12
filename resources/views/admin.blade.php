@@ -11,6 +11,7 @@
 
 		<title>Starter Template for Bootstrap</title>
 		
+		<link rel="stylesheet" href="{{ elixir('css/bootstrap.min.css') }}">
 		<link rel="stylesheet" href="{{ elixir('css/admin.all.css') }}">
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
