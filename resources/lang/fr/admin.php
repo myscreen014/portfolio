@@ -56,6 +56,7 @@ return [
         'action' => [
             'add'               => "Ajouter un administrateur",
             'create'            => "Ajouter cet administrateur",
+            'update'            => "Enregistrer cet administrateur",
             'delete'            => "Supprimer cet administrateur",
         ],
         'message'=> [

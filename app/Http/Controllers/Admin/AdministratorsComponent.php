@@ -81,25 +81,28 @@ class AdministratorsComponent extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, FormBuilder $formBuilder)
     {
-        //
+        $administrator = AdministratorModel::findOrFail($id);
+
+        $form = $formBuilder->create(
+            'App\Forms\AdministratorForm', 
+            array(
+                'method' => 'PUT',
+                'url' => route('admin.administrators.update', $id),
+                'model' => $administrator
+            )
+        )->remove('password')->remove('password_confirmation')->add(trans('admin.administrators.action.update'), 'submit', array(
+            'attr' => array('class' => 'btn btn-primary'),
+            'wrapper' => array('class' => 'form-group actions'),
+        ));
+
+        return view($this->defaultView, array('form' => $form));
     }
 
     /**
@@ -111,7 +114,15 @@ class AdministratorsComponent extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $administrator = AdministratorModel::findOrFail($id);
+        $administrator->update($request->only('name', 'email'));
+
+        Session::flash('feedback', array(
+            'message'=> trans('admin.global.feedback.update.ok'),
+            'type' => 'success'
+        ));
+
+        return redirect(route('admin.administrators.index'));
     }
 
 
