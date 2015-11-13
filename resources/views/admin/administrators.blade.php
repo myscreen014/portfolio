@@ -15,7 +15,8 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>Name</th>
+						<th>{{ trans('admin.administrators.field.name') }}</th>
+						<th>{{ trans('admin.administrators.field.last_login') }}</th>
 						<th class="actions"></th>
 					</tr>
 				</thead>
@@ -23,6 +24,7 @@
 					@foreach($administrators as $administrator)
 						<tr>
 							<td>{{ $administrator->name }}</td>
+							<td>{{ $administrator->last_login->diffForHumans() }}</td>
 							<td class="actions">
 								<a href="{{ route('admin.administrators.edit', [$administrator->id]) }}" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>
 								<a href="{{ route('admin.administrators.delete', [$administrator->id]) }}" class="btn btn-danger btn-xs">{{ trans('admin.global.action.delete') }}</a>
@@ -75,7 +77,7 @@
 
 		{!! Form::model($administrator, array('route' => array('admin.administrators.destroy', $administrator->id), 'method' => 'DELETE')) !!}
 			<a href="{{ route('admin.administrators.index') }}" class="btn btn-default">Retour</a>
-			{!! Form::submit('Supprimer cette administrator', ['class'=>'btn btn-danger'] ) !!}
+			{!! Form::submit(trans('admin.administrators.action.delete'), ['class'=>'btn btn-danger'] ) !!}
 		{!! Form::close() !!}
 
 	@endif

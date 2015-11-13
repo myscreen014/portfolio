@@ -43,6 +43,10 @@ return [
     ],
 
     'administrators' => [
+        'field' => [
+            'name'              => "Nom",
+            'last_login'        => "Dernière connexion",
+        ],
         'title' => [
             'index'             => "Liste des administrateurs",
             'create'            => "Ajout d'un administrateur",
@@ -50,11 +54,27 @@ return [
             'delete'            => "Suppression d'un administrateur",
         ],
         'action' => [
-            'add'               => "Ajouter un administrateur"
+            'add'               => "Ajouter un administrateur",
+            'create'            => "Ajouter cet administrateur",
+            'delete'            => "Supprimer cet administrateur",
+        ],
+        'message'=> [
+            'delete'            => "Êtes-vous certain de vouloir supprimer cet administrateur ?",
+        ],
+        'feedback' => [
+            'delete' => [
+                'suicide'         => "Impossible de se supprimer votre propre compte !!  (Tapez suicide dan Google ;-))",
+            ],
         ],
     ],
 
     'users' => [
+        'field' => [
+            'name'              => "Nom",
+            'email'             => "Email",
+            'password'          => "Mot de passe",
+            'password_confirmation'  => "Confirmation du mot de passe",
+        ],
         'title' => [
             'login'             => "Se connecter",
         ],
@@ -65,59 +85,42 @@ return [
         'message' => [
             'remember_me'        => "Se Souvenir De Moi",
         ],
-        'field' => [
-            'email'             => "Email",
-            'content'           => "Contenu de page",
-            'files'             => "Fichiers de la page",
-            'pictures'          => "Photos de la page",
-        ],
+        
     ],
 
     'pages' => [
-        'title' => [
-            'index'             => "Liste des pages",
-            'create'            => "Ajout d'une page",
-            'edit'              => "Edition d'une page",
-            'delete'            => "Suppression d'une page",
-        ],
         'field' => [
             'name'              => "Nom de page",
             'content'           => "Contenu de page",
             'files'             => "Fichiers de la page",
             'pictures'          => "Photos de la page",
         ],
-        'message' => [
-            'nocontent'         => "Aucune page actuellement.",
-            'delete'            => "Êtes-vous certain de vouloir supprimer cette page ?",
+        'title' => [
+            'index'             => "Liste des pages",
+            'create'            => "Ajout d'une page",
+            'edit'              => "Edition d'une page",
+            'delete'            => "Suppression d'une page",
         ],
         'action' => [
             'save'              => "Enregister cette page",
             'create'            => "Ajouter cette page",
-        ]
+        ],
+        'message' => [
+            'nocontent'         => "Aucune page actuellement.",
+            'delete'            => "Êtes-vous certain de vouloir supprimer cette page ?",
+        ],
+        
     ],
 
     'files' => [
-        'feedback' => [
-            'update' => [
-                'ok'            => 'Le fichier a bien été enregistré !',
-                'error'         => 'Une erreur est survenue lors de l\'enregistrement du fichier !',
-            ],
-            'delete' => [
-                'ok'            => 'Le fichier a bien été supprimé !',
-                'error'         => 'Une erreur est survenue lors de la suppression de ce fichier !',
-            ],
+        'field' => [
+            'name'              => "Nom du fichier",
+            'legend'            => "Légende du fichier",
         ],
         'title' => [
             'edit'              => 'Édition du fichier',
             'delete'            => "Suppression d'un fichier",
             'upload'            => "Upload de fichiers",
-        ],
-        'message' => [
-            'delete'            => "Êtes vous certain de vouloir supprimer ce fichier ?",
-        ],
-        'field' => [
-            'name'              => "Nom du fichier",
-            'legend'            => "Légende du fichier",
         ],
         'label' => [
             'status' => [
@@ -133,7 +136,23 @@ return [
         'action' => [
             'save'              => "Enregister ce fichier",
             'upload'            => "Lancer le transfert des fichiers",
-        ]
+        ],
+        'message' => [
+            'delete'            => "Êtes vous certain de vouloir supprimer ce fichier ?",
+        ],
+        'feedback' => [
+            'update' => [
+                'ok'            => 'Le fichier a bien été enregistré !',
+                'error'         => 'Une erreur est survenue lors de l\'enregistrement du fichier !',
+            ],
+            'delete' => [
+                'ok'            => 'Le fichier a bien été supprimé !',
+                'error'         => 'Une erreur est survenue lors de la suppression de ce fichier !',
+            ],
+        ],
+        
+        
+        
     ]
     
 ];

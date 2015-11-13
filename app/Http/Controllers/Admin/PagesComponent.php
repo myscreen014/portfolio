@@ -49,7 +49,10 @@ class PagesComponent extends Controller
 				'model_table'=> $page->getTable(),
 				'model_id'=> NULL
 			)
-		)->add(trans('admin.pages.action.create'), 'submit', ['attr' => ['class' => 'btn btn-success'] ]);
+		)->add(trans('admin.pages.action.create'), 'submit', array(
+            'attr' => array('class' => 'btn btn-success'),
+            'wrapper' => array('class' => 'form-group actions'),
+        ));
 
 		return view($this->defaultView, array(
 			'page'=>$page,
@@ -101,7 +104,10 @@ class PagesComponent extends Controller
 				'model_table'=> $page->getTable(),
 				'model_id'=> $page->id
 			)
-		)->add(trans('admin.pages.action.save'), 'submit', ['attr' => ['class' => 'btn btn-primary'] ]);
+		)->add(trans('admin.pages.action.save'), 'submit', array(
+            'attr' => array('class' => 'btn btn-primary'),
+            'wrapper' => array('class' => 'form-group actions'),
+        ));
 		return view($this->defaultView,  array(
 			'page' => $page,
 			'form' => $form

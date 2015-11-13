@@ -1,5 +1,5 @@
 
-<div class="form-group clearfix">
+<div class="form-group">
 
 	<label for="">{{ trans('admin.pages.field.'.$name) }}</label>
 	<input class="form-control" name="{{ $name }}_new" id="{{ $name }}_new" value="{{ Request::old($name.'_new') }}" type="hidden" />

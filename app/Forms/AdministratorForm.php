@@ -14,11 +14,13 @@ class AdministratorForm extends Form
     	// Create form
         $this
         ->add('name', 'text', array(
-            'label'=>trans('admin.pages.field.name')
+            'label'=>trans('admin.users.field.name')
         ))->add('email', 'text', array(
-            'label'=>trans('admin.pages.field.name')
-        ))->add('password', 'text', array(
-            'label'=>trans('admin.pages.field.name')
+            'label'=>trans('admin.users.field.email')
+        ))->add('password', 'password', array(
+            'label'=>trans('admin.users.field.password')
+        ))->add('password_confirmation', 'password', array(
+            'label'=>trans('admin.users.field.password_confirmation')
         ));
 
     }

@@ -83,6 +83,12 @@ table {
 -----------------------------------------------------------------------------------------*/
 form {
 	.form-group {
+		&.actions {
+			border-top: 1px solid #eee;
+			padding-top: 20px;
+			margin-top: 20px;
+			text-align: right;
+		}
 		.filebrowser {
 			&.dz-drag-hover {
 				background-color: #eee;

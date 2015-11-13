@@ -8,9 +8,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 /* My uses */
+use App\Http\Requests\AdministratorRequest;
 use Illuminate\Support\Str;
 use App\Models\AdministratorModel;
 use Kris\LaravelFormBuilder\FormBuilder;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
+use Event;
+use App\Listeners\UserEventListener;
 
 class AdministratorsComponent extends Controller
 {
@@ -25,8 +31,7 @@ class AdministratorsComponent extends Controller
     public function index()
     {
         $administrator = new AdministratorModel();
-        $administrators = $administrator
-            ->get();
+        $administrators = $administrator->get();
         
         return view($this->defaultView, array('administrators' => $administrators));
     }
@@ -47,7 +52,10 @@ class AdministratorsComponent extends Controller
                 'model' => $administrator
             ), 
             array()
-        )->add(trans('admin.administrators.action.create'), 'submit', ['attr' => ['class' => 'btn btn-success'] ]);
+        )->add(trans('admin.administrators.action.create'), 'submit', array(
+            'attr' => array('class' => 'btn btn-success'),
+            'wrapper' => array('class' => 'form-group actions'),
+        ));
 
 
         return view($this->defaultView, array('form' => $form));
@@ -59,7 +67,7 @@ class AdministratorsComponent extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdministratorRequest $request)
     {
 
         $administrator = new AdministratorModel;
@@ -106,6 +114,21 @@ class AdministratorsComponent extends Controller
         //
     }
 
+
+    public function delete($id) {
+        if (Auth::user()->id == $id) {
+            Session::flash('feedback', array(
+                'message'=> trans('admin.administrators.feedback.delete.suicide'),
+                'type' => 'warning'
+            ));
+            return redirect(route('admin.administrators.index'));
+        }
+        $administrator = AdministratorModel::findOrFail($id);
+        return view($this->defaultView,  array(
+            'administrator' => $administrator
+        ));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -114,6 +137,12 @@ class AdministratorsComponent extends Controller
      */
     public function destroy($id)
     {
-        //
+        $administrator = AdministratorModel::findOrFail($id);
+        $administrator->delete();
+        Session::flash('feedback', array(
+            'message'=> trans('admin.global.feedback.delete.ok'),
+            'type' => 'success'
+        ));
+        return redirect(route('admin.administrators.index'));
     }
 }
