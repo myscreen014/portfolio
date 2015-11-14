@@ -52,6 +52,10 @@ class FilesComponent extends Controller {
 						$pathInfosFile = pathinfo($file->name);
 
 
+						$isSave = false;
+						$isUploaded = false;
+
+
 						/* 
 						 * Gestion de l'entrée dans la table "files" 
 						 */
@@ -86,7 +90,7 @@ class FilesComponent extends Controller {
                                 $constraint->aspectRatio();
                                 $constraint->upsize();
                             });
-                            $thumbnail->save($destinationPath.'/'.$file->name, 100);
+                            $isUploaded = $thumbnail->save($destinationPath.'/'.$file->name, 100);
 						} else {
 							$isUploaded = $fileUploaded->move($destinationPath, $file->name);	
 						}
