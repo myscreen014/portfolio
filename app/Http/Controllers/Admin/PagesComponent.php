@@ -52,6 +52,13 @@ class PagesComponent extends Controller
 		)->add(trans('admin.pages.action.create'), 'submit', array(
             'attr' => array('class' => 'btn btn-success'),
             'wrapper' => array('class' => 'form-group actions'),
+            'others_actions' => array(
+                'back' => array(
+                    'value' => trans('admin.global.action.back'), 
+                    'class' => 'btn-default',
+                    'url' => route('admin.pages.index')
+                )
+            )
         ));
 
 		return view($this->defaultView, array(
@@ -107,6 +114,13 @@ class PagesComponent extends Controller
 		)->add(trans('admin.pages.action.save'), 'submit', array(
             'attr' => array('class' => 'btn btn-primary'),
             'wrapper' => array('class' => 'form-group actions'),
+            'others_actions' => array(
+                'back' => array(
+                    'value' => trans('admin.global.action.back'), 
+                    'class' => 'btn-default',
+                    'url' => route('admin.pages.index')
+                )
+            )
         ));
 		return view($this->defaultView,  array(
 			'page' => $page,
