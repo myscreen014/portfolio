@@ -55,6 +55,13 @@ class AdministratorsComponent extends Controller
         )->add(trans('admin.administrators.action.create'), 'submit', array(
             'attr' => array('class' => 'btn btn-success'),
             'wrapper' => array('class' => 'form-group actions'),
+            'others_actions' => array(
+                'back' => array(
+                    'value' => 'Retour', 
+                    'class' => 'btn-default',
+                    'url' => route('admin.administrators.index')
+                )
+            )
         ));
 
 
