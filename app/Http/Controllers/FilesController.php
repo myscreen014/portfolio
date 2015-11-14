@@ -68,7 +68,7 @@ class FilesController extends Controller
                         );
                         $fileContent = File::get($thumbnailsDir.'/'.$thumbnailName.'-'.$file->name);
                     } else {
-                         $fileContent = File::get($uploadPath.'/'.$file->path);
+                        $fileContent = File::get($uploadPath.'/'.$file->path);
                     }
                 } else {
                      return new Response('', 404);

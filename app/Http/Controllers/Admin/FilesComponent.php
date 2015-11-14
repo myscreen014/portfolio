@@ -12,6 +12,8 @@ use Illuminate\Http\Response;
 use App\Models\FileModel;
 use App\Forms\FileForm;
 use Kris\LaravelFormBuilder\FormBuilder;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Config;
 
 class FilesComponent extends Controller {
 	
@@ -47,6 +49,8 @@ class FilesComponent extends Controller {
 						$file->type = $fileUploaded->getMimeType();
 						$file->hash = hash_file('md5', $fileUploaded);	
 
+						$pathInfosFile = pathinfo($file->name);
+
 
 						/* 
 						 * Gestion de l'entrée dans la table "files" 
@@ -58,13 +62,11 @@ class FilesComponent extends Controller {
 							$isUploaded = true;
 						} elseif (FileModel::where('hash', '<>', $file->hash)->where('path', $file->path)->count()>=1) {
 							// Un autre fichier avec le même nom existe déjà
-
 							// Recherche d'un nouveau nom
-							$pathInfos = pathinfo($file->name);
 							$newPath = $file->model_table.'/'.$file->name;
 							$cmpt = 1;
 							while (FileModel::where('hash', '<>', $file->hash)->where('path', $newPath)->count()>=1) {
-								$newName = $pathInfos['filename'].'-'.($cmpt++).'.'.$pathInfos['extension'];
+								$newName = $pathInfosFile['filename'].'-'.($cmpt++).'.'.$pathInfosFile['extension'];
 								$newPath = $file->model_table.'/'.$newName;
 							}
 							$file->name = $newName;
@@ -77,7 +79,17 @@ class FilesComponent extends Controller {
 						/* 
 						 * Gestion du fichier sur le serveur 
 						 */
-						$isUploaded = $fileUploaded->move($destinationPath, $file->name);
+						if ($file->isPicture()) {
+							$thumbnailDefault = Config::get('thumbnail.thumbnail_default');
+							$thumbnail = Image::make($fileUploaded->getRealPath());
+							$thumbnail->resize(1920, 1080, function ($constraint) {
+                                $constraint->aspectRatio();
+                                $constraint->upsize();
+                            });
+                            $thumbnail->save($destinationPath.'/'.$file->name, 100);
+						} else {
+							$isUploaded = $fileUploaded->move($destinationPath, $file->name);	
+						}
 						
 						if ($isSave && $isUploaded) {
 							return array(
