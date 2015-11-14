@@ -9,7 +9,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>Starter Template for Bootstrap</title>
+		<title>{{ trans('admin.global.application.name') }}</title>
 		
 		<link rel="stylesheet" href="{{ elixir('css/bootstrap.min.css') }}">
 		<link rel="stylesheet" href="{{ elixir('css/admin.all.css') }}">
@@ -45,7 +45,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="index.html">{{ trans('admin.global.application.name') }}</a>
+						<a class="navbar-brand" href="{{ route('admin.index') }}">{{ trans('admin.global.application.name') }}</a>
 					</div>
 					<!-- /.navbar-header -->
 

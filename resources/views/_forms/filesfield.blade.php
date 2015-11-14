@@ -10,11 +10,11 @@
 		</div>
   		<div class="panel-body">
   			<ul id="{{ $name }}-files-container" class="files clearfix">
+  				<p class="dz-message" style="{{ (isset($options['value']) && count($options['value'])>0) ? 'display: none' : '' }}">{{ trans('admin.global.message.upload_file_here') }}</p>
 				@if (isset($options['value']))
 					@forelse($options['value'] as $file)
 						@include('_forms.itemfilesfield', ['file' => $file])
 					@empty
-						<p class="dz-message">{{ trans('admin.global.message.upload_file_here') }}</p>
 					@endforelse
 				@endif
 			</ul>
@@ -223,11 +223,12 @@
 			// Refresh dropzone status (empty, count files, ...)
 			var countFiles = $('#'+fieldName+'-files-container .dz-details').length;
 			if (countFiles == 0) {
-				$('#{{ $name }} .dz-message').show();
+				$('#'+fieldName+'-files-container .dz-message').show();
 			} else {
-				$('#{{ $name }} .panel-heading .count-value').html(countFiles);
-				$('#{{ $name }} .dz-message').hide();
+				
+				$('#'+fieldName+'-files-container .dz-message').hide();
 			}
+			$('#{{ $name }} .panel-heading .count-value').html(countFiles);
 		}
 		
 	</script>

@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+/* My uses */
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Config;
 
 class FileModel extends Model
 {
@@ -16,6 +19,44 @@ class FileModel extends Model
 	protected $table = 'files';
 	protected $dates = ['deleted_at'];
 	protected $fillable = array('name', 'legend', 'path', 'type', 'ordering');
+
+	/* Boot  */
+	public static function boot() {   
+  		
+        parent::boot();
+
+        static::deleted(function($file)
+        {
+        	$uploadPath = config('app.uploads_path');
+        	$thumbnailsPath = $uploadPath.Config::get('thumbnail.path');
+        	$thumbnailsAvailables = Config::get('thumbnail.thumbnails');
+
+        	$fileFullPath = $uploadPath.'/'.$file->path;
+
+        	// Avant de supprimer le fichier on vérifie s'il n'est pas utilisé ailleurs avec son hash
+        	if (FileModel::where('hash', $file->hash)->where('path', $file->path)->count()==0) {
+     
+        		// Delete file
+	        	if (File::exists($fileFullPath)) {
+	        		File::delete($uploadPath.'/'.$file->path);	
+	        	}
+	   
+	        	// Delete his thumbnails
+	        	foreach ($thumbnailsAvailables as $thumbnailName => $thumbnailDefinition) {
+	        		$thumbnailFullPath = $thumbnailsPath.'/'.$thumbnailName.'-'.$file->name;
+	        		if (File::exists($thumbnailFullPath)) {
+	        			File::delete($thumbnailFullPath);	
+	        		}
+	        	}
+	        	
+        	} else {
+        		// Le fichier est utilisé ailleurs, on ne le supprime pas
+        	}
+
+        	
+        });
+        
+    }
 
 	/* Scopes */
 	public function scopeOfOrder($query){

@@ -17,7 +17,7 @@ return [
         'component' => [
             'root'              => 'Accueil',
             'pages'             => 'Pages',
-            'administrators'    => 'Utilisateurs',
+            'administrators'    => 'Administrateurs',
         ],
         'feedback' => [
             'update' => [

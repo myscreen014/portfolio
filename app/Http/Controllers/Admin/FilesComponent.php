@@ -29,24 +29,56 @@ class FilesComponent extends Controller {
 					if ($request->file($fileUploadedName)->isValid()) {
 						$fileUploaded = $request->file($fileUploadedName);
 
+						
 						$destinationPath = $destinationPath.'/'.$modelTable;
 
+						// On créé le repertoire de destination 	
 						if (!File::exists($destinationPath)) {
 							File::makeDirectory($destinationPath);
 						}
-	
-						// Create File
+
+						// On créé l'instance File
 						$file = new FileModel();
 						$file->name = $fileUploaded->getClientOriginalName();
-						$file->type = $fileUploaded->getMimeType();
+						$file->path = $modelTable.'/'.$file->name;
 						$file->model_table = $modelTable;
 						$file->model_field = $modelField;
 						$file->model_id = $modelId;
-						$file->path = $modelTable.'/'.$file->name;
+						$file->type = $fileUploaded->getMimeType();
+						$file->hash = hash_file('md5', $fileUploaded);	
+
+
+						/* 
+						 * Gestion de l'entrée dans la table "files" 
+						 */
+
+						// On vérifie si on à déjà un fichier identique (même Hash, même nom)
+						if (FileModel::where('hash', $file->hash)->where('path', $file->path)->count()>0) {
+							// On enregistre uniquement le fichier
+							$isUploaded = true;
+						} elseif (FileModel::where('hash', '<>', $file->hash)->where('path', $file->path)->count()>=1) {
+							// Un autre fichier avec le même nom existe déjà
+
+							// Recherche d'un nouveau nom
+							$pathInfos = pathinfo($file->name);
+							$newPath = $file->model_table.'/'.$file->name;
+							$cmpt = 1;
+							while (FileModel::where('hash', '<>', $file->hash)->where('path', $newPath)->count()>=1) {
+								$newName = $pathInfos['filename'].'-'.($cmpt++).'.'.$pathInfos['extension'];
+								$newPath = $file->model_table.'/'.$newName;
+							}
+							$file->name = $newName;
+							$file->path = $newPath;
+							
+						}
 						$isSave = $file->save();
 
-						// Move uploaded file
-						$isUploaded = $fileUploaded->move($destinationPath, $fileUploaded->getClientOriginalName());
+
+						/* 
+						 * Gestion du fichier sur le serveur 
+						 */
+						$isUploaded = $fileUploaded->move($destinationPath, $file->name);
+						
 						if ($isSave && $isUploaded) {
 							return array(
 								'file' => $file->toArray()
