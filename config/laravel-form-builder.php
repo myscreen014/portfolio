@@ -27,6 +27,6 @@ return [
     'default_namespace' => '',
 
     'custom_fields' => [
-//        'datetime' => 'App\Forms\Fields\Datetime'
+        'files' => 'App\Forms\Fields\FilesType'
     ]
 ];

@@ -10,8 +10,6 @@ class PageForm extends Form
 
     public function buildForm()
     {
-    	// Add custom fields
-    	$this->addCustomField('files', 'App\Forms\Fields\FilesType');
 
     	// Create form
         $this
