@@ -10,8 +10,7 @@
 
 	
 		@foreach($page->files as $file)
-			
-		<img src="{{ route('file', $file->id, 'thumnails') }}" />
+		<img src="{{ route('picture', ['site', $file->name]) }}" />
 			
 		@endforeach
 	</div>

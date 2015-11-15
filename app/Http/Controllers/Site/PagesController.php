@@ -16,10 +16,12 @@ class PagesController extends Controller
  
     public function index($slug=NULL) {
     	if (is_null($slug)) {
-    		$page = PageModel::firstOrFail();
+            $page = PageModel::with(array('files' => function($query) {
+                $query->where('model_field', 'pictures'); 
+            }))->where('slug', $slug)->firstOrFail();
     	} else {
     		$page = PageModel::with(array('files' => function($query) {
-                // $query->select('page_id', 'path'); just select path
+                $query->where('model_field', 'pictures'); 
             }))->where('slug', $slug)->firstOrFail();
     	}
     	return view('site.pages', array('page' => $page));

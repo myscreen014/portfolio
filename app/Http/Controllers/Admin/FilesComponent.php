@@ -126,7 +126,7 @@ class FilesComponent extends Controller {
 	        return (new Response(
 	        	array(
 	        		'values' => $file->toJson(),
-	        		'route' => route('files', array('modal', $file->name))	
+	        		'route' => route('picture', array('modal', $file->name))	
 	        ), 200));
 	    } else {
 	    	return (new Response(NULL, 403));

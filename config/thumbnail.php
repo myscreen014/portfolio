@@ -15,6 +15,8 @@ return [
 
 	'thumbnails' => [
 
+		/* Admin */
+
 		'filebrowser' => [
 			'filters' => [
 				'fit' =>  [80,80]
@@ -32,6 +34,14 @@ return [
 		'modal' => [
 			'filters' => [
 				'max' =>  [600,400]
+			]
+		],
+
+		/* Site */
+		'site' => [
+			'filters' => [
+				'max' =>  [60,40],
+				'greyscale' => []
 			]
 		]
 	],  
