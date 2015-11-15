@@ -36,11 +36,27 @@
 				<div id="navbar" class="collapse navbar-collapse">
 			  		<ul class="nav navbar-nav">
 						@foreach($pages as $item)
-							<li @if ($item->id == $page->id) class="active" @endif >
+							<li @if (isset($page) && ($item->id == $page->id)) class="active" @endif >
 								<a href="{{ route('page', $item->slug) }}">{{ $item->name }}</a>
 							</li>
 						@endforeach
 					</ul>
+
+					<ul class="nav navbar-nav navbar-top-links navbar-right">
+			  			@if (Auth::check())
+			  				<li class="dropdown ">
+			  					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                   {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+                				<ul class="dropdown-menu">
+                                    <li><a href="{{ route('logout') }}">Deconnexion</a></li>
+                				</ul>
+              				</li>
+                        @else
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                        @endif
+      				</ul>
+
 				</div><!--/.nav-collapse -->
 	  		</div>
 		</nav>

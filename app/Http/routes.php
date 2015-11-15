@@ -11,18 +11,11 @@
 |
 */
 
-/* Authentication routes... */
-Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
-Route::get('auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 
-/* Registration routes... */
-Route::get('auth/register', 'Auth\AuthController@getRegister');
-Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 
 /* ADMIN */
-Route::group(['prefix' => 'admin', 'middleware'=> 'auth'], function () {
+Route::group(['prefix' => 'admin', 'middleware'=> ['auth', 'auth_administrator']], function () {
 
 	// Admin home 
 	Route::get('/', ['as'=>'admin.index', 'uses' => 'Admin\AdminController@index']);
@@ -53,6 +46,15 @@ Route::get('files/{thumbnail}/{name}',['as' => 'picture', 'uses' => 'FilesContro
 Route::get('files/{name}',['as' => 'file', 'uses' => 'FilesController@file']);
 
 Route::group(['prefix' => '/', 'middleware'=> 'pages'], function () {
+
+    /* Authentication routes... */
+    Route::get('auth/login', 'Auth\AuthController@getLogin');
+    Route::post('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
+    Route::get('auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
+
+    /* Registration routes... */
+    Route::get('auth/register', 'Auth\AuthController@getRegister');
+    Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 	Route::get('{slug?}',['as' => 'page', 'uses' => 'Site\PagesController@index']);
 

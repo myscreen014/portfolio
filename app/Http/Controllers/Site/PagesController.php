@@ -18,7 +18,7 @@ class PagesController extends Controller
     	if (is_null($slug)) {
             $page = PageModel::with(array('files' => function($query) {
                 $query->where('model_field', 'pictures'); 
-            }))->where('slug', $slug)->firstOrFail();
+            }))->firstOrFail();
     	} else {
     		$page = PageModel::with(array('files' => function($query) {
                 $query->where('model_field', 'pictures'); 

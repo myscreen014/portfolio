@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+/* My uses */
+use Illuminate\Support\Facades\Auth;
+
 class AuthController extends Controller
 {
     /*
@@ -30,8 +33,13 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->redirectPath = route(\Illuminate\Support\Facades\Config::get('auth.redirectPathRoute'));
         $this->middleware('guest', ['except' => 'getLogout']);
+    }
+
+    public function redirectPath() {
+        if (Auth::user()->role == 'admin') {
+            return route(\Illuminate\Support\Facades\Config::get('auth.redirectPathRoute'));    
+        }
     }
 
     /**
@@ -57,10 +65,16 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return UserModel::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+    
+        $user = new UserModel();
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = bcrypt($data['password']);
+        $user->role = 'user';
+        $user->confirmed = false;
+        $user->save();
+        
+        return $user;
+
     }
 }

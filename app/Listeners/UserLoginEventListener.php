@@ -32,5 +32,6 @@ class UserLoginEventListener
     {
         $user->last_login = Carbon::now();
         $user->save();
+
     }
 }

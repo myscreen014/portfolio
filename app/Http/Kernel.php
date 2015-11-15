@@ -32,5 +32,6 @@ class Kernel extends HttpKernel
 
         /* My midllewares */
         'pages' => \App\Http\Middleware\PagesMiddleware::class,
+        'auth_administrator' => \App\Http\Middleware\AuthAdministratorMiddleware::class,
     ];
 }

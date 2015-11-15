@@ -43,7 +43,7 @@ return array(
 	"min"              => array(
 		"numeric" => "La valeur de :attribute doit être inférieure à :min.",
 		"file"    => "Le fichier :attribute doit être plus que gros que :min kilobytes.",
-		"string"  => "Le texte :attribute doit contenir au moins :min caractères.",
+		"string"  => "Le champ :attribute doit contenir au moins :min caractères.",
 	),
 	"not_in"           => "Le champ :attribute sélectionné n'est pas valide.",
 	"numeric"          => "Le champ :attribute doit contenir un nombre.",

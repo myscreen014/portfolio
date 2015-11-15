@@ -79,6 +79,7 @@ return [
         ],
         'title' => [
             'login'             => "Se connecter",
+            'register'          => "Inscription",
         ],
         'action' => [
             'logout'            => "Déconnexion",
