@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 /* My uses */
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 
 class AuthController extends Controller
 {
@@ -38,7 +39,9 @@ class AuthController extends Controller
 
     public function redirectPath() {
         if (Auth::user()->role == 'admin') {
-            return route(\Illuminate\Support\Facades\Config::get('auth.redirectPathRoute'));    
+            return route(\Illuminate\Support\Facades\Config::get('auth.redirectPathRouteAdmin'));    
+        } else {
+            return route(\Illuminate\Support\Facades\Config::get('auth.redirectPathRouteSite'));    
         }
     }
 
@@ -71,10 +74,18 @@ class AuthController extends Controller
         $user->email = $data['email'];
         $user->password = bcrypt($data['password']);
         $user->role = 'user';
+        $user->key = md5(Config::get('app.key').$data['name'].$data['email']);
         $user->confirmed = false;
-        $user->save();
+        if ($user->save()) {
+            $user->sendEmailConfirmation();
+        }
         
         return $user;
 
+    }
+
+    public function confirmation($email, $secure) {
+        varlog($email);
+        varlog($secure);
     }
 }

@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 /* My uses */
 use App\Models\PageModel;
 
+use Illuminate\Support\Facades\Mail;
+
 class PagesController extends Controller
 {
  	
@@ -24,6 +26,7 @@ class PagesController extends Controller
                 $query->where('model_field', 'pictures'); 
             }))->where('slug', $slug)->firstOrFail();
     	}
+
     	return view('site.pages', array('page' => $page));
     }
 }

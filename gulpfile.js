@@ -20,6 +20,7 @@ elixir(function(mix) {
     mix.copy('resources/assets/css/font-awesome.min.css', 'public/css/font-awesome.min.css');
     mix.copy('resources/assets/fonts', 'public/fonts');
     mix.copy('resources/assets/plugins', 'public/plugins');
+    mix.copy('resources/assets/img', 'public/img');
 
     /* SASS */
 	mix.sass([

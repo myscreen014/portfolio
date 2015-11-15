@@ -2,7 +2,8 @@
 
 return [
 
-    'redirectPathRoute' => 'admin.index',
+    'redirectPathRouteAdmin' => 'admin.index',
+    'redirectPathRouteSite' => 'page',
 
     /*
     |--------------------------------------------------------------------------

@@ -10,6 +10,9 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+/* My uses */
+use Illuminate\Support\Facades\Mail;
+
 class UserModel extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract
@@ -36,4 +39,15 @@ class UserModel extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function sendEmailConfirmation() {
+        $subject = 'Sujet du mail';
+        return Mail::send('_emails.register', array(
+            'subject' => $subject,
+
+        ), function ($m) use ($subject) {
+            $m->from('hello@app.com', 'Your Application');
+            $m->to('test@tetst.fr', 'name de test')->subject($subject);
+        });
+    }
 }

@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
+/* My uses */
+use Illuminate\Support\Facades\Config;
+
 class UserTableSeeder extends Seeder
 {
     /**
@@ -15,6 +18,7 @@ class UserTableSeeder extends Seeder
             'name' 		=> 'Eric',
             'email' 	=> 'eric.tarillon@gmail.com',
             'role'      => 'admin',
+            'key'       => md5(Config::get('app.key').'Eric'.'eric.tarillon@gmail.com'),
             'password' 	=> bcrypt('pwdpwdpwd'),
         ]);
     }
