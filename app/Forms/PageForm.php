@@ -28,14 +28,14 @@ class PageForm extends Form
                 'model_id' => $this->getData('model_id'),
             )
         )
-      /*  ->add('files', 'files', 
+        ->add('files', 'files', 
             array(
                 'dropzone_acceptedFiles' => 'application/*, text/*, audio/*',
                 'model_table' => $this->getData('model_table'),
                 'model_field' => 'files',
                 'model_id' => $this->getData('model_id'),
             )
-        )*/;
+        );
 
     }
 }

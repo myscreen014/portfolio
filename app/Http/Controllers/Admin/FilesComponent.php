@@ -31,18 +31,11 @@ class FilesComponent extends Controller {
 					if ($request->file($fileUploadedName)->isValid()) {
 						$fileUploaded = $request->file($fileUploadedName);
 
-						
-						$destinationPath = $destinationPath.'/'.$modelTable;
-
-						// On créé le repertoire de destination 	
-						if (!File::exists($destinationPath)) {
-							File::makeDirectory($destinationPath);
-						}
 
 						// On créé l'instance File
 						$file = new FileModel();
 						$file->name = $fileUploaded->getClientOriginalName();
-						$file->path = $modelTable.'/'.$file->name;
+						$file->path = $file->model_table.'/'.$file->name;
 						$file->model_table = $modelTable;
 						$file->model_field = $modelField;
 						$file->model_id = $modelId;
@@ -67,17 +60,16 @@ class FilesComponent extends Controller {
 						} elseif (FileModel::where('hash', '<>', $file->hash)->where('path', $file->path)->count()>=1) {
 							// Un autre fichier avec le même nom existe déjà
 							// Recherche d'un nouveau nom
-							$newPath = $file->model_table.'/'.$file->name;
+
 							$cmpt = 1;
-							while (FileModel::where('hash', '<>', $file->hash)->where('path', $newPath)->count()>=1) {
-								$newName = $pathInfosFile['filename'].'-'.($cmpt++).'.'.$pathInfosFile['extension'];
-								$newPath = $file->model_table.'/'.$newName;
+							while (FileModel::where('hash', '<>', $file->hash)->where('path', $file->path)->count()>=1) {
+								$file->name = $pathInfosFile['filename'].'-'.($cmpt++).'.'.$pathInfosFile['extension'];
+								$file->path = $file->name;
 							}
-							$file->name = $newName;
-							$file->path = $newPath;
 							
 						}
 						$isSave = $file->save();
+
 
 
 						/* 
@@ -134,7 +126,7 @@ class FilesComponent extends Controller {
 	        return (new Response(
 	        	array(
 	        		'values' => $file->toJson(),
-	        		'route' => route('file', $file->id.'.modal')	
+	        		'route' => route('files', array('modal', $file->name))	
 	        ), 200));
 	    } else {
 	    	return (new Response(NULL, 403));

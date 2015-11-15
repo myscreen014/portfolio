@@ -18,6 +18,7 @@ return [
             'root'              => 'Accueil',
             'pages'             => 'Pages',
             'administrators'    => 'Administrateurs',
+            'files'             => 'Fichiers',
         ],
         'feedback' => [
             'update' => [
@@ -91,7 +92,7 @@ return [
 
     'pages' => [
         'field' => [
-            'name'              => "Nom de page",
+            'name'              => "Nom de la page",
             'content'           => "Contenu de page",
             'files'             => "Fichiers de la page",
             'pictures'          => "Photos de la page",
@@ -119,11 +120,16 @@ return [
             'legend'            => "Légende du fichier",
         ],
         'title' => [
+            'index'             => "Liste des fichiers",
             'edit'              => 'Édition du fichier',
             'delete'            => "Suppression d'un fichier",
             'upload'            => "Upload de fichiers",
         ],
         'label' => [
+            'thead' => [
+                'thumbnail'   => "Miniature",
+                'name_legend'   => "Nom et légende"
+            ],
             'status' => [
                 'pending'       => 'En attente',
                 'success'       => 'Transféré',

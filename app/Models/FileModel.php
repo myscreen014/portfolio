@@ -28,7 +28,7 @@ class FileModel extends Model
         static::deleted(function($file)
         {
         	$uploadPath = config('app.uploads_path');
-        	$thumbnailsPath = $uploadPath.Config::get('thumbnail.path');
+        	$thumbnailsPath = Config::get('thumbnail.path');
         	$thumbnailsAvailables = Config::get('thumbnail.thumbnails');
 
         	$fileFullPath = $uploadPath.'/'.$file->path;
@@ -43,9 +43,13 @@ class FileModel extends Model
 	   
 	        	// Delete his thumbnails
 	        	foreach ($thumbnailsAvailables as $thumbnailName => $thumbnailDefinition) {
-	        		$thumbnailFullPath = $thumbnailsPath.'/'.$thumbnailName.'-'.$file->name;
+	        		$thumbnailFullPath = $thumbnailsPath.'/'.$thumbnailName.'/'.$file->name;
+	        		varlog($thumbnailFullPath);
 	        		if (File::exists($thumbnailFullPath)) {
+	        			varlog('suppression de : '.$thumbnailFullPath);
 	        			File::delete($thumbnailFullPath);	
+	        		} else {
+	        			varlog('le fichier nexiste pas ');
 	        		}
 	        	}
 	        	

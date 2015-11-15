@@ -3,6 +3,7 @@
 @section('content')
 
 	@include ('_others.feedbacks')
+
 	
 	{{-- INDEX --}}
 	@if (Route::currentRouteName() == 'admin.pages.index')
@@ -15,7 +16,7 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>Name</th>
+						<th>{{ trans('admin.pages.field.name') }}</th>
 						<th class="actions"></th>
 					</tr>
 				</thead>

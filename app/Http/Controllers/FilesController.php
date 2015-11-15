@@ -13,76 +13,72 @@ use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Config;
 
+use Illuminate\Support\Facades\Cache;
+
 class FilesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index($id_thumbnail)
-    {
-    	$fileInfos = explode('.', $id_thumbnail);
-    	$fileId = $fileInfos[0];
 
-    	$file = FileModel::findOrFail($fileId);
+	public function file($fileName)
+	{
+		$uploadPath =  Config::get('app.uploads_path');
+		if (File::exists($uploadPath.'/'.$fileName)) {
+			$fileContent = File::get($uploadPath.'/'.$fileName);
+			$response = new Response($fileContent);
+			$response->header('Content-Type', File::mimeType($uploadPath.'/'.$fileName));
+			return $response;
+		} else {
+			return new Response('', 404);
+		}
+	}
+	
+	public function picture($thumbnailName=NULL, $fileName)
+	{
+		/* La thumbnails n'existe pas, le .htaccess nous redirige ici */
 
-        $uploadPath = config('app.uploads_path');
-      
-    	/* Thumbnail ? */
-    	if (isset($fileInfos[1])) {
-            $thumbnailName = $fileInfos[1]; 
-            $thumbnailsDir = base_path().'/uploads'.Config::get('thumbnail.path');
+		$uploadPath =  Config::get('app.uploads_path');
+		$thumbnailsDir = Config::get('thumbnail.path').'/'.$thumbnailName;
 
-            if (File::exists($thumbnailsDir.'/'.$thumbnailName.'-'.$file->name)) {
-                $fileContent = File::get($thumbnailsDir.'/'.$thumbnailName.'-'.$file->name);
-            } else {
-                if (File::exists($uploadPath.'/'.$file->path)) {
-                    $thumbnailsAvailables = Config::get('thumbnail.thumbnails');
-                    if (in_array($thumbnailName, array_keys($thumbnailsAvailables))) {
-                        
-                        if (!File::exists($thumbnailsDir)) {
-                            File::makeDirectory($thumbnailsDir);
-                        }
+		if (File::exists($uploadPath.'/'.$fileName)) {
+			$thumbnailsAvailables = Config::get('thumbnail.thumbnails');
+			if (in_array($thumbnailName, array_keys($thumbnailsAvailables))) {
+				if (!File::exists($thumbnailsDir)) {
+					File::makeDirectory($thumbnailsDir);
+				}
 
-                        $thumbnail = Image::make($uploadPath.'/'.$file->path);
-                        foreach ($thumbnailsAvailables[$thumbnailName]['filters'] as $filter => $filterParams) {
-                            switch ($filter) {
+				$thumbnail = Image::make($uploadPath.'/'.$fileName);
+				foreach ($thumbnailsAvailables[$thumbnailName]['filters'] as $filter => $filterParams) {
+					switch ($filter) {
 
-                                // Custom filters
-                                case 'max':
-                                    $thumbnail->resize($filterParams[0], $filterParams[1], function ($constraint) {
-                                        $constraint->aspectRatio();
-                                        $constraint->upsize();
-                                    });
-                                    break;
-                                default:  // default filters
-                                    call_user_func_array(array($thumbnail, $filter), array_values($filterParams));
-                                    break;
-                           }
-                           
-                        }
-                        $thumbnail->save(
-                            $thumbnailsDir.'/'.$thumbnailName.'-'.$file->name,
-                            (isset($thumbnailsAvailables[$thumbnailName]['quality']) ? $thumbnailsAvailables[$thumbnailName]['quality'] : Config::get('thumbnail.quality') )
-                        );
-                        $fileContent = File::get($thumbnailsDir.'/'.$thumbnailName.'-'.$file->name);
-                    } else {
-                        $fileContent = File::get($uploadPath.'/'.$file->path);
-                    }
-                } else {
-                     return new Response('', 404);
-                }
-            }
-    	} else {
-            return new Response('', 404);
-        } 
+						// Custom filters
+						case 'max':
+							$thumbnail->resize($filterParams[0], $filterParams[1], function ($constraint) {
+								$constraint->aspectRatio();
+								$constraint->upsize();
+							});
+							break;
+						default:  // default filters
+							call_user_func_array(array($thumbnail, $filter), array_values($filterParams));
+							break;
+				   }
+				   
+				}
+				$thumbnail->save(
+					$thumbnailsDir.'/'.$fileName,
+					(isset($thumbnailsAvailables[$thumbnailName]['quality']) ? $thumbnailsAvailables[$thumbnailName]['quality'] : Config::get('thumbnail.quality') )
+				);
+				$fileContent = File::get($thumbnailsDir.'/'.$fileName);
+			} else {
+				return new Response('', 404);
+			}
+		} else {
+			return new Response('', 404);
+		}
 
-        $response = new Response($fileContent);
-        $response->header('Content-Type', 'image/jpeg');
-        return $response;
-      
-    }
+		$response = new Response($fileContent);
+		$response->header('Content-Type', File::mimeType($uploadPath.'/'.$fileName));
+		return $response;
+	  
+	}
 
 
 }
