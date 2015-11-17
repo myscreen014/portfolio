@@ -10,7 +10,7 @@ class PageModel extends Model
     protected $table = 'pages';
     protected $fillable = ['name', 'content', 'files'];
 
-
+    /* Relations */
     public function files() {
     	return $this->hasMany('App\Models\FileModel', 'model_id');
     }

@@ -84,6 +84,7 @@ return [
         'action' => [
             'logout'            => "Déconnexion",
             'login'             => "Connexion",
+            'register'          => "Inscription",
         ],
         'message' => [
             'remember_me'        => "Se Souvenir De Moi",

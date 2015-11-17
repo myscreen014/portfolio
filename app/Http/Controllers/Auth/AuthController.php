@@ -62,51 +62,72 @@ class AuthController extends Controller
 	}
 
 	/**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postRegister(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+        $this->create($request->all());
+        return redirect(route('register.message'));
+    }
+
+	/**
 	 * Handle a login request to the application.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
 	public function postLogin(Request $request)
-	{
+    {
+        $this->validate($request, [
+            $this->loginUsername() => 'required', 'password' => 'required',
+        ]);
 
-		$this->validate($request, [
-			$this->loginUsername() => 'required', 'password' => 'required',
-		]);
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        $throttles = $this->isUsingThrottlesLoginsTrait();
 
-		// If the class is using the ThrottlesLogins trait, we can automatically throttle
-		// the login attempts for this application. We'll key this by the username and
-		// the IP address of the client making these requests into this application.
-		$throttles = $this->isUsingThrottlesLoginsTrait();
+        if ($throttles && $this->hasTooManyLoginAttempts($request)) {
+            return $this->sendLockoutResponse($request);
+        }
 
-		if ($throttles && $this->hasTooManyLoginAttempts($request)) {
-			return $this->sendLockoutResponse($request);
-		}
+        $credentials = $this->getCredentials($request);
 
-		$credentials = $this->getCredentials($request);
+        if (Auth::attempt($credentials, $request->has('remember'))) {
+        	if (Auth::user()->role != 'admin' && Auth::user()->confirmed == 0) {
+        		Auth::logout();
+        		return redirect($this->loginPath())
+            		->withInput($request->only($this->loginUsername(), 'remember'))
+            		->withErrors([
+                		trans('auth.noconfirmed')
+            		]);
+        	}
+            return $this->handleUserWasAuthenticated($request, $throttles);
+        }
 
-		if (Auth::attempt($credentials, $request->has('remember'))) {
-			if (Auth::user()->confirmed == 0) {
-				Auth::logout();
-				return Redirect(route('page'));
-			} else {
-				return $this->handleUserWasAuthenticated($request, $throttles);	
-			}
-		}
-
-		// If the login attempt was unsuccessful we will increment the number of attempts
-		// to login and redirect the user back to the login form. Of course, when this
-		// user surpasses their maximum number of attempts they will get locked out.
-		if ($throttles) {
-			$this->incrementLoginAttempts($request);
-		}
-
-		return redirect($this->loginPath())
-			->withInput($request->only($this->loginUsername(), 'remember'))
-			->withErrors([
-				$this->loginUsername() => $this->getFailedLoginMessage(),
-			]);
-	}
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        if ($throttles) {
+            $this->incrementLoginAttempts($request);
+        }
+     
+        return redirect($this->loginPath())
+            ->withInput($request->only($this->loginUsername(), 'remember'))
+            ->withErrors([
+                $this->loginUsername() => $this->getFailedLoginMessage(),
+            ]);
+    }
 
 	/**
 	 * Create a new user instance after a valid registration.
@@ -116,13 +137,13 @@ class AuthController extends Controller
 	 */
 	protected function create(array $data)
 	{
-	
+
 		$user = new UserModel();
 		$user->name = $data['name'];
 		$user->email = $data['email'];
 		$user->password = bcrypt($data['password']);
 		$user->role = 'user';
-		$user->key = md5(Config::get('app.key').$data['name'].$data['email']);
+		$user->key = str_random(30);
 		$user->confirmed = false;
 		if ($user->save()) {
 			$user->sendEmailConfirmation();
@@ -132,9 +153,24 @@ class AuthController extends Controller
 
 	}
 
-	public function confirmation($id, $secure) {
-		varlog('boom');
-		varlog($email);
-		varlog($secure);
+	public function confirmation($id, $key) {
+		$user = new UserModel;
+		$user = $user->where('id', $id)->where('key', $key)->first();
+		if (!is_null($user)) {
+			$user->confirmed = 1;
+			$user->save();
+			Auth::loginUsingId($user->id);
+			return view('auth.register', array(
+				'message' => trans('site.users.message.confirmation.ok')
+			));
+		} else {
+			return redirect(route('page'));
+		}
+	}
+
+	public function registerMessage() {
+		return view('auth.register', array(
+			'message' => trans('site.users.message.need_confirmation')
+		));
 	}
 }

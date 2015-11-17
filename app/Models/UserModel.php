@@ -40,6 +40,12 @@ class UserModel extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
+    /* Relations */
+    public function bankrolls() {
+        return $this->hasMany('App\Models\bankrollModel', 'user_id');
+    }
+
+    /* Methods */
     public function sendEmailConfirmation() {
         $urlConfirmation = route('auth.confirmation', array($this->id, $this->key));
         $subject = 'Sujet du mail';

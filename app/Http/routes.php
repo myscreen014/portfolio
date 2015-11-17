@@ -42,9 +42,15 @@ Route::group(['prefix' => 'admin', 'middleware'=> ['auth', 'auth_administrator']
  
 
 /* SITE */
-Route::get('files/{thumbnail}/{name}',['as' => 'picture', 'uses' => 'FilesController@picture']);
-Route::get('files/{name}',['as' => 'file', 'uses' => 'FilesController@file']);
+Route::get('files/{thumbnail}/{name}',['as' => 'picture', 'uses' => 'Site\FilesController@picture']);
+Route::get('files/{name}',['as' => 'file', 'uses' => 'Site\FilesController@file']);
 
+// Secure
+Route::group(['prefix' => '/bankroll', 'middleware'=> ['auth', 'pages']], function () {
+    Route::get('',['as' => 'bankroll', 'uses' => 'Site\BankrollsController@index']);
+});
+
+// Public
 Route::group(['prefix' => '/', 'middleware'=> 'pages'], function () {
 
     Route::get('auth/confirmation/{id}/{key}', ['as' => 'auth.confirmation', 'uses' => 'Auth\AuthController@confirmation']);
@@ -55,10 +61,11 @@ Route::group(['prefix' => '/', 'middleware'=> 'pages'], function () {
     Route::get('auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 
     /* Registration routes... */
-    Route::get('auth/register', 'Auth\AuthController@getRegister');
+    Route::get('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
     Route::post('auth/register', 'Auth\AuthController@postRegister');
+    Route::get('auth/register/message', ['as' => 'register.message', 'uses' => 'Auth\AuthController@registerMessage']);
     
-
+    Route::get('',['as' => 'page', 'uses' => 'Site\PagesController@index']);
 	Route::get('{slug?}',['as' => 'page', 'uses' => 'Site\PagesController@index']);
 
 });

@@ -1,16 +1,16 @@
-@extends('admin')
+@extends('site')
 
 
 @section('body')
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
+			<div class="col-md-6 col-md-offset-3">
 				<div class="login-panel panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">{{ trans('admin.users.title.login') }}</h3>
 					</div>
 					<div class="panel-body">
-
+						
 						{!! Form::open() !!}
 
 							@if (count($errors) > 0)
@@ -27,7 +27,7 @@
 							</div>
 
 							<div class="form-group">
-								{!! FORM::label('Mot de passe') !!}
+								{!! FORM::label('password', trans('admin.users.field.password')) !!}
 								{!! FORM::password('password', ['class'=>'form-control']) !!}
 							</div>
 

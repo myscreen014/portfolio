@@ -18,8 +18,18 @@ class UserTableSeeder extends Seeder
             'name' 		=> 'Eric',
             'email' 	=> 'eric.tarillon@gmail.com',
             'role'      => 'admin',
+            'confirmed' => 1,
             'key'       => str_random(30),
             'password' 	=> bcrypt('pwdpwdpwd'),
+        ]);
+
+         DB::table('users')->insert([
+            'name'      => 'User',
+            'email'     => 'eric@z6creation.net',
+            'role'      => 'user',
+            'confirmed' => 1,
+            'key'       => str_random(30),
+            'password'  => bcrypt('pwdpwdpwd'),
         ]);
     }
 }
