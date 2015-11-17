@@ -18,7 +18,7 @@ class UserTableSeeder extends Seeder
             'name' 		=> 'Eric',
             'email' 	=> 'eric.tarillon@gmail.com',
             'role'      => 'admin',
-            'key'       => md5(Config::get('app.key').'Eric'.'eric.tarillon@gmail.com'),
+            'key'       => str_random(30),
             'password' 	=> bcrypt('pwdpwdpwd'),
         ]);
     }

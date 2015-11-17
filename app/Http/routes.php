@@ -47,6 +47,8 @@ Route::get('files/{name}',['as' => 'file', 'uses' => 'FilesController@file']);
 
 Route::group(['prefix' => '/', 'middleware'=> 'pages'], function () {
 
+    Route::get('auth/confirmation/{id}/{key}', ['as' => 'auth.confirmation', 'uses' => 'Auth\AuthController@confirmation']);
+
     /* Authentication routes... */
     Route::get('auth/login', 'Auth\AuthController@getLogin');
     Route::post('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
@@ -55,7 +57,7 @@ Route::group(['prefix' => '/', 'middleware'=> 'pages'], function () {
     /* Registration routes... */
     Route::get('auth/register', 'Auth\AuthController@getRegister');
     Route::post('auth/register', 'Auth\AuthController@postRegister');
-    Route::get('auth/confirmation/{email}/{secure}', ['as' => 'auth.confirmation', 'uses' => 'Auth\AuthController@confirmation']);
+    
 
 	Route::get('{slug?}',['as' => 'page', 'uses' => 'Site\PagesController@index']);
 

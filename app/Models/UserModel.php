@@ -41,9 +41,11 @@ class UserModel extends Model implements AuthenticatableContract,
     protected $hidden = ['password', 'remember_token'];
 
     public function sendEmailConfirmation() {
+        $urlConfirmation = route('auth.confirmation', array($this->id, $this->key));
         $subject = 'Sujet du mail';
         return Mail::send('_emails.register', array(
             'subject' => $subject,
+            'urlConfirmation' => $urlConfirmation
 
         ), function ($m) use ($subject) {
             $m->from('hello@app.com', 'Your Application');
