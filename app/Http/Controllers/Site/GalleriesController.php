@@ -15,7 +15,7 @@ class GalleriesController extends Controller
 {
  	
     public function index($slug=NULL, $biim=NULL) {
-    	
+    	return view('site.galleries');
     }
 
     public function boom($test='hop') {

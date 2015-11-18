@@ -26,6 +26,7 @@ class PagesComponent extends Controller
 	
 	public function index()
 	{
+	
 		$page = new PageModel;
 		$pages = $page->get();
 		return view($this->defaultView, array('pages' => $pages));
@@ -144,7 +145,7 @@ class PagesComponent extends Controller
 			'message'=> trans('admin.global.feedback.update.ok'),
 			'type' => 'success'
 		));
-		varlog(route('admin.pages.index'));
+
 		return redirect(route('admin.pages.index'));
 	}
 

@@ -64,7 +64,6 @@ Route::group(['prefix' => '/', 'middleware'=> 'pages'], function () {
     Route::get('',['as' => 'page', 'uses' => 'Site\PagesController@index']);
     PageModel::loadControllersRoutes();
     Route::get('{slug?}',['as' => 'page', 'uses' => 'Site\PagesController@index']);
-    varlog('Load routes');
    
 
 });

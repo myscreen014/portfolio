@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /* My uses */
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 class PageModel extends Model
@@ -26,7 +25,6 @@ class PageModel extends Model
 
     /* Methodes */
     public static function loadControllersRoutes() {
-       
         $controllers = DB::table((new PageModel())->getTable())->distinct()->get(array('controller', 'slug'));
         foreach ($controllers as $key => $controller) {
             if ($controller->controller != 'pages') {
@@ -54,7 +52,6 @@ class PageModel extends Model
               
             }
         }
-        
     }
 
   	public static function boot() {   
@@ -70,10 +67,6 @@ class PageModel extends Model
         	}
            	$page->slug = $slugCandidate;	
             
-        });
-
-        static::saved(function ($page) {
-            Artisan::call('route:cache');
         });
 
         static::deleted(function($page)
