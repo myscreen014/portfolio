@@ -48,7 +48,14 @@ body {
 	  min-height: 50px;
 	}
   }
+  .dropdown-menu {
+  	border-top-left-radius: 0;
+  	border-top-right-radius: 0;
+  	margin-top: 0;
+  	border-top-color: #e7e7e7;
+  }
   .dropdown-menu li {
+  	
 	display: block;
 	&:last-child {
 	  margin-right: 0;
@@ -156,26 +163,6 @@ body {
 
 .btn-primary.btn-outline:hover, .btn-success.btn-outline:hover, .btn-info.btn-outline:hover, .btn-warning.btn-outline:hover, .btn-danger.btn-outline:hover {
   color: #fff;
-}
-
-.chat {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  li {
-	margin-bottom: 10px;
-	padding-bottom: 5px;
-	border-bottom: 1px dotted #999;
-	&.left .chat-body {
-	  margin-left: 60px;
-	}
-	&.right .chat-body {
-	  margin-right: 60px;
-	}
-	.chat-body p {
-	  margin: 0;
-	}
-  }
 }
 
 .panel .slidedown .glyphicon, .chat .glyphicon {

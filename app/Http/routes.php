@@ -45,11 +45,6 @@ Route::group(['prefix' => 'admin', 'middleware'=> ['auth', 'auth_administrator']
 Route::get('files/{thumbnail}/{name}',['as' => 'picture', 'uses' => 'Site\FilesController@picture']);
 Route::get('files/{name}',['as' => 'file', 'uses' => 'Site\FilesController@file']);
 
-// Secure
-Route::group(['prefix' => '/bankroll', 'middleware'=> ['auth', 'pages']], function () {
-    Route::get('',['as' => 'bankroll', 'uses' => 'Site\BankrollsController@index']);
-});
-
 // Public
 Route::group(['prefix' => '/', 'middleware'=> 'pages'], function () {
 

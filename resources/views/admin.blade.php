@@ -49,7 +49,7 @@
 					</div>
 					<!-- /.navbar-header -->
 
-			  		<ul class="nav navbar-nav navbar-top-links navbar-right">
+			  		<ul class="nav navbar-top-links navbar-right">
 			  			@if (Auth::check())
 			  				<li class="dropdown ">
 			  					<a href="#" class="dropdown-toggle" data-toggle="dropdown">

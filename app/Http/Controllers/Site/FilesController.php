@@ -38,6 +38,10 @@ class FilesController extends Controller
 		$uploadPath =  Config::get('app.uploads_path');
 		$thumbnailsDir = Config::get('thumbnail.path').'/'.$thumbnailName;
 
+		if (!File::exists(Config::get('thumbnail.path'))) {
+			File::makeDirectory(Config::get('thumbnail.path'));
+		}
+
 		if (File::exists($uploadPath.'/'.$fileName)) {
 			$thumbnailsAvailables = Config::get('thumbnail.thumbnails');
 			if (in_array($thumbnailName, array_keys($thumbnailsAvailables))) {
