@@ -68,9 +68,9 @@
 					<div class="navbar-default sidebar" role="navigation">
 						<div class="sidebar-nav navbar-collapse">
 							<ul class="nav" id="side-menu">
-								<li><a href="{{ route('admin.index') }}" class="@if ($controller == NULL) active @endif">{{ trans('admin.global.component.root') }}</a></li>
-								<li><a href="{{ route('admin.pages.index')}}" class="@if ($controller == 'pages') active @endif">{{ trans('admin.global.component.pages') }}</a></li>
-								<li><a href="{{ route('admin.administrators.index')}}" class="@if ($controller == 'administrators') active @endif">{{ trans('admin.global.component.administrators') }}</a></li>
+								<li><a href="{{ route('admin.index') }}" class="@if ($controller == NULL) active @endif"><i class="fa fa-home"></i>{{ trans('admin.global.component.root') }}</a></li>
+								<li><a href="{{ route('admin.pages.index')}}" class="@if ($controller == 'pages') active @endif"><i class="fa fa-file"></i>{{ trans('admin.global.component.pages') }}</a></li>
+								<li><a href="{{ route('admin.administrators.index')}}" class="@if ($controller == 'administrators') active @endif"><i class="fa fa-users"></i>{{ trans('admin.global.component.administrators') }}</a></li>
 							</ul>
 						</div>
 						<!-- /.sidebar-collapse -->

@@ -57,7 +57,7 @@
 	@if (Route::currentRouteName() == 'admin.administrators.edit')
 
 		@section('title')
-			{{ trans('admin.administrators.title.edit') }}
+			{{ trans('admin.administrators.title.edit') }} <small>- {{ $administrator->name }}</small>
 		@endsection
 		
 		{!! form($form) !!}

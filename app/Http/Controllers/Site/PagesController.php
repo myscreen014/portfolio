@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PageModel;
 
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Artisan;
 
 class PagesController extends Controller
 {
@@ -26,7 +27,6 @@ class PagesController extends Controller
                 $query->where('model_field', 'pictures'); 
             }))->where('slug', $slug)->firstOrFail();
     	}
-
     	return view('site.pages', array('page' => $page));
     }
 }

@@ -116,7 +116,10 @@ class AdministratorsComponent extends Controller
             )
 		));
 
-		return view($this->defaultView, array('form' => $form));
+		return view($this->defaultView, array(
+			'administrator' => $administrator,
+			'form' => $form
+		));
 	}
 
 	/**

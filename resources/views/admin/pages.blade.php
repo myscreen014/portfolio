@@ -56,7 +56,7 @@
 	@if (Route::currentRouteName() == 'admin.pages.edit')
 
 		@section('title')
-			{{ trans('admin.pages.title.edit') }}
+			{{ trans('admin.pages.title.edit') }} <small> - {{ $page->name }}</small>
 		@endsection
 		
 		{!! form($form) !!}
@@ -67,7 +67,7 @@
 	@if (Route::currentRouteName() == 'admin.pages.delete')
 
 		@section('title')
-			{{ trans('admin.pages.title.delete') }}
+			{{ trans('admin.pages.title.delete') }} <small> - {{ $page->name }}</small>
 		@endsection
 
 		<p class="text text-danger">

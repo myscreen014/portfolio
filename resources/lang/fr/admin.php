@@ -94,6 +94,7 @@ return [
 
     'pages' => [
         'field' => [
+            'controller'        => "Controller",
             'name'              => "Nom de la page",
             'content'           => "Contenu de page",
             'files'             => "Fichiers de la page",

@@ -13,6 +13,13 @@ class PageForm extends Form
 
     	// Create form
         $this
+        ->add('controller', 'select', array(
+            'label'=>trans('admin.pages.field.controller'),
+            'choices' => array(
+                'pages' => 'Controller pages',
+                'galleries' => 'Controller galerie',
+            )
+        ))
         ->add('name', 'text', array(
             'label'=>trans('admin.pages.field.name')
         ))

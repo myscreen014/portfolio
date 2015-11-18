@@ -132,7 +132,7 @@ class PagesComponent extends Controller
 	public function update($id, PageRequest $request)
 	{
 		$page = PageModel::findOrFail($id);
-		$page->update($request->only('name', 'content'));
+		$page->update($request->only('controller', 'name', 'content'));
 
 		// Get files added for this pages
 		$file = new FileModel();
@@ -144,7 +144,7 @@ class PagesComponent extends Controller
 			'message'=> trans('admin.global.feedback.update.ok'),
 			'type' => 'success'
 		));
-
+		varlog(route('admin.pages.index'));
 		return redirect(route('admin.pages.index'));
 	}
 

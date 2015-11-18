@@ -12,7 +12,7 @@
 */
 
 
-
+use App\Models\PageModel;
 
 /* ADMIN */
 Route::group(['prefix' => 'admin', 'middleware'=> ['auth', 'auth_administrator']], function () {
@@ -44,26 +44,28 @@ Route::group(['prefix' => 'admin', 'middleware'=> ['auth', 'auth_administrator']
 /* SITE */
 Route::get('files/{thumbnail}/{name}',['as' => 'picture', 'uses' => 'Site\FilesController@picture']);
 Route::get('files/{name}',['as' => 'file', 'uses' => 'Site\FilesController@file']);
-
+ 
 // Public
 Route::group(['prefix' => '/', 'middleware'=> 'pages'], function () {
 
-    Route::get('auth/confirmation/{id}/{key}', ['as' => 'auth.confirmation', 'uses' => 'Auth\AuthController@confirmation']);
 
-    /* Authentication routes... */
+    // Authentication routes...
     Route::get('auth/login', 'Auth\AuthController@getLogin');
     Route::post('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
     Route::get('auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 
-    /* Registration routes... */
+    // Registration routes...
     Route::get('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
     Route::post('auth/register', 'Auth\AuthController@postRegister');
     Route::get('auth/register/message', ['as' => 'register.message', 'uses' => 'Auth\AuthController@registerMessage']);
+    Route::get('auth/confirmation/{id}/{key}', ['as' => 'auth.confirmation', 'uses' => 'Auth\AuthController@confirmation']);
     
+    // Pages
     Route::get('',['as' => 'page', 'uses' => 'Site\PagesController@index']);
-	Route::get('{slug?}',['as' => 'page', 'uses' => 'Site\PagesController@index']);
+    PageModel::loadControllersRoutes();
+    Route::get('{slug?}',['as' => 'page', 'uses' => 'Site\PagesController@index']);
+    varlog('Load routes');
+   
 
 });
-
-
 
