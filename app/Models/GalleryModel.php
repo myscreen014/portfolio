@@ -17,7 +17,7 @@ class GalleryModel extends Model
     }
 
     public function pictures() {
-        return $this->hasMany('App\Models\FileModel', 'model_id');
+        return $this->hasMany('App\Models\FileModel', 'id');
     }
 
   	/* Boot */
@@ -26,7 +26,6 @@ class GalleryModel extends Model
         parent::boot();
 
         static::saving(function ($gallery) {
-        	varlog('saving');
             $slugCandidateRoot = str_slug($gallery->name);
             $slugCandidate = $slugCandidateRoot;
             $cmptProposal = 0;

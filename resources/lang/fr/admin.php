@@ -157,7 +157,7 @@ return [
         'action' => [
             'delete'            => "Supprimer cette galerie",
             'save'              => "Enregister cette galerie",
-            'create'            => "Ajouter cette galerie",
+            'create'            => "Ajouter une galerie",
         ],
         'message' => [
             'nocontent'         => "Aucune galerie actuellement.",
@@ -168,6 +168,21 @@ return [
     'galleriescategory' => [
         'field' => [
             'name'              => "Nom de la categorie",
+        ],
+        'title' => [
+            'index'             => "Liste des catégories",
+            'create'            => "Ajout d'une catégorie",
+            'edit'              => "Edition d'une catégorie",
+            'delete'            => "Suppression d'une catégorie",
+        ],
+        'action' => [
+            'delete'            => "Supprimer cette catégorie",
+            'save'              => "Enregister cette catégorie",
+            'create'            => "Ajouter une catégorie",
+        ],
+        'message' => [
+            'nocontent'         => "Aucune catégorie actuellement.",
+            'delete'            => "Êtes-vous certain de vouloir supprimer cette catégorie ?",
         ],
     ],
 

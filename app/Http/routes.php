@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin', 'middleware'=> ['auth', 'auth_administrator']
 
     // Galleries management
     Route::get('galleries/{id}/delete', array('as' => 'admin.galleries.delete', 'uses' => 'Admin\GalleriesComponent@delete'));
+    Route::get('galleries/categories/{id}/delete', array('as' => 'admin.galleries.categories.delete', 'uses' => 'Admin\GalleriesCategoriesComponent@delete'));
     Route::resource('galleries/categories', 'Admin\GalleriescategoriesComponent');
     Route::resource('galleries', 'Admin\GalleriesComponent');
 

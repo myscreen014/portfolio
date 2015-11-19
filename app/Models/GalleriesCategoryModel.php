@@ -12,13 +12,8 @@ class GalleriesCategoryModel extends Model
     protected $fillable = ['category', 'name', 'description'];
 
     /* Relations */
-    public function category() {
+    public function galleries() {
     	return $this->hasMany('App\Models\GalleryModel', 'category_id');
     }
-
-    public function pictures() {
-        return $this->hasMany('App\Models\FileModel', 'model_id');
-    }
-
     
 }

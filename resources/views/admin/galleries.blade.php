@@ -5,47 +5,6 @@
 	@include ('_others.feedbacks')
 	
 	{{-- INDEX --}}
-	@if (Route::currentRouteName() == 'admin.galleries.categories.index')
-
-		@section('title')
-			{{ trans('admin.gallery.title.index') }}
-		@endsection
-
-		@if (count($categories)>0)
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>{{ trans('admin.galleriescategories.field.name') }}</th>
-						<th class="actions"></th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach($categories as $category)
-						<tr>
-							<td>{{ $category->name }}</td>
-							<td class="actions">
-							{{--
-								<a href="{{ route('admin.galleries.edit', [$gallery->id]) }}" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>
-								<a href="{{ route('admin.galleries.delete', [$gallery->id]) }}" class="btn btn-danger btn-xs">{{ trans('admin.global.action.delete') }}</a>
-							--}}
-							</td>
-						</tr>
-					@endforeach	
-				</tbody>
-			</table>
-		@else
-			<div class="alert alert-danger" role="alert">
-				{{ trans('admin.gallery.message.nocontent') }}
-			</div>
-		@endif
-
-		<div class="actions">
-			<a href="{{ route('admin.galleries.create') }}" class="btn btn-success">{{ trans('admin.gallery.action.create') }}</a>
-		</div>
-
-	@endif
-	
-	{{-- INDEX --}}
 	@if (Route::currentRouteName() == 'admin.galleries.index')
 
 		@section('title')

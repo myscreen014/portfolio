@@ -157,6 +157,6 @@ class GalleriesComponent extends Controller
 			'message'=> trans('admin.global.feedback.delete.ok'),
 			'type' => 'success'
 		));
-		return redirect(route('admin.pages.index'));
+		return redirect(route('admin.galleries.index'));
 	}
 }

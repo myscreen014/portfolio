@@ -13,15 +13,15 @@ class PageModel extends Model
 {
     
     protected $table = 'pages';
-    protected $fillable = ['controller', 'name', 'content', 'files'];
+    protected $fillable = ['controller', 'name', 'content'];
 
     /* Relations */
     public function files() {
-    	return $this->hasMany('App\Models\FileModel', 'model_id');
+    	return $this->hasMany('App\Models\FileModel', 'file_id');
     }
 
     public function pictures() {
-        return $this->hasMany('App\Models\FileModel', 'model_id');
+        return $this->hasMany('App\Models\FileModel', 'file_id');
     }
 
      /* Boot */
