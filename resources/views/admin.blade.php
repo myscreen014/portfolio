@@ -24,15 +24,7 @@
 	<body>
 		@section('body')
 
-			{{-- Init variables for views --}}
 
-			@if (isset(Request::segments()[1])) 
-				<?php  $controller = Request::segments()[1] ?>	
-			@else
-				{{{ $controller = NULL }}}	
-			@endif 
-	  		
-	  		{{-- / --}}
 
 			<div id="wrapper">
 
@@ -68,9 +60,21 @@
 					<div class="navbar-default sidebar" role="navigation">
 						<div class="sidebar-nav navbar-collapse">
 							<ul class="nav" id="side-menu">
-								<li><a href="{{ route('admin.index') }}" class="@if ($controller == NULL) active @endif"><i class="fa fa-home"></i>{{ trans('admin.global.component.root') }}</a></li>
-								<li><a href="{{ route('admin.pages.index')}}" class="@if ($controller == 'pages') active @endif"><i class="fa fa-file"></i>{{ trans('admin.global.component.pages') }}</a></li>
-								<li><a href="{{ route('admin.administrators.index')}}" class="@if ($controller == 'administrators') active @endif"><i class="fa fa-users"></i>{{ trans('admin.global.component.administrators') }}</a></li>
+								@foreach(Config::get('administration.components') as $componentName => $componentDefinition)
+									<li class="@if (Request::segments()[1] == $componentName) active @endif">
+										<?php $route =  $componentDefinition['routes']['index']; ?>	
+										<a href="{{ route($route) }}"><i class="fa {{ $componentDefinition['icon'] }}"></i>{{ trans('admin.global.component.'.$componentName.'.index') }}</a>
+										@if (isset($componentDefinition['routes']['children']))
+											<ul class="nav nav-second-level">
+												@foreach($componentDefinition['routes']['children'] as $componentChildName => $componentChildRoute)
+													<li class="@if (Route::current()->getName() == $componentChildRoute) active @endif">
+														<a href="{{ route($componentChildRoute) }}"><i class="fa fa-angle-right"></i>{{ trans('admin.global.component.'.$componentName.'.'.$componentChildName) }}</a>
+													</li>
+												@endforeach
+											</ul>
+										@endif 
+									</li>
+								@endforeach
 							</ul>
 						</div>
 						<!-- /.sidebar-collapse -->

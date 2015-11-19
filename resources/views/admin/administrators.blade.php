@@ -8,15 +8,15 @@
 	@if (Route::currentRouteName() == 'admin.administrators.index')
 
 		@section('title')
-			{{ trans('admin.administrators.title.index') }}
+			{{ trans('admin.administrator.title.index') }}
 		@endsection
 
 		@if (count($administrators)>0)
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>{{ trans('admin.administrators.field.name') }}</th>
-						<th>{{ trans('admin.administrators.field.last_login') }}</th>
+						<th>{{ trans('admin.administrator.field.name') }}</th>
+						<th>{{ trans('admin.administrator.field.last_login') }}</th>
 						<th class="actions"></th>
 					</tr>
 				</thead>
@@ -35,18 +35,20 @@
 			</table>
 		@else
 			<div class="alert alert-danger" role="alert">
-				{{trans('admin.administrators.message.nocontent') }}
+				{{ trans('admin.administrator.message.nocontent') }}
 			</div>
 		@endif
-		<a href="{{ route('admin.administrators.create') }}" class="btn btn-success">{{ trans('admin.administrators.action.add') }}</a>
 
+		<div class="actions">
+			<a href="{{ route('admin.administrators.create') }}" class="btn btn-success">{{ trans('admin.administrator.action.add') }}</a>
+		</div>
 	@endif
 
 	{{-- CREATE --}}
 	@if (Route::currentRouteName() == 'admin.administrators.create')
 
 		@section('title')
-			{{ trans('admin.administrators.title.create') }}
+			{{ trans('admin.administrator.title.create') }}
 		@endsection
 
 		{!! form($form) !!}
@@ -57,7 +59,7 @@
 	@if (Route::currentRouteName() == 'admin.administrators.edit')
 
 		@section('title')
-			{{ trans('admin.administrators.title.edit') }} <small>- {{ $administrator->name }}</small>
+			{{ trans('admin.administrator.title.edit') }} <small>- {{ $administrator->name }}</small>
 		@endsection
 		
 		{!! form($form) !!}
@@ -68,18 +70,19 @@
 	@if (Route::currentRouteName() == 'admin.administrators.delete')
 
 		@section('title')
-			{{ trans('admin.administrators.title.delete') }}
+			{{ trans('admin.administrator.title.delete') }}
 		@endsection
 
 		<p class="text text-danger">
-			{{ trans('admin.administrators.message.delete') }}
+			{{ trans('admin.administrator.message.delete') }}
 		</p>
 
-		{!! Form::model($administrator, array('route' => array('admin.administrators.destroy', $administrator->id), 'method' => 'DELETE')) !!}
-			<a href="{{ route('admin.administrators.index') }}" class="btn btn-default">Retour</a>
-			{!! Form::submit(trans('admin.administrators.action.delete'), ['class'=>'btn btn-danger'] ) !!}
-		{!! Form::close() !!}
-
+		<div class="actions">
+			{!! Form::model($administrator, array('route' => array('admin.administrators.destroy', $administrator->id), 'method' => 'DELETE')) !!}
+				<a href="{{ route('admin.administrators.index') }}" class="btn btn-default">Retour</a>
+				{!! Form::submit(trans('admin.administrator.action.delete'), ['class'=>'btn btn-danger'] ) !!}
+			{!! Form::close() !!}
+		</div>
 	@endif
 
 

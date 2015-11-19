@@ -24,14 +24,14 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">{{ trans('admin.files.title.upload') }}</h4>
+                <h4 class="modal-title">{{ trans('admin.file.title.upload') }}</h4>
             </div>
             <div class="modal-body">
                 <table class="table table-upload">
                     <thead>
                         <tr>
                             <th class="upload-index">#</th>
-                            <th class="upload-name">{{ trans('admin.files.field.name') }}</th>
+                            <th class="upload-name">{{ trans('admin.file.field.name') }}</th>
                             <th class="upload-progress"></th>
                             <th class="upload-status"></th>
                         </tr>
@@ -42,7 +42,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" id="action-upload-cancel" data-dismiss="modal">{{ trans('admin.global.action.close') }}</button>
-                <button type="button" class="btn btn-success" id="action-upload-start">{{ trans('admin.files.action.upload') }}</button>
+                <button type="button" class="btn btn-success" id="action-upload-start">{{ trans('admin.file.action.upload') }}</button>
             </div>
         </div>
     </div>

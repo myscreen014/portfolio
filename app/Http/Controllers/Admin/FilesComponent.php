@@ -112,7 +112,7 @@ class FilesComponent extends Controller {
 					'url' => route('admin.files.update', $id),
 		            'model' => $file
 				)
-	        )->add(trans('admin.files.action.save'), 'submit', ['attr' => ['class' => 'btn btn-primary']]);
+	        )->add(trans('admin.file.action.save'), 'submit', ['attr' => ['class' => 'btn btn-primary']]);
 
 	        return (new Response(form($form), 200));
 	    } else {
@@ -157,7 +157,7 @@ class FilesComponent extends Controller {
    				'tag' => 'p',
    				'label_attr' => ['class' => 'hidden'],
     			'attr' => ['class' => 'text-danger'],
-    			'value' => trans('admin.files.message.delete')
+    			'value' => trans('admin.file.message.delete')
 			])->add(trans('admin.global.action.delete'), 'submit', ['attr' => ['class' => 'btn btn-danger']]);
 		    return (new Response(form($form), 200));
 		} else {

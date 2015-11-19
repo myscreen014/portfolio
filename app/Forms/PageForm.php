@@ -1,4 +1,6 @@
-<?php namespace App\Forms;
+<?php 
+
+namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
 
@@ -14,21 +16,22 @@ class PageForm extends Form
     	// Create form
         $this
         ->add('controller', 'select', array(
-            'label'=>trans('admin.pages.field.controller'),
+            'label'=>trans('admin.page.field.controller'),
             'choices' => array(
                 'pages' => 'Controller pages',
                 'galleries' => 'Controller galerie',
             )
         ))
         ->add('name', 'text', array(
-            'label'=>trans('admin.pages.field.name')
+            'label'=>trans('admin.page.field.name')
         ))
         ->add('content', 'textarea', array(
-            'label'=>trans('admin.pages.field.content'),
+            'label'=>trans('admin.page.field.content'),
             'attr' => array('class' => 'form-control wysiwyg')
         ))
         ->add('pictures', 'files', 
             array(
+                'label'=>trans('admin.page.field.pictures'),
                 'dropzone_acceptedFiles' => 'image/*',
                 'model_table' => $this->getData('model_table'),
                 'model_field' => 'pictures',
@@ -37,6 +40,7 @@ class PageForm extends Form
         )
         ->add('files', 'files', 
             array(
+                'label'=>trans('admin.page.field.files'),
                 'dropzone_acceptedFiles' => 'application/*, text/*, audio/*',
                 'model_table' => $this->getData('model_table'),
                 'model_field' => 'files',

@@ -18,7 +18,6 @@ class PagesMiddleware
      */
     public function handle($request, Closure $next)
     {
-        varlog('pages');
         $pages = PageModel::all();
         View::share('pages', $pages);
         return $next($request);

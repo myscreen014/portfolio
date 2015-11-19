@@ -18,9 +18,5 @@ class GalleriesController extends Controller
     	return view('site.galleries');
     }
 
-    public function boom($test='hop') {
-    	
-    }
-
 
 }

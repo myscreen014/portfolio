@@ -52,7 +52,7 @@ class AdministratorsComponent extends Controller
 				'model' => $administrator
 			), 
 			array()
-		)->add(trans('admin.administrators.action.create'), 'submit', array(
+		)->add(trans('admin.administrator.action.create'), 'submit', array(
 			'attr' => array('class' => 'btn btn-success'),
 			'wrapper' => array('class' => 'form-group actions'),
 			'others_actions' => array(
@@ -104,7 +104,7 @@ class AdministratorsComponent extends Controller
 				'url' => route('admin.administrators.update', $id),
 				'model' => $administrator
 			)
-		)->remove('password')->remove('password_confirmation')->add(trans('admin.administrators.action.update'), 'submit', array(
+		)->remove('password')->remove('password_confirmation')->add(trans('admin.administrator.action.update'), 'submit', array(
 			'attr' => array('class' => 'btn btn-primary'),
 			'wrapper' => array('class' => 'form-group actions'),
 			'others_actions' => array(
@@ -146,7 +146,7 @@ class AdministratorsComponent extends Controller
 	public function delete($id) {
 		if (Auth::user()->id == $id) {
 			Session::flash('feedback', array(
-				'message'=> trans('admin.administrators.feedback.delete.suicide'),
+				'message'=> trans('admin.administrator.feedback.delete.suicide'),
 				'type' => 'warning'
 			));
 			return redirect(route('admin.administrators.index'));

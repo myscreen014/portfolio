@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class PageRequest extends Request
+class GalleryRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class PageRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required',
-            'content' => 'required'
+            'category_id'   => 'required',
+            'name'          => 'required',
+            'description'   => 'required'
         ];
     }
 }

@@ -15,10 +15,20 @@ return [
             'name'              => 'Abarth'
         ],
         'component' => [
-            'root'              => 'Accueil',
-            'pages'             => 'Pages',
-            'administrators'    => 'Administrateurs',
-            'files'             => 'Fichiers',
+            'root'              => [
+                'index'         => 'Accueil',
+            ],
+            'pages'             => [
+                'index'         => 'Pages',
+            ],
+            'galleries'         => [
+                'index'         => 'Galeries',
+                'galleries'     => 'Gestion des galeries',
+                'categories'    => 'Gestion des catégories'
+            ],
+            'administrators'    => [
+                'index'         => 'Administrateurs',
+            ]
         ],
         'feedback' => [
             'update' => [
@@ -43,7 +53,15 @@ return [
         ]
     ],
 
-    'administrators' => [
+     /*
+    |--------------------------------------------------------------------------
+    | Models
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
+    'administrator' => [
         'field' => [
             'name'              => "Nom",
             'last_login'        => "Dernière connexion",
@@ -70,7 +88,7 @@ return [
         ],
     ],
 
-    'users' => [
+    'user' => [
         'field' => [
             'name'              => "Nom",
             'email'             => "Email",
@@ -92,7 +110,7 @@ return [
         
     ],
 
-    'pages' => [
+    'page' => [
         'field' => [
             'controller'        => "Controller",
             'name'              => "Nom de la page",
@@ -107,6 +125,7 @@ return [
             'delete'            => "Suppression d'une page",
         ],
         'action' => [
+            'delete'            => "Supprimer cette page",
             'save'              => "Enregister cette page",
             'create'            => "Ajouter cette page",
         ],
@@ -117,7 +136,42 @@ return [
         
     ],
 
-    'files' => [
+    'gallery' => [
+        'field' => [
+            'category'          => "Catégory de la galerie",
+            'name'              => "Nom de la galerie",
+            'content'           => "Contenu de la galerie",
+            'pictures'          => "Photos de la galerie",
+        ],
+        'label' => [
+            'category' => [
+                'select'        => "== Sélectionner une catégorie =="
+            ]
+        ],
+        'title' => [
+            'index'             => "Liste des galeries",
+            'create'            => "Ajout d'une galerie",
+            'edit'              => "Edition d'une galerie",
+            'delete'            => "Suppression d'une galerie",
+        ],
+        'action' => [
+            'delete'            => "Supprimer cette galerie",
+            'save'              => "Enregister cette galerie",
+            'create'            => "Ajouter cette galerie",
+        ],
+        'message' => [
+            'nocontent'         => "Aucune galerie actuellement.",
+            'delete'            => "Êtes-vous certain de vouloir supprimer cette galerie ?",
+        ],
+    ],
+
+    'galleriescategory' => [
+        'field' => [
+            'name'              => "Nom de la categorie",
+        ],
+    ],
+
+    'file' => [
         'field' => [
             'name'              => "Nom du fichier",
             'legend'            => "Légende du fichier",

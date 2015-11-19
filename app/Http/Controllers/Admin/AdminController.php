@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+/* My uses */
+use Illuminate\Support\Facades\Config;
+
 class AdminController extends Controller
 {
     /**
@@ -15,8 +18,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        
-        return view('admin.index');
+        $components = Config::get('administration.components');
+        $firstComponent = array_shift($components);
+        return redirect(route($firstComponent['routes']['index']));
     }
 
    

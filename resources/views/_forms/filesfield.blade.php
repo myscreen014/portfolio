@@ -1,12 +1,12 @@
 
 <div class="form-group">
 
-	<label for="">{{ trans('admin.pages.field.'.$name) }}</label>
+	<label for="{{ $name }}">{{ $options['label'] }}</label>
 	<input class="form-control" name="{{ $name }}_new" id="{{ $name }}_new" value="{{ Request::old($name.'_new') }}" type="hidden" />
 
 	<div id="{{ $name }}" class="panel panel-default clearfix filebrowser dropzone">
 		<div class="panel-heading text-right">
-			<span class="label label-info">{!! trans('admin.files.label.count.short', array('count' => count($options['value']))) !!}</span>
+			<span class="label label-info">{!! trans('admin.file.label.count.short', array('count' => count($options['value']))) !!}</span>
 		</div>
   		<div class="panel-body">
   			<ul id="{{ $name }}-files-container" class="files clearfix">
@@ -69,9 +69,9 @@
 			var fileId = button.parents('li').attr('data-file-id');
 			Admin.Modal.ajaxForm({
 				'url' : $(this).attr('data-url-edit'),
-				'title' : "{{ trans('admin.files.title.edit') }}",
-				'messageSuccess': "{{ trans('admin.files.feedback.update.ok') }}",
-				'messageError': "{{ trans('admin.files.feedback.update.error') }}",
+				'title' : "{{ trans('admin.file.title.edit') }}",
+				'messageSuccess': "{{ trans('admin.file.feedback.update.ok') }}",
+				'messageError': "{{ trans('admin.file.feedback.update.error') }}",
 				callbackSuccess: function() {
 					refreshFile('{{ $name }}', fileId);
 				}
@@ -82,9 +82,9 @@
 			var fileId = button.parents('li').attr('data-file-id');
 			Admin.Modal.ajaxForm({
 				'url' : $(this).attr('data-url-delete'),
-				'title' : "{{ trans('admin.files.title.delete') }}",
-				'messageSuccess': "{{ trans('admin.files.feedback.delete.ok') }}",
-				'messageError': "{{ trans('admin.files.feedback.delete.error') }}",
+				'title' : "{{ trans('admin.file.title.delete') }}",
+				'messageSuccess': "{{ trans('admin.file.feedback.delete.ok') }}",
+				'messageError': "{{ trans('admin.file.feedback.delete.error') }}",
 				callbackSuccess: function() {
 					Admin.removeFromSerializedField('{{ $name }}_new', fileId);
 					button.parents('li').remove();
@@ -110,8 +110,8 @@
 	  		previewsContainer: '#{{ $name }}-files-container',
 	  		previewTemplate: '<div style="display:none"></div>',
 
-	  		dictResponseError: "{{ trans('admin.files.label.status.error') }}",
-	  		dictInvalidFileType: "{{ trans('admin.files.label.status.unaccepted') }}",
+	  		dictResponseError: "{{ trans('admin.file.label.status.error') }}",
+	  		dictInvalidFileType: "{{ trans('admin.file.label.status.unaccepted') }}",
 	  		
 	  		uploadMultiple: false,
 		  	init: function() {
@@ -148,7 +148,7 @@
 						files[i]['id'] = (i+1);
 						if (i > dropzone.options.maxFiles-1) { break; }
 						modalBodyTable.append(
-							'<tr id="upload-file-'+files[i]['id']+'"><th scope="row">'+(i+1)+'</th><td class="upload-name"><span class="overflow">'+files[i]['name']+'</span></td><td class="upload-progress"><div class="progress"><div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div></div></td><td class="text-center upload-status"><span class="label label-info">{{ trans("admin.files.label.status.pending") }}</span></td></tr>'
+							'<tr id="upload-file-'+files[i]['id']+'"><th scope="row">'+(i+1)+'</th><td class="upload-name"><span class="overflow">'+files[i]['name']+'</span></td><td class="upload-progress"><div class="progress"><div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div></div></td><td class="text-center upload-status"><span class="label label-info">{{ trans("admin.file.label.status.pending") }}</span></td></tr>'
 						);
 					};
   				});
@@ -175,7 +175,7 @@
 			  	this.on('success', function(file, response)  {
 			  		var lineUpload = $('#upload-file-'+file['id']);
 			  		var labelStatus = lineUpload.find('.upload-status .label').removeClass('label-info');
-			  		labelStatus.addClass('label-success').html("{{ trans('admin.files.label.status.success') }}");
+			  		labelStatus.addClass('label-success').html("{{ trans('admin.file.label.status.success') }}");
 			  		var fileId = response['file']['id'];
 			  		$.ajax({
 		  				url: "{{ route('admin.files.getitemfilebrowser') }}",
