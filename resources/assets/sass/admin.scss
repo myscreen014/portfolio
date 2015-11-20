@@ -127,7 +127,7 @@ table {
 form {
 	.form-group {
 		&.form-group-wysiwyg {
-			height: 300px;
+			min-height: 300px;
 		}
 		.filebrowser {
 			&.dz-drag-hover {

@@ -9,7 +9,8 @@ use Kris\LaravelFormBuilder\Form;
 class PageForm extends Form
 {
 
-
+    /* lazy fields */
+    
     public function buildForm()
     {
 
