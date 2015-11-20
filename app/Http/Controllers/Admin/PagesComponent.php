@@ -28,7 +28,7 @@ class PagesComponent extends Controller
 	{
 	
 		$page = new PageModel;
-		$pages = $page->get();
+		$pages = $page->orderBy('ordering', 'ASC')->get();
 		return view($this->defaultView, array('pages' => $pages));
 	}
 

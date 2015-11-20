@@ -26,7 +26,7 @@ class GalleriesComponent extends Controller
 	public function index() 
 	{
 		$gallery = new GalleryModel;
-		$galleries = $gallery->with('category')->get();
+		$galleries = $gallery->orderBy('ordering', 'ASC')->with('category')->get();
 		return view($this->defaultView, array('galleries' => $galleries));
 	}
 

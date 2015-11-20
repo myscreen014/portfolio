@@ -44,6 +44,10 @@ Route::group(['prefix' => 'admin', 'middleware'=> ['auth', 'auth_administrator']
     Route::delete('files/{id}/destroy',['as' => 'admin.files.destroy', 'uses' => 'Admin\FilesComponent@destroyAjax']);
  	Route::post('files/store',['as' => 'admin.files.store', 'uses' => 'Admin\FilesComponent@store']);
 
+
+    // Models management
+     Route::post('models/reorder',['as' => 'admin.models.reorder', 'uses' => 'Admin\ModelsController@reorderAjax']);
+
 });
  
 
