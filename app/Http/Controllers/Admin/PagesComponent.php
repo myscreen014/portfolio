@@ -13,26 +13,22 @@ use App\Helpers;
 use App\Models\PageModel;
 use App\Models\FileModel;
 use App\Http\Requests\PageRequest;
-use App\Forms\PageForm;
 use DB;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\Session;
 
 
-class PagesComponent extends LazyComponent
+class PagesComponent extends Controller
 {
 
 	private $defaultView = 'admin.pages';
 
-<<<<<<< HEAD
-	public function configure() {
-=======
 	
 	public function index()
 	{
 	
 		$page = new PageModel;
-		$pages = $page->get();
+		$pages = $page->orderBy('ordering', 'ASC')->get();
 		return view($this->defaultView, array('pages' => $pages));
 	}
 
@@ -81,43 +77,93 @@ class PagesComponent extends LazyComponent
 		// Get files added for this pages
 		$file = new FileModel();
 		$files = $file->whereIn('id', explode(',', $request->input('files_new')))->get();
->>>>>>> parent of 736aa62... Add reorder items models
 
-		$this->lazyConfig = array(
+		// Save relation
+		$page->files()->saveMany($files);
 
-			/* global */
-			'componentName'	=> 'pages',
-			'modelName' 	=> 'page',
+		return redirect(route('admin.pages.index'));
+	}
+	
+	public function edit($id, Request $request, FormBuilder $formBuilder)
+	{
 
-			/* request */
-			'request'		=> new PageRequest(),
+		$page = new PageModel;
+		$page = $page->with(array(
+			'files' => function($query) {
+				$query->OfOrder()->where('model_field', 'files');
+			}
+		))->with(array(
+			'pictures' => function($query) {
+				$query->OfOrder()->where('model_field', 'pictures');
+			}
+		))->findOrFail($id);
 
-			/* form */
-			'form'			=> new PageForm(),
+		$page->pictures = $page->pictures->merge(FileModel::whereIn('id', explode(',', $request->old('pictures_new')))->get());
+		$page->files = $page->files->merge(FileModel::whereIn('id', explode(',', $request->old('files_new')))->get());
 
-			/* joins */
-			'width'			=> array(
-				'pictures' => function($query) {
-					$query->OfOrder()->where('model_field', 'pictures');
-				}, 
-				'files' => function($query) {
-					$query->OfOrder()->where('model_field', 'files');
-				},
-			),
-
-			/* fields File */
-			'fieldsFile' => array(
-				'pictures', 'files'
-			),
-
-			/* list */
-			'list'			=> array(
-				'fields'	=> array(
-					'id', 'name'
-				)
+		$form = $formBuilder->create(
+			'App\Forms\PageForm',
+			array(
+				'method' => 'PUT',
+				'url' => route('admin.pages.update', $id),
+				'model' => $page
+			), 
+			array(
+				'model_table'=> $page->getTable(),
+				'model_id'=> $page->id
 			)
-
-		);
+		)->add(trans('admin.page.action.save'), 'submit', array(
+            'attr' => array('class' => 'btn btn-primary'),
+            'wrapper' => array('class' => 'form-group actions'),
+            'others_actions' => array(
+                'back' => array(
+                    'value' => trans('admin.global.action.back'), 
+                    'class' => 'btn-default',
+                    'url' => route('admin.pages.index')
+                )
+            )
+        ));
+		return view($this->defaultView,  array(
+			'page' => $page,
+			'form' => $form
+		));
 	}
 
+
+	public function update($id, PageRequest $request)
+	{
+		$page = PageModel::findOrFail($id);
+		$page->update($request->only('controller', 'name', 'content'));
+
+		// Get files added for this pages
+		$file = new FileModel();
+		$files = $file->whereIn('id', explode(',', $request->input('files_new')))->get();
+
+		// Save relation
+		$page->files()->saveMany($files);
+		Session::flash('feedback', array(
+			'message'=> trans('admin.global.feedback.update.ok'),
+			'type' => 'success'
+		));
+
+		return redirect(route('admin.pages.index'));
+	}
+
+	public function delete($id) {
+		$page = PageModel::findOrFail($id);
+		return view($this->defaultView,  array(
+			'page' => $page
+		));
+	}
+
+	public function destroy($id)
+	{
+		$page = PageModel::findOrFail($id);
+		$page->delete();
+		Session::flash('feedback', array(
+			'message'=> trans('admin.global.feedback.delete.ok'),
+			'type' => 'success'
+		));
+		return redirect(route('admin.pages.index'));
+	}
 }
