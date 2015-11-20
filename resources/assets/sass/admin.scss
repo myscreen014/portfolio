@@ -111,6 +111,9 @@ table {
 -----------------------------------------------------------------------------------------*/
 form {
 	.form-group {
+		&.form-group-wysiwyg {
+			height: 300px;
+		}
 		.filebrowser {
 			&.dz-drag-hover {
 				background-color: #eee;

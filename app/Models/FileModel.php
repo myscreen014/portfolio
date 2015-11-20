@@ -18,7 +18,7 @@ class FileModel extends Model
 
 	protected $table = 'files';
 	protected $dates = ['deleted_at'];
-	protected $fillable = array('name', 'legend', 'path', 'type', 'ordering');
+	protected $fillable = array('name', 'title', 'legend', 'path', 'type', 'ordering');
 
 	/* Boot  */
 	public static function boot() {   

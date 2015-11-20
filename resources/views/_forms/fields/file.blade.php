@@ -8,7 +8,13 @@
 			@endif
 		</span>
 		<span class="file-infos">
-			<strong class="file-name overflow">{{ $file->name }}</strong>
+			<strong class="file-name overflow">
+				@if (isset($file->title) && !empty($file->title))
+					{{ $file->title }}
+				@else
+					{{ $file->name }}
+				@endif 
+			</strong>
 			<small class="file-type overflow">{{ $file->type }}</small>
 			<p class="file-legend text-muted"><small>{{ str_limit($file->legend, 100) }}</small></p>
 		</span>

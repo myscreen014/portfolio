@@ -26,7 +26,8 @@ class PageForm extends Form
             'label'=>trans('admin.page.field.name')
         ))
         ->add('content', 'textarea', array(
-            'label'=>trans('admin.page.field.content'),
+            'wrapper' => ['class' => 'form-group form-group-wysiwyg'],
+            'label'=> trans('admin.page.field.content'),
             'attr' => array('class' => 'form-control wysiwyg')
         ))
         ->add('pictures', 'files', 

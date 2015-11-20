@@ -20,7 +20,7 @@ class GalleriesCategoryForm extends Form
             'label'=> trans('admin.galleriescategory.field.name')
         ))
         ->add('description', 'textarea', array(
-            'label'=>trans('admin.galleriescategory.field.content'),
+            'label'=>trans('admin.galleriescategory.field.description'),
             'attr' => array('class' => 'form-control wysiwyg')
         ));
     }

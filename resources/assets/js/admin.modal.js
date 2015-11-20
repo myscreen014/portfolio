@@ -50,7 +50,7 @@ $.extend(Admin, {
   				success: function(response) {
   					var file = jQuery.parseJSON(response['values']);
   					var route = response['route'];
-  					modalTitle.html(file['name']);
+  					modalTitle.html((file['title']!='')?file['title']:file['name'];);
   					modalBody.html('<img src="'+route+'" />');	
   				}
   			});

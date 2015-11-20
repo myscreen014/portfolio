@@ -33,9 +33,7 @@ class GalleriesCategoriesComponent extends Controller
 	{
 
 		$category = new GalleriesCategoryModel;
-		$category->pictures = FileModel::where('model_field', 'pictures')->whereIn('id', explode(',', $request->old('pictures_new')))->get();
-
-	   
+	
 		$form = $formBuilder->create(
 			'App\Forms\GalleriesCategoryForm', 
 			array(

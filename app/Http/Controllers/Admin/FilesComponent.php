@@ -110,6 +110,7 @@ class FilesComponent extends Controller {
 	            array(
 					'method' => 'PUT',
 					'url' => route('admin.files.update', $id),
+					'template' => '_forms.forms.file',
 		            'model' => $file
 				)
 	        )->add(trans('admin.file.action.save'), 'submit', ['attr' => ['class' => 'btn btn-primary']]);
@@ -126,7 +127,7 @@ class FilesComponent extends Controller {
 	        return (new Response(
 	        	array(
 	        		'values' => $file->toJson(),
-	        		'route' => route('picture', array('modal', $file->name))	
+	        		'route' => route('picture', array('show', $file->name))	
 	        ), 200));
 	    } else {
 	    	return (new Response(NULL, 403));
@@ -136,7 +137,7 @@ class FilesComponent extends Controller {
 	public function updateAjax($id, Request $request) {
     	if ($request->ajax()) {
 	        $file = FileModel::findOrFail($id);
-	        $file->update($request->only('legend'));
+	        $file->update($request->only('title', 'legend'));
 	        return (new Response(NULL, 200));
 	    } else {
 	    	return (new Response(NULL, 403));
@@ -193,7 +194,7 @@ class FilesComponent extends Controller {
     public function getitemfilebrowserAjax(Request $request) {
     	if ($request->ajax()) {
     		$file = FileModel::findOrFail($request->input('file_id'));
-    		return view('_forms.itemfilesfield', array('file' => $file));
+    		return view('_forms.fields.file', array('file' => $file));
     	}
     	return (new Response('fileId', 200));
     }

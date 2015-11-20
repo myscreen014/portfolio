@@ -39,7 +39,7 @@
 		@endif
 
 		<div class="actions">			
-			<a href="{{ route('admin.pages.create') }}" class="btn btn-success">{{ trans('admin.page.action.create') }}</a>
+			<a href="{{ route('admin.pages.create') }}" class="btn btn-success">{{ trans('admin.page.action.add') }}</a>
 		</div>
 
 	@endif

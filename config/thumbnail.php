@@ -16,22 +16,18 @@ return [
 	'thumbnails' => [
 
 		/* Admin */
-
 		'filebrowser' => [
 			'filters' => [
 				'fit' =>  [80,80]
 			],
 			'quality' => 100
 		],
-
-		'small'       => [
+		'edit' => [
 			'filters' => [
-				'fit' =>  [40,40]
-			],
-			'quality' => 40
+				'max' =>  [180,168]
+			]
 		],
-
-		'modal' => [
+		'show' => [
 			'filters' => [
 				'max' =>  [600,400]
 			]

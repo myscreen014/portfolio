@@ -26,9 +26,7 @@
 							<td>{{ $category->name }}</td>
 							<td class="actions">
 								<a href="{{ route('admin.galleries.categories.edit', [$category->id]) }}" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>
-								
 								<a href="{{ route('admin.galleries.categories.delete', [$category->id]) }}" class="btn btn-danger btn-xs @if (count($category->galleries)>0) disabled @endif>"> {{ trans('admin.global.action.delete') }}</a>
-								
 							</td>
 						</tr>
 					@endforeach	
@@ -41,7 +39,7 @@
 		@endif
 
 		<div class="actions">
-			<a href="{{ route('admin.galleries.categories.create') }}" class="btn btn-success">{{ trans('admin.galleriescategory.action.create') }}</a>
+			<a href="{{ route('admin.galleries.categories.create') }}" class="btn btn-success">{{ trans('admin.galleriescategory.action.add') }}</a>
 		</div>
 
 	@endif

@@ -17,11 +17,11 @@ class PageModel extends Model
 
     /* Relations */
     public function files() {
-    	return $this->hasMany('App\Models\FileModel', 'file_id');
+    	return $this->hasMany('App\Models\FileModel', 'model_id');
     }
 
     public function pictures() {
-        return $this->hasMany('App\Models\FileModel', 'file_id');
+        return $this->hasMany('App\Models\FileModel', 'model_id');
     }
 
      /* Boot */

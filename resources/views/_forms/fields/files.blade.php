@@ -13,7 +13,7 @@
   				<p class="dz-message" style="{{ (isset($options['value']) && count($options['value'])>0) ? 'display: none' : '' }}">{{ trans('admin.global.message.upload_file_here') }}</p>
 				@if (isset($options['value']))
 					@forelse($options['value'] as $file)
-						@include('_forms.itemfilesfield', ['file' => $file])
+						@include('_forms.fields.file', ['file' => $file])
 					@empty
 					@endforelse
 				@endif
@@ -38,9 +38,6 @@
       		create: function() {
       			heightInitContainer = $(this).height();
       			$(this).height(heightInitContainer);
-      		},
-      		update: function() {
-      			console.log('update');
       		},
       		start: function(event, ui){
       			$(this).height(heightInitContainer);

@@ -10,7 +10,7 @@ class FilesType extends FormField {
         // and if fails falls back to loading view
         // resources/views/fields/datetime.blade.php
         
-        return '_forms.filesfield';
+        return '_forms.fields.files';
 
     }
 

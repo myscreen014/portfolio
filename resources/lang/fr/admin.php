@@ -125,6 +125,7 @@ return [
             'delete'            => "Suppression d'une page",
         ],
         'action' => [
+            'add'               => "Ajouter une page",
             'delete'            => "Supprimer cette page",
             'save'              => "Enregister cette page",
             'create'            => "Ajouter cette page",
@@ -155,9 +156,10 @@ return [
             'delete'            => "Suppression d'une galerie",
         ],
         'action' => [
+            'add'               => "Ajouter une galerie",
             'delete'            => "Supprimer cette galerie",
             'save'              => "Enregister cette galerie",
-            'create'            => "Ajouter une galerie",
+            'create'            => "Ajouter cette galerie",
         ],
         'message' => [
             'nocontent'         => "Aucune galerie actuellement.",
@@ -168,6 +170,7 @@ return [
     'galleriescategory' => [
         'field' => [
             'name'              => "Nom de la categorie",
+            'description'       => "Description de la categorie",
         ],
         'title' => [
             'index'             => "Liste des catégories",
@@ -176,6 +179,7 @@ return [
             'delete'            => "Suppression d'une catégorie",
         ],
         'action' => [
+            'add'               => "Ajouter une catégorie",
             'delete'            => "Supprimer cette catégorie",
             'save'              => "Enregister cette catégorie",
             'create'            => "Ajouter une catégorie",
@@ -189,6 +193,7 @@ return [
     'file' => [
         'field' => [
             'name'              => "Nom du fichier",
+            'title'             => "Titre du fichier",
             'legend'            => "Légende du fichier",
         ],
         'title' => [
@@ -198,8 +203,9 @@ return [
             'upload'            => "Upload de fichiers",
         ],
         'label' => [
+            'preview'           => "Aperçu",
             'thead' => [
-                'thumbnail'   => "Miniature",
+                'thumbnail'     => "Miniature",
                 'name_legend'   => "Nom et légende"
             ],
             'status' => [

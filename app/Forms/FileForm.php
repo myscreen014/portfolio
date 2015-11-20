@@ -12,7 +12,15 @@ class FileForm extends Form
     	
     	// Create form
         $this
-        ->add('legend', 'textarea', array('label'=>trans('admin.file.field.legend')));
+        ->add('title', 'text', array(
+        	'label'=> trans('admin.file.field.title')
+        ))
+        ->add('legend', 'textarea', array(
+        	'label'=> trans('admin.file.field.legend'),
+        	'attr' => array(
+        		'rows' => 4
+        	)
+        ));
 
     }
 }
