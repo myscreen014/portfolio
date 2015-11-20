@@ -13,7 +13,7 @@
 		@endsection
 
 		@if (count($pages)>0)
-			<table class="table table-hover sortable" data-model="page">
+			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th>{{ trans('admin.page.field.name') }}</th>
@@ -22,7 +22,7 @@
 				</thead>
 				<tbody>
 					@foreach($pages as $page)
-						<tr data-item-id="{{ $page->id }}">
+						<tr>
 							<td>{{ $page->name }}</td>
 							<td class="actions">
 								<a href="{{ route('admin.pages.edit', [$page->id]) }}" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>

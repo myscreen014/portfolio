@@ -30,7 +30,6 @@
 
 	
 		/* Sortable - JQuery UI */
-		console.log('boom');
 		var heightInitContainer = null;
     	var containerSortable = $( "#{{ $name }}-files-container").sortable({
       		placeholder: "ui-state-highlight dz-details file col-md-6 col-lg-4",  
@@ -51,12 +50,11 @@
     				filesIds.push($(files[i]).attr('data-file-id'));
     			};
     			$.ajax({
-	  				url: Admin.configGet('route_reorder'),
+	  				url: "{{ route('admin.files.reorder') }}",
 	  				method: 'POST',
 	  				data: {
-	  					'_token' : Admin.configGet('csrf_token'),
-	  					'model'	: "file",
-	  					'itemsIds': filesIds
+	  					'_token' : "{{ csrf_token() }}",
+	  					'filesIds': filesIds
 	  				}
 	  			});
     		}

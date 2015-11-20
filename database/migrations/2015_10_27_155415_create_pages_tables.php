@@ -18,7 +18,6 @@ class CreatePagesTables extends Migration
             $table->string('controller');
             $table->string('name');
             $table->text('content');
-            $table->integer('ordering')->nullable();
             $table->timestamps();
         });
     }

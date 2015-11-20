@@ -119,10 +119,6 @@
 			@section('javascript')
 				<script>
 					Admin.init();
-					Admin.configInit({
-						'csrf_token' : "{{ csrf_token() }}",
-						'route_reorder' : "{{ route('admin.models.reorder') }}"
-					});
 				</script>
 			@show
 				
