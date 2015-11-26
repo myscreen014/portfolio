@@ -5,7 +5,9 @@
 <?php if ($showFields): ?>
     <?php foreach ($fields as $field): ?>
     	<?php if( ! in_array($field->getName(), $exclude) ) { ?>
-        	<?= $field->render() ?>
+    		<div class="form-field form-field-<?= $field->getName() ?>">
+        		<?= $field->render() ?>
+       		</div>
 		<?php } ?>
     <?php endforeach; ?>
 <?php endif; ?>

@@ -12,7 +12,7 @@
 		@endsection
 
 		@if (count($galleries)>0)
-			<table class="table table-striped">
+			<table class="table table-striped sortable" data-model="gallery">
 				<thead>
 					<tr>
 						<th>{{ trans('admin.gallery.field.name') }}</th>
@@ -22,7 +22,7 @@
 				</thead>
 				<tbody>
 					@foreach($galleries as $gallery)
-						<tr>
+						<tr data-item-id="{{ $gallery->id }}">
 							<td>{{ $gallery->name }}</td>
 							<td>{{ $gallery->category->name }}</td>
 							<td class="actions">

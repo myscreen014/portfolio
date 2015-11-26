@@ -12,7 +12,7 @@
 		@endsection
 
 		@if (count($categories)>0)
-			<table class="table table-striped">
+			<table class="table table-striped sortable" data-model="galleriescategory">
 				<thead>
 					<tr>
 						<th>{{ trans('admin.galleriescategory.field.name') }}</th>
@@ -22,7 +22,7 @@
 				<tbody>
 
 					@foreach($categories as $category)
-						<tr>
+						<tr data-item-id="{{ $category->id }}">
 							<td>{{ $category->name }}</td>
 							<td class="actions">
 								<a href="{{ route('admin.galleries.categories.edit', [$category->id]) }}" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>

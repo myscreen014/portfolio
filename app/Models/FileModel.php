@@ -71,9 +71,7 @@ class FileModel extends Model
 	}
 
 	/* Relations */
-	public function page() {
-		return $this->belongsTo('App\Models\PageModel', 'model_id');
-	}
+	// No relations here, I don't want get owner of file
 
 	/* Methods */
 	public function isPicture() {

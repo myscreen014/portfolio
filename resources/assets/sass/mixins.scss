@@ -1,4 +1,11 @@
 /* CSS3 Mixins */
+@mixin blur($blur) {
+	-webkit-filter: blur($blur);
+	-moz-filter: blur($blur);
+	-o-filter: blur($blur);
+	-ms-filter: blur($blur);
+	filter: blur($blur);
+}
 @mixin bg-linear-gradient($from, $to: #ffffff, $fallback: $from) {
 	@if $from == none {
 		background-color: transparent;

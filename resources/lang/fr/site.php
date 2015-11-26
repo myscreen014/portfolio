@@ -11,7 +11,16 @@ return [
 	*/
 
 	'global' => [
-	
+		'name' 					=> "Aline photo",
+		'copyright'				=> "Copyright © :year :name",
+		'action' => [
+            'back'              =>  'Retour',
+            'close'             =>  'Fermer',
+            'edit'              =>  'Éditer',
+            'show'              =>  'Afficher',
+            'save'              =>  'Enregistrer',
+            'delete'            =>  'Supprimer',
+        ]
 	],
 
 

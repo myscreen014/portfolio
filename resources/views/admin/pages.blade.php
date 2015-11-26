@@ -13,7 +13,7 @@
 		@endsection
 
 		@if (count($pages)>0)
-			<table class="table table-striped">
+			<table class="table table-hover sortable" data-model="page">
 				<thead>
 					<tr>
 						<th>{{ trans('admin.page.field.name') }}</th>
@@ -22,7 +22,7 @@
 				</thead>
 				<tbody>
 					@foreach($pages as $page)
-						<tr>
+						<tr data-item-id="{{ $page->id }}">
 							<td>{{ $page->name }}</td>
 							<td class="actions">
 								<a href="{{ route('admin.pages.edit', [$page->id]) }}" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>
@@ -89,6 +89,23 @@
 
 	@endif
 
+
+@endsection
+
+@section('javascript')
+
+	@parent
+
+	<script type="text/javascript">
+		$('select#controller').bind('change', function() {
+			if ($(this).val() != 'pages') {
+				$('.form-field:not(.form-field-actions)').hide();
+				$('.form-field-name, .form-field-controller').show();
+			} else {
+				$('.form-field').show();
+			} 
+		}).trigger('change');
+	</script>
 
 @endsection
 

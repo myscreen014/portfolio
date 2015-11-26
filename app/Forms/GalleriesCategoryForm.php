@@ -22,6 +22,15 @@ class GalleriesCategoryForm extends Form
         ->add('description', 'textarea', array(
             'label'=>trans('admin.galleriescategory.field.description'),
             'attr' => array('class' => 'form-control wysiwyg')
-        ));
+        ))
+        ->add('pictures', 'files', 
+            array(
+                'label'=>trans('admin.galleriescategory.field.pictures'),
+                'dropzone_acceptedFiles' => 'image/*',
+                'model_table' => $this->getData('model_table'),
+                'model_field' => 'pictures',
+                'model_id' => $this->getData('model_id'),
+            )
+        );
     }
 }

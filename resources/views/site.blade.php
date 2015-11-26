@@ -9,67 +9,69 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<link rel="icon" href="../../favicon.ico">
-
-		<title>Starter Template for Bootstrap</title>
-
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
-
+		<title>{{ trans('site.global.name') }}</title>
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="{{ elixir('css/site.all.css') }}">
 	</head>
 
-	<body style="padding-top: 80px;">
-		@section('body')
-		
-			<nav class="navbar navbar-default navbar-fixed-top">
-				<div class="container">
-					<div class="navbar-header">
-			  			<a class="navbar-brand" href="{{ route('page') }}">Site</a>
-					</div>
-					<div id="navbar" class="collapse navbar-collapse">
-				  		<ul class="nav navbar-nav">
-							@foreach($pages as $item)
-								<li @if (isset($page) && ($item->id == $page->id)) class="active" @endif >
-									<a href="{{ route('page', $item->slug) }}">{{ $item->name }}</a>
-								</li>
-							@endforeach
-						</ul>
+	<body>
 
-						<ul class="nav navbar-nav navbar-top-links navbar-right">
-				  			@if (Auth::check())
-				  				<li class="dropdown ">
-				  					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	                                   {{ Auth::user()->name }} <span class="caret"></span>
-	                                </a>
-	                				<ul class="dropdown-menu">
-	                                    <li><a href="{{ route('logout') }}">Deconnexion</a></li>
-	                				</ul>
-	              				</li>
-	                        @else
-	                            <li><a href="{{ route('login') }}">Login</a></li>
-	                        @endif
-	                        <li><a href="{{ route('register') }}">Inscription</a></li>
-	      				</ul>
+		<div class="container">
+			@section('body')
 
-					</div><!--/.nav-collapse -->
-		  		</div>
-			</nav>
+				<header>
+					<div class="row">
+		    			<div class="col-md-4">
+		    				<a href="{{ route('page') }}" class="brand">{{ trans('site.global.name') }}</a>
+		    			</div>
+		    			<nav class="col-md-8">
+		    				<ul>
+			    				@foreach($site['pages'] as $item)
+									<li>
+										<a href="{{ route('page', $item->slug) }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
+									</li>
+								@endforeach
+							</ul>
+		    			</nav>
+		  			</div>
+				</header>
 
-			<div id="container" class="container">
-				<div class="row">
+				<div id="container">
 					@section('content')
 					@show
 				</div>
-			</div><!-- /.container -->
+
+			@show
+		</div>
+		<footer>
+			<div class="container">
+				<div class="row">
+	    			<div class="col-md-12">
+	    				{{ trans('site.global.copyright', array(
+	    					'year' => \Carbon\Carbon::now()->year,
+	    					'name' => trans('site.global.name')
+	    				)) }}
+	    			</div>
+		  		</div>
+		  	</div>
+		</footer>
+
+		<!-- Include overlays for site
+		================================================== -->
+		@include('_others.overlays')
+
+		<!-- JavaScripts
+		================================================== -->
+		<script src="{{ elixir('js/site.all.js') }}"></script>
+
+		@section('javascript')
+
+			<script>
+				$(document).ready(function() {
+					Site.init();
+				});
+			</script>
 		@show
 
-		<!-- Bootstrap core JavaScript
-		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 	</body>
 </html>

@@ -10,6 +10,7 @@ use App\Helpers;
 
 
 /* My uses */
+use App\Models\FileModel;
 use App\Models\GalleriesCategoryModel;
 use App\Http\Requests\GalleriesCategoryRequest;
 use Kris\LaravelFormBuilder\FormBuilder;
@@ -33,6 +34,8 @@ class GalleriesCategoriesComponent extends Controller
 	{
 
 		$category = new GalleriesCategoryModel;
+		$category->pictures = FileModel::where('model_field', 'pictures')->whereIn('id', explode(',', $request->old('pictures_new')))->get();
+
 	
 		$form = $formBuilder->create(
 			'App\Forms\GalleriesCategoryForm', 
@@ -45,7 +48,8 @@ class GalleriesCategoriesComponent extends Controller
 				'model_table'=> $category->getTable(),
 				'model_id'=> NULL
 			)
-		)->add(trans('admin.gallery.action.create'), 'submit', array(
+		)->add('actions', 'submit', array(
+			'label' => trans('admin.gallery.action.create'),
             'attr' => array('class' => 'btn btn-success'),
             'wrapper' => array('class' => 'form-group actions'),
             'others_actions' => array(
@@ -69,6 +73,13 @@ class GalleriesCategoriesComponent extends Controller
 		// Create category
 		$category = GalleriesCategoryModel::create($request->all());
 
+		// Get files added for this pages
+		$file = new FileModel();
+		$files = $file->whereIn('id', explode(',', $request->input('pictures_new')))->get();
+
+		// Save relation
+		$category->pictures()->saveMany($files);
+
 		return redirect(route('admin.galleries.categories.index'));
 	}
 	
@@ -76,7 +87,17 @@ class GalleriesCategoriesComponent extends Controller
 	{
 
 		$category = new GalleriesCategoryModel;
-		$category = $category->findOrFail($id);
+		$category = $category->with(array(
+			'pictures' => function($query) {
+				$query
+				->OfOrder()
+				->where('model_table', 'gallerycategories')
+				->where('model_field', 'pictures');
+			}
+		))->findOrFail($id);
+
+		$category->pictures = $category->pictures->merge(FileModel::whereIn('id', explode(',', $request->old('pictures_new')))->get());
+
 
 		$form = $formBuilder->create(
 			'App\Forms\GalleriesCategoryForm',
@@ -89,7 +110,8 @@ class GalleriesCategoriesComponent extends Controller
 				'model_table'=> $category->getTable(),
 				'model_id'=> $category->id
 			)
-		)->add(trans('admin.gallery.action.save'), 'submit', array(
+		)->add('actions', 'submit', array(
+			'label' => trans('admin.gallery.action.save'),
             'attr' => array('class' => 'btn btn-primary'),
             'wrapper' => array('class' => 'form-group actions'),
             'others_actions' => array(
@@ -111,6 +133,13 @@ class GalleriesCategoriesComponent extends Controller
 	{
 		$category = GalleriesCategoryModel::findOrFail($id);
 		$category->update($request->all());
+
+		// Get files pictures added for this gallery
+		$file = new FileModel();
+		$files = $file->whereIn('id', explode(',', $request->input('pictures_new')))->get();
+
+		// Save relation
+		$category->pictures()->saveMany($files);
 
 		Session::flash('feedback', array(
 			'message'=> trans('admin.global.feedback.update.ok'),

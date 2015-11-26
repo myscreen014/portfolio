@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Session;
 
 class PageModel extends Model
 {
@@ -17,11 +18,21 @@ class PageModel extends Model
 
     /* Relations */
     public function files() {
-    	return $this->hasMany('App\Models\FileModel', 'model_id');
+    	return $this
+            ->hasMany('App\Models\FileModel', 'model_id')
+            ->where('model_table', 'pages')
+            ->where('model_field', 'files');
     }
 
     public function pictures() {
-        return $this->hasMany('App\Models\FileModel', 'model_id');
+        return $this
+            ->hasMany('App\Models\FileModel', 'model_id')
+            ->where('model_table', 'pages')
+            ->where('model_field', 'pictures');
+    }
+
+    public function getpictures() {
+        return $this;
     }
 
      /* Boot */
@@ -54,11 +65,12 @@ class PageModel extends Model
     }
 
     /* Methodes */
-    public static function loadControllersRoutes() {
+    public static function loadControllersRoutes() { 
+    /* Unused from 25/10/2015 */
         $controllers = DB::table((new PageModel())->getTable())->distinct()->get(array('controller', 'slug'));
         foreach ($controllers as $key => $controller) {
             if ($controller->controller != 'pages') {
-                $methods = array_diff(get_class_methods('App\Http\Controllers\Site\GalleriesController'), get_class_methods('App\Http\Controllers\Controller'));
+                $methods = array_diff(get_class_methods('App\Http\Controllers\Site\\'.ucfirst($controller->controller).'Controller'), get_class_methods('App\Http\Controllers\Controller'));
                 $methods = array_reverse($methods); // to load index (first method) latest
                 foreach ($methods as $key => $method) {
                     $ref = new \ReflectionMethod('App\Http\Controllers\Site\\'.$controller->controller.'Controller', $method);
@@ -77,7 +89,11 @@ class PageModel extends Model
                         $uri .= '/'.$method;
                     }
                     $uri .= (!empty($parametersToUrl)?'/'.$parametersRoute:'');
-                    Route::any($uri, 'Site\\'.ucfirst($controller->controller).'Controller@'.$method);
+                    Route::any($uri, array(
+                        'as'=>'site.gallery', 
+                        'uses' => 'Site\\'.ucfirst($controller->controller).'Controller@'.$method
+                        )
+                    );
                 }
               
             }

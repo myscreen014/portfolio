@@ -1,19 +1,26 @@
 
-
-{!! form($form) !!}
+<div class="form-wrapper" >
+	{!! form($form) !!}
+</div>
 
 @section('javascript')
 	
 	@parent
 
 	<script type="text/javascript">
+	
+		/* FORM */
+		$(document).ready(function() {
+			$('.form-wrapper').fadeIn('fast');
+		});
+
+		/* WYSIWYG */	
 		tinymce.init({
 			language: 'fr_FR',
             selector: "textarea.wysiwyg",
             menubar: false,
             height : 200,
             content_css : "{{ asset('css/wysiwyg.css') }}",
-            plugins: 'file',
            	style_formats : [
            		{title : "Headings", items: [
 	           		{ title: "Heading 1", block : 'h1'},
@@ -44,7 +51,7 @@
 					{selector: 'img', collapsed: false, classes: 'align_justify', styles: {display: 'block'}}
 				]
 			},
-            toolbar: "example | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image"
+            toolbar: "styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image"
         });
 	</script>
 

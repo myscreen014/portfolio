@@ -44,32 +44,37 @@ Route::group(['prefix' => 'admin', 'middleware'=> ['auth', 'auth_administrator']
     Route::delete('files/{id}/destroy',['as' => 'admin.files.destroy', 'uses' => 'Admin\FilesComponent@destroyAjax']);
  	Route::post('files/store',['as' => 'admin.files.store', 'uses' => 'Admin\FilesComponent@store']);
 
+
+    // Models management
+     Route::post('models/reorder',['as' => 'admin.models.reorder', 'uses' => 'Admin\ModelsController@reorderAjax']);
+
 });
  
 
 /* SITE */
 Route::get('files/{thumbnail}/{name}',['as' => 'picture', 'uses' => 'Site\FilesController@picture']);
 Route::get('files/{name}',['as' => 'file', 'uses' => 'Site\FilesController@file']);
+
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
+Route::get('auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
+
+// Registration routes...
+Route::get('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+Route::get('auth/register/message', ['as' => 'register.message', 'uses' => 'Auth\AuthController@registerMessage']);
+Route::get('auth/confirmation/{id}/{key}', ['as' => 'auth.confirmation', 'uses' => 'Auth\AuthController@confirmation']);
  
 // Public
-Route::group(['prefix' => '/', 'middleware'=> 'pages'], function () {
-
-
-    // Authentication routes...
-    Route::get('auth/login', 'Auth\AuthController@getLogin');
-    Route::post('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
-    Route::get('auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
-
-    // Registration routes...
-    Route::get('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
-    Route::post('auth/register', 'Auth\AuthController@postRegister');
-    Route::get('auth/register/message', ['as' => 'register.message', 'uses' => 'Auth\AuthController@registerMessage']);
-    Route::get('auth/confirmation/{id}/{key}', ['as' => 'auth.confirmation', 'uses' => 'Auth\AuthController@confirmation']);
+Route::group(['prefix' => '/', 'middleware'=> 'site'], function () {
     
     // Pages
     Route::get('',['as' => 'page', 'uses' => 'Site\PagesController@index']);
-    PageModel::loadControllersRoutes();
-    Route::get('{slug?}',['as' => 'page', 'uses' => 'Site\PagesController@index']);
+    Route::get('{slug?}/{params?}',array(
+        'as' => 'page', 
+        'uses' => 'Site\PagesController@index'
+    ))->where('params', '(.*)');
    
 
 });

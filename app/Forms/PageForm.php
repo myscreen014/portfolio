@@ -9,22 +9,21 @@ use Kris\LaravelFormBuilder\Form;
 class PageForm extends Form
 {
 
-    /* lazy fields */
-    
+
     public function buildForm()
     {
 
     	// Create form
         $this
+        ->add('name', 'text', array(
+            'label'=>trans('admin.page.field.name')
+        ))
         ->add('controller', 'select', array(
             'label'=>trans('admin.page.field.controller'),
             'choices' => array(
-                'pages' => 'Controller pages',
-                'galleries' => 'Controller galerie',
+                'pages' => trans('admin.page.option.controller.pages'),
+                'galleries' => trans('admin.page.option.controller.galleries'),
             )
-        ))
-        ->add('name', 'text', array(
-            'label'=>trans('admin.page.field.name')
         ))
         ->add('content', 'textarea', array(
             'wrapper' => ['class' => 'form-group form-group-wysiwyg'],

@@ -24,7 +24,7 @@ return [
             'galleries'         => [
                 'index'         => 'Galeries',
                 'galleries'     => 'Gestion des galeries',
-                'categories'    => 'Gestion des catégories'
+                'galleriescategories'    => 'Gestion des catégories'
             ],
             'administrators'    => [
                 'index'         => 'Administrateurs',
@@ -112,11 +112,17 @@ return [
 
     'page' => [
         'field' => [
-            'controller'        => "Controller",
+            'controller'        => "Type de page",
             'name'              => "Nom de la page",
             'content'           => "Contenu de page",
             'files'             => "Fichiers de la page",
             'pictures'          => "Photos de la page",
+        ],
+        'option'                => [
+            'controller'        => [
+                'pages'         => "Page classique",
+                'galleries'     => "Page galerie",
+            ],
         ],
         'title' => [
             'index'             => "Liste des pages",
@@ -171,6 +177,7 @@ return [
         'field' => [
             'name'              => "Nom de la categorie",
             'description'       => "Description de la categorie",
+            'pictures'          => "Photos de la catégorie",
         ],
         'title' => [
             'index'             => "Liste des catégories",

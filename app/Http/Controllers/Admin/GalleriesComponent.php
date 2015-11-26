@@ -26,7 +26,7 @@ class GalleriesComponent extends Controller
 	public function index() 
 	{
 		$gallery = new GalleryModel;
-		$galleries = $gallery->with('category')->get();
+		$galleries = $gallery->orderBy('ordering', 'ASC')->with('category')->get();
 		return view($this->defaultView, array('galleries' => $galleries));
 	}
 
@@ -48,7 +48,8 @@ class GalleriesComponent extends Controller
 				'model_table'=> $gallery->getTable(),
 				'model_id'=> NULL
 			)
-		)->add(trans('admin.gallery.action.create'), 'submit', array(
+		)->add('actions', 'submit', array(
+			'label' => trans('admin.gallery.action.create'),
             'attr' => array('class' => 'btn btn-success'),
             'wrapper' => array('class' => 'form-group actions'),
             'others_actions' => array(
@@ -88,7 +89,10 @@ class GalleriesComponent extends Controller
 		$gallery = new GalleryModel;
 		$gallery = $gallery->with(array(
 			'pictures' => function($query) {
-				$query->OfOrder()->where('model_field', 'pictures');
+				$query
+				->OfOrder()
+				->where('model_table', 'galleries')
+				->where('model_field', 'pictures');
 			}
 		))->findOrFail($id);
 
@@ -105,7 +109,8 @@ class GalleriesComponent extends Controller
 				'model_table'=> $gallery->getTable(),
 				'model_id'=> $gallery->id
 			)
-		)->add(trans('admin.gallery.action.save'), 'submit', array(
+		)->add('actions', 'submit', array(
+			'label' => trans('admin.gallery.action.save'),
             'attr' => array('class' => 'btn btn-primary'),
             'wrapper' => array('class' => 'form-group actions'),
             'others_actions' => array(
@@ -151,8 +156,8 @@ class GalleriesComponent extends Controller
 
 	public function destroy($id)
 	{
-		$page = PageModel::findOrFail($id);
-		$page->delete();
+		$gallery = GalleryModel::findOrFail($id);
+		$gallery->delete();
 		Session::flash('feedback', array(
 			'message'=> trans('admin.global.feedback.delete.ok'),
 			'type' => 'success'

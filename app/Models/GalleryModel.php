@@ -17,7 +17,10 @@ class GalleryModel extends Model
     }
 
     public function pictures() {
-        return $this->hasMany('App\Models\FileModel', 'id');
+        return $this
+            ->hasMany('App\Models\FileModel', 'model_id')
+            ->where('model_table', 'galleries')
+            ->where('model_field', 'pictures');
     }
 
   	/* Boot */
