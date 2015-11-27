@@ -20,9 +20,14 @@ return [
             'show'              =>  'Afficher',
             'save'              =>  'Enregistrer',
             'delete'            =>  'Supprimer',
+        ],
+        'title' => [
+        	'404' => '404 : Page non trouvée'
+        ],
+        'message' => [
+        	'404' => "Cette page n'éxiste pas !"
         ]
 	],
-
 
 	'users' => [
 		'message' => [
@@ -35,12 +40,6 @@ return [
 			'goto_login'			=> "Je souhaite me connecter"
 		]
 	],
-
-	'bankrolls' => [
-		'action' => [
-			'goto_index' 			=> "J'accède à ma bankroll"
-		]
-	]
 
 	
 ];
