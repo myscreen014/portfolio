@@ -25,7 +25,8 @@ return [
         	'404' => '404 : Page non trouvée'
         ],
         'message' => [
-        	'404' => "Cette page n'éxiste pas !"
+        	'404' => "Cette page n'éxiste pas !",
+        	'503' => "Site en maintenance"
         ]
 	],
 
