@@ -24,7 +24,7 @@ return [
             'galleries'         => [
                 'index'         => 'Galeries',
                 'galleries'     => 'Gestion des galeries',
-                'galleriescategories'    => 'Gestion des catégories'
+                'categories'    => 'Gestion des catégories'
             ],
             'administrators'    => [
                 'index'         => 'Administrateurs',
