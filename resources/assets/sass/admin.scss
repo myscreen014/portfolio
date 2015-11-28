@@ -35,33 +35,10 @@ table {
 					 text-align: right;
 				}
 			}
-		}  
-	}
-	&.table-files {
-		tr {
-			td {
-				p {
-					margin: 0;
-				}
-				.file-thumnails {
-					border: 1px solid #e7e7e7;
-					display: block;
-					width: 40px;
-					img,
-					.img-type {
-						display: block;
-						height: 40px;
-						text-align: center;
-						width: 40px;
-					}
-					.img-type i {
-						color: #f8f8f8 - 50;
-						font-size: 20px;
-						line-height: 40px;
-					}
-				}
+			&.ui-state-highlight {
+				border-bottom: 2px solid transparent;
 			}
-		}
+		}  
 	}
 	&.table-upload {
 		.upload-index {}
