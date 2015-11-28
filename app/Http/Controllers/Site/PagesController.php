@@ -19,8 +19,11 @@ class PagesController extends Controller
     public function index($slug=NULL, $params=NULL) {
         
     	if (is_null($slug)) {
-            $page = PageModel::with(array('files' => function($query) {
-                $query->where('model_field', 'pictures'); 
+            $page = PageModel::with(array('pictures' => function($query) {
+                $query
+                ->where('model_field', 'pictures')
+                ->orderBy('ordering', 'ASC'); 
+
             }))->orderBy('ordering','ASC')->firstOrFail();
     	} else {
     		$page = PageModel::where('slug', $slug)->firstOrFail();

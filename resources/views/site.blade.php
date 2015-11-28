@@ -71,6 +71,20 @@
 					Site.init();
 				});
 			</script>
+
+			@if (isset($page) && count($page->pictures)>0)
+
+				<script>
+					var backgroundPictures = new Array();
+					@foreach($page->pictures as $picture)
+						backgroundPictures.push("{{ route('picture', ['background', $picture['name']] ) }}");
+					@endforeach
+					$(document).ready(function() {
+						$.backstretch(backgroundPictures, {duration: 3000, fade: 750});
+					})
+				</script>
+			@endif 
+
 		@show
 
 	</body>

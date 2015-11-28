@@ -34,6 +34,13 @@ return [
 		],
 
 		/* Site */
+		'background' => [
+			'filters' => [
+				'max' =>  [1080,720],
+				'greyscale' => []
+			],
+			'quality' => 40
+		],
 		'site' => [
 			'filters' => [
 				'max' =>  [60,40],
