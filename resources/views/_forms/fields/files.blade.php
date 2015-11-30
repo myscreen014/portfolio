@@ -100,6 +100,7 @@
 		  		//paramName: "file", // The name that will be used to transfer the file
 		  		maxFilesize: 5, // MB
 		  		maxFiles: 5,
+		  		clickable: false,
 		  		autoProcessQueue: false,
 		  		url: "{{ route('admin.files.store') }}",
 		  		parallelUploads: 5,
