@@ -53,6 +53,8 @@ class FilesController extends Controller
 				foreach ($thumbnailsAvailables[$thumbnailName]['filters'] as $filter => $filterParams) {
 					switch ($filter) {
 
+						
+
 						// Custom filters
 						case 'max':
 							$thumbnail->resize($filterParams[0], $filterParams[1], function ($constraint) {

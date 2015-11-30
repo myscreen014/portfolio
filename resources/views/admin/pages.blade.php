@@ -100,7 +100,7 @@
 		$('select#controller').bind('change', function() {
 			if ($(this).val() != 'pages') {
 				$('.form-field:not(.form-field-actions)').hide();
-				$('.form-field-name, .form-field-controller').show();
+				$('.form-field-name, .form-field-controller, .form-field-pictures').show();
 			} else {
 				$('.form-field').show();
 			} 

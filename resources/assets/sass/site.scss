@@ -2,8 +2,8 @@
    ============================= */
 @import 'mixins';
 
-$colorText: 		#fff;
-$colorForeground:	#00BFFF;
+$colorText: 		#9A9A9A;
+$colorForeground:	#fff;
 $backgroundColor: 	#111;
 
 
@@ -20,7 +20,7 @@ html {
 body {
 	background: transparent url(../../img/background-body.png) center center repeat;
 	color: $colorText;
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Open Sans Condensed', sans-serif;
 	font-weight: 300;
 	height: 100%;
 	min-height: 100%;
@@ -33,11 +33,11 @@ div {
 
 /* HEADER */
 header {
-	border-bottom: 4px solid #fff;   
+	border-bottom: 1px solid $colorText;   
 	padding-top: 50px;
 	padding-bottom: 20px;
 	.brand {
-		color: #fff;
+		color: $colorText;
 		font-size: 30px;
 		text-decoration: none;
 	}
@@ -50,14 +50,17 @@ header {
 				a,
 				a:visited {
 					color: $colorText;
-					font-style: 28px;
+					font-size: 26px;
+					font-weight: 300;
 					line-height: 30px;
 					text-decoration: none;
 					text-transform: uppercase;
-					@include text-shadow(0px 0px 3px #000);
+					//@include text-shadow(0px 0px 2px #000);
+					@include transition(all 0.1s ease);
 					&:hover,
 					&.active {
 						color: $colorForeground;
+						@include transition(all 0.1s ease);
 					}
 				}
 			}

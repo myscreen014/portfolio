@@ -18,32 +18,36 @@ return [
 		/* Admin */
 		'filebrowser' => [
 			'filters' => [
-				'fit' =>  [80,80]
+				'fit' 	=>  [80,80]
 			],
 			'quality' => 100
 		],
 		'edit' => [
 			'filters' => [
-				'max' =>  [180,168]
+				'max' 	=>  [180,168]
 			]
 		],
 		'show' => [
 			'filters' => [
-				'max' =>  [600,400]
+				'max' 	=>  [600,400]
 			]
 		],
 
 		/* Site */
 		'background' => [
 			'filters' => [
-				'max' =>  [1080,720],
-				'greyscale' => []
+				'max' 	=>  [1080,720]
 			],
-			'quality' => 40
+			'quality' => 80
+		],
+		'portfolio' => [
+			'filters' => [
+				'max' 	=>  [300,200],
+			]
 		],
 		'site' => [
 			'filters' => [
-				'max' =>  [60,40],
+				'max' 	=>  [60,40],
 				'greyscale' => []
 			]
 		]

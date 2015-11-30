@@ -10,7 +10,8 @@
 		<meta name="author" content="">
 		<link rel="icon" href="../../favicon.ico">
 		<title>{{ trans('site.global.name') }}</title>
-		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+		
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{ elixir('css/site.all.css') }}">
 	</head>
 
