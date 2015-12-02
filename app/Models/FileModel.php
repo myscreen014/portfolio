@@ -44,12 +44,8 @@ class FileModel extends Model
 	        	// Delete his thumbnails
 	        	foreach ($thumbnailsAvailables as $thumbnailName => $thumbnailDefinition) {
 	        		$thumbnailFullPath = $thumbnailsPath.'/'.$thumbnailName.'/'.$file->name;
-	        		varlog($thumbnailFullPath);
 	        		if (File::exists($thumbnailFullPath)) {
-	        			varlog('suppression de : '.$thumbnailFullPath);
 	        			File::delete($thumbnailFullPath);	
-	        		} else {
-	        			varlog('le fichier nexiste pas ');
 	        		}
 	        	}
 	        	

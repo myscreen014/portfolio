@@ -98,7 +98,7 @@
 			var myDropzone{{ $name }} = new Dropzone({{ $name }}, {
 				dictDefaultMessage: "",
 		  		//paramName: "file", // The name that will be used to transfer the file
-		  		maxFilesize: 5, // MB
+		  		maxFilesize: 2, // MB
 		  		maxFiles: 5,
 		  		clickable: false,
 		  		autoProcessQueue: false,
