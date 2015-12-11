@@ -40,6 +40,12 @@ return [
 			],
 			'quality' => 80
 		],
+		'zoom' => [
+			'filters' => [
+				'max' 	=>  [1080,720]
+			],
+			'quality' => 80
+		],
 		'portfolio' => [
 			'filters' => [
 				'max' 	=>  [300,200],

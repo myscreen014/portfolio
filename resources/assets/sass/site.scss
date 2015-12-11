@@ -2,8 +2,8 @@
    ============================= */
 @import 'mixins';
 
-$colorText: 		#9A9A9A;
-$colorForeground:	#fff;
+$colorText: 		#dadada;
+$colorForeground:	#3b9cff;
 $backgroundColor: 	#111;
 
 
@@ -12,19 +12,25 @@ $backgroundColor: 	#111;
    ============================= */
 
 html {
-	background: linear-gradient(to bottom, $backgroundColor, $backgroundColor+20);
-	background-size: cover;
+	background: $backgroundColor;
+	background-attachment: fixed;
 	height: 100%;
 	min-height: 100%;
 }
 body {
-	background: transparent url(../../img/background-body.png) center center repeat;
 	color: $colorText;
 	font-family: 'Open Sans Condensed', sans-serif;
 	font-weight: 300;
 	height: 100%;
-	min-height: 100%;
-
+	min-height: 100%; 
+	& > .mask {
+		background: linear-gradient(to bottom, transparentize($backgroundColor, 0.1), transparentize($backgroundColor, 0.9));
+		height: 100%;
+		min-height: 100%;
+		position: fixed;
+		width: 100%;
+		z-index: -1;
+	}
 }
 
 div {
@@ -104,6 +110,11 @@ footer {
 h1 {
 	font-size: 30px;
 	margin: 30px 0;
+}
+
+p {
+	margin: 20px 0;
+	padding: 0;
 }
 
 .button {
@@ -214,6 +225,48 @@ h1 {
 					@include transition(all 0.6s ease 0.4s);
 				}
 			}
+		}
+	}
+}
+
+
+/* LIGHTBOX
+   ============================= */
+.fancybox-skin {
+	.fancybox-item,
+	.fancybox-nav span {
+		background-image: none;
+		background-color: transparentize(#000, 0.2);
+		color: #fff;
+		display: inline-block;
+		font-size: 16px;
+		height: auto;
+		line-height: 16px;
+		padding: 4px 8px;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		width: auto;
+	}
+
+	.fancybox-item {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+	.fancybox-prev span {
+		left: 0;
+	}
+	.fancybox-next span {
+		right: 0;
+	}
+
+	.fancybox-title {
+		.caption-title {
+			color: #fff;
+		}
+		.caption-legend {
+			color: #fff - 100;
 		}
 	}
 }

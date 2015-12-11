@@ -30,6 +30,14 @@ return [
         ]
 	],
 
+	'lightbox' => [
+		'action' => [
+			'close' 			=> 'Fermer',
+			'next' 				=> 'Suivant',
+			'prev' 				=> 'Précédent',
+		]
+	],
+
 	'users' => [
 		'message' => [
 			'need_confirmation' 	=> "Votre inscription à bien été pris en compte. Merci de cliquer sur le lien dans l'email que vous avez reçu.",

@@ -13,10 +13,11 @@
 		
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{ elixir('css/site.all.css') }}">
+		<link rel="stylesheet" href="{{ asset('plugins/lightbox/jquery.fancybox.css') }}">
 	</head>
 
 	<body>
-
+		<div class="mask"></div>
 		<div class="container">
 			@section('body')
 
@@ -48,6 +49,7 @@
 			<div class="container">
 				<div class="row">
 	    			<div class="col-md-12">
+
 	    				{{ trans('site.global.copyright', array(
 	    					'year' => \Carbon\Carbon::now()->year,
 	    					'name' => trans('site.global.name')
@@ -64,12 +66,15 @@
 		<!-- JavaScripts
 		================================================== -->
 		<script src="{{ elixir('js/site.all.js') }}"></script>
+		<script src="{{ asset('plugins/lightbox/jquery.fancybox.pack.js') }}"></script>
 
 		@section('javascript')
 
 			<script>
 				$(document).ready(function() {
-					Site.init();
+					Site.init({
+						'i18n' : jQuery.parseJSON('<?php print(json_encode(trans('site'), JSON_HEX_APOS)) ?>')
+					});
 				});
 			</script>
 
@@ -81,7 +86,7 @@
 						backgroundPictures.push("{{ route('picture', ['background', $picture['name']] ) }}");
 					@endforeach
 					$(document).ready(function() {
-						$.backstretch(backgroundPictures, {duration: 3000, fade: 750});
+						$('body').backstretch(backgroundPictures, {duration: 3000, fade: 750});
 					})
 				</script>
 			@endif 
