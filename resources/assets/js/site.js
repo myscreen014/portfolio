@@ -48,9 +48,9 @@ var Site = {
 	loading: function(show) {
 
 		if (show) {
-			$('.overlay').fadeIn('fast');	
+			$('.overlay.loading').fadeIn('fast');	
 		} else {
-			$('.overlay').fadeOut('fast');
+			$('.overlay.loading').fadeOut('slow');
 		}
 		 
 	}

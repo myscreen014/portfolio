@@ -2,10 +2,9 @@
    ============================= */
 @import 'mixins';
 
-$colorText: 		#dadada;
+$colorText: 		#aaa;
 $colorForeground:	#3b9cff;
 $backgroundColor: 	#111;
-
 
 
 /* STRUCTURE
@@ -19,12 +18,14 @@ html {
 }
 body {
 	color: $colorText;
-	font-family: 'Open Sans Condensed', sans-serif;
-	font-weight: 300;
+	font-family: 'Hind', sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 26px;
 	height: 100%;
 	min-height: 100%; 
 	& > .mask {
-		background: linear-gradient(to bottom, transparentize($backgroundColor, 0.1), transparentize($backgroundColor, 0.9));
+		background: linear-gradient(to bottom, transparentize($backgroundColor, 0.0), transparentize($backgroundColor, 0.4));
 		height: 100%;
 		min-height: 100%;
 		position: fixed;
@@ -61,7 +62,6 @@ header {
 					line-height: 30px;
 					text-decoration: none;
 					text-transform: uppercase;
-					//@include text-shadow(0px 0px 2px #000);
 					@include transition(all 0.1s ease);
 					&:hover,
 					&.active {
@@ -94,14 +94,39 @@ footer {
 /* OVERLAYS
    ============================= */
 .overlay {
+	background-color: transparentize($backgroundColor, 0.2);
+	display: none;
 	top: 0;
 	left: 0;
-	background-color: rgba(0,0,0, 0.6);
 	position: fixed;
 	height: 100%;
 	width: 100%;
 	z-index: 999;
+	&.loading {
+		display: block;
+		line-height: 100vh;
+		text-align: center;
+		span {
+			background: transparentize(#fff, 0.9);
+			color: #fff;
+			display: inline-block;
+			font-family: Arial;
+			font-size: 13px;
+			font-weight: 100;
+			line-height: 24px;
+			padding: 6px 12px;
+			vertical-align: middle;
+			@include border-radius(3px);
+		}
+	}
 }
+
+
+
+
+
+
+
 
 
 /* SHORCODES
@@ -115,6 +140,16 @@ h1 {
 p {
 	margin: 20px 0;
 	padding: 0;
+}
+strong {
+	color: $colorText + 60;
+}
+a, a:visited {
+	color: $colorForeground;
+	text-decoration: underline;
+	&:hover {
+		text-decoration: none;
+	}
 }
 
 .button {
