@@ -22,7 +22,7 @@ class SiteMiddleware
 
         // Load pages
         $page = new PageModel;
-        $pages = $page->orderBy('ordering','DESC')->get();
+        $pages = $page->orderBy('ordering','ASC')->get();
         $site['pages'] = $pages;
 
 

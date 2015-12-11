@@ -4,12 +4,6 @@
 @section('content')
 
    
-    <div class="row">
-        <div class="col-md-12">
-            <h1>{{ $page->name }}</h1>
-        </div>
-    </div>
-
     @if (isset($categories))
 
         <div class="portfolio clearfix">
@@ -26,9 +20,11 @@
                             </span>
                         </div>
                     </div>
+                
                     @if (isset($category->pictures[0]))
                         <img src="{{ route('picture', ['portfolio', $category->pictures[0]['name']] ) }}" />
                     @endif 
+
                 </a>
             @endforeach
         </div>

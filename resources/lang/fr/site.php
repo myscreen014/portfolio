@@ -11,7 +11,7 @@ return [
 	*/
 
 	'global' => [
-		'name' 					=> "Lorem ipsum",
+		'name' 					=> "Aline Photo",
 		'copyright'				=> "Copyright © :year :name",
 		'action' => [
             'back'              =>  'Retour',

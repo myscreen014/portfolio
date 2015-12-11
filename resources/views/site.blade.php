@@ -11,53 +11,46 @@
 		<link rel="icon" href="../../favicon.ico">
 		<title>{{ trans('site.global.name') }}</title>
 		
-		<link href='https://fonts.googleapis.com/css?family=Hind:400,300,700' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,300,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{ elixir('css/site.all.css') }}">
 		<link rel="stylesheet" href="{{ asset('plugins/lightbox/jquery.fancybox.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+
 	</head>
 
 	<body>
-		<div class="mask"></div>
-		<div class="container">
-			@section('body')
 
-				<header>
-					<div class="row">
-		    			<div class="col-md-4">
-		    				<a href="{{ route('page') }}" class="brand">{{ trans('site.global.name') }}</a>
-		    			</div>
-		    			<nav class="col-md-8">
-		    				<ul>
-			    				@foreach($site['pages'] as $item)
-									<li>
-										<a href="{{ route('page', $item->slug) }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
-									</li>
-								@endforeach
-							</ul>
-		    			</nav>
-		  			</div>
-				</header>
-
-				<div id="container">
-					@section('content')
-					@show
-				</div>
-
-			@show
-		</div>
-		<footer>
-			<div class="container">
-				<div class="row">
-	    			<div class="col-md-12">
-
+		<div id="global" class="container-fluid">
+			<div class="row">
+				<div id="sidebar" class="col-md-2 col-sm-3">
+					<a href="{{ route('page') }}" class="brand">{!! trans('site.global.name') !!}</a>
+					<div class="spacer"></div>
+    				<ul class="clearfix">
+	    				@foreach($site['pages'] as $item)
+							<li>
+								<a href="{{ route('page', $item->slug) }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
+							</li>
+						@endforeach
+					</ul>
+					<footer>
+						<a href=""><i class="fa fa-facebook-square"></i></a>
+						<a href=""><i class="fa fa-twitter-square"></i></a>
+						<div class="spacer"></div>
 	    				{{ trans('site.global.copyright', array(
 	    					'year' => \Carbon\Carbon::now()->year,
 	    					'name' => trans('site.global.name')
 	    				)) }}
-	    			</div>
-		  		</div>
-		  	</div>
-		</footer>
+					</footer>
+				</div>
+				<div id="content" class="col-md-offset-2 col-md-10 col-sm-offset-3 col-sm-9">
+					@section('content')
+					@show
+				</div>
+			</div>
+
+		</div>
+
+		
 
 		<!-- Include overlays for site
 		================================================== -->
@@ -86,7 +79,7 @@
 						backgroundPictures.push("{{ route('picture', ['background', $picture['name']] ) }}");
 					@endforeach
 					$(document).ready(function() {
-						$('body').backstretch(backgroundPictures, {duration: 3000, fade: 750});
+						$.backstretch(backgroundPictures, {duration: 3000, fade: 750});
 					})
 				</script>
 			@endif 

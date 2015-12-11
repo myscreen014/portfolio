@@ -37,7 +37,7 @@ return [
 		'background' => [
 			'filters' => [
 				'max' 	=>  [1080,720],
-				'greyscale' => []
+				//'greyscale' => []
 			],
 			'quality' => 80
 		],

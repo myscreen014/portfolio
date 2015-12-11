@@ -9,6 +9,7 @@ var Site = {
 			Site.loading(true);
 		});
 		Site.initLightbox();
+		
 	},
 
 	trans: function(slug) {
@@ -41,7 +42,8 @@ var Site = {
 		    	if ($(this.element).attr('data-caption-legend').length>0) {
 					this.title += '<span class="caption-legend"> - '+$(this.element).attr('data-caption-legend')+'</span>';	
 		    	}
-        	}
+        	},
+
 		}); 
 	},
 
