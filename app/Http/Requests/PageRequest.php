@@ -25,7 +25,7 @@ class PageRequest extends Request
     {
         return [
             'name' => 'required',
-            'content' => 'required'
+            'content' => ''
         ];
     }
 }

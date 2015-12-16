@@ -76,11 +76,35 @@
 				<script>
 					var backgroundPictures = new Array();
 					@foreach($page->pictures as $picture)
-						backgroundPictures.push("{{ route('picture', ['background', $picture['name']] ) }}");
+						backgroundPictures.push({
+							'picture' : "{{ route('picture', ['background', $picture['name']] ) }}",
+							'title'   : "{{ $picture['title'] }}",
+							'legend'  : "{{ $picture['legend'] }}"
+						});
 					@endforeach
 					$(document).ready(function() {
-						$.backstretch(backgroundPictures, {duration: 3000, fade: 750});
+						var options = {
+	            			fade: 700,
+	            			duration: 6000
+	        			};
+						var pictures = $.map(backgroundPictures, function(i) { return i.picture; });
+
+						$.backstretch(pictures, {duration: options.duration, fade: options.fade});
+
+						$(window).on("backstretch.show", function(e, instance) {
+							var title = backgroundPictures[instance.index].title;
+							var legend = backgroundPictures[instance.index].legend;
+
+							var caption = '';
+							if (title!='') caption+='<span class="title">'+title+'</span>';
+							if (legend!='') caption+='<span class="legend">'+legend+'</span>';
+							if (caption!='') $(".backstretch-caption").html(caption).addClass('current');
+						});
+						$(window).on("backstretch.before", function(e, instance) {
+							$(".backstretch-caption").removeClass('current');
+						});
 					})
+
 				</script>
 			@endif 
 
