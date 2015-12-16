@@ -38,6 +38,10 @@ table {
 			&.ui-state-highlight {
 				border-bottom: 2px solid transparent;
 			}
+			&.ui-sortable-handle {
+				cursor: move;
+			}
+
 		}  
 	}
 	&.table-upload {

@@ -3,7 +3,6 @@ var Admin = {
 	_config: Array(),
 
 	init: function() {
-
 		Admin.modelSortable();
 	},
 
@@ -18,6 +17,12 @@ var Admin = {
 	modelSortable: function() {
 		var model = null;
 		$('table.sortable').sortable({
+			helper: function(e, ui) {
+			    ui.children().each(function() {
+			        $(this).width($(this).width());
+			    });
+			    return ui;
+			},
       		items: "tr",   		
       		placeholder: "ui-state-highlight",  
       		tolerance: 'pointer',
