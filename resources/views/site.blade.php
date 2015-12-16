@@ -20,9 +20,9 @@
 
 	<body>
 
-		<div id="global" class="container-fluid">
+		<div id="global" class="container">
 			<div class="row">
-				<div id="sidebar" class="col-md-2 col-sm-3">
+				<div id="sidebar" class="col-md-2">
 					<a href="{{ route('page') }}" class="brand">{!! trans('site.global.name') !!}</a>
 					<div class="spacer"></div>
     				<ul class="clearfix">
@@ -42,7 +42,7 @@
 	    				)) }}
 					</footer>
 				</div>
-				<div id="content" class="col-md-offset-2 col-md-10 col-sm-offset-3 col-sm-9">
+				<div id="content" class="col-md-offset-3 col-md-9 ">
 					@section('content')
 					@show
 				</div>
