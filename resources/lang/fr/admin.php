@@ -12,7 +12,7 @@ return [
 
     'global' => [
         'application' => [
-            'name'              => 'Abarth'
+            'name'              => 'Administration'
         ],
         'component' => [
             'root'              => [
