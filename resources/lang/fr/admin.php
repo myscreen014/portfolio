@@ -22,9 +22,9 @@ return [
                 'index'         => 'Pages',
             ],
             'galleries'         => [
-                'index'         => 'Galeries',
-                'galleries'     => 'Gestion des galeries',
-                'categories'    => 'Gestion des catégories'
+                'index'                 => 'Galeries',
+                'galleries'             => 'Gestion des galeries',
+                'galleriescategories'   => 'Gestion des catégories'
             ],
             'administrators'    => [
                 'index'         => 'Administrateurs',

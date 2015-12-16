@@ -57,7 +57,6 @@
                         @endif
           			</ul>
 					<!-- /.navbar-top-links -->
-
 					<div class="navbar-default sidebar" role="navigation">
 						<div class="sidebar-nav navbar-collapse">
 							<ul class="nav" id="side-menu">
@@ -65,15 +64,17 @@
 									<li class="@if (Request::segments()[1] == $componentName) active @endif">
 										<?php $route =  $componentDefinition['routes']['index']; ?>	
 										<a href="{{ route($route) }}"><i class="fa {{ $componentDefinition['icon'] }}"></i>{{ trans('admin.global.component.'.$componentName.'.index') }}</a>
+
 										@if (isset($componentDefinition['routes']['children']))
 											<ul class="nav nav-second-level">
 												@foreach($componentDefinition['routes']['children'] as $componentChildName => $componentChildRoute)
-													<li class="@if (Route::current()->getName() == $componentChildRoute) active @endif">
+													<li class="@if ($controllerName == $componentChildName) active @endif">
 														<a href="{{ route($componentChildRoute) }}"><i class="fa fa-angle-right"></i>{{ trans('admin.global.component.'.$componentName.'.'.$componentChildName) }}</a>
 													</li>
 												@endforeach
 											</ul>
 										@endif 
+
 									</li>
 								@endforeach
 							</ul>
