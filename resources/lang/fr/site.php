@@ -30,6 +30,12 @@ return [
         ]
 	],
 
+	'galleries' => [
+		'message' => [
+        	'nocontent'         => "Aucune galerie actuellement dans cette catégorie."
+        ]
+	],
+
 	'lightbox' => [
 		'action' => [
 			'close' 			=> 'Fermer',

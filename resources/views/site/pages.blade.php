@@ -5,11 +5,12 @@
 
 	<div class="backstretch-caption"></div>
 	
-	<div class="wysiwyg">
-
-		{!! $page->content !!}
-
-	</div>
+	@if ($page->content)
+		<div class="wysiwyg mask-content">
+			{!! $page->content !!}
+		</div>
+	@endif
+	
 
 @endsection
 

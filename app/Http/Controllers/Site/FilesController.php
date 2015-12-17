@@ -53,8 +53,7 @@ class FilesController extends Controller
 				foreach ($thumbnailsAvailables[$thumbnailName]['filters'] as $filter => $filterParams) {
 					switch ($filter) {
 
-						
-
+		
 						// Custom filters
 						case 'max':
 							$thumbnail->resize($filterParams[0], $filterParams[1], function ($constraint) {
@@ -62,12 +61,24 @@ class FilesController extends Controller
 								$constraint->upsize();
 							});
 							break;
+						case 'watermark':
+							$watermark = Image::make($filterParams[0]);
+							$thumbnail->insert(
+								$watermark, 
+								(isset($filterParams[1])?$filterParams[1]:'center'),
+								(isset($filterParams[2])?$filterParams[2]:0),
+								(isset($filterParams[3])?$filterParams[3]:0)
+							);
+							break;
 						default:  // default filters
 							call_user_func_array(array($thumbnail, $filter), array_values($filterParams));
 							break;
 				   }
 				   
 				}
+				
+				
+
 				$thumbnail->save(
 					$thumbnailsDir.'/'.$fileName,
 					(isset($thumbnailsAvailables[$thumbnailName]['quality']) ? $thumbnailsAvailables[$thumbnailName]['quality'] : Config::get('thumbnail.quality') )

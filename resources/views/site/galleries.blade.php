@@ -24,33 +24,36 @@
                     @if (isset($category->pictures[0]))
                         <img src="{{ route('picture', ['portfolio', $category->pictures[0]['name']] ) }}" />
                     @endif 
-
                 </a>
             @endforeach
         </div>
 
     @elseif (isset($category))  
-
-        <div class="portfolio clearfix">
-            @foreach ($category->galleries as $gallery)
-                <a href="{{ route_page($page, [$category->slug, $gallery->slug]) }}" class="item">
-                    <div class="mask">
-                        <div>
-                            <span class="title">
-                                {{ $gallery->name }}
-                            </span>
-                            <span class="separator"></span>
-                            <span class="summary">
-                                {!! str_limit($gallery->description, 75, '...') !!}
-                            </span>
+        
+        @if (count($category->galleries)>0)
+            <div class="portfolio clearfix">
+                @foreach ($category->galleries as $gallery)
+                    <a href="{{ route_page($page, [$category->slug, $gallery->slug]) }}" class="item">
+                        <div class="mask">
+                            <div>
+                                <span class="title">
+                                    {{ $gallery->name }}
+                                </span>
+                                <span class="separator"></span>
+                                <span class="summary">
+                                    {!! str_limit($gallery->description, 75, '...') !!}
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    @if (isset($gallery->pictures[0]))
-                        <img src="{{ route('picture', ['portfolio', $gallery->pictures[0]['name']] ) }}" />
-                    @endif 
-                </a>
-            @endforeach
-        </div>
+                        @if (isset($gallery->pictures[0]))
+                            <img src="{{ route('picture', ['portfolio', $gallery->pictures[0]['name']] ) }}" />
+                        @endif 
+                    </a>
+                @endforeach
+            </div>
+        @else
+            <p>{{ trans('site.galleries.message.nocontent') }}</p>
+        @endif    
 
         <div class="actions clearfix">
             <a href="{{ route_page($page) }}" class="button">{{ trans('site.global.action.back') }}</a>

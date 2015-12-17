@@ -15,8 +15,8 @@
 			'greyscale' => [],
 			'blur' => [5], // CAREFUL IT'S VERY LONG...
 			'gamma' => [0.4],
-			'pixelate' => [12]
-
+			'pixelate' => [12],
+			'watermark'	=> ['img/watermark.png', 'bottom-right', 10, 10]
 		],
 		'quality' => 100
 	],
@@ -54,6 +54,7 @@ return [
 		'background' => [
 			'filters' => [
 				'max' 	=>  [1080,720],
+				//'watermark'	=> ['img/watermark.png', 'bottom-right', 10, 10]
 				//'greyscale' => []
 			],
 			'quality' => 80
@@ -67,6 +68,7 @@ return [
 		'portfolio' => [
 			'filters' => [
 				'max' 	=>  [400,600],
+				//'watermark'	=> ['img/watermark.png', 'bottom-right', 10, 10]
 			]
 		],
 		'site' => [
