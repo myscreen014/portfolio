@@ -70,6 +70,18 @@ class GalleriesComponent extends Controller
 	public function store(GalleryRequest $request)
 	{
 	
+		// Validation pictures required !!!
+		if (empty($request->input('pictures_new'))) {
+	   		return redirect(route('admin.galleries.create'))
+                ->withErrors(
+                	array(
+                		'message' => trans('validation.required', array(
+                			'attribute'=> trans('validation.attributes.pictures')
+                		)
+                )))
+                ->withInput();
+	   	}
+	
 		// Create gallery
 		$gallery = GalleryModel::create($request->all());
 
@@ -130,6 +142,19 @@ class GalleriesComponent extends Controller
 
 	public function update($id, GalleryRequest $request)
 	{
+
+		// Validation pictures required !!!
+		if (empty($request->input('pictures_new'))) {
+	   		return redirect(route('admin.galleries.edit', $id))
+                ->withErrors(
+                	array(
+                		'message' => trans('validation.required', array(
+                			'attribute'=> trans('validation.attributes.pictures')
+                		)
+                )))
+                ->withInput();
+	   	}
+
 		$gallery = GalleryModel::findOrFail($id);
 		$gallery->update($request->all());
 
