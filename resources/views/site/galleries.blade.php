@@ -59,7 +59,7 @@
 
     @elseif (isset($gallery))   
 
-        <div class="portfolio clearfix">
+        <div class="portfolio">
             @foreach ($gallery->pictures as $picture)
                 <a href="{{ route('picture', ['zoom', $picture['name']] ) }}" data-caption-title="{{ $picture->title }}" data-caption-legend="{{ $picture->legend }}"  class="item lightbox" rel="gallery">
                     <div class="mask">
@@ -78,13 +78,34 @@
                 
             @endforeach
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <a href="{{ route_page($page, [$gallery->category->slug]) }}" class="button">{{ trans('site.global.action.back') }}</a>
-            </div>
+
+        <div class="clearfix">
+            <a href="{{ route_page($page, [$gallery->category->slug]) }}" class="button">{{ trans('site.global.action.back') }}</a>
         </div>
 
     @endif 
+
+@endsection
+
+
+@section('javascript')
+
+    @parent
+    
+    <script>
+        $(window).load(function() {  
+        $('.portfolio').gridify( {
+            srcNode: '.item img',               // grid items (class, node)
+            margin: '10px',                     // margin in pixel, default: 0px
+            max_width: '300px',                 // dynamic gird item width if specified, (pixel)
+            resizable: true,                    // re-layout if window resize
+            loaded: function(elem) {
+                $(this).addClass('loaded');
+            }
+        });
+      
+ });
+    </script>
 
 @endsection
 

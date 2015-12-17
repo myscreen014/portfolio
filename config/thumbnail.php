@@ -5,6 +5,23 @@
 	http://image.intervention.io/
 */
 
+/* 
+	Exemple 
+	'name-thumbnails' => [
+		'filters' => [
+			'fit' 	=>  [80,80],
+			'max' 	=>  [180,168],
+			'brightness' => [35],
+			'greyscale' => [],
+			'blur' => [5], // CAREFUL IT'S VERY LONG...
+			'gamma' => [0.4],
+			'pixelate' => [12]
+
+		],
+		'quality' => 100
+	],
+*/
+
 
 return [
 
@@ -37,7 +54,7 @@ return [
 		'background' => [
 			'filters' => [
 				'max' 	=>  [1080,720],
-				//'greyscale' => []
+				'greyscale' => []
 			],
 			'quality' => 80
 		],
@@ -49,7 +66,7 @@ return [
 		],
 		'portfolio' => [
 			'filters' => [
-				'max' 	=>  [300,200],
+				'max' 	=>  [300,600],
 			]
 		],
 		'site' => [

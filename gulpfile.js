@@ -54,13 +54,14 @@ elixir(function(mix) {
     */
     mix.sass([
         'mixins.scss',
-        'site.grid.scss',
+        'reset.scss',
         'site.scss',
     ], "public/css/site.all.css");
 
     mix.scripts([
         'jquery-1.11.3.min.js',
         'jquery.backstretch.min.js',
+        'gridify-custom.js',
         'site.js'
     ], "public/js/site.all.js" );
 

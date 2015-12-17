@@ -20,34 +20,35 @@
 
 	<body>
 
-		<div id="global" class="container">
-			<div class="row">
-				<div id="sidebar" class="col-md-2">
-					<a href="{{ route('page') }}" class="brand">{!! trans('site.global.name') !!}</a>
-					<div class="spacer"></div>
-    				<ul class="clearfix">
-	    				@foreach($site['pages'] as $item)
-							<li>
-								<a href="{{ route('page', $item->slug) }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
-							</li>
-						@endforeach
+		<div id="global">
+			<div id="sidebar">
+				<a href="{{ route('page') }}" class="brand">{!! trans('site.global.name') !!}</a>
+				<div class="spacer"></div>
+				<ul class="clearfix">
+    				@foreach($site['pages'] as $item)
+						<li>
+							<a href="{{ route('page', $item->slug) }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
+						</li>
+					@endforeach
+				</ul>
+				<footer>
+					<ul class="social">
+						<li><a href=""><i class="fa fa-facebook-square"></i></a></li>
+						<li><a href=""><i class="fa fa-twitter-square"></i></a></li>
 					</ul>
-					<footer>
-						<a href=""><i class="fa fa-facebook-square"></i></a>
-						<a href=""><i class="fa fa-twitter-square"></i></a>
-						<div class="spacer"></div>
+					<div class="spacer sticky"></div>
+					<p class="copyright">
 	    				{{ trans('site.global.copyright', array(
 	    					'year' => \Carbon\Carbon::now()->year,
 	    					'name' => trans('site.global.name')
 	    				)) }}
-					</footer>
-				</div>
-				<div id="content" class="col-md-offset-3 col-md-9 ">
-					@section('content')
-					@show
-				</div>
+    				</p>
+				</footer>
 			</div>
-
+			<div id="content">
+				@section('content')
+				@show
+			</div>
 		</div>
 
 		
@@ -74,6 +75,8 @@
 			@if (isset($page) && count($page->pictures)>0)
 
 				<script>
+
+					/* Backstrech slideshow */
 					var backgroundPictures = new Array();
 					@foreach($page->pictures as $picture)
 						backgroundPictures.push({
@@ -82,19 +85,17 @@
 							'legend'  : "{{ $picture['legend'] }}"
 						});
 					@endforeach
+
 					$(document).ready(function() {
 						var options = {
 	            			fade: 700,
 	            			duration: 6000
 	        			};
 						var pictures = $.map(backgroundPictures, function(i) { return i.picture; });
-
 						$.backstretch(pictures, {duration: options.duration, fade: options.fade});
-
 						$(window).on("backstretch.show", function(e, instance) {
 							var title = backgroundPictures[instance.index].title;
 							var legend = backgroundPictures[instance.index].legend;
-
 							var caption = '';
 							if (title!='') caption+='<span class="title">'+title+'</span>';
 							if (legend!='') caption+='<span class="legend">'+legend+'</span>';

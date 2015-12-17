@@ -20,7 +20,7 @@ var Site = {
 			value = value[_i18n[i]];
 		};
 		return value;
-	},
+	}, 
 
 	initLightbox: function() {
 		$(".lightbox").fancybox({

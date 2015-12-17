@@ -2,17 +2,17 @@
    ============================= */
 @import 'mixins';
 
-$paddingInner:		40px;
+$spaceUnit:			40px;
+$widthSidebar:	    240px;
 $colorText: 		#efefef;
 $colorForeground:	#3b9cff;
-$backgroundColor: 	#111;
+$backgroundColor: 	#333;
 
 
 /* STRUCTURE
    ============================= */
-
 html {
-	background: $backgroundColor;
+	background: #111;
 	background-attachment: fixed;
 	height: 100%;
 	min-height: 100%;
@@ -39,12 +39,14 @@ div {
 
 /* SIDEBAR */
 #sidebar {
-	background-color: $backgroundColor - 20;
+	background-color: #000;
 	height: 100%;
 	min-height: 100%;
-	padding: $paddingInner;
+	padding: $spaceUnit;
 	position: fixed;
 	z-index: 9;
+	margin-left: $spaceUnit;
+	width: $widthSidebar;
 	@include box-shadow( 0 1px 20px rgba(0,0,0,0.4));
 	.brand {
 		font-size: 28px;
@@ -54,6 +56,9 @@ div {
 	.spacer {
 		border-bottom: 1px solid #444;
 		margin: 30px 0; 
+		&.sticky {
+			margin: 6px 0;
+		}
 	}
 	ul {
 		list-style: inside none;
@@ -76,13 +81,38 @@ div {
 			}
 		}
 	}
+
+	footer {
+		bottom: 0;
+		left: 0;
+		padding: $spaceUnit;
+		position: absolute;
+		width: $widthSidebar;
+		ul.social {
+			li {
+				display: inline-block;
+				margin-right: 8px;
+				a, a:visited {
+					color: $colorText;
+					font-size: 22px;
+					&:hover {
+						color: $colorForeground;
+					}
+				}
+			}
+		} 
+		.copyright {
+			font-size: 9px;		
+		}
+	}
 }
 
 /* CONTENT */
 #content {
 	height: 100%;
 	min-height: 100%;
-	padding: $paddingInner;
+	padding: $spaceUnit;
+	padding-left: $widthSidebar + ($spaceUnit*2);
 	.backstretch-caption {
 		background-color: rgba(0,0,0,0.8);
 		bottom: 0;
@@ -112,20 +142,15 @@ div {
 			opacity: 1;
 			bottom: 50px;
 			@include transition(all 0.4s ease-out);
-		}
+		}    
 	}
 }
 
-footer {
-	position: absolute;
-	bottom: $paddingInner;
-	left: $paddingInner;
-}
 
 /* OVERLAYS
    ============================= */
 .overlay {
-	background-color: transparentize($backgroundColor, 0.2);
+	background-color: transparentize(#000, 0.2);
 	display: none;
 	top: 0;
 	left: 0;
@@ -148,7 +173,7 @@ footer {
 			padding: 6px 12px;
 			vertical-align: middle;
 			@include border-radius(3px);
-		}
+		} 
 	}
 }
 
@@ -157,19 +182,25 @@ footer {
    ============================= */
 
 .portfolio {
-	outline: 1px solid red;
+	margin: 0 -10px;
+	opacity: 0;
 	.item {
-
-		float: left;
-	
+		display: block;
 		.mask {
+			position: absolute;
+			top: 0;
+			left: 0;
 			display: none;
 		}
-		 img {
-  max-width: 100%;
-  max-height: 100%;
-  vertical-align: bottom;
-}
+		img {
+			display: block;
+			position: relative;
+			margin: 0;
+		}  
+	}
+	&.loaded {
+		opacity: 1;
+		@include transition(opacity 0.4s ease-in);
 	}
 }
 
