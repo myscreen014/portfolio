@@ -90,6 +90,10 @@ table {
 
 /*	FORMS 
 -----------------------------------------------------------------------------------------*/
+ul.errors {
+	padding: 10px;
+	list-style: inside;
+}
 form {
 	.form-group {
 		&.form-group-wysiwyg {

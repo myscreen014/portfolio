@@ -53,8 +53,12 @@ class GalleriesController extends Controller
     		));
     	} else {
             $gallery = new GalleryModel();
-            $gallery = $gallery
-                ->where('slug', $gallerySlug)
+            $gallery = $gallery->with(
+                array(
+                    'pictures' => function($query) {
+                        $query->orderBy('ordering', 'ASC');
+                    }
+                ))->where('slug', $gallerySlug)
                 ->first();
             return view('site.galleries', array(
                 'gallery'   => $gallery
