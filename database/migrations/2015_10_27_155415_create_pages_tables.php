@@ -17,6 +17,7 @@ class CreatePagesTables extends Migration
             $table->string('slug')->unique();
             $table->string('controller');
             $table->string('name');
+            $table->integer('ordering')->unsigned();
             $table->text('content');
             $table->timestamps();
         });
