@@ -211,7 +211,7 @@ div {
 					padding: 8px 20px 0 20px;
 					position: relative;
 					opacity: 1;
-					bottom: -20px;
+					bottom: -60px;
 					@include transition(all 0.4s ease);
 					&.title {}
 					&.summary {	
@@ -235,13 +235,12 @@ div {
 				@include transition(all 0.2s ease-in);
 				div {
 					span {
+						bottom: 0;
 						&.title {
-							bottom: 0;
-							@include transition(all 0.2s 0.0s ease);
+							@include transition(all 0.2s 0.0s ease-out);
 						}
 						&.summary {
-							bottom: 0;
-							@include transition(all 0.3s 0.1s ease);
+							@include transition(all 0.2s 0.1s ease-out);
 						}
 					}
 				}
