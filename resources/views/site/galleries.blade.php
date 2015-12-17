@@ -16,7 +16,7 @@
                             </span>
                             <span class="separator"></span>
                             <span class="summary">
-                                {!! str_limit($category->description, 50, '...') !!}
+                                {!! str_limit($category->description, 75, '...') !!}
                             </span>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                             </span>
                             <span class="separator"></span>
                             <span class="summary">
-                                {!! str_limit($gallery->description, 50, '...') !!}
+                                {!! str_limit($gallery->description, 75, '...') !!}
                             </span>
                         </div>
                     </div>
@@ -51,10 +51,9 @@
                 </a>
             @endforeach
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <a href="{{ route_page($page) }}" class="button">{{ trans('site.global.action.back') }}</a>
-            </div>
+
+        <div class="actions clearfix">
+            <a href="{{ route_page($page) }}" class="button">{{ trans('site.global.action.back') }}</a>
         </div>
 
     @elseif (isset($gallery))   
@@ -65,11 +64,7 @@
                     <div class="mask">
                         <div>
                             <span class="title">
-                                {{ $picture->name }}
-                            </span>
-                            <span class="separator"></span>
-                            <span class="summary">
-                                {!! str_limit($picture->legend, 50, '...') !!}
+                                {{ $picture->title }}
                             </span>
                         </div>
                     </div>
@@ -79,7 +74,7 @@
             @endforeach
         </div>
 
-        <div class="clearfix">
+        <div class="actions clearfix">
             <a href="{{ route_page($page, [$gallery->category->slug]) }}" class="button">{{ trans('site.global.action.back') }}</a>
         </div>
 
@@ -93,18 +88,17 @@
     @parent
     
     <script>
-        $(window).load(function() {  
-        $('.portfolio').gridify( {
-            srcNode: '.item img',               // grid items (class, node)
-            margin: '10px',                     // margin in pixel, default: 0px
-            max_width: '300px',                 // dynamic gird item width if specified, (pixel)
-            resizable: true,                    // re-layout if window resize
-            loaded: function(elem) {
-                $(this).addClass('loaded');
-            }
+      $(window).load(function() {  
+            $('.portfolio').gridify( {
+                srcNode: '.item img',               // grid items (class, node)
+                margin: '10px',                     // margin in pixel, default: 0px
+                max_width: '400px',                 // dynamic gird item width if specified, (pixel)
+                resizable: true,                    // re-layout if window resize
+                loaded: function(elem) {
+                    $(this).addClass('loaded');
+                }
+            });
         });
-      
- });
     </script>
 
 @endsection

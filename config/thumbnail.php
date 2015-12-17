@@ -54,7 +54,7 @@ return [
 		'background' => [
 			'filters' => [
 				'max' 	=>  [1080,720],
-				'greyscale' => []
+				//'greyscale' => []
 			],
 			'quality' => 80
 		],
@@ -66,7 +66,7 @@ return [
 		],
 		'portfolio' => [
 			'filters' => [
-				'max' 	=>  [300,600],
+				'max' 	=>  [400,600],
 			]
 		],
 		'site' => [
