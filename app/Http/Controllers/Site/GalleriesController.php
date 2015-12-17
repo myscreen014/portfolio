@@ -22,9 +22,23 @@ class GalleriesController extends Controller
 		$category = new GalleriesCategoryModel();
 
     	if (is_null($categorySlug) && is_null($gallerySlug)) {
-    		$categories = $category->with(array('pictures' => function($query) {
-                $query->orderBy('ordering', 'ASC');
-            }))->get();
+    		$categories = $category->with(
+                array(
+                    'galleries' => function($query) {
+                        $query->with(
+                            array(
+                                'pictures' => function($query) {
+                                    $query->orderBy('ordering', 'ASC');
+                                }
+                            ))->orderBy('ordering', 'ASC');
+                    },
+                    'pictures' => function($query) {
+                        $query->orderBy('ordering', 'ASC');
+                    }
+                ))->has('galleries', '>', 0)->get();
+
+            varlog(count($categories));
+
     		return view('site.galleries', array(
     			'categories' => $categories 
     		));

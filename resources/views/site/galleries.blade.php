@@ -8,6 +8,7 @@
 
         <div class="portfolio clearfix">
             @foreach ($categories as $category)
+            
                 <a href="{{ route_page($page, [$category->slug]) }}" class="item">
                     <div class="mask">
                         <div>
@@ -23,6 +24,8 @@
                 
                     @if (isset($category->pictures[0]))
                         <img src="{{ route('picture', ['portfolio', $category->pictures[0]['name']] ) }}" />
+                    @else
+                        <img src="{{ route('picture', ['portfolio', $category->galleries[0]->pictures[0]['name']] ) }}" />
                     @endif 
                 </a>
             @endforeach
