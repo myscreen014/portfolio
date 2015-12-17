@@ -18,7 +18,7 @@
 | loading any of our classes later on. It feels nice to relax.
 |
 */
-if ('192.168.0.12' !=  $_SERVER['REMOTE_ADDR']) die();
+
 require __DIR__.'/../bootstrap/autoload.php';
 
 /*
