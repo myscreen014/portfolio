@@ -14,7 +14,7 @@ class PageModel extends Model
 {
     
     protected $table = 'pages';
-    protected $fillable = ['controller', 'name', 'content'];
+    protected $fillable = ['controller', 'menu', 'name', 'content'];
 
     /* Relations */
     public function files() {

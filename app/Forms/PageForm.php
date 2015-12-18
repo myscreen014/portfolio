@@ -18,10 +18,17 @@ class PageForm extends Form
         ->add('name', 'text', array(
             'label'=>trans('admin.page.field.name')
         ))
+         ->add('menu', 'select', array(
+            'label'=>trans('admin.page.field.menu'),
+            'choices' => array(
+                'primary'   => trans('admin.page.option.menu.primary'),
+                'secondary' => trans('admin.page.option.menu.secondary'),
+            )
+        ))
         ->add('controller', 'select', array(
             'label'=>trans('admin.page.field.controller'),
             'choices' => array(
-                'pages' => trans('admin.page.option.controller.pages'),
+                'pages'     => trans('admin.page.option.controller.pages'),
                 'galleries' => trans('admin.page.option.controller.galleries'),
             )
         ))

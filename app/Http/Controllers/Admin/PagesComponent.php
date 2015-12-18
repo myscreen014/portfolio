@@ -28,8 +28,12 @@ class PagesComponent extends Controller
 	{
 	
 		$page = new PageModel;
-		$pages = $page->orderBy('ordering', 'ASC')->get();
-		return view($this->defaultView, array('pages' => $pages));
+		return view($this->defaultView, array(
+			'pages' => array(
+				'primary' => $page->where('menu', 'primary')->orderBy('ordering', 'ASC')->get(),
+				'secondary' => $page->where('menu', 'secondary')->orderBy('ordering', 'ASC')->get()
+			)
+		));
 	}
 
 	public function create(FormBuilder $formBuilder, Request $request)
@@ -135,7 +139,7 @@ class PagesComponent extends Controller
 	public function update($id, PageRequest $request)
 	{
 		$page = PageModel::findOrFail($id);
-		$page->update($request->only('controller', 'name', 'content'));
+		$page->update($request->all());
 
 		// Get files added for this pages
 		$file = new FileModel();

@@ -27,18 +27,30 @@
 					<i class="fa fa-bars"></i>
 				</a>
 				<div class="spacer"></div>
-				<nav id="main-nav">
+				<nav>
 					<a href="#" id="nav-close-action" class="no-loading">
 						<i class="fa fa-close"></i>
 					</a>
 					<ul class="clearfix">
-	    				@foreach($site['pages'] as $item)
+	    				@foreach($site['pages']['primary'] as $item)
 							<li>
 								<a href="{{ route('page', $item->slug) }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
 							</li>
 						@endforeach
 					</ul>
+					@if(count($site['pages']['secondary'])>0)
+						<div class="spacer sticky"></div>
+						<ul class="clearfix">
+		    				@foreach($site['pages']['secondary'] as $item)
+								<li>
+									<a href="{{ route('page', $item->slug) }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
+								</li>
+							@endforeach
+						</ul>
+					@endif
 				</nav>
+
+				
 				<footer>
 					<ul class="social">
 						<li><a href=""><i class="fa fa-facebook-square"></i></a></li>

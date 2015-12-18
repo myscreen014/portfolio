@@ -11,32 +11,39 @@
 		@section('title')
 			{{ trans('admin.page.title.index') }}
 		@endsection
-
-		@if (count($pages)>0)
-			<table class="table table-hover sortable" data-model="page">
-				<thead>
-					<tr>
-						<th>{{ trans('admin.page.field.name') }}</th>
-						<th class="actions"></th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach($pages as $page)
-						<tr data-item-id="{{ $page->id }}">
-							<td>{{ $page->name }}</td>
-							<td class="actions">
-								<a href="{{ route('admin.pages.edit', [$page->id]) }}" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>
-								<a href="{{ route('admin.pages.delete', [$page->id]) }}" class="btn btn-danger btn-xs">{{ trans('admin.global.action.delete') }}</a>
-							</td>
+ 
+		
+		@foreach(array('primary','secondary') as $menu)
+			@if (count($pages[$menu])>0)
+				<table class="table table-hover sortable" data-model="page">
+					<thead>
+						<tr>
+							<th>{{ trans('admin.page.option.menu.'.$menu) }}</th>
+							<th class="actions"></th>
 						</tr>
-					@endforeach	
-				</tbody>
-			</table>
-		@else
+					</thead>
+					<tbody>
+						@foreach($pages[$menu] as $page)
+							<tr data-item-id="{{ $page->id }}">
+								<td>{{ $page->name }}</td>
+								<td class="actions">
+									<a href="{{ route('admin.pages.edit', [$page->id]) }}" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>
+									<a href="{{ route('admin.pages.delete', [$page->id]) }}" class="btn btn-danger btn-xs">{{ trans('admin.global.action.delete') }}</a>
+								</td>
+							</tr>
+						@endforeach	
+					</tbody>
+				</table>
+			@endif
+		@endforeach
+			
+		@if (count($pages['primary'])==0 && count($pages['secondary'])==0)
 			<div class="alert alert-danger" role="alert">
 				{{ trans('admin.page.message.nocontent') }}
 			</div>
 		@endif
+		
+		
 
 		<div class="actions">			
 			<a href="{{ route('admin.pages.create') }}" class="btn btn-success">{{ trans('admin.page.action.add') }}</a>

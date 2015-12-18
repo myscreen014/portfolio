@@ -22,18 +22,22 @@ class SiteMiddleware
 
         // Load pages
         $page = new PageModel;
-        $pages = $page->orderBy('ordering','ASC')->get();
-        $site['pages'] = $pages;
+        $site['pages'] = array(
+            'primary'   => $page->where('menu', 'primary')->orderBy('ordering','ASC')->get(),
+            'secondary' => $page->where('menu', 'secondary')->orderBy('ordering','ASC')->get(),
+        );
 
 
         // Load controllers pages
-        $controllerPages = array();
+        /* 
+       $controllerPages = array();
         foreach ($pages as $page) {
             if ($page->controller != 'pages') {
                 $controllerPages[$page->controller] = $page;
             }
         }
         $site['controllersPages'] = $controllerPages;
+        */
         
         View::share('site', $site);
         return $next($request);

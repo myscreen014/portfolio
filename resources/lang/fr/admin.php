@@ -112,6 +112,7 @@ return [
 
     'page' => [
         'field' => [
+            'menu'              => "Menu de la page",
             'controller'        => "Type de page",
             'name'              => "Nom de la page",
             'content'           => "Contenu de page",
@@ -119,6 +120,10 @@ return [
             'pictures'          => "Photos de la page",
         ],
         'option'                => [
+            'menu'        => [
+                'primary'       => "Menu principal",
+                'secondary'     => "Menu secondaire",
+            ],
             'controller'        => [
                 'pages'         => "Page classique",
                 'galleries'     => "Page galerie",
