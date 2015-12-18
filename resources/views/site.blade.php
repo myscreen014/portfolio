@@ -66,25 +66,28 @@
 						</ul>
 					@endif
 				</nav>
-
-				
-				<footer>
-					<ul class="social">
-						<li><a href=""><i class="fa fa-facebook-square"></i></a></li>
-						<li><a href=""><i class="fa fa-twitter-square"></i></a></li>
-					</ul>
-					<div class="spacer sticky"></div>
-					<p class="copyright">
-	    				{{ trans('site.global.copyright', array(
-	    					'year' => \Carbon\Carbon::now()->year,
-	    					'name' => trans('site.global.name')
-	    				)) }}
-    				</p>
-				</footer>
+				@section('footer')
+					<footer>
+						<ul class="social">
+							<li><a href=""><i class="fa fa-facebook-square"></i></a></li>
+							<li><a href=""><i class="fa fa-twitter-square"></i></a></li>
+						</ul>
+						<div class="spacer sticky"></div>
+						<p class="copyright">
+		    				{{ trans('site.global.copyright', array(
+		    					'year' => \Carbon\Carbon::now()->year,
+		    					'name' => trans('site.global.name')
+		    				)) }}
+	    				</p>
+					</footer>
+				@show
 			</div>
 			<div id="content">
 				@section('content')
 				@show
+				<div id="footer-mobile" class="mobile-only">
+					@yield('footer')
+				</div
 			</div>
 		</div>
 

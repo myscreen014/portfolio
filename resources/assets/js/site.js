@@ -12,12 +12,12 @@ var Site = {
 
 		/* Mobile navigation */
 		$('#nav-close-action').bind('click', function(event) {
-			$('nav').removeClass('open');
+			$('html').removeClass('open-nav');
 			event.preventDefault;
 			return false;
 		});
 		$('#nav-open-action').bind('click', function(event) {
-			$('nav').addClass('open');
+			$('html').addClass('open-nav');
 			event.preventDefault;
 			return false;
 		});

@@ -87,35 +87,12 @@ div {
 			}
 		}
 	}
-
-	footer {
-		bottom: 0;
-		left: 0;
-		padding: $spaceUnit;
-		position: absolute;
-		width: $widthSidebar;
-		.social {
-			li {
-				display: inline-block;
-				margin-right: 8px;
-				a, a:visited {
-					color: $colorText;
-					font-size: 22px;
-					&:hover {
-						color: $colorForeground;
-					}
-				}
-			}
-		} 
-		.copyright {
-			font-size: 9px;		
-		}
-	}
 }
 
 /* CONTENT */
 #content {
 	min-height: 100%;
+	position: relative;
 	padding: $spaceUnit;
 	padding-left: $widthSidebar + ($spaceUnit*2);
 	.backstretch-caption {
@@ -156,6 +133,30 @@ div {
 	}
 }
 
+/* FOOTER */
+footer {
+	bottom: 0;
+	left: 0;
+	padding: $spaceUnit;
+	position: absolute;
+	width: $widthSidebar;
+	.social {
+		li {
+			display: inline-block;
+			margin-right: 8px;
+			a, a:visited {
+				color: $colorText;
+				font-size: 22px;
+				&:hover {
+					color: $colorForeground;
+				}
+			}
+		}
+	} 
+	.copyright {
+		font-size: 9px;		
+	}
+}
 
 /* OVERLAYS
    ============================= */
