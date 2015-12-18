@@ -56,6 +56,7 @@ elixir(function(mix) {
         'mixins.scss',
         'reset.scss',
         'site.scss',
+        'responsive.scss',
     ], "public/css/site.all.css");
 
     mix.scripts([

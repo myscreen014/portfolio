@@ -25,8 +25,8 @@ class GalleryForm extends Form
             'label'=> trans('admin.gallery.field.name')
         ))
         ->add('description', 'textarea', array(
-            'label'=>trans('admin.gallery.field.content'),
-            'attr' => array('class' => 'form-control wysiwyg')
+            'label'=>trans('admin.gallery.field.description'),
+            'attr' => array('class' => 'form-control')
         ))
         ->add('pictures', 'files', 
             array(

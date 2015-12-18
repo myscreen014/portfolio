@@ -147,7 +147,7 @@ return [
         'field' => [
             'category'          => "Catégory de la galerie",
             'name'              => "Nom de la galerie",
-            'content'           => "Contenu de la galerie",
+            'description'       => "Description de la galerie",
             'pictures'          => "Photos de la galerie",
         ],
         'label' => [

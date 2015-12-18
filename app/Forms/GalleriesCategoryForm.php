@@ -21,7 +21,7 @@ class GalleriesCategoryForm extends Form
         ))
         ->add('description', 'textarea', array(
             'label'=>trans('admin.galleriescategory.field.description'),
-            'attr' => array('class' => 'form-control wysiwyg')
+            'attr' => array('class' => 'form-control')
         ))
         ->add('pictures', 'files', 
             array(
