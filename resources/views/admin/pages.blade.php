@@ -15,7 +15,7 @@
 		
 		@foreach(array('primary','secondary') as $menu)
 			@if (count($pages[$menu])>0)
-				<table class="table table-hover sortable" data-model="page">
+				<table class="table table-pages table-hover sortable" data-model="page">
 					<thead>
 						<tr>
 							<th>{{ trans('admin.page.option.menu.'.$menu) }}</th>
@@ -25,7 +25,7 @@
 					<tbody>
 						@foreach($pages[$menu] as $page)
 							<tr data-item-id="{{ $page->id }}">
-								<td>{{ $page->name }}</td>
+								<td><i class="fa {{ Config::get('administration.components.'.$page->controller.'.icon') }}"></i>{{ $page->name }}</td>
 								<td class="actions">
 									<a href="{{ route('admin.pages.edit', [$page->id]) }}" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>
 									<a href="{{ route('admin.pages.delete', [$page->id]) }}" class="btn btn-danger btn-xs">{{ trans('admin.global.action.delete') }}</a>
@@ -107,7 +107,7 @@
 		$('select#controller').bind('change', function() {
 			if ($(this).val() != 'pages') {
 				$('.form-field:not(.form-field-actions)').hide();
-				$('.form-field-name, .form-field-controller, .form-field-pictures').show();
+				$('.form-field-name, .form-field-menu, .form-field-controller, .form-field-pictures').show();
 			} else {
 				$('.form-field').show();
 			} 

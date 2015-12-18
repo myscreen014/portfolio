@@ -67,7 +67,21 @@ table {
 				padding-top: 0;
 			}
 		}
-		
+	}
+	&.table-pages {
+		tbody {
+			tr {
+				td {
+					i.fa {
+						display: inline-block;
+						font-size: 12px;
+						color: #bbb;
+						margin: 0 10px 0 0;
+						width: 16px;
+					}
+				}
+			}
+		}
 	}
 }
 
