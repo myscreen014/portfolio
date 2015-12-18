@@ -49,6 +49,7 @@ $backgroundColor: 	#333;
 			line-height: 100vh;
 			left: 0;
 			opacity: 0;
+			padding: 80px 0 0 0;
 			position: fixed;
 			top: -100vh;
 			text-align: center;
@@ -65,12 +66,13 @@ $backgroundColor: 	#333;
 				top: 30px;
 			}
 			ul {
-				display: inline-block;
+				display: block;
 				vertical-align: middle;
+				margin-bottom: 60px;
 				li {
 					a, a:visited {
-						font-size: 42px;
-						line-height: 80px;
+						font-size: 36px;
+						line-height: 60px;
 					}
 				}
 			}
