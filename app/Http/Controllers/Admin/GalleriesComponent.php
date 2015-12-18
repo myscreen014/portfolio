@@ -143,8 +143,10 @@ class GalleriesComponent extends Controller
 	public function update($id, GalleryRequest $request)
 	{
 
+		$gallery = GalleryModel::findOrFail($id);
+
 		// Validation pictures required !!!
-		if (empty($request->input('pictures_new'))) {
+		if (empty($request->input('pictures_new')) && count($gallery->pictures) == 0) {
 	   		return redirect(route('admin.galleries.edit', $id))
                 ->withErrors(
                 	array(
@@ -155,7 +157,6 @@ class GalleriesComponent extends Controller
                 ->withInput();
 	   	}
 
-		$gallery = GalleryModel::findOrFail($id);
 		$gallery->update($request->all());
 
 		// Get files pictures added for this gallery
