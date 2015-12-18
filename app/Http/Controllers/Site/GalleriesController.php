@@ -28,7 +28,7 @@ class GalleriesController extends Controller
                         $query->with(
                             array(
                                 'pictures' => function($query) {
-                                    $query->orderBy('ordering', 'ASC');
+                                    $query->OfOrder();
                                 }
                             ))->orderBy('ordering', 'ASC');
                     },
@@ -36,9 +36,6 @@ class GalleriesController extends Controller
                         $query->orderBy('ordering', 'ASC');
                     }
                 ))->has('galleries', '>', 0)->get();
-
-            varlog(count($categories));
-
     		return view('site.galleries', array(
     			'categories' => $categories 
     		));
@@ -46,6 +43,7 @@ class GalleriesController extends Controller
     	} elseif (is_null($gallerySlug)) {
             $gallery = new GalleryModel();
     		$category = $category
+                ->with(array('galleries'))
                 ->where('slug', $categorySlug)
                 ->first();
 			return view('site.galleries', array(
@@ -56,7 +54,7 @@ class GalleriesController extends Controller
             $gallery = $gallery->with(
                 array(
                     'pictures' => function($query) {
-                        $query->orderBy('ordering', 'ASC');
+                        $query->OfOrder();
                     }
                 ))->where('slug', $gallerySlug)
                 ->first();
