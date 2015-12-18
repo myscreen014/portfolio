@@ -5,10 +5,22 @@ var Site = {
 	init: function(i18n) {
 		Site.i18n = i18n['i18n'];
 		Site.loading(false);
-		$('a:not(.lightbox)').bind('click', function() {
+		$('a:not(.lightbox):not(.no-loading)').bind('click', function() {
 			Site.loading(true);
 		});
 		Site.initLightbox();
+
+		/* Mobile navigation */
+		$('#nav-close-action').bind('click', function(event) {
+			$('#main-nav').removeClass('open');
+			event.preventDefault;
+			return false;
+		});
+		$('#nav-open-action').bind('click', function(event) {
+			$('#main-nav').addClass('open');
+			event.preventDefault;
+			return false;
+		});
 		
 	},
 

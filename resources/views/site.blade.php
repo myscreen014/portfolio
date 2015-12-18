@@ -23,14 +23,22 @@
 		<div id="global">
 			<div id="sidebar">
 				<a href="{{ route('page') }}" class="brand">{!! trans('site.global.name') !!}</a>
+				<a href="#" id="nav-open-action" class="no-loading">
+					<i class="fa fa-bars"></i>
+				</a>
 				<div class="spacer"></div>
-				<ul class="clearfix">
-    				@foreach($site['pages'] as $item)
-						<li>
-							<a href="{{ route('page', $item->slug) }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
-						</li>
-					@endforeach
-				</ul>
+				<nav id="main-nav">
+					<a href="#" id="nav-close-action" class="no-loading">
+						<i class="fa fa-close"></i>
+					</a>
+					<ul class="clearfix">
+	    				@foreach($site['pages'] as $item)
+							<li>
+								<a href="{{ route('page', $item->slug) }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
+							</li>
+						@endforeach
+					</ul>
+				</nav>
 				<footer>
 					<ul class="social">
 						<li><a href=""><i class="fa fa-facebook-square"></i></a></li>

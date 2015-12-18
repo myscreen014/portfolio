@@ -60,25 +60,29 @@ div {
 			margin: 6px 0;
 		}
 	}
-	ul {
-		list-style: inside none;
-		margin: 0;
-		padding: 0;
-		li {
-			margin: 5px 0;
+	#nav-open-action { display: none; }
+	nav {
+		#nav-close-action { display: none; }
+		ul {
+			list-style: inside none;
+			margin: 0;
 			padding: 0;
-			a, a:visited {
-				display: block;
-				color: $colorText;
-				font-size: 14px;
-				line-height: 28px;
-				text-decoration: none;
-				text-transform: uppercase;
-				@include transition(all 0.1s 0.0s ease-out);
-				&:hover,
-				&.active {
-					color: $colorForeground;
+			li {
+				margin: 5px 0;
+				padding: 0;
+				a, a:visited {
+					display: block;
+					color: $colorText;
+					font-size: 14px;
+					line-height: 28px;
+					text-decoration: none;
+					text-transform: uppercase;
 					@include transition(all 0.1s 0.0s ease-out);
+					&:hover,
+					&.active {
+						color: $colorForeground;
+						@include transition(all 0.1s 0.0s ease-out);
+					}
 				}
 			}
 		}
@@ -90,7 +94,7 @@ div {
 		padding: $spaceUnit;
 		position: absolute;
 		width: $widthSidebar;
-		ul.social {
+		.social {
 			li {
 				display: inline-block;
 				margin-right: 8px;
@@ -187,7 +191,7 @@ div {
 /* SHORCODES
    ============================= */
 .portfolio {
-	margin: 0 -10px;
+	margin: -10px;
 	opacity: 0;
 	.item {
 		display: block;
@@ -196,7 +200,7 @@ div {
 		float: left;
 		width: 33.33%; // default with rewrite in javascript
 		.mask {
-			background-color: rgba(0,0,0,0.6);
+			background-color: transparentize(#000, 0.6);
 			height: 100%;
 			left: 0;
 			opacity: 0;
@@ -334,6 +338,7 @@ div {
 /* WYSIWYG
    ============================= */
 .wysiwyg {
+	overflow: hidden;
 	h1, h2, h3 {
 		text-transform: uppercase;
 		&:first-child {
