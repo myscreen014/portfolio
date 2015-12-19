@@ -19,12 +19,8 @@ class PagesController extends Controller
     public function index($slug=NULL, $params=NULL) {
         
     	if (is_null($slug)) {
-            $page = PageModel::with(array('pictures' => function($query) {
-                $query
-                ->where('model_field', 'pictures')
-                ->orderBy('ordering', 'ASC'); 
-
-            }))->orderBy('ordering','ASC')->firstOrFail();
+            $homePage = PageModel::orderBy('ordering', 'ASC')->first();
+            return redirect(route('page', [$homePage->slug]), 301);
     	} else {
     		$page = PageModel::where('slug', $slug)->with(array('pictures' => function($query) {
                 $query
@@ -38,8 +34,9 @@ class PagesController extends Controller
             
             if (!is_null($params)) { $arrayParams = explode('/',$params);
             } else { $arrayParams = array(); }
-            $Controller = new \App\Http\Controllers\Site\GalleriesController;    
-            $view = call_user_func_array(array($Controller, 'index'), $arrayParams);
+            $controllerName = '\App\Http\Controllers\Site\\'.$page->controller.'Controller';
+            $controller = new $controllerName;
+            $view = call_user_func_array(array($controller, 'index'), $arrayParams);
             return $view->with('page', $page);
         }
             

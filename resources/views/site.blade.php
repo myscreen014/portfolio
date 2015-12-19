@@ -14,7 +14,23 @@
 		<meta name="author" content="{{ trans('site.global.name') }}">
 		<meta name="generator" content="Laravel" />
 
-		<title>{{ trans('site.global.name') }}</title>
+		<title>
+			@if ($page->ordering == 0)
+				{{ trans('site.global.name') }} - 
+				@if ($page['meta-title'])
+					{{ $page['meta-title'] }}
+				@else
+					{{ $page->name }}
+				@endif
+			@else
+				@if ($page['meta-title'])
+					{{ $page['meta-title'] }}
+				@else
+					{{ $page->name }}
+				@endif
+				- {{ trans('site.global.name') }}
+			@endif			
+		</title>
 		
 		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,300,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{ elixir('css/site.all.css') }}">
