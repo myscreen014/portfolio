@@ -54,7 +54,26 @@ class PageForm extends Form
                 'model_field' => 'files',
                 'model_id' => $this->getData('model_id'),
             )
-        );
+        )
+
+        // Metas datas
+        ->add('group-metadatas', 'static', [
+            'tag' => 'h2', 
+            'attr' => ['class' => 'form-control-static'], 
+            'value' => trans('admin.page.form.group.metadatas')
+        ])
+
+        ->add('meta-title', 'text', array(
+            'wrapper' => ['class' => 'form-group'],
+            'label'=> trans('admin.page.field.meta-title'),
+            'attr' => array('class' => 'form-control')
+        ))
+        ->add('meta-description', 'textarea', array(
+            'wrapper' => ['class' => 'form-group'],
+            'label'=> trans('admin.page.field.meta-description'),
+            'attr' => array('class' => 'form-control')
+        ))
+        ;
 
     }
 }

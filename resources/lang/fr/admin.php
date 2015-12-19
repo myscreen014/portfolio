@@ -118,6 +118,13 @@ return [
             'content'           => "Contenu de page",
             'files'             => "Fichiers de la page",
             'pictures'          => "Photos de la page",
+            'meta-title'        => "Meta title",
+            'meta-description'  => "Meta description",
+        ],
+        'form' => [
+            'group' => [
+                'metadatas'    => "Informations de référencement de la page"
+            ]
         ],
         'option'                => [
             'menu'        => [
