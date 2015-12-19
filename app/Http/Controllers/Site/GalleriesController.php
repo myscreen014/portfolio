@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\GalleriesCategoryModel;
 use App\Models\GalleryModel;
 use Illuminate\Support\Facades\Route;
+use App\Models\PageModel;
 
 class GalleriesController extends Controller
 {
@@ -63,6 +64,21 @@ class GalleriesController extends Controller
             ));
         }
 
+    }
+
+    public function _sitemap(PageModel $page) {
+
+        $urls = array();
+        $galleries = GalleryModel::with('category')->get();
+        
+        foreach ($galleries as $key => $gallery) {
+            array_push($urls, array(
+                'loc' => route_page($page, [$gallery->category->slug, $gallery->slug]),
+                'priority' => 0.9
+            ));
+        }
+        
+        return $urls;
     }
 
 

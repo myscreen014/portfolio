@@ -27,18 +27,6 @@ class SiteMiddleware
             'secondary' => $page->where('menu', 'secondary')->orderBy('ordering','ASC')->get(),
         );
 
-
-        // Load controllers pages
-        /* 
-       $controllerPages = array();
-        foreach ($pages as $page) {
-            if ($page->controller != 'pages') {
-                $controllerPages[$page->controller] = $page;
-            }
-        }
-        $site['controllersPages'] = $controllerPages;
-        */
-        
         View::share('site', $site);
         return $next($request);
     }
