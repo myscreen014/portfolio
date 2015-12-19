@@ -52,8 +52,10 @@ Route::group(['prefix' => 'admin', 'middleware'=> ['auth', 'auth_administrator']
  
 
 /* SITE */
+// Sitemap
 Route::get('sitemap.xml', 'Site\SitemapController@index');
 
+// Files
 Route::get('files/{thumbnail}/{name}',['as' => 'picture', 'uses' => 'Site\FilesController@picture']);
 Route::get('files/{name}',['as' => 'file', 'uses' => 'Site\FilesController@file']);
 
@@ -78,6 +80,5 @@ Route::group(['prefix' => '/', 'middleware'=> 'site'], function () {
         'uses' => 'Site\PagesController@index'
     ))->where('params', '(.*)');
    
-
 });
 
