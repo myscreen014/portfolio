@@ -31,6 +31,11 @@
 				- {{ trans('site.global.name') }}
 			@endif			
 		</title>
+
+		@if ($page['meta-description'])
+			<meta name="description" content="{{ $page['meta-description'] }}" />
+		@endif
+
 		
 		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,300,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{ elixir('css/site.all.css') }}">
