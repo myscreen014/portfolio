@@ -52,6 +52,8 @@ Route::group(['prefix' => 'admin', 'middleware'=> ['auth', 'auth_administrator']
  
 
 /* SITE */
+Route::get('sitemap.xml', 'Site\SitemapController@index');
+
 Route::get('files/{thumbnail}/{name}',['as' => 'picture', 'uses' => 'Site\FilesController@picture']);
 Route::get('files/{name}',['as' => 'file', 'uses' => 'Site\FilesController@file']);
 
