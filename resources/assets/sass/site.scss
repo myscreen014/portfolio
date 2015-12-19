@@ -257,10 +257,6 @@ footer {
 					}
 				}
 			}
-			img {
-				@include blur(1px);
-				@include transition(all 0.1s ease-in);
-			}
 		}
 		html.touch & {
 			.mask {
@@ -281,9 +277,6 @@ footer {
 						}
 					}
 				}
-			}
-			img {
-				@include blur(0px);
 			}
 		}
 		

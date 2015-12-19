@@ -66,7 +66,7 @@
 
         <div class="portfolio">
             @foreach ($gallery->pictures as $picture)
-                <a href="{{ route('picture', ['zoom', $picture['name']] ) }}" data-caption-title="{{ $picture->title }}" data-caption-legend="{{ $picture->legend }}"  class="item lightbox" rel="gallery">
+                <a href="{{ route('picture', ['zoom', $picture['name']] ) }}" title="{{ $picture->title }}" class="item lightbox" rel="gallery">
                     <div class="mask">
                         <div>
                             @if ($picture->title)

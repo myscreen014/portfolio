@@ -39,7 +39,7 @@
 		
 		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,300,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{ elixir('css/site.all.css') }}">
-		<link rel="stylesheet" href="{{ asset('plugins/lightbox/jquery.fancybox.css') }}">
+		<link rel="stylesheet" href="{{ asset('plugins/lightbox/css/swipebox.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
 
 		{{-- Google analytics --}} 
@@ -121,7 +121,7 @@
 		<!-- JavaScripts
 		================================================== -->
 		<script src="{{ elixir('js/site.all.js') }}"></script>
-		<script src="{{ asset('plugins/lightbox/jquery.fancybox.pack.js') }}"></script>
+		<script src="{{ asset('plugins/lightbox/js/jquery.swipebox.min.js') }}"></script>
 
 		@section('javascript')
 
