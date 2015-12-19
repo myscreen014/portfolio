@@ -87,7 +87,7 @@
 				@show
 				<div id="footer-mobile" class="mobile-only">
 					@yield('footer')
-				</div
+				</div>
 			</div>
 		</div>
 

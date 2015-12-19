@@ -63,6 +63,7 @@ elixir(function(mix) {
         'jquery-1.11.3.min.js',
         'jquery.backstretch.min.js',
         'gridify-custom.js',
+        'modernizr-custom.js',
         'site.js'
     ], "public/js/site.all.js" );
 

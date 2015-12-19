@@ -69,9 +69,11 @@
                 <a href="{{ route('picture', ['zoom', $picture['name']] ) }}" data-caption-title="{{ $picture->title }}" data-caption-legend="{{ $picture->legend }}"  class="item lightbox" rel="gallery">
                     <div class="mask">
                         <div>
-                            <span class="title">
-                                {{ $picture->title }}
-                            </span>
+                            @if ($picture->title)
+                                <span class="title">
+                                    {{ $picture->title }}
+                                </span>
+                            @endif 
                         </div>
                     </div>
                     <img src="{{ route('picture', ['portfolio', $picture['name']] ) }}" />

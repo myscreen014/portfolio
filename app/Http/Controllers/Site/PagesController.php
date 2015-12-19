@@ -26,7 +26,12 @@ class PagesController extends Controller
 
             }))->orderBy('ordering','ASC')->firstOrFail();
     	} else {
-    		$page = PageModel::where('slug', $slug)->firstOrFail();
+    		$page = PageModel::where('slug', $slug)->with(array('pictures' => function($query) {
+                $query
+                ->where('model_field', 'pictures')
+                ->orderBy('ordering', 'ASC'); 
+
+            }))->firstOrFail();
     	}
 
         if ($page->controller != 'pages') {

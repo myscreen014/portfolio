@@ -9,7 +9,7 @@ var Site = {
 			Site.loading(true);
 		});
 		Site.initLightbox();
-
+ 
 		/* Mobile navigation */
 		$('#nav-close-action').bind('click', function(event) {
 			$('html').removeClass('open-nav');
@@ -21,6 +21,10 @@ var Site = {
 			event.preventDefault;
 			return false;
 		});
+
+		if (Modernizr.touch || 'ontouchstart' in window) { 
+   	 		$('html').addClass('touch');
+		}
 		
 	},
 
@@ -54,7 +58,7 @@ var Site = {
 		    	if ($(this.element).attr('data-caption-legend').length>0) {
 					this.title += '<span class="caption-legend"> - '+$(this.element).attr('data-caption-legend')+'</span>';	
 		    	}
-        	},
+        	}, 
 
 		}); 
 	},

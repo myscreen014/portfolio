@@ -76,12 +76,13 @@
                         });
 
                         columns[idx] += $item.innerHeight() + item_margin;
-
+    
                         if (columns[idx] > heightContainer ) {
 							heightContainer=columns[idx];
                         }
 
                     }
+    
                     $this.height(heightContainer + item_margin);
                     if (typeof options.loaded == 'function') {
                     	options.loaded.call($this);

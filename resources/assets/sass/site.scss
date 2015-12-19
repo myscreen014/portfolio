@@ -5,7 +5,8 @@
 $spaceUnit:			40px;
 $widthSidebar:	    240px;
 $colorText: 		#efefef;
-$colorForeground:	#3b9cff;
+//$colorForeground:	#3b9cff;
+$colorForeground:	#AA0000;
 $backgroundColor: 	#333;
 
 
@@ -31,8 +32,7 @@ div {
 	//outline: 1px solid blue; 
 }
 
-#global,
-#global > .row {
+#global {
 	height: 100%;
 	min-height: 100%;
 }
@@ -211,11 +211,12 @@ footer {
 			z-index: 2;
 			@include transition(all 0.4s ease);
 			div {
+				bottom: 16px;
 				color: $colorText;
 				font-size: 18px;
+				line-height: 20px;
 				position: absolute;
 				text-transform: uppercase;
-				bottom: 20px;
 				width: 100%;
 				span {
 					display: block;
@@ -261,10 +262,38 @@ footer {
 				@include transition(all 0.1s ease-in);
 			}
 		}
+		html.touch & {
+			.mask {
+				opacity: 1;
+				background-color: transparent;
+				@include transition(none);
+				@include box-shadow(inset 0 0 0 0 rgba(0,0,0,0.4));
+				div {
+					bottom: 0;
+					span {
+						background-color: transparentize(#000, 0.4);
+						bottom: 0;
+						padding: 8px 20px 8px 20px;
+						@include transition(all 0.2s 0.0s ease-out);
+						&.separator,
+						&.summary {
+							display: none;
+						}
+					}
+				}
+			}
+			img {
+				@include blur(0px);
+			}
+		}
+		
 	}
 	&.loaded {
 		opacity: 1;
 		@include transition(opacity 0.4s ease-in);
+	}
+	html.touch & .mask {
+		opacity: 1;
 	}
 }
 

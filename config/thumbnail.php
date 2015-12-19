@@ -53,7 +53,7 @@ return [
 		/* Site */
 		'background' => [
 			'filters' => [
-				'max' 	=>  [1080,720],
+				'max' 	=>  [1920,1080],
 				//'watermark'	=> ['img/watermark.png', 'bottom-right', 10, 10]
 				//'greyscale' => []
 			],
