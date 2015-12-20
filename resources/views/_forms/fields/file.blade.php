@@ -16,7 +16,7 @@
 				@endif 
 			</strong>
 			<small class="file-type overflow">{{ $file->type }}</small>
-			<p class="file-legend text-muted"><small>{{ str_limit($file->legend, 100) }}</small></p>
+			<p class="file-legend text-muted"><small>{{ str_limit($file->legend, 80) }}</small></p>
 		</span>
 		<span class="file-actions">
 			<span class="btn-group">
