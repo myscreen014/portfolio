@@ -31,11 +31,15 @@ class FilesComponent extends Controller {
 					if ($request->file($fileUploadedName)->isValid()) {
 						$fileUploaded = $request->file($fileUploadedName);
 
+						$uploadPath =  Config::get('app.uploads_path');
+						if (!File::exists($uploadPath)) {
+							File::makeDirectory($uploadPath);
+						}
 
 						// On créé l'instance File
 						$file = new FileModel();
 						$file->name = $fileUploaded->getClientOriginalName();
-						$file->path = $file->model_table.'/'.$file->name;
+						$file->path = $file->name;
 						$file->model_table = $modelTable;
 						$file->model_field = $modelField;
 						$file->model_id = $modelId;
@@ -60,31 +64,30 @@ class FilesComponent extends Controller {
 						} elseif (FileModel::where('hash', '<>', $file->hash)->where('path', $file->path)->count()>=1) {
 							// Un autre fichier avec le même nom existe déjà
 							// Recherche d'un nouveau nom
-
 							$cmpt = 1;
 							while (FileModel::where('hash', '<>', $file->hash)->where('path', $file->path)->count()>=1) {
 								$file->name = $pathInfosFile['filename'].'-'.($cmpt++).'.'.$pathInfosFile['extension'];
 								$file->path = $file->name;
 							}
-							
 						}
 						$isSave = $file->save();
-
 
 
 						/* 
 						 * Gestion du fichier sur le serveur 
 						 */
-						if ($file->isPicture()) {
-							$thumbnailDefault = Config::get('thumbnail.thumbnail_default');
-							$thumbnail = Image::make($fileUploaded->getRealPath());
-							$thumbnail->resize(1920, 1080, function ($constraint) {
-                                $constraint->aspectRatio();
-                                $constraint->upsize();
-                            });
-                            $isUploaded = $thumbnail->save($destinationPath.'/'.$file->name, 100);
-						} else {
-							$isUploaded = $fileUploaded->move($destinationPath, $file->name);	
+						if (!$isUploaded) {
+							if ($file->isPicture()) {
+								$thumbnailDefault = Config::get('thumbnail.thumbnail_default');
+								$thumbnail = Image::make($fileUploaded->getRealPath());
+								$thumbnail->resize(1920, 1080, function ($constraint) {
+	                                $constraint->aspectRatio();
+	                                $constraint->upsize();
+	                            });
+	                            $isUploaded = $thumbnail->save($destinationPath.'/'.$file->name, 100);
+							} else {
+								$isUploaded = $fileUploaded->move($destinationPath, $file->name);	
+							}
 						}
 						
 						if ($isSave && $isUploaded) {
