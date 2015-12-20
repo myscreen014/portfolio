@@ -1,9 +1,12 @@
 var Admin = {
 
 	_config: Array(),
+	_i18n: null,
 
-	init: function() {
+	init: function(i18n) {
+		Admin._i18n = i18n['i18n'];
 		Admin.modelSortable();
+		Admin.modelPublishable();
 	},
 
 	configInit: function(config) {
@@ -12,6 +15,40 @@ var Admin = {
 
 	configGet: function(key) {
 		return Admin._config[key];
+	},
+
+	modelPublishable: function() {
+		var table = $('table.publishable');
+		var model = $(table).attr('data-model');
+		table.find('tr').each(function() {
+			var itemTr = $(this);
+			var itemId = $(itemTr).attr('data-item-id');
+			$(this).find('.publish a').bind('click', function() {
+				$.ajax({
+	  				url: Admin.configGet('route_models_publish'),
+	  				method: 'POST',
+	  				data: {
+	  					'_token'  : Admin.configGet('csrf_token'),
+	  					'model'	  : model,
+	  					'itemId'  : itemId
+	  				}, 
+	  				success: function(publish) {
+	  					if (publish==true) {
+	  						itemTr.addClass('publish-1').removeClass('publish-0');
+	  					} else {
+	  						itemTr.addClass('publish-0').removeClass('publish-1');
+	  					}
+	  				},
+	  				error: function() {
+	  					Admin.Modal.alert(
+	  						Admin._i18n['global']['title']['error'],
+	  						Admin._i18n['global']['message']['error'],
+	  						'danger'
+	  					);
+	  				}
+	  			});
+			})
+		});
 	},
 
 	modelSortable: function() {
@@ -37,7 +74,7 @@ var Admin = {
     				itemsIds.push($(items[i]).attr('data-item-id'));
     			};
     			$.ajax({
-	  				url: Admin.configGet('route_reorder'),
+	  				url: Admin.configGet('route_models_reorder'),
 	  				method: 'POST',
 	  				data: {
 	  					'_token'  : Admin.configGet('csrf_token'),

@@ -12,20 +12,23 @@
 			{{ trans('admin.page.title.index') }}
 		@endsection
  
-		
 		@foreach(array('primary','secondary') as $menu)
 			@if (count($pages[$menu])>0)
-				<table class="table table-pages table-hover sortable" data-model="page">
+				<table class="table table-pages sortable publishable" data-model="page">
 					<thead>
 						<tr>
+							<th></th>
 							<th>{{ trans('admin.page.option.menu.'.$menu) }}</th>
 							<th class="actions"></th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach($pages[$menu] as $page)
-							<tr data-item-id="{{ $page->id }}">
-								<td><i class="fa {{ Config::get('administration.components.'.$page->controller.'.icon') }}"></i>{{ $page->name }}</td>
+							<tr data-item-id="{{ $page->id }}" class="publish-{{ $page->publish }}">
+								<td class="publish">
+									<a href="#"><i class="fa fa-square"></i></a>
+								</td>
+								<td><i class="fa page-controller {{ Config::get('administration.components.'.$page->controller.'.icon') }}"></i>{{ $page->name }}</td>
 								<td class="actions">
 									<a href="{{ route('admin.pages.edit', [$page->id]) }}" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>
 									<a href="{{ route('admin.pages.delete', [$page->id]) }}" class="btn btn-danger btn-xs">{{ trans('admin.global.action.delete') }}</a>

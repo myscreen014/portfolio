@@ -35,6 +35,12 @@ class PageModel extends Model
         return $this;
     }
 
+    /* Scopes */
+    public function scopePublished($query){
+        return $query
+            ->where('publish', 1);
+    }
+
      /* Boot */
     public static function boot() {   
         

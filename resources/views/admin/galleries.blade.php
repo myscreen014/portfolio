@@ -12,7 +12,7 @@
 		@endsection
 
 		@if (count($galleries)>0)
-			<table class="table table-striped sortable" data-model="gallery">
+			<table class="table sortable" data-model="gallery">
 				<thead>
 					<tr>
 						<th>{{ trans('admin.gallery.field.name') }}</th>

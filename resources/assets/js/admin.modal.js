@@ -16,13 +16,17 @@ $.extend(Admin, {
 			$('#modal-loading').modal('hide');
 		},
 
-		alert: function(title, message) {
+		alert: function(title, message, type) {
 
 			// preparing modal
 			var modal = Admin.Modal._get('modal-default');
-			var modalTitle = modal.find('.modal-title').html(title);
-			var modalBody = modal.find('.modal-body').html(message);
-
+			var modalBody = modal.find('.modal-title').html(title);
+			if (typeof type != 'undefined') {
+				var modalTitle = modal.find('.modal-body').html('<div class="alert alert-'+type+'" role="alert">'+message+'</div>');
+			} else {
+				var modalTitle = modal.find('.modal-body').html(message);
+			}
+			
 			// display modal
 			modal.modal();
 		},

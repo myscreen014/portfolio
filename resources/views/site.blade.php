@@ -17,24 +17,26 @@
 		
 		<?php $metaTitle = ''; ?>
 		@if (isset($_metaTitle))
-			<?php $metaTitle = $_metaTitle; ?>
-		@elseif ($page['meta-title'])
-			<?php $metaTitle = $page['meta-title']; ?>
-		@else
-			<?php $metaTitle = $page->name; ?>
+			<?php $metaTitle = $_metaTitle.' - '; ?>
+		@elseif (isset($page))
+			@if ($page['meta-title'])
+				<?php $metaTitle = $page['meta-title'].' - '; ?>
+			@else
+				<?php $metaTitle = $page->name.' - '; ?>
+			@endif
 		@endif
 		<title>
-			@if ($page->ordering == 0)
+			@if (isset($page) && $page->ordering == 0)
 				{{ trans('site.global.name') }} - {{ $metaTitle }}
 			@else
-				{{ $metaTitle }} - {{ trans('site.global.name') }}
+				{{ $metaTitle }} {{ trans('site.global.name') }}
 			@endif	
 		</title>
 
 		<?php $metaDescription = ''; ?>
 		@if (isset($_metaDescription))
 			<?php $metaDescription = $_metaDescription; ?>
-		@elseif ($page['meta-description'])
+		@elseif (isset($page) && $page['meta-description'])
 			<?php $metaDescription = $page['meta-description']; ?>
 		@endif
 		<meta name="description" content="{{ str_limit(rtrim($metaDescription), 160) }}" />

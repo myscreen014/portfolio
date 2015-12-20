@@ -12,7 +12,7 @@
 		@endsection
 
 		@if (count($categories)>0)
-			<table class="table table-striped sortable" data-model="galleriescategory">
+			<table class="table sortable" data-model="galleriescategory">
 				<thead>
 					<tr>
 						<th>{{ trans('admin.galleriescategory.field.name') }}</th>

@@ -30,8 +30,8 @@ elixir(function(mix) {
     /* SASS */
     mix.sass([
         'mixins.scss',
-        'admin.scss',
         'sb-admin-2.scss',
+        'admin.scss',
     ], "public/css/admin.all.css");
     mix.sass([
         'wysiwyg.scss'

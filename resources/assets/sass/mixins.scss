@@ -1,4 +1,10 @@
 /* CSS3 Mixins */
+@mixin animation($animation...) {
+	-webkit-animation: $animation;
+	-moz-animation: $animation;
+	-o-animation: $animation;
+	animation: $animation;
+}
 @mixin blur($blur) {
 	-webkit-filter: blur($blur);
 	-moz-filter: blur($blur);

@@ -48,7 +48,8 @@ Route::group(['prefix' => 'admin', 'middleware'=> ['auth', 'auth_administrator']
 
 
     // Models management
-     Route::post('models/reorder',['as' => 'admin.models.reorder', 'uses' => 'Admin\ModelsController@reorderAjax']);
+    Route::post('models/reorder',['as' => 'admin.models.reorder', 'uses' => 'Admin\ModelsController@reorderAjax']);
+    Route::post('models/publish',['as' => 'admin.models.publish', 'uses' => 'Admin\ModelsController@publishAjax']);
 
 });
  

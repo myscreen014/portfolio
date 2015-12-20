@@ -1,4 +1,9 @@
+/* IMPORT AND VARIABLES
+   ============================= */
 @import 'mixins';
+
+$colorDanger: 	#a94442;
+$colorSuccess:	#3c763d;
 
 /*	TEMPLATES 
 -----------------------------------------------------------------------------------------*/
@@ -31,8 +36,26 @@ table {
 	tbody {
 		tr {
 			td {
+				i.fa {
+					display: inline-block;
+					font-size: 12px;
+					color: #bbb;
+					width: 16px;
+				}
+				&.publish {
+					width: 20px;
+					a, a:visited {
+						display: inline-block;
+						text-align: center;
+						width: 20px;
+						i.fa {
+							margin: 0;
+							width: 10px;
+						}
+					}
+				}
 				&.actions {
-					 text-align: right;
+					text-align: right;
 				}
 			}
 			&.ui-state-highlight {
@@ -41,7 +64,16 @@ table {
 			&.ui-sortable-handle {
 				cursor: move;
 			}
-
+			&.publish-0 {
+				td.publish a i { color: $colorDanger }
+			}
+			&.publish-1 {
+				td.publish a i { color: $colorSuccess }
+			}
+			&.updated {
+				@include animation(tr-updated 0.4s ease);
+				 
+			}
 		}  
 	}
 	&.table-upload {
@@ -72,12 +104,8 @@ table {
 		tbody {
 			tr {
 				td {
-					i.fa {
-						display: inline-block;
-						font-size: 12px;
-						color: #bbb;
+					i.fa.page-controller {
 						margin: 0 10px 0 0;
-						width: 16px;
 					}
 				}
 			}

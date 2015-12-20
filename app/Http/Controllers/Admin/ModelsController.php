@@ -15,7 +15,7 @@ use Illuminate\Http\Response;
 class ModelsController extends Controller
 {
 
-	 public function reorderAjax(Request $request) {
+	public function reorderAjax(Request $request) {
     	if ($request->ajax()) {
     		$model = 'App\Models\\'.$request->input('model').'Model';
 	    	$itemIds = $request->input('itemsIds');
@@ -26,6 +26,19 @@ class ModelsController extends Controller
 				$item->update(); 
 			}
 	    	return (new Response(NULL, 200));
+	    } else {
+	    	return (new Response(NULL, 403));
+	    }
+    }
+
+    public function publishAjax(Request $request) {
+    	if ($request->ajax()) {
+    		$model = 'App\Models\\'.$request->input('model').'Model';
+	    	$itemId = $request->input('itemId');
+	    	$item = $model::findOrFail($itemId);
+			$item->publish = !$item->publish;
+			$item->update(); 
+	    	return (new Response((int)$item->publish, 200));
 	    } else {
 	    	return (new Response(NULL, 403));
 	    }

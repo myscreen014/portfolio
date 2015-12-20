@@ -23,8 +23,8 @@ class SiteMiddleware
         // Load pages
         $page = new PageModel;
         $site['pages'] = array(
-            'primary'   => $page->where('menu', 'primary')->orderBy('ordering','ASC')->get(),
-            'secondary' => $page->where('menu', 'secondary')->orderBy('ordering','ASC')->get(),
+            'primary'   => $page->published()->where('menu', 'primary')->orderBy('ordering','ASC')->get(),
+            'secondary' => $page->published()->where('menu', 'secondary')->orderBy('ordering','ASC')->get(),
         );
 
         View::share('site', $site);

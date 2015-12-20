@@ -40,8 +40,12 @@ return [
                 'error'         => 'Une erreur est survenue lors de la suppression !',
             ],
         ],
+        'title' => [
+            'error' => 'Erreur'
+        ],
         'message' => [
-            'upload_file_here'  => 'Glisser vos fichiers ici'
+            'upload_file_here'  => 'Glisser vos fichiers ici',
+            'error'             => 'Une erreur est survenu, si le problème persiste veuillez contacter le webmaster.'
         ],
         'action' => [
             'back'              =>  'Retour',
@@ -240,7 +244,7 @@ return [
                 'unaccepted'    => 'Fichier invalide',
             ],
             'count' => [
-                'short'         => "<span class=\"count-value\">:count</span> fichier(s)"
+                'short'         => '<span class=\"count-value\">:count</span> fichier(s)'
             ]
         ],
         'action' => [
@@ -260,9 +264,6 @@ return [
                 'error'         => 'Une erreur est survenue lors de la suppression de ce fichier !',
             ],
         ],
-        
-        
-        
     ]
     
 ];

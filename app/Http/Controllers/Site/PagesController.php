@@ -22,7 +22,7 @@ class PagesController extends Controller
             $homePage = PageModel::orderBy('ordering', 'ASC')->first();
             return redirect(route('page', [$homePage->slug]), 301);
     	} else {
-    		$page = PageModel::where('slug', $slug)->with(array('pictures' => function($query) {
+    		$page = PageModel::published()->where('slug', $slug)->with(array('pictures' => function($query) {
                 $query
                 ->where('model_field', 'pictures')
                 ->orderBy('ordering', 'ASC'); 
