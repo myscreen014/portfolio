@@ -67,6 +67,7 @@ return [
             'last_login'        => "Dernière connexion",
         ],
         'title' => [
+            'changepwd'         => "Modifier votre mot de passe",
             'index'             => "Liste des administrateurs",
             'create'            => "Ajout d'un administrateur",
             'edit'              => "Edition d'un administrateur",
@@ -77,6 +78,7 @@ return [
             'create'            => "Ajouter cet administrateur",
             'update'            => "Enregistrer cet administrateur",
             'delete'            => "Supprimer cet administrateur",
+            'changepwd'         => "Modifier mon mot de passe"
         ],
         'message'=> [
             'delete'            => "Êtes-vous certain de vouloir supprimer cet administrateur ?",
@@ -94,12 +96,16 @@ return [
             'email'             => "Email",
             'password'          => "Mot de passe",
             'password_confirmation'  => "Confirmation du mot de passe",
+            'password_new'      => "Nouveau mot de passe",
+            'password_new_confirmation'      => "Confirmation du nouveau mot de passe",
         ],
         'title' => [
             'login'             => "Se connecter",
             'register'          => "Inscription",
         ],
         'action' => [
+            'change_password'   => "Modifier mon mot de passe",
+            'profile'           => "Mon profil",
             'logout'            => "Déconnexion",
             'login'             => "Connexion",
             'register'          => "Inscription",

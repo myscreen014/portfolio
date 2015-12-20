@@ -62,7 +62,9 @@
 			{{ trans('admin.administrator.title.edit') }} <small>- {{ $administrator->name }}</small>
 		@endsection
 		
-		{!! form($form) !!}
+		@include('_forms.form', array(
+			'form' => $form
+		))
 
 	@endif
 
@@ -83,6 +85,19 @@
 				{!! Form::submit(trans('admin.administrator.action.delete'), ['class'=>'btn btn-danger'] ) !!}
 			{!! Form::close() !!}
 		</div>
+	@endif
+
+	{{-- CHANGEPWD --}}
+	@if (Route::currentRouteName() == 'admin.administrators.changepwd')
+
+		@section('title')
+			{{ trans('admin.administrator.title.changepwd') }}
+		@endsection
+
+		@include('_forms.form', array(
+			'form' => $form
+		))
+
 	@endif
 
 

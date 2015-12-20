@@ -14,6 +14,7 @@ use App\Models\AdministratorModel;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 use Event;
 use App\Listeners\UserEventListener;
@@ -34,6 +35,80 @@ class AdministratorsComponent extends Controller
 		$administrators = $administrator->get();
 		
 		return view($this->defaultView, array('administrators' => $administrators));
+	}
+
+	/**
+	 * Change administrator password
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function changepwd($id, FormBuilder $formBuilder) {
+		$administrator = AdministratorModel::findOrFail($id);
+
+		$administrator->password = NULL;
+
+		$form = $form = $formBuilder->create(
+			'App\Forms\AdministratorForm',
+			array(
+				'method' => 'PUT',
+				'url' => route('admin.administrators.updatepwd', $id),
+				'model' => $administrator
+			)
+		)
+		->remove('name')
+		->remove('email')
+		->remove('password_confirmation')
+		->add('password_new', 'password', array(
+			'label' => trans('admin.user.field.password_new'), 
+		))
+		->add('password_new_confirmation', 'password', array(
+			'label' => trans('admin.user.field.password_new_confirmation'), 
+		))
+		->add(trans('admin.administrator.action.changepwd'), 'submit', array(
+			'attr' => array('class' => 'btn btn-success'),
+			'wrapper' => array('class' => 'form-group actions'),
+			'others_actions' => array(
+				'back' => array(
+					'value' => trans('admin.global.action.back'), 
+					'class' => 'btn-default',
+					'url' => route('admin.administrators.index')
+				)
+			)
+		));
+
+		return view($this->defaultView, array('form' => $form));
+	}
+
+	public function updatepwd($id, Request $request) {
+		
+		$administrator = AdministratorModel::findOrFail($id);
+
+		$validator = Validator::make($request->all(), [
+			'password' => 'required',
+			'password_new' => 'required|confirmed|min:6',
+		]);
+
+		if (!Auth::once(['email' => $administrator->email, 'password' => $request->password])) {
+			return redirect(route('admin.administrators.changepwd', $id))
+				->withErrors(
+					array('password' => trans('auth.failed'))
+				)->withInput();
+		}
+
+		if ($validator->fails()) {
+			return redirect(route('admin.administrators.changepwd', $id))
+				->withErrors($validator)
+				->withInput();
+		}
+		
+		$administrator->password = bcrypt($request->password_new);
+		$administrator->save();
+		Session::flash('feedback', array(
+			'message'=> trans('admin.global.feedback.update.ok'),
+			'type' => 'success'
+		));
+
+		return redirect(route('admin.administrators.index'));
 	}
 
 	/**
@@ -108,12 +183,17 @@ class AdministratorsComponent extends Controller
 			'attr' => array('class' => 'btn btn-primary'),
 			'wrapper' => array('class' => 'form-group actions'),
 			'others_actions' => array(
-                'back' => array(
-                    'value' => trans('admin.global.action.back'), 
-                    'class' => 'btn-default',
-                    'url' => route('admin.administrators.index')
-                )
-            )
+				'back' => array(
+					'value' => trans('admin.global.action.back'), 
+					'class' => 'btn-default',
+					'url' => route('admin.administrators.index')
+				),
+				'changepwd' => array(
+					'value' => trans('admin.administrator.action.changepwd'), 
+					'class' => 'btn-default btn-info',
+					'url' => route('admin.administrators.changepwd', $id)
+				)
+			)
 		));
 
 		return view($this->defaultView, array(

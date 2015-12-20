@@ -49,7 +49,8 @@
                                    {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                 				<ul class="dropdown-menu">
-                                    <li><a href="{{ route('logout') }}">Deconnexion</a></li>
+                					<li><a href="{{ route('admin.administrators.edit', Auth::user()->id) }}">{{ trans('admin.user.action.profile') }}</a></li>
+                                	<li><a href="{{ route('logout') }}">{{ trans('admin.user.action.logout') }}</a></li>
                 				</ul>
               				</li>
                         @else

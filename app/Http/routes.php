@@ -32,6 +32,8 @@ Route::group(['prefix' => 'admin', 'middleware'=> ['auth', 'auth_administrator']
 
     // Administrators management
     Route::get('administrators/{id}/delete', array('as' => 'admin.administrators.delete', 'uses' => 'Admin\AdministratorsComponent@delete'));
+    Route::get('administrators/{id}/changepwd', array('as' => 'admin.administrators.changepwd', 'uses' => 'Admin\AdministratorsComponent@changepwd'));
+    Route::put('administrators/{id}/updatepwd', array('as' => 'admin.administrators.updatepwd', 'uses' => 'Admin\AdministratorsComponent@updatepwd'));
     Route::resource('administrators', 'Admin\AdministratorsComponent');
 
     // Files management
