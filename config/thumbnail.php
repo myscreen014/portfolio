@@ -61,9 +61,9 @@ return [
 		],
 		'zoom' => [
 			'filters' => [
-				'max' 	=>  [1080,720]
+				'max' 	=>  [1920,1080],
 			],
-			'quality' => 80
+			'quality' => 100
 		],
 		'portfolio' => [
 			'filters' => [

@@ -22,6 +22,7 @@ class GalleriesController extends Controller
 
 		$category = new GalleriesCategoryModel();
 
+        // Display Categories
     	if (is_null($categorySlug) && is_null($gallerySlug)) {
     		$categories = $category->with(
                 array(
@@ -38,9 +39,10 @@ class GalleriesController extends Controller
                     }
                 ))->has('galleries', '>', 0)->get();
     		return view('site.galleries', array(
-    			'categories' => $categories 
+    			'categories' => $categories
     		));
 
+        // Display Galleries of category 
     	} elseif (is_null($gallerySlug)) {
             $gallery = new GalleryModel();
     		$category = $category
@@ -48,8 +50,12 @@ class GalleriesController extends Controller
                 ->where('slug', $categorySlug)
                 ->first();
 			return view('site.galleries', array(
-    			'category' => $category
+    			'category' => $category,
+                '_metaTitle' => $category->name,
+                '_metaDescription' => $category->description,
     		));
+
+        // Display Gallery
     	} else {
             $gallery = new GalleryModel();
             $gallery = $gallery->with(
@@ -60,7 +66,9 @@ class GalleriesController extends Controller
                 ))->where('slug', $gallerySlug)
                 ->first();
             return view('site.galleries', array(
-                'gallery'   => $gallery
+                'gallery'   => $gallery,
+                '_metaTitle' => $gallery->category->name.' - '.$gallery->name,
+                '_metaDescription' => $gallery->description,
             ));
         }
 

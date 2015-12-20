@@ -14,27 +14,30 @@
 		<meta name="author" content="{{ trans('site.global.name') }}">
 		<meta name="generator" content="Laravel" />
 
+		
+		<?php $metaTitle = ''; ?>
+		@if (isset($_metaTitle))
+			<?php $metaTitle = $_metaTitle; ?>
+		@elseif ($page['meta-title'])
+			<?php $metaTitle = $page['meta-title']; ?>
+		@else
+			<?php $metaTitle = $page->name; ?>
+		@endif
 		<title>
 			@if ($page->ordering == 0)
-				{{ trans('site.global.name') }} - 
-				@if ($page['meta-title'])
-					{{ $page['meta-title'] }}
-				@else
-					{{ $page->name }}
-				@endif
+				{{ trans('site.global.name') }} - {{ $metaTitle }}
 			@else
-				@if ($page['meta-title'])
-					{{ $page['meta-title'] }}
-				@else
-					{{ $page->name }}
-				@endif
-				- {{ trans('site.global.name') }}
-			@endif			
+				{{ $metaTitle }} - {{ trans('site.global.name') }}
+			@endif	
 		</title>
 
-		@if ($page['meta-description'])
-			<meta name="description" content="{{ $page['meta-description'] }}" />
+		<?php $metaDescription = ''; ?>
+		@if (isset($_metaDescription))
+			<?php $metaDescription = $_metaDescription; ?>
+		@elseif ($page['meta-description'])
+			<?php $metaDescription = $page['meta-description']; ?>
 		@endif
+		<meta name="description" content="{{ str_limit(rtrim($metaDescription), 160) }}" />
 
 		
 		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,300,700' rel='stylesheet' type='text/css'>

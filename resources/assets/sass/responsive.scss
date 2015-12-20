@@ -64,7 +64,7 @@ $backgroundColor: 	#333;
 			text-align: center;
 			width: 100%;
 			z-index: 999;
-			@include transition(all 0.4s ease-out);
+			@include transition(all 0.2s ease-out);
 			#nav-close-action {
 				display: block;
 				color: $colorText;
@@ -74,7 +74,7 @@ $backgroundColor: 	#333;
 				position: absolute;
 				top: 30px;
 			}
-			ul {
+			ul {  
 				display: block;
 				vertical-align: middle;
 				margin-bottom: 15px;
@@ -88,7 +88,7 @@ $backgroundColor: 	#333;
 			html.open-nav & {
 				opacity: 1;
 				top: 0;
-				@include transition(all 0.4s ease-out);
+				@include transition(all 0.2s ease-out);
 			}
 		}
 		footer {

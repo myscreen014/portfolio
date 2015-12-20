@@ -107,7 +107,7 @@
 		$('select#controller').bind('change', function() {
 			if ($(this).val() != 'pages') {
 				$('.form-field:not(.form-field-actions)').hide();
-				$('.form-field-name, .form-field-menu, .form-field-controller, .form-field-pictures').show();
+				$('.form-field-name, .form-field-menu, .form-field-controller, .form-field-pictures, .form-field-group-metadatas, .form-field-meta-title, .form-field-meta-description').show();
 			} else {
 				$('.form-field').show();
 			} 

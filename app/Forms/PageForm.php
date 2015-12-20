@@ -59,7 +59,8 @@ class PageForm extends Form
         // Metas datas
         ->add('group-metadatas', 'static', [
             'tag' => 'h2', 
-            'attr' => ['class' => 'form-control-static'], 
+            'label' => false,
+            'attr' => ['class' => 'form-group-title'], 
             'value' => trans('admin.page.form.group.metadatas')
         ])
 

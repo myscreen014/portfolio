@@ -110,6 +110,9 @@ ul.errors {
 }
 form {
 	.form-group {
+		h2.form-group-title {
+			margin-top: 40px;
+		}
 		&.form-group-wysiwyg {
 			min-height: 300px;
 		}
