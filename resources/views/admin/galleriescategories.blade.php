@@ -12,9 +12,10 @@
 		@endsection
 
 		@if (count($categories)>0)
-			<table class="table sortable" data-model="galleriescategory">
+			<table class="table sortable publishable" data-model="galleriescategory">
 				<thead>
 					<tr>
+						<th></th>
 						<th>{{ trans('admin.galleriescategory.field.name') }}</th>
 						<th class="actions"></th>
 					</tr>
@@ -22,7 +23,10 @@
 				<tbody>
 
 					@foreach($categories as $category)
-						<tr data-item-id="{{ $category->id }}">
+						<tr data-item-id="{{ $category->id }}" class="publish-{{ $category->publish }}">
+							<td class="publish">
+								<a href="#"><i class="fa fa-square"></i></a>
+							</td>
 							<td>{{ $category->name }}</td>
 							<td class="actions">
 								<a href="{{ route('admin.galleries.categories.edit', [$category->id]) }}" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>

@@ -12,9 +12,10 @@
 		@endsection
 
 		@if (count($galleries)>0)
-			<table class="table sortable" data-model="gallery">
+			<table class="table sortable publishable" data-model="gallery">
 				<thead>
 					<tr>
+						<th></th>
 						<th>{{ trans('admin.gallery.field.name') }}</th>
 						<th>{{ trans('admin.gallery.field.category') }}</th>
 						<th class="actions"></th>
@@ -22,7 +23,10 @@
 				</thead>
 				<tbody>
 					@foreach($galleries as $gallery)
-						<tr data-item-id="{{ $gallery->id }}">
+						<tr data-item-id="{{ $gallery->id }}" class="publish-{{ $gallery->publish }}">
+							<td class="publish">
+								<a href="#"><i class="fa fa-square"></i></a>
+							</td>
 							<td>{{ $gallery->name }}</td>
 							<td>{{ $gallery->category->name }}</td>
 							<td class="actions">

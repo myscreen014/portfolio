@@ -24,7 +24,7 @@ class GalleriesController extends Controller
 
         // Display Categories
     	if (is_null($categorySlug) && is_null($gallerySlug)) {
-    		$categories = $category->with(
+    		$categories = $category->published()->with(
                 array(
                     'galleries' => function($query) {
                         $query->with(
@@ -37,7 +37,10 @@ class GalleriesController extends Controller
                     'pictures' => function($query) {
                         $query->orderBy('ordering', 'ASC');
                     }
-                ))->has('galleries', '>', 0)->get();
+                ))->has('galleries', '>', 0)->whereHas('galleries', function($query){
+                    $query->published();
+                }
+            )->get();
     		return view('site.galleries', array(
     			'categories' => $categories
     		));
@@ -46,7 +49,9 @@ class GalleriesController extends Controller
     	} elseif (is_null($gallerySlug)) {
             $gallery = new GalleryModel();
     		$category = $category
-                ->with(array('galleries'))
+                ->with(array('galleries' => function($query) {
+                    $query->published();
+                }))
                 ->where('slug', $categorySlug)
                 ->first();
 			return view('site.galleries', array(
@@ -58,7 +63,7 @@ class GalleriesController extends Controller
         // Display Gallery
     	} else {
             $gallery = new GalleryModel();
-            $gallery = $gallery->with(
+            $gallery = $gallery->published()->with(
                 array(
                     'pictures' => function($query) {
                         $query->OfOrder();

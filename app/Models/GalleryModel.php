@@ -23,6 +23,12 @@ class GalleryModel extends Model
             ->where('model_field', 'pictures');
     }
 
+    /* Scopes */
+    public function scopePublished($query){
+        return $query
+            ->where('publish', 1);
+    }
+
   	/* Boot */
     public static function boot() {   
         
