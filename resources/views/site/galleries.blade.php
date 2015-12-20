@@ -8,7 +8,6 @@
 
         <div class="portfolio clearfix">
             @foreach ($categories as $category)
-            
                 <a href="{{ route_page($page, [$category->slug]) }}" class="item">
                     <div class="mask">
                         <div>
@@ -21,7 +20,6 @@
                             </span>
                         </div>
                     </div>
-                
                     @if (isset($category->pictures[0]))
                         <img src="{{ route('picture', ['portfolio', $category->pictures[0]['name']] ) }}" />
                     @else
@@ -57,7 +55,6 @@
         @else
             <p>{{ trans('site.galleries.message.nocontent') }}</p>
         @endif    
-
         <div class="actions clearfix">
             <a href="{{ route_page($page) }}" class="button">{{ trans('site.global.action.back') }}</a>
         </div>
@@ -78,10 +75,8 @@
                     </div>
                     <img src="{{ route('picture', ['portfolio', $picture['name']] ) }}" />
                 </a>
-                
             @endforeach
         </div>
-
         <div class="actions clearfix">
             <a href="{{ route_page($page, [$gallery->category->slug]) }}" class="button">{{ trans('site.global.action.back') }}</a>
         </div>
