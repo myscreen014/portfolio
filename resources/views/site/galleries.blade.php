@@ -14,10 +14,11 @@
                             <span class="title overflow">
                                 {{ $category->name }}
                             </span>
-                            <span class="separator"></span>
-                            <span class="summary">
-                                {!! str_limit($category->description, 80, '...') !!}
-                            </span>
+                            @if ($category->description)
+                                <span class="summary">
+                                    {!! str_limit($category->description, 80, '...') !!}
+                                </span>
+                            @endif
                         </div>
                     </div>
                     @if (isset($category->pictures[0]))
@@ -40,10 +41,11 @@
                                 <span class="title overflow">
                                     {{ $gallery->name }}
                                 </span>
-                                <span class="separator"></span>
-                                <span class="summary">
-                                    {!! str_limit($gallery->description, 75, '...') !!}
-                                </span>
+                                @if ($gallery->description)
+                                    <span class="summary">
+                                        {!! str_limit($gallery->description, 75, '...') !!}
+                                    </span>
+                                @endif 
                             </div>
                         </div>
                         @if (isset($gallery->pictures[0]))
