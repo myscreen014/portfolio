@@ -23,7 +23,7 @@ var Admin = {
 		table.find('tr').each(function() {
 			var itemTr = $(this);
 			var itemId = $(itemTr).attr('data-item-id');
-			$(this).find('.publish a').bind('click', function() {
+			$(this).find('.publish a').bind('click', function(event) {
 				$.ajax({
 	  				url: Admin.configGet('route_models_publish'),
 	  				method: 'POST',
@@ -33,6 +33,7 @@ var Admin = {
 	  					'itemId'  : itemId
 	  				}, 
 	  				success: function(publish) {
+	  					Admin.highlightTableTr(itemTr);
 	  					if (publish==true) {
 	  						itemTr.addClass('publish-1').removeClass('publish-0');
 	  					} else {
@@ -47,6 +48,8 @@ var Admin = {
 	  					);
 	  				}
 	  			});
+				event.preventDefault();
+	  			return false;
 			})
 		});
 	},
@@ -67,6 +70,9 @@ var Admin = {
       		create: function() {
       			model = $(this).attr('data-model');
       		},
+      		start: function(event, ui) {
+      			$('.ui-state-highlight').innerHeight($(ui.item).innerHeight());
+      		},
     		stop: function(event, ui){
     			var itemsIds = Array();
     			var items = $(this).find('tbody tr');
@@ -84,6 +90,13 @@ var Admin = {
 	  			});
     		}
     	});
+	},
+
+	highlightTableTr: function(itemTr) {
+		itemTr.addClass('hightlight');
+		setTimeout(function() {
+			itemTr.removeClass('hightlight')
+		}, 1000)
 	},
 
 	addToSerializedField: function(element, value) {

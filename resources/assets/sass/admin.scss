@@ -5,6 +5,13 @@
 $colorDanger: 	#a94442;
 $colorSuccess:	#3c763d;
 
+@keyframes hightlight {
+    0%   { background-color: #fff; }
+    50%  { background-color: #eee; }
+    100% { background-color: #fff; }
+}
+
+
 /*	TEMPLATES 
 -----------------------------------------------------------------------------------------*/
 #side-menu {
@@ -25,6 +32,7 @@ $colorSuccess:	#3c763d;
 table {
 	thead {
 		tr {
+			background-color: #fff;
 			th {
 				font-weight: bold;
 				&.actions {
@@ -35,6 +43,7 @@ table {
 	} 
 	tbody {
 		tr {
+			background-color: #fff;
 			td {
 				i.fa {
 					display: inline-block;
@@ -59,10 +68,13 @@ table {
 				}
 			}
 			&.ui-state-highlight {
-				border-bottom: 2px solid transparent;
+				background-color: #eee;
 			}
 			&.ui-sortable-handle {
 				cursor: move;
+			}
+			&.ui-sortable-helper {
+				@include box-shadow(0px 0px 10px rgba(0,0,0,.3));
 			}
 			&.publish-0 {
 				td.publish a i { color: $colorDanger }
@@ -70,9 +82,8 @@ table {
 			&.publish-1 {
 				td.publish a i { color: $colorSuccess }
 			}
-			&.updated {
-				@include animation(tr-updated 0.4s ease);
-				 
+			&.hightlight {
+				@include animation(hightlight 1s ease)
 			}
 		}  
 	}
