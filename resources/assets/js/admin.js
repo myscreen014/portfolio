@@ -86,6 +86,13 @@ var Admin = {
 	  					'_token'  : Admin.configGet('csrf_token'),
 	  					'model'	  : model,
 	  					'itemsIds': itemsIds
+	  				},
+	  				error: function() {
+	  					Admin.Modal.alert(
+	  						Admin._i18n['global']['title']['error'],
+	  						Admin._i18n['global']['message']['error'],
+	  						'danger'
+	  					);
 	  				}
 	  			});
     		}
