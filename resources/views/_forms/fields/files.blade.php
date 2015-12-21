@@ -106,7 +106,7 @@
 		  		clickable: '#{{ $name }}-action-add-files',
 		  		autoProcessQueue: false,
 		  		url: "{{ route('admin.files.store') }}",
-		  		parallelUploads: 5,
+		  		parallelUploads: 1,
 	 	  		acceptedFiles: "{{ $options['dropzone_acceptedFiles'] }}",
 		  		previewsContainer: '#{{ $name }}-files-container',
 		  		previewTemplate: '<div style="display:none"></div>',
@@ -153,6 +153,11 @@
 							);
 						};
 	  				});
+					this.on("complete", function(file) {
+  						this.removeFile(file);
+  						dropzone.processQueue();
+					});
+
 					this.on("sending", function(file, xhr, formData) {
 				   		formData.append("_token", "{{ csrf_token() }}");
 				   		formData.append("model_table", "{{ $options['model_table'] }}");
