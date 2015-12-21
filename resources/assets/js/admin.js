@@ -3,14 +3,12 @@ var Admin = {
 	_config: Array(),
 	_i18n: null,
 
-	init: function(i18n) {
+	init: function(config, i18n) {
+		Admin._config = config;
 		Admin._i18n = i18n['i18n'];
+
 		Admin.modelSortable();
 		Admin.modelPublishable();
-	},
-
-	configInit: function(config) {
-		Admin._config = config;
 	},
 
 	configGet: function(key) {

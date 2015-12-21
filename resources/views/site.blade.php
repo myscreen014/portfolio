@@ -45,6 +45,7 @@
 		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,300,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{ elixir('css/site.all.css') }}">
 		<link rel="stylesheet" href="{{ asset('plugins/lightbox/css/swipebox.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('plugins/vegas-master/vegas.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
 
 		{{-- Google analytics --}} 
@@ -109,6 +110,7 @@
 				@show
 			</div>
 			<div id="content">
+				<div class="vegas-caption"></div>
 				@section('content')
 				@show
 				<div id="footer-mobile" class="mobile-only">
@@ -127,6 +129,7 @@
 		================================================== -->
 		<script src="{{ elixir('js/site.all.js') }}"></script>
 		<script src="{{ asset('plugins/lightbox/js/jquery.swipebox.min.js') }}"></script>
+		<script src="{{ asset('plugins/vegas-master/vegas.min.js') }}"></script>
 
 		@section('javascript')
 
@@ -146,30 +149,39 @@
 					var backgroundPictures = new Array();
 					@foreach($page->pictures as $picture)
 						backgroundPictures.push({
-							'picture' : "{{ route('picture', ['background', $picture['name']] ) }}",
+							'src' : "{{ route('picture', ['background', $picture['name']] ) }}",
 							'title'   : "{{ $picture['title'] }}",
 							'legend'  : "{{ $picture['legend'] }}"
 						});
 					@endforeach
 
 					$(document).ready(function() {
-						var options = {
-	            			fade: 700,
-	            			duration: 6000
-	        			};
-						var pictures = $.map(backgroundPictures, function(i) { return i.picture; });
-						$.backstretch(pictures, {duration: options.duration, fade: options.fade});
-						$(window).on("backstretch.show", function(e, instance) {
-							var title = backgroundPictures[instance.index].title;
-							var legend = backgroundPictures[instance.index].legend;
-							var caption = '';
-							if (title!='') caption+='<span class="title">'+title+'</span>';
-							if (legend!='') caption+='<span class="legend">'+legend+'</span>';
-							if (caption!='') $(".backstretch-caption").html(caption).addClass('current');
-						});
-						$(window).on("backstretch.before", function(e, instance) {
-							$(".backstretch-caption").removeClass('current');
-						});
+						
+						var vegasSlideshow = $('body').vegas({
+						 	delay: 5000,
+					        slides: backgroundPictures,
+					        transition: 'fade',
+					        timer: false,
+					        transitionDuration: 1000,
+					        animation: [ 'kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight' ],
+					        overlay: true,
+					        walk: function (index, slideSettings) {
+					        	if (slideSettings.title != '') {
+					        		$('.vegas-caption').html(slideSettings.title);
+						        	setTimeout(function() {
+							        	$('.vegas-caption').animate({
+							        		opacity: 1,
+							        	}, 1000, function() {
+							        		setTimeout(function() {
+							        			$('.vegas-caption').animate({
+							        				opacity: 0,
+							        			}, 1000);
+							        		}, 2500)
+							        	})
+						        	}, 500);
+					        	}
+    						}
+					    });
 					})
 
 				</script>

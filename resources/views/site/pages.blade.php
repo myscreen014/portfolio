@@ -2,8 +2,6 @@
 
 
 @section('content')
-
-	<div class="backstretch-caption"></div>
 	
 	@if ($page->content)
 		<div class="wysiwyg mask-content">
@@ -11,6 +9,5 @@
 		</div>
 	@endif
 	
-
 @endsection
 

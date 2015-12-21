@@ -5,8 +5,8 @@
 $spaceUnit:			40px;
 $widthSidebar:	    240px;
 $colorText: 		#efefef;
-//$colorForeground:	#3b9cff;
-$colorForeground:	#AA0000;
+$colorForeground:	#3b9cff;
+//$colorForeground:	#AA0000;
 $backgroundColor: 	#333;
 
 
@@ -95,37 +95,16 @@ div {
 	position: relative;
 	padding: $spaceUnit;
 	padding-left: $widthSidebar + ($spaceUnit*2);
-	.backstretch-caption {
-		background-color: transparentize(#000, 0.0);
-		bottom: 0;
-		max-width: 60%;
+	.vegas-caption {
+		background-color: #000;
+		bottom: $spaceUnit;
+		padding: 2px 14px;
 		opacity: 0;
-		padding: 5px 20px;
 		position: absolute;
 		right: $spaceUnit;
-		@include transition(all 0.2s ease-in);
-		@include box-shadow( 0 1px 20px rgba(0,0,0,0.4));
-		span {
-			display: block;
-			margin: 15px 0px;
-			padding: 0px;
-			&.title {
-				font-size: 24px;
-				text-transform: uppercase;
-			}
-			&.legend {
-				color: $colorText;
-				font-size: 16px;
-				line-height: 20px;
-			}
-		}
-		&.current {
-			opacity: 1;
-			bottom: $spaceUnit;
-			@include transition(all 0.4s ease-out);
-		}    
+		text-transform: uppercase;
+		z-index: 999;
 	}
-
 	.mask-content {
 		background-color: transparentize(#000, 0.4);
 		padding: $spaceUnit;
