@@ -50,7 +50,12 @@ class GalleriesController extends Controller
             $gallery = new GalleryModel();
     		$category = $category
                 ->with(array('galleries' => function($query) {
-                    $query->published();
+                    $query->published()->with(
+                        array(
+                            'pictures' => function($query) {
+                                $query->OfOrder();
+                            }
+                        ));
                 }))
                 ->where('slug', $categorySlug)
                 ->first();
