@@ -96,22 +96,21 @@ div {
 	padding: $spaceUnit;
 	padding-left: $widthSidebar + ($spaceUnit*2);
 	.backstretch-caption {
-		background-color: transparentize(#000, 0.4);
+		background-color: transparentize(#000, 0.0);
 		bottom: 0;
 		max-width: 60%;
 		opacity: 0;
-		padding: 20px;
+		padding: 5px 20px;
 		position: absolute;
-		right: 50px;
+		right: $spaceUnit;
 		@include transition(all 0.2s ease-in);
 		@include box-shadow( 0 1px 20px rgba(0,0,0,0.4));
 		span {
 			display: block;
+			margin: 15px 0px;
+			padding: 0px;
 			&.title {
-				border-bottom: 1px solid $colorText - 60;
 				font-size: 24px;
-				margin-bottom: 20px;
-				padding-bottom: 20px;
 				text-transform: uppercase;
 			}
 			&.legend {
@@ -122,7 +121,7 @@ div {
 		}
 		&.current {
 			opacity: 1;
-			bottom: 50px;
+			bottom: $spaceUnit;
 			@include transition(all 0.4s ease-out);
 		}    
 	}
@@ -135,6 +134,7 @@ div {
 
 /* FOOTER */
 footer {
+	overflow: hidden;
 	bottom: 0;
 	left: 0;
 	padding: $spaceUnit;
@@ -154,7 +154,9 @@ footer {
 		}
 	} 
 	.copyright {
-		font-size: 9px;		
+		font-size: 9px;	
+		padding: 0;
+		margin: 0;	
 	}
 }
 
