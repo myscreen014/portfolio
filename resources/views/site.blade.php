@@ -17,19 +17,19 @@
 		
 		<?php $metaTitle = ''; ?>
 		@if (isset($_metaTitle))
-			<?php $metaTitle = $_metaTitle.' - '; ?>
+			<?php $metaTitle = $_metaTitle; ?>
 		@elseif (isset($page))
 			@if ($page['meta-title'])
-				<?php $metaTitle = $page['meta-title'].' - '; ?>
+				<?php $metaTitle = $page['meta-title']; ?>
 			@else
-				<?php $metaTitle = $page->name.' - '; ?>
+				<?php $metaTitle = $page->name; ?>
 			@endif
 		@endif
 		<title>
 			@if (isset($page) && $page->ordering == 0)
 				{{ trans('site.global.name') }} - {{ $metaTitle }}
 			@else
-				{{ $metaTitle }} {{ trans('site.global.name') }}
+				{{ $metaTitle }} - {{ trans('site.global.name') }}
 			@endif	
 		</title>
 
@@ -162,6 +162,7 @@
 					        slides: backgroundPictures,
 					        transition: 'fade',
 					        timer: false,
+					        color: '#333333',
 					        transitionDuration: 1000,
 					        animation: [ 'kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight' ],
 					        overlay: true,
