@@ -248,6 +248,7 @@ return [
             ]
         ],
         'action' => [
+            'add'               => "Ajouter un fichier",
             'save'              => "Enregister ce fichier",
             'upload'            => "Lancer le transfert des fichiers",
         ],

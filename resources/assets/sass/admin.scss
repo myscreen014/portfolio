@@ -259,6 +259,14 @@ form {
 					}
 				}
 			}
+			.panel-footer {
+				cursor: pointer;
+				color: #666;
+				text-align: center;
+				&:hover {
+					color: inherit;
+				}
+			}
 			
 		}
 	}

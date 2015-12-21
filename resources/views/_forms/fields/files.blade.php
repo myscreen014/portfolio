@@ -19,6 +19,9 @@
 				@endif
 			</ul>
   		</div>
+  		<div class="panel-footer" id="{{ $name }}-action-add-files">
+  			{{ trans('admin.file.action.add') }}
+  		</div>
 	</div>
 </div>
 
@@ -100,7 +103,7 @@
 		  		//paramName: "file", // The name that will be used to transfer the file
 		  		maxFilesize: 2, // MB
 		  		maxFiles: 5,
-		  		clickable: false,
+		  		clickable: '#{{ $name }}-action-add-files',
 		  		autoProcessQueue: false,
 		  		url: "{{ route('admin.files.store') }}",
 		  		parallelUploads: 5,
@@ -128,10 +131,7 @@
 					});
 
 			  		this.on("addedfiles", function(files) {
-			  			
-			  			// drop all files
-			  			dropzone.removeAllFiles();
-
+			  	
 			  			// Create modal
 						modalFilesUpload = Admin.Modal.filesUpload();
 						
@@ -141,7 +141,10 @@
 							modalFilesUpload.find('#action-upload-cancel').prop("disabled", true);
 							dropzone.processQueue();
 						});
-						
+						actionCancel = modalFilesUpload.find('.modal-footer #action-upload-cancel').bind('click', function() {
+							dropzone.removeAllFiles();
+						});
+
 						for (var i = 0; i < files.length; i++) {
 							files[i]['id'] = (i+1);
 							if (i > dropzone.options.maxFiles-1) { break; }
@@ -191,6 +194,7 @@
 				  	});
 				  	this.on("queuecomplete", function() {
 				  		if (dropzone.getQueuedFiles().length==0) {
+				  			dropzone.removeAllFiles();
 				  			actionUpload.remove();
 							modalFilesUpload.find('button').prop("disabled", false);
 				  		}
