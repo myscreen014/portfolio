@@ -183,7 +183,6 @@ footer {
 		float: left;
 		width: 33.33%; // default with rewrite in javascript
 		.mask {
-			background-color: transparentize(#000, 0.6);
 			height: 100%;
 			left: 0;
 			opacity: 0;
@@ -198,22 +197,39 @@ footer {
 				font-size: 18px;
 				line-height: 20px;
 				position: absolute;
+				bottom: 20px;
 				text-transform: uppercase;
 				width: 100%;
+				@include transition(all 0.4s ease-in);
 				span {
 					display: block;
-					padding: 8px 20px 0 20px;
+					padding: 0 20px 0 20px;
 					position: relative;
 					opacity: 1;
-					bottom: -60px;
 					@include transition(all 0.4s ease);
-					&.title {}
-					&.summary {	
+					&.title {
+						bottom: -26px;
+						line-height: 26px;
+					}
+					&.summary {
+						bottom: -100px;
 						font-size: 12px;
-						line-height: 16px;
+						line-height: 18px;
+						overflow: hidden;
 					}
 				}
-				
+			}
+			&.category {
+				background-color: transparent;
+				opacity: 1;
+				div {
+					opacity: 1;
+					max-height: 26px;
+					span.title {
+						background-color: transparentize(#000, 0.6);
+						bottom: 0;
+					}
+				}
 			}
 		}
 		img {
@@ -224,18 +240,25 @@ footer {
 		}  
 		&:hover {
 			.mask {
+				background-color: transparentize(#000, 0.6);
 				opacity: 1;
 				@include box-shadow(inset 0 0 30px 5px rgba(0,0,0,0.4));
 				@include transition(all 0.2s ease-in);
 				div {
+					max-height: 150px;
 					span {
 						bottom: 0;
 						&.title {
 							@include transition(all 0.2s 0.0s ease-out);
 						}
 						&.summary {
-							@include transition(all 0.2s 0.1s ease-out);
+							@include transition(all 0.2s 0.0s ease-out);
 						}
+					}
+				}
+				&.category {
+					div span.title {
+						background-color: transparent;
 					}
 				}
 			}
@@ -270,6 +293,12 @@ footer {
 	html.touch & .mask {
 		opacity: 1;
 	}
+}
+
+.overflow {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .actions {

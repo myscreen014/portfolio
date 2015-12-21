@@ -9,14 +9,14 @@
         <div class="portfolio clearfix">
             @foreach ($categories as $category)
                 <a href="{{ route_page($page, [$category->slug]) }}" class="item">
-                    <div class="mask">
+                    <div class="mask category">
                         <div>
-                            <span class="title">
+                            <span class="title overflow">
                                 {{ $category->name }}
                             </span>
                             <span class="separator"></span>
                             <span class="summary">
-                                {!! str_limit($category->description, 75, '...') !!}
+                                {!! str_limit($category->description, 80, '...') !!}
                             </span>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                     <a href="{{ route_page($page, [$category->slug, $gallery->slug]) }}" class="item">
                         <div class="mask">
                             <div>
-                                <span class="title">
+                                <span class="title overflow">
                                     {{ $gallery->name }}
                                 </span>
                                 <span class="separator"></span>
