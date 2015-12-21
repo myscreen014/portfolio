@@ -52,7 +52,7 @@
 	    				filesIds.push($(files[i]).attr('data-file-id'));
 	    			};
 	    			$.ajax({
-		  				url: Admin.configGet('route_reorder'),
+		  				url: Admin.configGet('route_models_reorder'),
 		  				method: 'POST',
 		  				data: {
 		  					'_token' : Admin.configGet('csrf_token'),
