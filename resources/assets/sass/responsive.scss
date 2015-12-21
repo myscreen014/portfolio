@@ -102,24 +102,8 @@ $backgroundColor: 	#333;
 		padding-left: $spaceUnit;
 		padding-top: $spaceUnit + $heightSidebar;
 		padding-bottom: $spaceUnit + 120px; // 120px => heigth footer
-		.backstretch-caption {
-			bottom: 90px;
-			max-width: 75%;
-			padding: 5px 10px;
-			right: $spaceUnit;
-			&.current {
-				bottom: $spaceUnit + 120px;
-			}
-			span {
-				margin: 10px 0;
-				&.title {
-					font-size: 16px;
-				}
-				&.legend {
-					display: none;
-				}	
-			}
-			
+		.vegas-caption {
+			bottom: $spaceUnit + 120px;
 		}
 		.mask-content {
 			padding: $spaceUnit;
