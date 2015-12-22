@@ -101,8 +101,8 @@
 			var myDropzone{{ $name }} = new Dropzone({{ $name }}, {
 				dictDefaultMessage: "",
 		  		//paramName: "file", // The name that will be used to transfer the file
-		  		maxFilesize: 2, // MB
-		  		maxFiles: 5,
+		  		maxFilesize: 4, // MB
+		  		maxFiles: 10,
 		  		clickable: '#{{ $name }}-action-add-files',
 		  		autoProcessQueue: false,
 		  		url: "{{ route('admin.files.store') }}",
