@@ -167,7 +167,7 @@
 				
 				  	this.on("uploadprogress", function(file, progress)  {
 				  		var progressionBar = $('#upload-file-'+file['id']+' .progress-bar');
-				  		progressionBar.width(progress+'%').text(progress+'%');
+				  		progressionBar.width(progress+'%').text(Math.ceil(progress)+'%');
 				  		if (progress=='100') {
 				  			progressionBar.addClass('progress-bar-success');
 				  		}
