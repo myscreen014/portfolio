@@ -34,7 +34,7 @@ class PagesController extends Controller
             
             if (!is_null($params)) { $arrayParams = explode('/',$params);
             } else { $arrayParams = array(); }
-            $controllerName = '\App\Http\Controllers\Site\\'.$page->controller.'Controller';
+            $controllerName = '\App\Http\Controllers\Site\\'.ucfirst($page->controller).'Controller';
             $controller = new $controllerName;
             $view = call_user_func_array(array($controller, 'index'), $arrayParams);
             return $view->with('page', $page);
