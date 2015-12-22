@@ -26,7 +26,7 @@ class SitemapController extends Controller
 					'priority' => '1'
 				));
 			} else {
-				$controllerName = '\App\Http\Controllers\Site\\'.$page->controller.'Controller';
+				$controllerName = '\App\Http\Controllers\Site\\'.ucfirst($page->controller).'Controller';
 	            $controller = new $controllerName;
 	            $controllerUrls = call_user_func_array(array($controller, '_sitemap'), array($page));
 	            $urls = array_merge($urls, $controllerUrls);

@@ -79,7 +79,7 @@ class PageModel extends Model
                 $methods = array_diff(get_class_methods('App\Http\Controllers\Site\\'.ucfirst($controller->controller).'Controller'), get_class_methods('App\Http\Controllers\Controller'));
                 $methods = array_reverse($methods); // to load index (first method) latest
                 foreach ($methods as $key => $method) {
-                    $ref = new \ReflectionMethod('App\Http\Controllers\Site\\'.$controller->controller.'Controller', $method);
+                    $ref = new \ReflectionMethod('App\Http\Controllers\Site\\'.ucfirst($controller->controller).'Controller', $method);
                     $parameters = $ref->getParameters();
                     $parametersToUrl = array();
                     foreach ($parameters as $key => $parameter) {
