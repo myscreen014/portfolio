@@ -71,7 +71,7 @@ $.extend(Admin, {
 			var modalBody = modal.find('.modal-body').removeClass('text-center');
 			var modalFooter = modal.find('.modal-footer');
 			modalTitle.html(params.title);
-
+  
 			// Ajax
 			$.ajax({
   				url: params.url,
@@ -82,9 +82,11 @@ $.extend(Admin, {
   					if (button.attr('type') =='submit') {
   						button.bind('click', function(event) {
   							event.preventDefault();
+  							var method = (form.find('input[name=_method]')?form.find('input[name=_method]').val():form.attr('method'));
+  							if (method=='PUT' || method=='DELETE') method = 'POST';
   							$.ajax({
 	  							url: form.attr('action'),
-	  							method: (form.find('input[name=_method]')?form.find('input[name=_method]').val():form.attr('method')),
+	  							method: method, 
 	  							data: form.serialize(),
 	  							success: function(response, status) {
 	  								modalBody.html('<div class="alert alert-success" role="alert">'+params.messageSuccess+'</div>');
