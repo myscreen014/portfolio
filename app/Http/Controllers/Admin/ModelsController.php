@@ -17,7 +17,7 @@ class ModelsController extends Controller
 
 	public function reorderAjax(Request $request) {
     	if ($request->ajax()) {
-    		$model = 'App\Models\\'.$request->input('model').'Model';
+    		$model = 'App\Models\\'.ucfirst($request->input('model')).'Model';
 	    	$itemIds = $request->input('itemsIds');
 	  		$itemOrder = array_flip($itemIds);
 	    	$items = $model::whereIn('id', $itemIds)->get();
@@ -33,7 +33,7 @@ class ModelsController extends Controller
 
     public function publishAjax(Request $request) {
     	if ($request->ajax()) {
-    		$model = 'App\Models\\'.$request->input('model').'Model';
+    		$model = 'App\Models\\'.ucfirst($request->input('model')).'Model';
 	    	$itemId = $request->input('itemId');
 	    	$item = $model::findOrFail($itemId);
 			$item->publish = !$item->publish;
