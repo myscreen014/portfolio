@@ -14,6 +14,10 @@
 		<meta name="author" content="{{ trans('site.global.name') }}">
 		<meta name="generator" content="Laravel" />
 
+		@if (!App::environment('prod'))
+			<meta name="robots" content="noindex,nofollow,noarchive">
+		@endif
+
 		
 		<?php $metaTitle = ''; ?>
 		@if (isset($_metaTitle))

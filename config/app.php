@@ -158,7 +158,6 @@ return [
         
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
