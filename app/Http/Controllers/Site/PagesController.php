@@ -24,8 +24,8 @@ class PagesController extends Controller
     	} else {
     		$page = PageModel::published()->where('slug', $slug)->with(array('pictures' => function($query) {
                 $query
-                ->where('model_field', 'pictures')
-                ->orderBy('ordering', 'ASC'); 
+                ->OfOrder()
+                ->where('model_field', 'pictures'); 
 
             }))->firstOrFail();
     	}
