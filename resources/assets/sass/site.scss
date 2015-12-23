@@ -106,7 +106,7 @@ div {
 		z-index: 999;
 	}
 	.mask-content {
-		background-color: transparentize(#000, 0.4);
+		background-color: transparentize(#000, 0.3);
 		padding: $spaceUnit;
 	}
 }
@@ -224,12 +224,10 @@ footer {
 				background-color: transparent;
 				opacity: 1;
 				div {
-					bottom: -26px;
-					opacity: 1;
-					max-height: 150px;
-					span.title {
-						background-color: transparentize(#000, 0.6);
-						bottom: 0;
+					bottom: 32px;
+					span.title {}
+					span.summary {
+						max-height: 0;
 					}
 				}
 			}
@@ -255,6 +253,7 @@ footer {
 							@include transition(all 0.2s 0.0s ease-out);
 						}
 						&.summary {
+							max-height: 150px;
 							@include transition(all 0.2s 0.1s ease-out);
 						}
 					}
