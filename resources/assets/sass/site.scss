@@ -225,7 +225,9 @@ footer {
 				opacity: 1;
 				div {
 					bottom: 32px;
-					span.title {}
+					span.title {
+						background-color: transparentize(#000, 0.6);
+					}
 					span.summary {
 						max-height: 0;
 					}
