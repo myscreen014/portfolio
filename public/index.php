@@ -20,7 +20,7 @@
 */
 
 if (ini_get('error_log') == '/dev/null') {
-	ini_set('../php_error.log');
+	ini_set('error_log', '../php_error.log');
 }
 
 
