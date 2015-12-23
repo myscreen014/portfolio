@@ -19,6 +19,11 @@
 |
 */
 
+if (ini_get('error_log') == '/dev/null') {
+	ini_set('../php_error.log');
+}
+
+
 require __DIR__.'/../bootstrap/autoload.php';
 
 /*
