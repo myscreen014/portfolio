@@ -227,6 +227,8 @@ footer {
 					bottom: 32px;
 					span.title {
 						background-color: transparentize(#000, 0.6);
+						padding-bottom: 4px;
+						padding-top: 4px;
 					}
 					span.summary {
 						max-height: 0;
