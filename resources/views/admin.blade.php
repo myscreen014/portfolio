@@ -57,7 +57,7 @@
           			</ul>
 					<!-- /.navbar-top-links -->
 					<div class="navbar-default sidebar" role="navigation">
-						<div class="sidebar-nav navbar-collapse">
+						<div class="sidebar-nav navbar-collapse navbar-ex1-collapse collapse" aria-expanded="false">
 							<ul class="nav" id="side-menu">
 								@foreach(Config::get('administration.components') as $componentName => $componentDefinition)
 									<li class="@if (Request::segments()[1] == $componentName) active @endif">
