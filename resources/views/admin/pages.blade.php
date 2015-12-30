@@ -17,8 +17,7 @@
 				<table class="table table-pages sortable publishable" data-model="page">
 					<thead>
 						<tr>
-							<th></th>
-							<th>{{ trans('admin.page.option.menu.'.$menu) }}</th>
+							<th colspan="2">{{ trans('admin.page.option.menu.'.$menu) }}</th>
 							<th class="actions"></th>
 						</tr>
 					</thead>
