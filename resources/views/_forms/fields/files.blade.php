@@ -38,11 +38,11 @@
 	      		items: "> li",   		
 	      		tolerance: 'pointer',
 	      		create: function() {
-	      			heightInitContainer = $(this).height();
-	      			$(this).height(heightInitContainer);
+	      			/*heightInitContainer = $(this).height();
+	      			$(this).height(heightInitContainer);*/
 	      		},
 	      		start: function(event, ui){
-	      			$(this).height(heightInitContainer);
+	      			//$(this).height(heightInitContainer);
 	        		ui.placeholder.innerHeight(ui.item.innerHeight());
 	    		},
 	    		stop: function(event, ui){
