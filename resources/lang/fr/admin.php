@@ -244,7 +244,7 @@ return [
                 'unaccepted'    => 'Fichier invalide',
             ],
             'count' => [
-                'short'         => '<span class=\"count-value\">:count</span> fichier(s)'
+                'short'         => '<span class=\'count-value\'>:count</span> fichier(s)'
             ]
         ],
         'action' => [
