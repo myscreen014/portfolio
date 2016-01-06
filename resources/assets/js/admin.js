@@ -66,6 +66,9 @@ var Admin = {
       		tolerance: 'pointer',
       		containment: "parent",
       		create: function() {
+      			$(this).find('> thead th').each(function() {
+    				$(this).width($(this).width());
+    			});
       			model = $(this).attr('data-model');
       		},
       		start: function(event, ui) {
