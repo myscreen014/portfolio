@@ -70,8 +70,7 @@ class FilesComponent extends Controller {
 								$file->path = $file->name;
 							}
 						}
-						$isSave = $file->save();
-
+					
 
 						/* 
 						 * Gestion du fichier sur le serveur 
@@ -89,6 +88,8 @@ class FilesComponent extends Controller {
 								$isUploaded = $fileUploaded->move($destinationPath, $file->name);	
 							}
 						}
+
+						$isSave = $file->save();
 						
 						if ($isSave && $isUploaded) {
 							return array(
