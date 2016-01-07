@@ -253,7 +253,7 @@ return [
             'upload'            => "Lancer le transfert des fichiers",
         ],
         'message' => [
-            'delete'            => "Êtes vous certain de vouloir supprimer ce fichier ?",
+            'delete'            => "Êtes vous certain de vouloir supprimer ce fichier ? <br/> <em>:file</em>",
         ],
         'feedback' => [
             'update' => [
