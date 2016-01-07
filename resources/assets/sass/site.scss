@@ -416,6 +416,7 @@ footer {
 
 	iframe, img, object {
 		display: block;
+		height: auto !important;
 		max-width: 100%;
 		margin: 10px 0;
 		&.align_justify {
