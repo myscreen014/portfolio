@@ -31,7 +31,7 @@ class GalleryForm extends Form
         ->add('pictures', 'files', 
             array(
                 'label'=>trans('admin.gallery.field.pictures'),
-                'dropzone_acceptedFiles' => 'image/*',
+                'accepted_files' => 'image/*',
                 'model_table' => $this->getData('model_table'),
                 'model_field' => 'pictures',
                 'model_id' => $this->getData('model_id'),

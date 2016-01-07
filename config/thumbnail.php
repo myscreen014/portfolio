@@ -33,6 +33,12 @@ return [
 	'thumbnails' => [
 
 		/* Admin */
+		'wysiwyg' => [
+			'filters' => [
+				'max' 	=>  [1920,1080],
+			],
+			'quality' => 100
+		],
 		'filebrowser' => [
 			'filters' => [
 				'fit' 	=>  [80,80]

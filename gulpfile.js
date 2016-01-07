@@ -43,7 +43,8 @@ elixir(function(mix) {
         'bootstrap.min.js',
         'dropzone.js',
         'admin.js',
-        'admin.modal.js'
+        'admin.upload.js',
+        'admin.modal.js',
     ], "public/js/admin.all.js" );
    
     

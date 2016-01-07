@@ -123,7 +123,8 @@
 					{
 						'csrf_token' : "{{ csrf_token() }}",
 						'route_models_reorder' : "{{ route('admin.models.reorder') }}",
-						'route_models_publish' : "{{ route('admin.models.publish') }}"
+						'route_models_publish' : "{{ route('admin.models.publish') }}",
+						'route_files_store' : "{{ route('admin.files.store') }}"
 					},
 					{
 						'i18n' : jQuery.parseJSON('<?php print(json_encode(trans('admin'), JSON_HEX_APOS)) ?>')

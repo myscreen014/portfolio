@@ -27,6 +27,7 @@ return [
     'default_namespace' => '',
 
     'custom_fields' => [
-        'files' => 'App\Forms\Fields\FilesType',
+        'files'     => 'App\Forms\Fields\FilesType',
+        'wysiwyg'   => 'App\Forms\Fields\WysiwygType',
     ]
 ];

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 /* My uses */
 use App\Models\PageModel;
+
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Artisan;
 
@@ -19,7 +20,9 @@ class PagesController extends Controller
     public function index($slug=NULL, $params=NULL) {
         
     	if (is_null($slug)) {
+
             $homePage = PageModel::published()->where('menu', 'primary')->orderBy('ordering', 'ASC')->first();
+            if (is_null($homePage)) abort(404);
             return redirect(route('page', [$homePage->slug]), 301);
     	} else {
     		$page = PageModel::published()->where('slug', $slug)->with(array('pictures' => function($query) {

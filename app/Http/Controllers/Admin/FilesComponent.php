@@ -162,7 +162,9 @@ class FilesComponent extends Controller {
    				'tag' => 'p',
    				'label_attr' => ['class' => 'hidden'],
     			'attr' => ['class' => 'text-danger'],
-    			'value' => trans('admin.file.message.delete')
+    			'value' => trans('admin.file.message.delete', array(
+    				'file' => $file->path
+    			))
 			])->add(trans('admin.global.action.delete'), 'submit', ['attr' => ['class' => 'btn btn-danger']]);
 		    return (new Response(form($form), 200));
 		} else {

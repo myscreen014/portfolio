@@ -30,13 +30,15 @@ var Admin = {
 	  					'model'	  : model,
 	  					'itemId'  : itemId
 	  				}, 
+	  				beforeSend: function() {
+	  					if (itemTr.hasClass('publish-0')) {
+							itemTr.addClass('publish-1').removeClass('publish-0');
+						} else {
+							itemTr.addClass('publish-0').removeClass('publish-1');
+						}
+	  				},
 	  				success: function(publish) {
 	  					Admin.highlightTableTr(itemTr);
-	  					if (publish==true) {
-	  						itemTr.addClass('publish-1').removeClass('publish-0');
-	  					} else {
-	  						itemTr.addClass('publish-0').removeClass('publish-1');
-	  					}
 	  				},
 	  				error: function() {
 	  					Admin.Modal.alert(
