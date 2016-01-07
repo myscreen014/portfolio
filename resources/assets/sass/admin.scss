@@ -147,6 +147,10 @@ ul.errors {
 	padding: 10px;
 	list-style: inside;
 }
+.form-wrapper {
+	display: none;
+	/* show in JS */
+}
 form {
 	.form-group {
 		h2.form-group-title {

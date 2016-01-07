@@ -53,7 +53,7 @@
 	<div class="modal-dialog">
     	<div class="modal-content">
       		<div class="modal-header">
-        		<h4 class="modal-title">Chargement...</h4>
+        		<h4 class="modal-title">{{ trans('site.global.label.loading') }}</h4>
       		</div>
       		<div class="modal-body">
         		<div class="progress">

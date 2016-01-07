@@ -24,6 +24,9 @@ return [
         'title' => [
         	'404' => '404 : Page non trouvée'
         ],
+        'label' => [
+        	'loading' => 'Chargement...'
+        ],
         'message' => [
         	'404' => "Cette page n'éxiste pas !",
         	'503' => "Site en maintenance"
