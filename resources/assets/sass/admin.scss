@@ -158,6 +158,18 @@ form {
 		}
 		&.form-group-wysiwyg {
 			min-height: 300px;
+			.mce-panel, .mce-btn {
+				background-color: #f5f5f5;
+			}
+			.mce-tinymce {
+				@include border-radius(3px);
+				.mce-toolbar-grp {
+					@include border-radius(3px 3px 0 0);
+				}
+				.mce-statusbar {
+					@include border-radius(0 0 3px 3px);
+				}
+			}
 		}
 		.filebrowser {
 			&.dz-drag-hover {
