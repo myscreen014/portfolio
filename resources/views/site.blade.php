@@ -71,12 +71,12 @@
 		<div id="global">
 			<div id="sidebar">
 				<a href="{{ route('page') }}" class="brand">{!! trans('site.global.name') !!}</a>
-				<a href="#" id="nav-open-action" class="no-loading">
+				<a href="#" id="nav-open-action" class="noloading">
 					<i class="fa fa-bars"></i>
 				</a>
 				<div class="spacer"></div>
 				<nav>
-					<a href="#" id="nav-close-action" class="no-loading">
+					<a href="#" id="nav-close-action" class="noloading">
 						<i class="fa fa-close"></i>
 					</a>
 					<ul class="clearfix">

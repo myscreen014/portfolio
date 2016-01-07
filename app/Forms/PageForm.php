@@ -32,15 +32,18 @@ class PageForm extends Form
                 'galleries' => trans('admin.page.option.controller.galleries'),
             )
         ))
-        ->add('content', 'textarea', array(
+        ->add('content', 'wysiwyg', array(
             'wrapper' => ['class' => 'form-group form-group-wysiwyg'],
             'label'=> trans('admin.page.field.content'),
-            'attr' => array('class' => 'form-control wysiwyg')
+            'attr' => array('class' => 'form-control wysiwyg'),
+            'model_table' => $this->getData('model_table'),
+            'model_field' => 'content',
+            'model_id' => $this->getData('model_id'),
         ))
         ->add('pictures', 'files', 
             array(
                 'label'=>trans('admin.page.field.pictures'),
-                'dropzone_acceptedFiles' => 'image/*',
+                'accepted_files' => 'image/*',
                 'model_table' => $this->getData('model_table'),
                 'model_field' => 'pictures',
                 'model_id' => $this->getData('model_id'),
@@ -49,7 +52,7 @@ class PageForm extends Form
         ->add('files', 'files', 
             array(
                 'label'=>trans('admin.page.field.files'),
-                'dropzone_acceptedFiles' => 'application/*, text/*, audio/*',
+                'accepted_files' => 'application/*, text/*, audio/*',
                 'model_table' => $this->getData('model_table'),
                 'model_field' => 'files',
                 'model_id' => $this->getData('model_id'),

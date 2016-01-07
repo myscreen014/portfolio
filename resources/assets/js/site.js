@@ -5,10 +5,10 @@ var Site = {
 	init: function(i18n) {
 		Site._i18n = i18n['i18n'];
 		Site.loading(false);
-		$('a:not(.lightbox):not(.no-loading)').bind('click', function() {
+		$('a:not(.lightbox):not(.noloading):not(.wysiwyg a)').bind('click', function() {
 			Site.loading(true);
 		});
-		Site.initLightbox();
+		Site.initLightbox(); 
  
 		/* Mobile navigation */
 		$('#nav-close-action').bind('click', function(event) {
