@@ -31,7 +31,7 @@
 		tinymce.init({
 			language: 'fr_FR',
             selector: "textarea#{{ $name }}",
-            plugins: "code, paste, link, file",
+            plugins: "code, paste, link, file, fullscreen",
             relative_urls: false,
             menubar: false,
             height : 200,
@@ -67,7 +67,7 @@
 					{selector: 'img', collapsed: false, classes: 'align_justify', styles: {display: 'block'}}
 				]
 			},
-            toolbar: "styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link file | code",
+            toolbar: "styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link file | code fullscreen",
 
             setup: function(editor) {
 				editor.on('init', function(e) {
