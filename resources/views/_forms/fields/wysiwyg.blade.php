@@ -34,7 +34,7 @@
             plugins: "code, paste, link, file, fullscreen",
             relative_urls: false,
             menubar: false,
-            height : 200,
+            height : 300,
             content_css : "{{ asset('css/wysiwyg.css') }}",
             paste_as_text: true,
            	style_formats : [
