@@ -161,6 +161,9 @@ form {
 			.mce-panel, .mce-btn {
 				background-color: #f5f5f5;
 			}
+			.mce-flow-layout-item {
+				margin: 0 0 0 2px;
+			}
 			.mce-tinymce {
 				@include border-radius(3px);
 				.mce-toolbar-grp {
