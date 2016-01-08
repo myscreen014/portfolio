@@ -12,7 +12,7 @@
 		@endsection
 
 		@if (count($categories)>0)
-			<table class="table sortable publishable" data-model="galleriescategory">
+			<table class="table sortable publishable" data-model="galleriesCategory">
 				<thead>
 					<tr>
 						<th></th>
