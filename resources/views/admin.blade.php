@@ -11,6 +11,7 @@
 
 		<title>{{ trans('admin.global.application.name') }}</title>
 		
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{ elixir('css/bootstrap.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
 		<link rel="stylesheet" href="{{ elixir('css/admin.all.css') }}">

@@ -2,8 +2,14 @@
    ============================= */
 @import 'mixins';
 
-$colorDanger: 	#a94442;
-$colorSuccess:	#3c763d;
+$colorDanger: 				#a94442;
+$colorSuccess:				#3c763d;
+
+$colorForeground:			#00acac;
+
+$backgroundColorTopbar:		#fff;
+$backgroundColorSidebar:	#2d353c;
+$backgroundColorContainer:	#fff;
 
 @keyframes hightlight {
     0%   { background-color: #fff; }
@@ -14,20 +20,66 @@ $colorSuccess:	#3c763d;
 
 /*	TEMPLATES 
 -----------------------------------------------------------------------------------------*/
-#side-menu {
-	background-color: red;
-	li {
-		a {
-			i {
-				display: inline-block;
-				width: 22px;
-				&.fa-home {
-					font-size: 16px;
+html, body {
+	background-color: $backgroundColorSidebar;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.navbar {
+	position: fixed;
+	#side-menu {
+		background-color: $backgroundColorSidebar;
+		padding-top: 36px;
+		li {
+			border: none;
+			a, a:visited {
+				background-color: $backgroundColorSidebar;
+				color:	#a8acb1;
+				i {
+					display: inline-block;
+					width: 26px;
+				}
+				&:hover {
+					background-color: #232a2f;
+					color: #a8acb1 + 50;
+				}
+			}
+			&.active {
+				& > a, & > a:visited {
+					background-color: #232a2f;
+					color: $colorForeground;
+				}
+				ul {
+					background-color: #232a2f;
+					li a i {
+						width: 16px;
+					}
 				}
 			}
 		}
 	}
+	&.navbar-static-top {
+		background-color: $backgroundColorTopbar;
+		border-color: $backgroundColorTopbar - 30;
+		width: 100%;
+		@include box-shadow(0px 0px 6px rgba(0,0,0,.1));
+		a, a:visited {
+			color: #232a2f;
+			&:hover {
+				color: $colorForeground;
+			}
+		}
+	}
 }
+
+#container {
+	background-color: $backgroundColorContainer;
+	padding-top: 50px;
+	h1.page-header {
+		margin-top: 10px;
+	}
+}
+
 /*	TABLES 
 -----------------------------------------------------------------------------------------*/
 table {

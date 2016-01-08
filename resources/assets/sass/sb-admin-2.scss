@@ -39,13 +39,13 @@ body {
 .navbar-top-links {
 	margin-right: 0;
 	li {
-		  display: inline-block;
-		  &:last-child {
-		  margin-right: 15px;
-		  }
+	  	display: inline-block;
+	  	&:last-child {
+		  	margin-right: 15px;
+		}
 		a {
 			padding: 15px;
-			  min-height: 50px;
+			min-height: 50px;
 		}
 	}
 	.dropdown-menu {
@@ -63,7 +63,8 @@ body {
 			padding: 3px 20px;
 			min-height: 0;
 			i {
-				margin-right: 10px;
+				width: 20px;
+				margin-right: 2px;
 			}
 			div {
 				white-space: normal;
@@ -120,9 +121,6 @@ body {
 	}
 	.active > a > .fa.arrow:before {
 		content: "\f107";
-	}
-	.nav-second-level li, .nav-third-level li {
-		border-bottom: 0 !important;
 	}
 	.nav-second-level li a {
 		padding-left: 37px;
