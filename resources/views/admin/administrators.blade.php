@@ -24,7 +24,14 @@
 					@foreach($administrators as $administrator)
 						<tr>
 							<td>{{ $administrator->name }}</td>
-							<td>{{ $administrator->last_login->diffForHumans() }}</td>
+							<td>
+								@if ($administrator->last_login->timestamp <= 0)
+									{{ trans('admin.global.label.never') }}
+								@else
+									{{ $administrator->last_login->diffForHumans() }}
+								@endif
+								
+							</td>
 							<td class="actions">
 								<a href="{{ route('admin.administrators.edit', [$administrator->id]) }}" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>
 								<a href="{{ route('admin.administrators.delete', [$administrator->id]) }}" class="btn btn-danger btn-xs">{{ trans('admin.global.action.delete') }}</a>

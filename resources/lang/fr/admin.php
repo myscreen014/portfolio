@@ -54,6 +54,9 @@ return [
             'show'              =>  'Afficher',
             'save'              =>  'Enregistrer',
             'delete'            =>  'Supprimer',
+        ],
+        'label' => [
+            'never'             => 'Jamais'
         ]
     ],
 
