@@ -71,12 +71,21 @@ html, body {
 		}
 	}
 }
-
+ 
 #container {
 	background-color: $backgroundColorContainer;
 	padding-top: 50px;
 	h1.page-header {
 		margin-top: 10px;
+	}
+}
+
+@media (max-width: 768px) {
+	.navbar {
+		position: relative;
+	}
+	#container {
+		padding-top: 0;
 	}
 }
 
