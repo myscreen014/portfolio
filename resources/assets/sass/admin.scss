@@ -218,6 +218,9 @@ form {
 		h2.form-group-title {
 			margin-top: 40px;
 		}
+		.label.counter-chars {
+			float: right;
+		}
 		&.form-group-wysiwyg {
 			min-height: 400px;
 			.mce-panel, .mce-btn {

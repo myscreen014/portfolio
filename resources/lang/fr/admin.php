@@ -137,7 +137,11 @@ return [
         ],
         'form' => [
             'group' => [
-                'metadatas'    => "Informations de référencement de la page"
+                'metadatas'     => "Informations de référencement de la page"
+            ],
+            'help' => [
+                'meta-title'    => "Merci de saisir un texte d'environ 60 caractères.",
+                'meta-description' => "Merci de saisir un texte d'environ 160 caractères.",
             ]
         ],
         'option'                => [

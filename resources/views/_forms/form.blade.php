@@ -21,6 +21,13 @@
 	
 		/* FORM */
 		$(document).ready(function() {
+			$('form .counter-chars').each(function() {
+				var field = $(this);
+				field.parent().prepend('<span class="label label-info counter-chars">0</span>');
+				field.bind('change keyup', function() {
+					field.parent().find('.counter-chars').html(field.val().length);
+				}).trigger('change');
+			});	
 			$('.form-wrapper').fadeIn('fast');
 		});
 

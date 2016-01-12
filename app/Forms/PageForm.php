@@ -70,12 +70,22 @@ class PageForm extends Form
         ->add('meta-title', 'text', array(
             'wrapper' => ['class' => 'form-group'],
             'label'=> trans('admin.page.field.meta-title'),
-            'attr' => array('class' => 'form-control')
+            'attr' => array('class' => 'form-control counter-chars'),
+            'help_block' => [
+                'text' => trans('admin.page.form.help.meta-title'),
+                'tag' => 'p',
+                'attr' => ['class' => 'help-block']
+            ],
         ))
         ->add('meta-description', 'textarea', array(
             'wrapper' => ['class' => 'form-group'],
             'label'=> trans('admin.page.field.meta-description'),
-            'attr' => array('class' => 'form-control')
+            'attr' => array('class' => 'form-control counter-chars'),
+             'help_block' => [
+                'text' => trans('admin.page.form.help.meta-description'),
+                'tag' => 'p',
+                'attr' => ['class' => 'help-block']
+            ],
         ))
         ;
 
