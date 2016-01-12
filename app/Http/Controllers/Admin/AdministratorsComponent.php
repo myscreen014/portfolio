@@ -211,6 +211,11 @@ class AdministratorsComponent extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
+		// Validator just for update (I can also create e new UpdateAdministratorRequest but no!)
+		$this->validate($request, [
+       		'email' => 'required|email|max:255|unique:users,email,'.$id,
+   		]);
+
 		$administrator = AdministratorModel::findOrFail($id);
 		$administrator->update($request->only('name', 'email'));
 
