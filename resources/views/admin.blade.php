@@ -34,7 +34,7 @@
 				<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-							<span class="sr-only">Toggle navigation</span>
+							<span class="sr-only"></span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
@@ -44,8 +44,13 @@
 					<!-- /.navbar-header -->
 
 			  		<ul class="nav navbar-top-links navbar-right">
+						<li>
+							<a href="{{ route('page') }}" target="_blank">
+								{{ trans('admin.global.action.goto_website') }}
+							</a>
+						</li>
 			  			@if (Auth::check())
-			  				<li class="dropdown ">
+			  				<li class="dropdown">
 			  					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                    {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>

@@ -54,6 +54,7 @@ return [
             'show'              =>  'Afficher',
             'save'              =>  'Enregistrer',
             'delete'            =>  'Supprimer',
+            'goto_website'      =>  'Afficher le site',
         ],
         'label' => [
             'never'             => 'Jamais'
