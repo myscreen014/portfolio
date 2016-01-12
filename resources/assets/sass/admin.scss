@@ -80,6 +80,18 @@ html, body {
 	}
 }
 
+.login-panel {
+	.panel-heading {
+		padding: 15px;
+		i {
+			float: right;
+		}
+	}
+	.form-group:last-child {
+		margin-bottom: 0;
+	}
+}
+
 @media (max-width: 768px) {
 	.navbar {
 		position: relative;

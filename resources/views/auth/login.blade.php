@@ -7,7 +7,7 @@
 			<div class="col-md-4 col-md-offset-4">
 				<div class="login-panel panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">{{ trans('admin.user.title.login') }}</h3>
+						<h3 class="panel-title">{{ trans('admin.user.title.login') }}<i class="fa fa-lock"></i></h3>
 					</div>
 					<div class="panel-body">
 						
