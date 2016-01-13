@@ -142,7 +142,7 @@ footer {
 /* OVERLAYS
    ============================= */
 .overlay {
-	background-color: transparentize(#000, 0.2);
+	background-color: transparentize(#000, 0.1);
 	display: none;
 	top: 0;
 	left: 0;
@@ -156,7 +156,7 @@ footer {
 		text-align: center;
 		span { 
 			background: transparentize(#fff, 0.9);
-			color: #fff;
+			color: #777;
 			display: inline-block;
 			font-family: Arial;
 			font-size: 13px;
