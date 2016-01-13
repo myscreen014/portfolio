@@ -162,13 +162,14 @@
 					$(document).ready(function() {
 						
 						var vegasSlideshow = $('body').vegas({
-						 	delay: 5000,
+						 	delay: 8000,
 					        slides: backgroundPictures,
 					        transition: 'fade',
 					        timer: false,
 					        color: '#333333',
-					        transitionDuration: 1000,
+					        transitionDuration: 1500,
 					        animation: [ 'kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight' ],
+					        animationDuration: 6000,
 					        overlay: true,
 					        walk: function (index, slideSettings) {
 					        	if (slideSettings.title != '') {

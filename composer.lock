@@ -484,16 +484,16 @@
         },
         {
             "name": "kris/laravel-form-builder",
-            "version": "1.6.41",
+            "version": "1.6.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kristijanhusak/laravel-form-builder.git",
-                "reference": "de89f85da647e2464c314d27515796c4ef43f17a"
+                "reference": "3c850146dea249c8b6d4b03ab2ed51fa7c09e067"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kristijanhusak/laravel-form-builder/zipball/de89f85da647e2464c314d27515796c4ef43f17a",
-                "reference": "de89f85da647e2464c314d27515796c4ef43f17a",
+                "url": "https://api.github.com/repos/kristijanhusak/laravel-form-builder/zipball/3c850146dea249c8b6d4b03ab2ed51fa7c09e067",
+                "reference": "3c850146dea249c8b6d4b03ab2ed51fa7c09e067",
                 "shasum": ""
             },
             "require": {
@@ -534,7 +534,7 @@
                 }
             ],
             "description": "Laravel form builder - symfony like",
-            "time": "2016-01-04 12:06:03"
+            "time": "2016-01-08 12:37:46"
         },
         {
             "name": "laravel/framework",
