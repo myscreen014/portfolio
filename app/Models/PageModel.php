@@ -48,6 +48,9 @@ class PageModel extends Model
 
         static::saving(function ($page) {
             $slugCandidateRoot = str_slug($page->name);
+            if (empty($slugCandidateRoot)) {
+                $slugCandidateRoot = 'page-'.$page->id;
+            }
             $slugCandidate = $slugCandidateRoot;
             $cmptProposal = 0;
             $wheres = array(
