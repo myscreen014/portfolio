@@ -93,7 +93,7 @@ return [
         ],
         'feedback' => [
             'delete' => [
-                'suicide'         => "Impossible de supprimer votre propre compte !!  (Tapez suicide dan Google ;-))",
+                'suicide'         => "Impossible de supprimer votre propre compte !!  (Tapez suicide dans Google ;-))",
             ],
         ],
     ],
