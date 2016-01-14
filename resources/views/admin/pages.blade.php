@@ -14,7 +14,7 @@
  
 		@foreach(array('primary','secondary') as $menu)
 			@if (count($pages[$menu])>0)
-				<table class="table table-pages sortable publishable" data-model="page">
+				<table class="table table-hover table-pages sortable publishable" data-model="page">
 					<thead>
 						<tr>
 							<th colspan="2">{{ trans('admin.page.option.menu.'.$menu) }}</th>

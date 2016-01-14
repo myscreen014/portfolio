@@ -12,7 +12,7 @@
 		@endsection
 
 		@if (count($administrators)>0)
-			<table class="table table-striped">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>{{ trans('admin.administrator.field.name') }}</th>

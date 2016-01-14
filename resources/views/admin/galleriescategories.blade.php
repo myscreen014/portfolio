@@ -12,16 +12,14 @@
 		@endsection
 
 		@if (count($categories)>0)
-			<table class="table sortable publishable" data-model="galleriesCategory">
+			<table class="table table-hover sortable publishable" data-model="galleriesCategory">
 				<thead>
 					<tr>
-						<th></th>
-						<th>{{ trans('admin.galleriescategory.field.name') }}</th>
+						<th colspan="2">{{ trans('admin.galleriescategory.field.name') }}</th>
 						<th class="actions"></th>
 					</tr>
 				</thead>
 				<tbody>
-
 					@foreach($categories as $category)
 						<tr data-item-id="{{ $category->id }}" class="publish-{{ $category->publish }}">
 							<td class="publish">

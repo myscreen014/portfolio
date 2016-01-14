@@ -12,11 +12,10 @@
 		@endsection
 
 		@if (count($galleries)>0)
-			<table class="table sortable publishable" data-model="gallery">
+			<table class="table table-hover sortable publishable" data-model="gallery">
 				<thead>
 					<tr>
-						<th></th>
-						<th>{{ trans('admin.gallery.field.name') }}</th>
+						<th colspan="2">{{ trans('admin.gallery.field.name') }}</th>
 						<th>{{ trans('admin.gallery.field.category') }}</th>
 						<th class="actions"></th>
 					</tr>
