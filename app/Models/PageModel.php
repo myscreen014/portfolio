@@ -68,44 +68,6 @@ class PageModel extends Model
             $page->files()->delete();
         });
         
-    }
-
-    /* Methodes */
-    public static function loadControllersRoutes() { 
-    /* Unused from 25/10/2015 */
-        $controllers = DB::table((new PageModel())->getTable())->distinct()->get(array('controller', 'slug'));
-        foreach ($controllers as $key => $controller) {
-            if ($controller->controller != 'pages') {
-                $methods = array_diff(get_class_methods('App\Http\Controllers\Site\\'.ucfirst($controller->controller).'Controller'), get_class_methods('App\Http\Controllers\Controller'));
-                $methods = array_reverse($methods); // to load index (first method) latest
-                foreach ($methods as $key => $method) {
-                    $ref = new \ReflectionMethod('App\Http\Controllers\Site\\'.ucfirst($controller->controller).'Controller', $method);
-                    $parameters = $ref->getParameters();
-                    $parametersToUrl = array();
-                    foreach ($parameters as $key => $parameter) {
-                        if ($parameter->isOptional()) {
-                            array_push($parametersToUrl, '{'.$parameter->getName().'?}');
-                        } else {
-                            array_push($parametersToUrl, '{'.$parameter->getName().'}');
-                        }
-                    }
-                    $parametersRoute = implode('/', $parametersToUrl);
-                    $uri = $controller->slug;
-                    if ($method != 'index') {
-                        $uri .= '/'.$method;
-                    }
-                    $uri .= (!empty($parametersToUrl)?'/'.$parametersRoute:'');
-                    Route::any($uri, array(
-                        'as'=>'site.gallery', 
-                        'uses' => 'Site\\'.ucfirst($controller->controller).'Controller@'.$method
-                        )
-                    );
-                }
-              
-            }
-        }
-    }
-
-  	
+    }  	
 
 }
