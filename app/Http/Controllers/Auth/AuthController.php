@@ -47,6 +47,18 @@ class AuthController extends Controller
 	}
 
 	/**
+	 * Log the user out of the application.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function getLogout()
+	{
+	    Auth::logout();
+
+	    return redirect(route('admin.index'));
+	}	
+
+	/**
 	 * Get a validator for an incoming registration request.
 	 *
 	 * @param  array  $data
