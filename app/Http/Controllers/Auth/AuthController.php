@@ -141,48 +141,4 @@ class AuthController extends Controller
             ]);
     }
 
-	/**
-	 * Create a new user instance after a valid registration.
-	 *
-	 * @param  array  $data
-	 * @return User
-	 */
-	protected function create(array $data)
-	{
-
-		$user = new UserModel();
-		$user->name = $data['name'];
-		$user->email = $data['email'];
-		$user->password = bcrypt($data['password']);
-		$user->role = 'user';
-		$user->key = str_random(30);
-		$user->confirmed = false;
-		if ($user->save()) {
-			$user->sendEmailConfirmation();
-		}
-		
-		return $user;
-
-	}
-
-	public function confirmation($id, $key) {
-		$user = new UserModel;
-		$user = $user->where('id', $id)->where('key', $key)->first();
-		if (!is_null($user)) {
-			$user->confirmed = 1;
-			$user->save();
-			Auth::loginUsingId($user->id);
-			return view('auth.register', array(
-				'message' => trans('site.users.message.confirmation.ok')
-			));
-		} else {
-			return redirect(route('page'));
-		}
-	}
-
-	public function registerMessage() {
-		return view('auth.register', array(
-			'message' => trans('site.users.message.need_confirmation')
-		));
-	}
 }

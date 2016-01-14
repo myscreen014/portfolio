@@ -67,12 +67,6 @@ Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
 Route::get('auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 
-// Registration routes...
-Route::get('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
-Route::post('auth/register', 'Auth\AuthController@postRegister');
-Route::get('auth/register/message', ['as' => 'register.message', 'uses' => 'Auth\AuthController@registerMessage']);
-Route::get('auth/confirmation/{id}/{key}', ['as' => 'auth.confirmation', 'uses' => 'Auth\AuthController@confirmation']);
- 
 // Public
 Route::group(['prefix' => '/', 'middleware'=> 'site'], function () {
     
