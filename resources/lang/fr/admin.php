@@ -119,7 +119,7 @@ return [
             'register'          => "Inscription",
         ],
         'message' => [
-            'remember_me'        => "Se Souvenir De Moi",
+            'remember_me'        => "Se souvenir de moi",
         ],
         
     ],
