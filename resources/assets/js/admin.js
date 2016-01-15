@@ -6,7 +6,6 @@ var Admin = {
 	init: function(config, i18n) {
 		Admin._config = config;
 		Admin._i18n = i18n['i18n'];
-
 		Admin.modelSortable();
 		Admin.modelPublishable();
 	},
@@ -16,6 +15,7 @@ var Admin = {
 	},
 
 	modelPublishable: function() {
+		$('[data-toggle="tooltip"]').tooltip();
 		var table = $('table.publishable');
 		var model = $(table).attr('data-model');
 		table.find('tr').each(function() {
@@ -31,10 +31,13 @@ var Admin = {
 	  					'itemId'  : itemId
 	  				}, 
 	  				beforeSend: function() {
+	  					var action = itemTr.find('.publish a');
 	  					if (itemTr.hasClass('publish-0')) {
 							itemTr.addClass('publish-1').removeClass('publish-0');
+							action.attr('data-original-title', Admin._i18n['global']['label']['publish']).tooltip('fixTitle').tooltip('show');;
 						} else {
 							itemTr.addClass('publish-0').removeClass('publish-1');
+							action.attr('data-original-title', Admin._i18n['global']['label']['draft']).tooltip('fixTitle').tooltip('show');;
 						}
 	  				},
 	  				success: function(publish) {

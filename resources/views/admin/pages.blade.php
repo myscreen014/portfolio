@@ -24,8 +24,8 @@
 					<tbody>
 						@foreach($pages[$menu] as $page)
 							<tr data-item-id="{{ $page->id }}" class="publish-{{ $page->publish }}">
-								<td class="publish">
-									<a href="#"><i class="fa fa-square"></i></a>
+								<td class="publish" >
+									<a href="#" data-toggle="tooltip" title="@if ($page->publish) {{ trans('admin.global.label.publish') }} @else {{ trans('admin.global.label.draft') }} @endif"><i class="fa fa-square"></i></a>
 								</td>
 								<td><i class="fa page-controller {{ Config::get('administration.components.'.$page->controller.'.icon') }}"></i>{{ $page->name }}</td>
 								<td class="actions">

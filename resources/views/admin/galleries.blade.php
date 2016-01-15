@@ -24,7 +24,7 @@
 					@foreach($galleries as $gallery)
 						<tr data-item-id="{{ $gallery->id }}" class="publish-{{ $gallery->publish }}">
 							<td class="publish">
-								<a href="#"><i class="fa fa-square"></i></a>
+								<a href="#" data-toggle="tooltip" title="@if ($gallery->publish) {{ trans('admin.global.label.publish') }} @else {{ trans('admin.global.label.draft') }} @endif"><i class="fa fa-square"></i></a>
 							</td>
 							<td>{{ $gallery->name }}</td>
 							<td>{{ $gallery->category->name }}</td>

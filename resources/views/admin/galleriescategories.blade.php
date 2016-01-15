@@ -23,7 +23,7 @@
 					@foreach($categories as $category)
 						<tr data-item-id="{{ $category->id }}" class="publish-{{ $category->publish }}">
 							<td class="publish">
-								<a href="#"><i class="fa fa-square"></i></a>
+								<a href="#" data-toggle="tooltip" title="@if ($category->publish) {{ trans('admin.global.label.publish') }} @else {{ trans('admin.global.label.draft') }} @endif"><i class="fa fa-square"></i></a>
 							</td>
 							<td>{{ $category->name }}</td>
 							<td class="actions">

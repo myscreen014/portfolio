@@ -57,7 +57,9 @@ return [
             'goto_website'      =>  'Afficher le site',
         ],
         'label' => [
-            'never'             => 'Jamais'
+            'never'             => 'Jamais',
+            'publish'           => 'Publié',
+            'draft'             => 'Brouillon'
         ]
     ],
 

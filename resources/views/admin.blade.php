@@ -135,7 +135,6 @@
 					{
 						'i18n' : jQuery.parseJSON('<?php print(json_encode(trans('admin'), JSON_HEX_APOS)) ?>')
 					});
-					//Admin.configInit();
 				</script>
 			@show
 				
