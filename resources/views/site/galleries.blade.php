@@ -67,13 +67,13 @@
             @foreach ($gallery->pictures as $picture)
                 <a href="{{ route('picture', ['zoom', $picture['name']] ) }}" title="{{ $picture->title }}" class="item lightbox" rel="gallery">
                     <div class="mask">
-                        <div>
-                            @if ($picture->title)
+                        @if ($picture->title)
+                            <div>
                                 <span class="title">
                                     {{ $picture->title }}
                                 </span>
-                            @endif 
-                        </div>
+                            </div>
+                        @endif 
                     </div>
                     <img src="{{ route('picture', ['portfolio', $picture['name']] ) }}" />
                 </a>
