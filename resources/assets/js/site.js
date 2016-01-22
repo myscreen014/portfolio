@@ -36,9 +36,13 @@ var Site = {
 			hideCloseButtonOnMobile : false, // true will hide the close button on mobile devices
 			hideBarsDelay : 3000, // delay before hiding bars on desktop
 			videoMaxWidth : 1140, // videos max width
-			beforeOpen: function() {}, // called before opening
+			beforeOpen: function() {
+				$('html, body').css('overflow', 'hidden');
+			}, // called before opening
 			afterOpen: null, // called after opening
-			afterClose: function() {}, // called after closing
+			afterClose: function() {
+				$('html, body').css('overflow', 'visible');
+			}, // called after closing
 			loopAtEnd: false // true will return to the first image after the last image is reached
 		});
 	},
