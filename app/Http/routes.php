@@ -71,7 +71,6 @@ Route::get('auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getL
 Route::group(['prefix' => '/', 'middleware'=> 'site'], function () {
     
     // Pages
-    Route::get('',['as' => 'page', 'uses' => 'Site\PagesController@index']);
     Route::get('{slug?}/{params?}',array(
         'as' => 'page', 
         'uses' => 'Site\PagesController@index'

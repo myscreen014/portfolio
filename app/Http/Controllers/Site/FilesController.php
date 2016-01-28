@@ -27,7 +27,7 @@ class FilesController extends Controller
 			$response->header('Content-Type', File::mimeType($uploadPath.'/'.$fileName));
 			return $response;
 		} else {
-			return new Response('', 404);
+			abort(403);
 		}
 	}
 	

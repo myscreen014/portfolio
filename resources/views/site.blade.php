@@ -67,62 +67,62 @@
 	</head>
 
 	<body>
-
-		<div id="global">
-			<div id="sidebar">
-				<a href="{{ route('page') }}" class="brand">{!! trans('site.global.name') !!}</a>
-				<a href="#" id="nav-open-action" class="noloading">
-					<i class="fa fa-bars"></i>
-				</a>
-				<div class="spacer"></div>
-				<nav>
-					<a href="#" id="nav-close-action" class="noloading">
-						<i class="fa fa-close"></i>
+		@section('body')
+			<div id="global">
+				<div id="sidebar">
+					<a href="{{ route('page') }}" class="brand">{!! trans('site.global.name') !!}</a>
+					<a href="#" id="nav-open-action" class="noloading">
+						<i class="fa fa-bars"></i>
 					</a>
-					<ul class="clearfix">
-	    				@foreach($site['pages']['primary'] as $item)
-							<li>
-								<a href="{{ route('page', $item->slug) }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
-							</li>
-						@endforeach
-					</ul>
-					@if(count($site['pages']['secondary'])>0)
-						<div class="spacer sticky"></div>
+					<div class="spacer"></div>
+					<nav>
+						<a href="#" id="nav-close-action" class="noloading">
+							<i class="fa fa-close"></i>
+						</a>
 						<ul class="clearfix">
-		    				@foreach($site['pages']['secondary'] as $item)
+		    				@foreach($site['pages']['primary'] as $item)
 								<li>
 									<a href="{{ route('page', $item->slug) }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
 								</li>
 							@endforeach
 						</ul>
-					@endif
-				</nav>
-				@section('footer')
-					<footer>
-						<ul class="social">
-							<li><a href=""><i class="fa fa-facebook-square"></i></a></li>
-							<li><a href=""><i class="fa fa-twitter-square"></i></a></li>
-						</ul>
-						<div class="spacer sticky"></div>
-						<p class="copyright">
-		    				{{ trans('site.global.copyright', array(
-		    					'year' => \Carbon\Carbon::now()->year,
-		    					'name' => trans('site.global.name')
-		    				)) }}
-	    				</p>
-					</footer>
-				@show
-			</div>
-			<div id="content">
-				<div class="vegas-caption"></div>
-				@section('content')
-				@show
-				<div id="footer-mobile" class="mobile-only">
-					@yield('footer')
+						@if(count($site['pages']['secondary'])>0)
+							<div class="spacer sticky"></div>
+							<ul class="clearfix">
+			    				@foreach($site['pages']['secondary'] as $item)
+									<li>
+										<a href="{{ route('page', $item->slug) }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
+									</li>
+								@endforeach
+							</ul>
+						@endif
+					</nav>
+					@section('footer')
+						<footer>
+							<ul class="social">
+								<li><a href=""><i class="fa fa-facebook-square"></i></a></li>
+								<li><a href=""><i class="fa fa-twitter-square"></i></a></li>
+							</ul>
+							<div class="spacer sticky"></div>
+							<p class="copyright">
+			    				{{ trans('site.global.copyright', array(
+			    					'year' => \Carbon\Carbon::now()->year,
+			    					'name' => trans('site.global.name')
+			    				)) }}
+		    				</p>
+						</footer>
+					@show
+				</div>
+				<div id="content">
+					<div class="vegas-caption"></div>
+					@section('content')
+					@show
+					<div id="footer-mobile" class="mobile-only">
+						@yield('footer')
+					</div>
 				</div>
 			</div>
-		</div>
-
+		@show
 		
 
 		<!-- Include overlays for site

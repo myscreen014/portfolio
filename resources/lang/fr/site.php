@@ -22,14 +22,17 @@ return [
             'delete'            =>  'Supprimer',
         ],
         'title' => [
-        	'404' => '404 : Page non trouvée'
+        	'404' => '404 : Page non trouvée',
+        	'403' => '403 : Accès refusé',
+        	'503' => "Site en maintenance",
         ],
         'label' => [
         	'loading' => 'Chargement...'
         ],
         'message' => [
         	'404' => "Cette page n'éxiste pas !",
-        	'503' => "Site en maintenance"
+        	'403' => '403 : Accès refusé',
+        	'503' => "Site en maintenance",
         ]
 	],
 

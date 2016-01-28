@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{{ trans('site.global.title.503') }}</title>
+        <title>{{ trans('site.global.title.403') }}</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -40,7 +40,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">{{ trans('site.global.message.503') }}</div>
+                <div class="title">{{ trans('site.global.message.403') }}</div>
             </div>
         </div>
     </body>
