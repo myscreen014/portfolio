@@ -14,10 +14,7 @@ use Illuminate\Support\Facades\Config;
 class FileModel extends Model
 {
 
-	use SoftDeletes;
-
 	protected $table = 'files';
-	protected $dates = ['deleted_at'];
 	protected $fillable = array('name', 'title', 'legend', 'path', 'type', 'ordering');
 
 	/* Boot  */
