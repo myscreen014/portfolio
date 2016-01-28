@@ -66,7 +66,7 @@ var Admin = {
 			    });
 			    return ui;
 			},
-      		items: "tr",   		
+      		items: "tbody > tr",   		
       		placeholder: "ui-state-highlight",  
       		tolerance: 'pointer',
       		containment: "parent",
