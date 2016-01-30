@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Artisan;
 
 class PagesController extends Controller
 {
- 	
  
     public function index($slug=NULL, $params=NULL) {
         
@@ -38,7 +37,7 @@ class PagesController extends Controller
             if (!is_null($params)) { $arrayParams = explode('/',$params);
             } else { $arrayParams = array(); }
             $controllerName = '\App\Http\Controllers\Site\\'.ucfirst($page->controller).'Controller';
-            $controller = new $controllerName;
+            $controller = new $controllerName($page);
             $view = call_user_func_array(array($controller, 'index'), $arrayParams);
             return $view->with('page', $page);
         }
