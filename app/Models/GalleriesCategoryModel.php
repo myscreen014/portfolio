@@ -11,6 +11,18 @@ class GalleriesCategoryModel extends Model
     protected $table = 'gallerycategories';
     protected $fillable = ['category', 'name', 'description'];
 
+    /* Boot  */
+    public static function boot() {   
+        
+        parent::boot();
+
+        static::deleted(function($gallery)
+        {
+            $gallery->pictures()->delete();
+        });
+        
+    }
+
     /* Relations */
     public function galleries() {
     	return $this->hasMany('App\Models\GalleryModel', 'category_id');
