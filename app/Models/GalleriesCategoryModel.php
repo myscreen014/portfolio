@@ -16,9 +16,22 @@ class GalleriesCategoryModel extends Model
         
         parent::boot();
 
-        static::deleted(function($gallery)
-        {
-            $gallery->pictures()->delete();
+        static::deleted(function($category) {
+            $category->pictures()->delete();
+        });
+
+        static::saving(function ($category) {
+            $slugCandidateRoot = str_slug($category->name);
+            $slugCandidate = $slugCandidateRoot;
+            $cmptProposal = 0;
+            while(GalleriesCategoryModel::where('slug', $slugCandidate)->where(function($query) use ($category) {
+                if (!is_null($category->id)) {
+                    return $query->where('id', '<>', $category->id);
+                }
+            })->count()>0) {
+                $slugCandidate = $slugCandidateRoot . '-' . intval(++$cmptProposal);
+            }
+            $category->slug = $slugCandidate;   
         });
         
     }
