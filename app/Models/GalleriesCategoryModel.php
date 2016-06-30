@@ -17,7 +17,9 @@ class GalleriesCategoryModel extends Model
         parent::boot();
 
         static::deleted(function($category) {
-            $category->pictures()->delete();
+            foreach($category->pictures()->get() as $file) {
+                $file->delete();
+            }
         });
 
         static::saving(function ($category) {

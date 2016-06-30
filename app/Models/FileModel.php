@@ -24,7 +24,6 @@ class FileModel extends Model
 
         static::deleted(function($file)
         {
-        	varlog('delete files');
         	$uploadPath = config('app.uploads_path');
         	$thumbnailsPath = Config::get('thumbnail.path');
         	$thumbnailsAvailables = Config::get('thumbnail.thumbnails');

@@ -50,7 +50,9 @@ class GalleryModel extends Model
 
         static::deleted(function($gallery)
         {
-            $gallery->pictures()->delete();
+            foreach($gallery->pictures()->get() as $file) {
+                $file->delete();
+            }
         });
         
     }
