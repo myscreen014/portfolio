@@ -66,22 +66,27 @@ var Admin = {
 			    });
 			    return ui;
 			},
-      		items: "tbody > tr",   		
+      		items: "> tbody > tr",   		
       		placeholder: "ui-state-highlight",  
       		tolerance: 'pointer',
-      		containment: "parent",
+      		//containment: "parent",
+      		axis: "y",
       		create: function() {
-      			$(this).find('> thead th').each(function() {
-    				$(this).width($(this).width());
-    			});
-      			model = $(this).attr('data-model');
+      			if ($(this).find('> tbody > tr').size()<=1) {
+      				$(this).sortable( "destroy" );
+      			} else {
+      				$(this).find('> thead th').each(function() {
+	    				$(this).width($(this).width());
+	    			});
+	      			model = $(this).attr('data-model');	
+      			}
       		},
       		start: function(event, ui) {
       			$('.ui-state-highlight').innerHeight($(ui.item).innerHeight());
       		},
     		stop: function(event, ui){
     			var itemsIds = Array();
-    			var items = $(this).find('tbody tr');
+    			var items = $(this).find('> tbody > tr');
     			for (var i = 0; i < items.length ; i++) {
     				itemsIds.push($(items[i]).attr('data-item-id'));
     			};
@@ -101,6 +106,7 @@ var Admin = {
 	  					);
 	  				}
 	  			});
+	  			
     		}
     	});
 	},

@@ -11,29 +11,21 @@
 		@section('title')
 			{{ trans('admin.page.title.index') }}
 		@endsection
- 
+
 		@foreach(array('primary','secondary') as $menu)
 			@if (count($pages[$menu])>0)
 				<table class="table table-hover table-pages sortable publishable" data-model="page">
 					<thead>
 						<tr>
-							<th colspan="2">{{ trans('admin.page.option.menu.'.$menu) }}</th>
+							<th colspan="3">{{ trans('admin.page.option.menu.'.$menu) }}</th>
 							<th class="actions"></th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($pages[$menu] as $page)
-							<tr data-item-id="{{ $page->id }}" class="publish-{{ $page->publish }}">
-								<td class="publish" >
-									<a href="#" data-toggle="tooltip" title="@if ($page->publish) {{ trans('admin.global.label.publish') }} @else {{ trans('admin.global.label.draft') }} @endif"><i class="fa fa-square"></i></a>
-								</td>
-								<td><i class="fa page-controller {{ Config::get('administration.components.'.$page->controller.'.icon') }}"></i>{{ $page->name }}</td>
-								<td class="actions">
-									<a href="{{ route('admin.pages.edit', [$page->id]) }}" class="btn btn-primary btn-xs">{{ trans('admin.global.action.edit') }}</a>
-									<a href="{{ route('admin.pages.delete', [$page->id]) }}" class="btn btn-danger btn-xs">{{ trans('admin.global.action.delete') }}</a>
-								</td>
-							</tr>
-						@endforeach	
+						@include('admin.pages_branch', array(
+							'pages' => $pages[$menu], 
+							'level' => 1
+						))
 					</tbody>
 				</table>
 			@endif
@@ -44,8 +36,6 @@
 				{{ trans('admin.page.message.nocontent') }}
 			</div>
 		@endif
-		
-		
 
 		<div class="actions">			
 			<a href="{{ route('admin.pages.create') }}" class="btn btn-success">{{ trans('admin.page.action.add') }}</a>
@@ -105,16 +95,18 @@
 
 	@parent
 
-	<script type="text/javascript">
-		$('select#controller').bind('change', function() {
-			if ($(this).val() != 'pages') {
-				$('.form-field:not(.form-field-actions)').hide();
-				$('.form-field-name, .form-field-menu, .form-field-controller, .form-field-pictures, .form-field-group-metadatas, .form-field-meta-title, .form-field-meta-description').show();
-			} else {
-				$('.form-field').show();
-			} 
-		}).trigger('change');
-	</script>
+	@if (in_array(Route::currentRouteName(), array('admin.pages.create', 'admin.pages.edit')))
+		<script type="text/javascript">
+			$('select#controller').bind('change', function() {
+				if ($(this).val() != 'pages') {
+					$('.form-field:not(.form-field-actions)').hide();
+					$('.form-field-name, .form-field-menu, .form-field-parent, .form-field-controller, .form-field-pictures, .form-field-group-metadatas, .form-field-meta-title, .form-field-meta-description').show();
+				} else {
+					$('.form-field').show();
+				} 
+			}).trigger('change');
+		</script>
+	@endif
 
 @endsection
 

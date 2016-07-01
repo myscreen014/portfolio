@@ -14,9 +14,13 @@ class PageModel extends Model
 {
     
     protected $table = 'pages';
-    protected $fillable = ['controller', 'menu', 'name', 'content', 'meta-title', 'meta-description'];
+    protected $fillable = ['parent', 'controller', 'menu', 'name', 'content', 'meta-title', 'meta-description'];
 
     /* Relations */
+    public function parent() {
+        return $this
+            ->hasOne('App\Models\PageModel', 'id');
+    }
     public function files() {
     	return $this
             ->hasMany('App\Models\FileModel', 'model_id')
@@ -29,10 +33,6 @@ class PageModel extends Model
             ->hasMany('App\Models\FileModel', 'model_id')
             ->where('model_table', 'pages')
             ->where('model_field', 'pictures');
-    }
-
-    public function getpictures() {
-        return $this;
     }
 
     /* Scopes */
@@ -73,5 +73,29 @@ class PageModel extends Model
         });
         
     }  	
+
+
+    /* METHODS */
+    public static function getTree($menu) {
+        $page = new PageModel;
+        $allPages = $page->where('menu', $menu)->orderBy('ordering', 'ASC')->get();
+        $tree = array();
+        $tree = self::getTreeBranch($allPages);
+        return $tree;
+    }
+
+    public static function getTreeBranch(&$allPages, $parent=NULL) {
+        $branch = array();
+        foreach ($allPages as $key => $page) {
+            if ($page['parent']==$parent) {
+                $pageValue = $page->toArray();
+                $pageValue['children'] = self::getTreeBranch($allPages, $pageValue['id']);
+                array_push($branch, $pageValue);
+                unset($allPages[$key]);
+            }
+        }
+        return $branch;
+    }
+
 
 }

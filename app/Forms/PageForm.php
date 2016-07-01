@@ -3,12 +3,12 @@
 namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
+use App\Models\PageModel;
 
 /* No rules validation here !! => see PageRequest */ 
 
 class PageForm extends Form
 {
-
 
     public function buildForm()
     {
@@ -17,6 +17,11 @@ class PageForm extends Form
         $this
         ->add('name', 'text', array(
             'label'=>trans('admin.page.field.name')
+        ))
+        ->add('parent', 'select', array(
+            'label' => trans('admin.page.field.parent'),
+            'choices' => PageModel::get((array('id', 'name')))->lists('name', 'id')->toArray(),
+            'empty_value' => trans('admin.page.label.parent.select')
         ))
          ->add('menu', 'select', array(
             'label'=>trans('admin.page.field.menu'),

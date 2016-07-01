@@ -30,10 +30,11 @@ class PagesComponent extends Controller
 		$page = new PageModel;
 		return view($this->defaultView, array(
 			'pages' => array(
-				'primary' => $page->where('menu', 'primary')->orderBy('ordering', 'ASC')->get(),
-				'secondary' => $page->where('menu', 'secondary')->orderBy('ordering', 'ASC')->get()
+				'primary' => PageModel::getTree('primary'),
+				'secondary' => PageModel::getTree('secondary')
 			)
 		));
+
 	}
 
 	public function create(FormBuilder $formBuilder, Request $request)

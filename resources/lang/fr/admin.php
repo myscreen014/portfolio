@@ -128,6 +128,7 @@ return [
 
     'page' => [
         'field' => [
+            'parent'            => "Parent de la page",
             'menu'              => "Menu de la page",
             'controller'        => "Type de page",
             'name'              => "Nom de la page",
@@ -155,6 +156,11 @@ return [
                 'pages'         => "Page classique",
                 'galleries'     => "Page galerie",
             ],
+        ],
+        'label' => [
+            'parent' => [
+                'select'        => "== Sélectionner une page parent =="
+            ]
         ],
         'title' => [
             'index'             => "Liste des pages",
