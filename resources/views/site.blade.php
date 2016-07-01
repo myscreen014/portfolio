@@ -46,7 +46,8 @@
 		<meta name="description" content="{{ str_limit(rtrim($metaDescription), 160) }}" />
 
 		
-		<link href='https://fonts.googleapis.com/css?family=Quicksand:400,300,700' rel='stylesheet' type='text/css'>
+		{{-- <link href='https://fonts.googleapis.com/css?family=Quicksand:400,300,700' rel='stylesheet' type='text/css'> --}}
+		<link href='https://fonts.googleapis.com/css?family=Kalam:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{ elixir('css/site.all.css') }}">
 		<link rel="stylesheet" href="{{ asset('plugins/lightbox/css/swipebox.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('plugins/vegas-master/vegas.min.css') }}">

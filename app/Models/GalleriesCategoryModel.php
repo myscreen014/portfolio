@@ -11,6 +11,33 @@ class GalleriesCategoryModel extends Model
     protected $table = 'gallerycategories';
     protected $fillable = ['category', 'name', 'description'];
 
+    /* Boot  */
+    public static function boot() {   
+        
+        parent::boot();
+
+        static::deleted(function($category) {
+            foreach($category->pictures()->get() as $file) {
+                $file->delete();
+            }
+        });
+
+        static::saving(function ($category) {
+            $slugCandidateRoot = str_slug($category->name);
+            $slugCandidate = $slugCandidateRoot;
+            $cmptProposal = 0;
+            while(GalleriesCategoryModel::where('slug', $slugCandidate)->where(function($query) use ($category) {
+                if (!is_null($category->id)) {
+                    return $query->where('id', '<>', $category->id);
+                }
+            })->count()>0) {
+                $slugCandidate = $slugCandidateRoot . '-' . intval(++$cmptProposal);
+            }
+            $category->slug = $slugCandidate;   
+        });
+        
+    }
+
     /* Relations */
     public function galleries() {
     	return $this->hasMany('App\Models\GalleryModel', 'category_id');
