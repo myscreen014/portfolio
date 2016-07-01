@@ -66,9 +66,10 @@ class PageModel extends Model
             $page->slug = $slugCandidate;   
         });
 
-        static::deleted(function($page)
-        {
-            $page->files()->delete();
+        static::deleted(function($page) {
+            foreach($page->pictures()->get() as $file) {
+                $file->delete();
+            }
         });
         
     }  	
