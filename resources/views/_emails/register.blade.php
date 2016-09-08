@@ -1,4 +1,4 @@
-@extends('_emails.skeleton')
+@extends('_emails.skeleton') 
 
 @section('content') 
 
