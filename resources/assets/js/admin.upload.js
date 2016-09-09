@@ -14,7 +14,7 @@
 			var myDropzone = new Dropzone('#'+_config.field, {
 				dictDefaultMessage: "",
 		  		//paramName: "file", // The name that will be used to transfer the file
-		  		maxFilesize: 24, // MB
+		  		maxFilesize: 32, // MB
 		  		maxFiles: 10,
 		  		clickable: _config.clickable,
 		  		autoProcessQueue: false,
@@ -26,6 +26,7 @@
 
 		  		dictResponseError: Admin._i18n['file']['label']['status']['error'],
 		  		dictInvalidFileType: Admin._i18n['file']['label']['status']['unaccepted'],
+		  		dictFileTooBig: Admin._i18n['file']['label']['status']['tobig'],
 		  		
 		  		uploadMultiple: false,
 			  	init: function() {

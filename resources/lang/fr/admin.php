@@ -251,6 +251,7 @@ return [
                 'pending'       => 'En attente',
                 'success'       => 'Transféré',
                 'error'         => "Erreur",
+                'tobig'         => "Fichier trop lourd",
                 'unaccepted'    => 'Fichier invalide',
             ],
             'count' => [
