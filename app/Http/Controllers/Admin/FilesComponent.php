@@ -20,6 +20,9 @@ class FilesComponent extends Controller {
 	public function store(Request $request) {
 		if (!is_null($request->input('model_table')) && !is_null($request->input('model_field')) && !is_null($request->input('model_id'))) {
 
+			ini_set('memory_limit', '512M');
+			ini_set('max_execution_time', 300);
+
 			$fileUploadedName = 'file';
 			$destinationPath = config('app.uploads_path');
 			$modelTable = $request->input('model_table');

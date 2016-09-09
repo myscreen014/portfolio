@@ -14,7 +14,7 @@
 			var myDropzone = new Dropzone('#'+_config.field, {
 				dictDefaultMessage: "",
 		  		//paramName: "file", // The name that will be used to transfer the file
-		  		maxFilesize: 4, // MB
+		  		maxFilesize: 24, // MB
 		  		maxFiles: 10,
 		  		clickable: _config.clickable,
 		  		autoProcessQueue: false,
