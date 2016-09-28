@@ -53,6 +53,9 @@
 	    			};
 	    			$.ajax({
 		  				url: Admin.configGet('route_models_reorder'),
+		  				headers: {
+                    		'X-CSRF-Token': Admin.configGet('csrf_token')
+                    	},
 		  				method: 'POST',
 		  				data: {
 		  					'_token' : Admin.configGet('csrf_token'),
