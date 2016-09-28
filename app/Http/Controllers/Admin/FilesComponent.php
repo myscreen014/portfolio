@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 
 /* My uses */
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Response;
 use App\Models\FileModel;
 use App\Forms\FileForm;
