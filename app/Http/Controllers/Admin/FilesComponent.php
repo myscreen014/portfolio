@@ -42,7 +42,7 @@ class FilesComponent extends Controller {
 
 						// On créé l'instance File
 						$file = new FileModel();
-						$file->name = $fileUploaded->getClientOriginalName();
+						$file->name = preg_replace("/[^A-Za-z0-9\_\-\.]/", '',$fileUploaded->getClientOriginalName());
 						$file->path = $file->name;
 						$file->model_table = $modelTable;
 						$file->model_field = $modelField;
