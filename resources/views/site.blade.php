@@ -71,7 +71,7 @@
 		@section('body')
 			<div id="global">
 				<div id="sidebar">
-					<a href="{{ route('page') }}" class="brand">{!! trans('site.global.name') !!}</a>
+					<a href="{{ route('page') }}" class="brand">{!! trans('site.global.brand') !!}</a>
 					<a href="#" id="nav-open-action" class="noloading">
 						<i class="fa fa-bars"></i>
 					</a>
