@@ -25,7 +25,7 @@ class GalleriesCategoryRequest extends Request
     {
         return [
             'name'          => 'required',
-            'description'   => 'required'
+            'description'   => ''
         ];
     }
 }
