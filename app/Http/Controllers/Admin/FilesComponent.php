@@ -42,7 +42,7 @@ class FilesComponent extends Controller {
 
 						// On créé l'instance File
 						$file = new FileModel();
-						$file->name = preg_replace("/[^A-Za-z0-9\_\-\.]/", '',$fileUploaded->getClientOriginalName());
+						$file->name = computerFriendly($fileUploaded->getClientOriginalName());
 						$file->path = $file->name;
 						$file->model_table = $modelTable;
 						$file->model_field = $modelField;
@@ -52,10 +52,8 @@ class FilesComponent extends Controller {
 
 						$pathInfosFile = pathinfo($file->name);
 
-
 						$isSave = false;
 						$isUploaded = false;
-
 
 						/* 
 						 * Gestion de l'entrée dans la table "files" 
