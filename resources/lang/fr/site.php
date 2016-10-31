@@ -13,7 +13,7 @@ return [
 	'global' => [
 		'name' 					=> "Instant'Aline - photographies",
 		'brand' 				=> "Instant'Aline<small>photographies</small>",
-		'copyright'				=> "Copyright © :year :name",
+		'copyright'				=> "Copyright © :year",
 		'action' => [
             'back'              =>  'Retour',
             'close'             =>  'Fermer',

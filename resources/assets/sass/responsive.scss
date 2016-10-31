@@ -171,7 +171,7 @@ $backgroundColor: 	#333;
 /* Smaller view only */
 @media only screen and (max-width: 479px) {
 
-	$heightSidebar: 80px;
+	$heightSidebar: 60px;
 	$spaceUnit: 15px;
 
 	/* STRUCTURE
@@ -179,6 +179,7 @@ $backgroundColor: 	#333;
 
 	/* SIDEBAR */
 	#sidebar {
+		height: $heightSidebar;
 		padding: 0 $spaceUnit;
 		footer {
 			padding: 0 $spaceUnit;
@@ -192,7 +193,7 @@ $backgroundColor: 	#333;
 		padding-top: $spaceUnit + $heightSidebar;
 		padding-bottom: $spaceUnit + 120px;
 		.mask-content {
-			padding: $spaceUnit;
+			padding: $spaceUnit + 10;
 		}
 	}
 
