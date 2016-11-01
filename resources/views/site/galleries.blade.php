@@ -10,16 +10,12 @@
             @foreach ($categories as $category)
                 <a href="{{ route_page($page, [$category->slug]) }}" class="item">
                     <div class="mask category">
-                        <div>
-                            <span class="title overflow">
-                                {{ $category->name }}
-                            </span>
-                            @if ($category->description)
-                                <span class="summary">
-                                    {!! str_limit($category->description, 80, '...') !!}
-                                </span>
-                            @endif
-                        </div>
+                        <span class="title overflow">
+                            {{ $category->name }}
+                        </span>
+                        <span class="summary">
+                            {!! str_limit($category->description, 120, '...') !!}
+                        </span>
                     </div>
                     @if (isset($category->pictures[0]))
                         <img src="{{ route('picture', ['portfolio', $category->pictures[0]['name']] ) }}" />
@@ -37,16 +33,12 @@
                 @foreach ($category->galleries as $gallery)
                     <a href="{{ route_page($page, [$category->slug, $gallery->slug]) }}" class="item">
                         <div class="mask">
-                            <div>
-                                <span class="title overflow">
-                                    {{ $gallery->name }}
-                                </span>
-                                @if ($gallery->description)
-                                    <span class="summary">
-                                        {!! str_limit($gallery->description, 75, '...') !!}
-                                    </span>
-                                @endif 
-                            </div>
+                            <span class="title overflow">
+                                {{ $gallery->name }}
+                            </span>
+                            <span class="summary">
+                                {!! str_limit($gallery->description, 120, '...') !!}
+                            </span>
                         </div>
                         @if (isset($gallery->pictures[0]))
                             <img src="{{ route('picture', ['portfolio', $gallery->pictures[0]['name']] ) }}" />
@@ -66,15 +58,7 @@
         <div class="portfolio">
             @foreach ($gallery->pictures as $picture)
                 <a href="{{ route('picture', ['zoom', $picture['name']] ) }}" title="{{ $picture->title }}" class="item lightbox" rel="gallery">
-                    <div class="mask">
-                        @if ($picture->title)
-                            <div>
-                                <span class="title">
-                                    {{ $picture->title }}
-                                </span>
-                            </div>
-                        @endif 
-                    </div>
+                    <div class="mask"></div>
                     <img src="{{ route('picture', ['portfolio', $picture['name']] ) }}" />
                 </a>
             @endforeach

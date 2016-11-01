@@ -105,7 +105,7 @@ div {
 		background-color: #000;
 		bottom: $spaceUnit;
 		padding: 2px 14px;
-		opacity: 0;
+		@include opacity(0);
 		position: absolute;
 		right: $spaceUnit;
 		text-transform: uppercase;
@@ -180,66 +180,65 @@ footer {
    ============================= */
 .portfolio {
 	margin: -10px;
-	opacity: 0;
+	@include opacity(0);
 	.item {
-		outline: 1px solid #000;
+		$spacer: 30px;
 		display: block;
 		position: relative;
 		overflow: hidden;
 		float: left;
 		width: 33.33%; // default with rewrite in javascript
+		@include box-shadow( 0 1px 20px rgba(0,0,0,0.4));
 		.mask {
+			background-color: transparentize(#000, 0.8);
 			height: 100%;
 			left: 0;
-			opacity: 0;
+			@include opacity(0);
 			position: absolute;
 			top: 0;
 			width: 100%;
 			z-index: 2;
-			@include transition(all 0.4s ease);
-			div {
-				bottom: 16px;
-				color: $colorText;
-				font-size: 18px;
-				line-height: 20px;
+			@include transition(all 0.2s ease);
+			span {
+				color: #fff;
+				display: block;
+				@include opacity(1);
+				overflow: visible;
+				padding: 0 $spacer;
 				position: absolute;
-				bottom: 20px;
-				text-transform: uppercase;
 				width: 100%;
-				@include transition(all 0.2s ease-in);
-				span {
-					display: block;
-					padding: 0 20px 0 20px;
+				@include transition(all 0.2s ease);
+				&.title {
+					font-size: 26px;
+					line-height: 50px;
 					position: relative;
-					opacity: 1;
-					@include transition(all 0.4s ease-in);
-					&.title {
-						bottom: -26px;
-						line-height: 26px;
+					text-align: right;
+					top: $spacer;
+					&::after {
+						background: #fff;
+						bottom: 0px;
+						content: '';
+						height: 2px;
+						left: $spacer;
+						@include opacity(0);
+						position: absolute;
+						right: $spacer;
+						-webkit-transform: translate3d(0,40px,0);
+						transform: translate3d(0,40px,0);
+						@include transition(all 0.2s ease);
 					}
-					&.summary {
-						bottom: -100px;
-						font-size: 12px;
-						line-height: 18px;
-						overflow: hidden;
-						padding-top: 8px;
-					}
+				}
+				&.summary {
+					bottom: 0;
+					@include opacity(0);
+					font-size: 16px;
+					line-height: 20px;
 				}
 			}
 			&.category {
-				background-color: transparent;
-				opacity: 1;
-				div {
-					bottom: 26px;
-					span.title {
-						background-color: transparentize(#000, 0.6);
-						padding-bottom: 4px;
-						padding-top: 4px;
-					}
-					span.summary {
-						max-height: 0;
-					}
-				}
+				/* todo something */
+				@include opacity(1);
+				@include transition(all 0.2s ease);
 			}
 		}
 		img {
@@ -250,60 +249,40 @@ footer {
 		}  
 		&:hover {
 			.mask {
-				background-color: transparentize(#000, 0.6);
-				opacity: 1;
-				@include box-shadow(inset 0 0 30px 5px rgba(0,0,0,0.4));
-				@include transition(all 0.2s ease-in);
-				div {
-					bottom: 18px;
-					max-height: 150px;
-					span {
-						bottom: 0;
-						&.title {
-							@include transition(all 0.2s 0.0s ease-out);
-						}
-						&.summary {
-							max-height: 150px;
-							@include transition(all 0.2s 0.1s ease-out);
+				background-color: transparentize(#000, 0.5);
+				@include opacity(1);
+				@include transition(all 0.2s ease);
+				span {
+					@include transition(all 0.4s ease);
+					&.title {
+						top: 15px;
+						&::after {
+							@include opacity(1);
+							-webkit-transform: translate3d(0,0,0);
+							transform: translate3d(0,0,0);
+							@include transition(all 0.3s ease);
 						}
 					}
-				}
-				&.category {
-					div span.title {
-						background-color: transparent;
+					&.summary {
+						bottom: $spacer;
+						@include opacity(1);
 					}
 				}
 			}
 		}
 		html.touch & {
 			.mask {
-				opacity: 1;
-				background-color: transparent;
-				@include transition(none);
-				@include box-shadow(inset 0 0 0 0 rgba(0,0,0,0.4));
-				div {
-					bottom: 0;
-					span {
-						background-color: transparentize(#000, 0.4);
-						bottom: 0;
-						padding: 8px 20px 8px 20px;
-						@include transition(all 0.2s 0.0s ease-out);
-						&.separator,
-						&.summary {
-							display: none;
-						}
-					}
-				}
+				@include opacity(1);
 			}
 		}
 		
 	}
 	&.loaded {
-		opacity: 1;
+		@include opacity(1);
 		@include transition(opacity 0.4s ease-in);
 	}
 	html.touch & .mask {
-		opacity: 1;
+		@include opacity(1);
 	}
 }
 
@@ -324,7 +303,7 @@ footer {
 	border: 1px solid $colorForeground;
 	display: inline-block;
 	color: $colorForeground;
-	padding: 0px 6px;
+	padding: 4px 6px 2px 6px;
 	font-size: 12px;
 	text-transform: uppercase;
 	text-decoration: none;
