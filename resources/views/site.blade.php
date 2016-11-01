@@ -165,12 +165,12 @@
 						var vegasSlideshow = $('body').vegas({
 						 	delay: 8000,
 					        slides: backgroundPictures,
-					        transition: 'fade',
+					        transition: 'blur',
 					        timer: false,
 					        color: '#333333',
-					        transitionDuration: 1500,
-					        animation: [ 'kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight' ],
-					        animationDuration: 6000,
+					        transitionDuration: 1000,
+					       // animation: [ 'kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight' ],
+					        animationDuration: 1000,
 					        overlay: true,
 					        walk: function (index, slideSettings) {
 					        	if (slideSettings.title != '') {
