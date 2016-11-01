@@ -61,13 +61,15 @@ class FilesController extends Controller
 							});
 							break;
 						case 'watermark':
-							$watermark = Image::make($filterParams[0]);
-							$thumbnail->insert(
-								$watermark, 
-								(isset($filterParams[1])?$filterParams[1]:'center'),
-								(isset($filterParams[2])?$filterParams[2]:0),
-								(isset($filterParams[3])?$filterParams[3]:0)
-							);
+							if (file_exists($filterParams[0])) {
+								$watermark = Image::make($filterParams[0]);
+								$thumbnail->insert(
+									$watermark, 
+									(isset($filterParams[1])?$filterParams[1]:'center'),
+									(isset($filterParams[2])?$filterParams[2]:0),
+									(isset($filterParams[3])?$filterParams[3]:0)
+								);
+							}
 							break;
 						default:  // default filters
 							call_user_func_array(array($thumbnail, $filter), array_values($filterParams));

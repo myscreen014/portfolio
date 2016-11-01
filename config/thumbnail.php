@@ -73,8 +73,7 @@ return [
 		],
 		'portfolio' => [
 			'filters' => [
-				'max' 	=>  [400,600],
-				//'watermark'	=> ['img/watermark.png', 'bottom-right', 10, 10]
+				'max' 	=>  [400,600]
 			]
 		],
 		'site' => [
