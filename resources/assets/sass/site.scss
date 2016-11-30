@@ -6,7 +6,6 @@ $spaceUnit:			40px;
 $widthSidebar:	    240px;
 $colorText: 		#efefef;
 $colorForeground:	#3b9cff;
-//$colorForeground:	#AA0000;
 $backgroundColor: 	#333;
 
 
@@ -20,7 +19,6 @@ html {
 }
 body {
 	color: $colorText;
-	//font-family: 'Quicksand', sans-serif;
 	font-family: 'Kalam', cursive;
 	font-weight: normal;
 	font-size: 16px;
@@ -29,9 +27,6 @@ body {
 	min-height: 100%; 
 }
 
-div {
-	//outline: 1px solid blue; 
-}
 
 #global {
 	height: 100%;
@@ -49,19 +44,14 @@ div {
 	margin-left: $spaceUnit;
 	width: $widthSidebar;
 	@include box-shadow( 0 1px 20px rgba(0,0,0,0.4));
-	.brand {
-		font-size: 28px;
-		color: $colorText;
-		text-decoration: none;
-		small {
-			display: block;
-			font-size: 15px;
-			color: $colorText - 100;
+	.logo {
+		img {
+			width: 100%; 
 		}
 	}
 	.spacer {
 		border-bottom: 1px solid #444;
-		margin: 30px 0; 
+		margin: 20px 0; 
 		&.sticky {
 			margin: 6px 0;
 		}

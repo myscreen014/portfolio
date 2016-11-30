@@ -71,7 +71,9 @@
 		@section('body')
 			<div id="global">
 				<div id="sidebar">
-					<a href="{{ route('page') }}" class="brand">{!! trans('site.global.brand') !!}</a>
+					<a href="{{ route('page') }}" class="logo">
+						<img src="{{ asset('img/logo.png') }}" title="{{ trans('site.global.name') }}">
+					</a>
 					<a href="#" id="nav-open-action" class="noloading">
 						<i class="fa fa-bars"></i>
 					</a>
@@ -83,7 +85,7 @@
 						<ul class="clearfix">
 		    				@foreach($site['pages']['primary'] as $item)
 								<li>
-									<a href="{{ route('page', $item->slug) }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
+									<a href="{{ route('page', $item->slug) }}" title="{{ $item->name }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
 								</li>
 							@endforeach
 						</ul>
@@ -92,7 +94,7 @@
 							<ul class="clearfix">
 			    				@foreach($site['pages']['secondary'] as $item)
 									<li>
-										<a href="{{ route('page', $item->slug) }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
+										<a href="{{ route('page', $item->slug) }}" title="{{ $item->name }}" @if (isset($page) && ($item->id == $page->id)) class="active" @endif>{{ $item->name }}</a>
 									</li>
 								@endforeach
 							</ul>
