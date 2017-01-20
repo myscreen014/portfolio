@@ -60,7 +60,7 @@ return [
 		'background' => [
 			'filters' => [
 				'max' 	=>  [1920,1080],
-				'watermark'	=> ['img/watermark.png', 'bottom-right', 20, 10]
+				//'watermark'	=> ['img/watermark.png', 'bottom-right', 20, 10]
 			],
 			'quality' => 80
 		],
