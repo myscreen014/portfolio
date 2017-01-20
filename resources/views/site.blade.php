@@ -103,7 +103,7 @@
 					@section('footer')
 						<footer>
 							<ul class="social">
-								<li><a href="https://www.facebook.com/Aline-M-Photographies-912196962186188/"><i class="fa fa-facebook-square"></i></a></li>
+								<li><a href="https://www.facebook.com/Aline-M-Photographies-912196962186188/" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
 							</ul>
 							<div class="spacer sticky"></div>
 							<p class="copyright">
