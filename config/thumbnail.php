@@ -68,7 +68,7 @@ return [
 		'zoom' => [
 			'filters' => [
 				'max' 	=>  [1920,1080],
-				'watermark'	=> ['img/watermark.png', 'bottom-right', 40, 30]
+				'watermark'	=> ['img/watermark.png', 'bottom-right', 30, 20]
 			],
 			'quality' => 100
 		],
