@@ -68,13 +68,14 @@ return [
 		'zoom' => [
 			'filters' => [
 				'max' 	=>  [1920,1080],
+				'watermark'	=> ['img/watermark.png', 'bottom-right', 40, 30]
 			],
 			'quality' => 100
 		],
 		'portfolio' => [
 			'filters' => [
 				'max' 	=>  [400,600],
-				'watermark'	=> ['img/watermark.png', 'bottom-right', 10, 10]
+				//'watermark'	=> ['img/watermark.png', 'bottom-right', 10, 10]
 			]
 		],
 		'site' => [
