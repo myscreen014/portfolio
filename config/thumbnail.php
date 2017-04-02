@@ -60,21 +60,19 @@ return [
 		'background' => [
 			'filters' => [
 				'max' 	=>  [1920,1080],
-				//'watermark'	=> ['img/watermark.png', 'bottom-right', 20, 10]
 			],
 			'quality' => 80
 		],
 		'zoom' => [
 			'filters' => [
 				'max' 	=>  [1920,1080],
-				'watermark'	=> ['img/watermark.png', 'bottom-right', 20, 10]
+				'watermark'	=> ['img/watermark.png', 'center']
 			],
 			'quality' => 100
 		],
 		'portfolio' => [
 			'filters' => [
 				'max' 	=>  [400,600],
-				//'watermark'	=> ['img/watermark.png', 'bottom-right', 10, 10]
 			]
 		],
 		'site' => [
