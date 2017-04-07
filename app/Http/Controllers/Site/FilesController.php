@@ -63,6 +63,9 @@ class FilesController extends Controller
 						case 'watermark':
 							if (file_exists($filterParams[0])) {
 								$watermark = Image::make($filterParams[0]);
+								$watermark->resize($thumbnail->width(), null, function ($constraint) {
+    								$constraint->aspectRatio();
+								});
 								$thumbnail->insert(
 									$watermark, 
 									(isset($filterParams[1])?$filterParams[1]:'center'),
