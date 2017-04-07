@@ -8,7 +8,7 @@
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<link rel="icon" href="{{ asset('favicon.png') }}">
+		<link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 
 		<meta name="copyright" content="(c) Eric Tarillon">
 		<meta name="author" content="{{ trans('site.global.name') }}">
