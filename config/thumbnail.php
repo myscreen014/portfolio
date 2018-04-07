@@ -60,6 +60,7 @@ return [
 		'background' => [
 			'filters' => [
 				'max' 	=>  [1920,1080],
+				'watermark'	=> ['img/watermark.png', 'center']
 			],
 			'quality' => 80
 		],
@@ -73,6 +74,7 @@ return [
 		'portfolio' => [
 			'filters' => [
 				'max' 	=>  [400,600],
+				'watermark'	=> ['img/watermark.png', 'center']
 			]
 		],
 		'site' => [
