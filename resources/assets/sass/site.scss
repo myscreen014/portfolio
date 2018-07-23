@@ -183,27 +183,32 @@ footer {
 			background-color: transparentize(#000, 0.8);
 			height: 100%;
 			left: 0;
-			@include opacity(0);
 			position: absolute;
 			top: 0;
 			width: 100%;
 			z-index: 2;
+			@include opacity(0);
 			@include transition(all 0.2s ease);
 			span {
 				color: #fff;
 				display: block;
-				@include opacity(1);
 				overflow: visible;
 				padding: 0 $spacer;
 				position: absolute;
 				width: 100%;
+				@include opacity(1);
 				@include transition(all 0.2s ease);
 				&.title {
-					font-size: 26px;
-					line-height: 50px;
+					font-size: 22px;
+					line-height: 40px;
 					position: relative;
 					text-align: right;
 					top: $spacer;
+					span {
+						overflow: hidden;
+						position: relative;
+						padding: 0;
+					}
 					&::after {
 						background: #fff;
 						bottom: 0px;
@@ -277,9 +282,9 @@ footer {
 }
 
 .overflow {
-	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .actions {

@@ -10,8 +10,8 @@
             @foreach ($categories as $category)
                 <a href="{{ route_page($page, [$category->slug]) }}" class="item">
                     <div class="mask category">
-                        <span class="title overflow">
-                            {{ $category->name }}
+                        <span class="title">
+                            <span class="overflow">{{ $category->name }}</span>
                         </span>
                         <span class="summary">
                             {!! str_limit($category->description, 120, '...') !!}
@@ -33,8 +33,8 @@
                 @foreach ($category->galleries as $gallery)
                     <a href="{{ route_page($page, [$category->slug, $gallery->slug]) }}" class="item">
                         <div class="mask">
-                            <span class="title overflow">
-                                {{ $gallery->name }}
+                            <span class="title">
+                                <span class="overflow">{{ $gallery->name }}</span>
                             </span>
                             <span class="summary">
                                 {!! str_limit($gallery->description, 120, '...') !!}
